@@ -5,7 +5,7 @@ require('vimp')
 -----------------
 map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
 vim.o.undofile = true
-vim.o.undodir="~/.vim/undo-dir"
+vim.o.undodir="/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 
 --------------
 --  tagbar  --
