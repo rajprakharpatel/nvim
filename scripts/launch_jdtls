@@ -7,8 +7,8 @@
 # If you're not using Linux you'll need to adjust the `-configuration` option
 # to point to the `config_mac' or `config_win` folders depending on your system.
 
-JAR="$HOME/.config/coc/extensions/coc-java-data/server2/plugins/org.eclipse.equinox.launcher_*.jar"
-GRADLE_HOME=$HOME/gradle /usr/lib/jvm/java-15-openjdk/bin/java \
+JAR="$HOME/.local/lib/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"
+GRADLE_HOME=$HOME/gradle $HOME/.sdkman/candidates/java/current/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
@@ -17,8 +17,8 @@ GRADLE_HOME=$HOME/gradle /usr/lib/jvm/java-15-openjdk/bin/java \
   -Xms1g \
   -Xmx2G \
   -jar $(echo "$JAR") \
-  -configuration "$HOME/.config/coc/extensions/coc-java-data/server2/config_linux" \
-  -data "${1:-$HOME/.workspace}" \
+  -configuration "$HOME/.local/lib/jdtls/config_linux" \
+  -data "${1:-$HOME/.local/share/jdtls}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \
   --add-opens java.base/java.lang=ALL-UNNAMED

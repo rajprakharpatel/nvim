@@ -51,7 +51,7 @@ map('n', '<Leader>ve', ':e $MYVIMRC<cr>', {noremap = true})
 -- Reload vimrc configuration file
 map('n', '<leader>vr', ':luafile $MYVIMRC<CR>', {noremap = true})
 -- Reload current luafile
-map('n', '<leader>lr', ':luafile %', {noremap = true})
+map('n', '<leader>lr', ':luafile %<cr>', {noremap = true})
 --Run current line as a command with '\e'
 map('n', '<leader>e', ':exe getline(line(\'.\'))<CR>', {noremap = true})
 -- CDF = Change to Directory of Current file
@@ -61,8 +61,11 @@ map('n', '<F5>', ':checktime', {noremap = true})
 --Quit without closing tab
 vim.cmd('command! Q :Sayonara!')
 --Add semicolon to end of line with <;>
-map('n', ';', 'A;<cr>', {noremap = true})
+map('n', ';', 'A;<esc>', {noremap = true})
 
+-- Comment toggle
+vim.cmd([[map <c-/> :CommentToggle<ESC><CR>]])
+vim.cmd([[map <c-_> :CommentToggle<ESC><CR>]])
 -- ctrl-s save
 map('n', '<c-s>', '<esc>:w!<cr>', {noremap = true})
 map('i', '<c-s>', '<esc>:w!<cr>a', {noremap = true})

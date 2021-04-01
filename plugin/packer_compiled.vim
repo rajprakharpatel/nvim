@@ -80,6 +80,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/incsearch.vim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
+  },
   ["lf.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/lf.vim"
@@ -100,6 +104,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/monokai.nvim"
   },
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-comment"
+  },
   ["nvim-compe"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-compe"
@@ -116,6 +124,26 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-lsputils"
   },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context"
+  },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag"
+  },
+  ["nvim-ts-context-commentstring"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring"
+  },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
@@ -127,6 +155,10 @@ _G.packer_plugins = {
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -183,10 +215,6 @@ _G.packer_plugins = {
   ["vim-abolish"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-abolish"
-  },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-devicons"
   },
   ["vim-easy-align"] = {
     loaded = true,

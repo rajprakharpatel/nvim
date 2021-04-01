@@ -52,6 +52,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter'            -- automatically sets project directory using rules in vimrc
     use 'Raimondi/delimitMate'
+    use 'terrortylor/nvim-comment'
 
     -- Target objects
     use 'wellle/targets.vim'
@@ -101,8 +102,22 @@ return require('packer').startup(function(use)
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
-    use 'ryanoasis/vim-devicons'
     use 'glepnir/dashboard-nvim'
+
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'p00f/nvim-ts-rainbow'
+    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use 'nvim-treesitter/playground'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'windwp/nvim-ts-autotag'
+    use 'romgrk/nvim-treesitter-context'
+
+    -- Explorer
+    use 'kyazdani42/nvim-tree.lua'
+
+
+
 
 
 

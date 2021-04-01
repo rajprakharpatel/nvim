@@ -283,3 +283,111 @@ map('n', '<leader>ss', ':<c-u>SessionSave<cr>', {noremap = true})
 map('n', '<leader>sl', ':<c-u>SessionLoad<cr>', {noremap = true})
 vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2")
 
+--------------------
+--  nvim_comment  --
+--------------------
+require('nvim_comment').setup({comment_empty = false})
+
+------------------
+--  treesitter  --
+------------------
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = {"c", "cpp", "lua", "java", "python", "json", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    -- TODO seems to be broken
+    ignore_install = {"haskell"},
+    highlight = {
+        enable = true -- false will disable the whole extension
+    },
+    -- indent = {enable = true, disable = {"python", "html", "javascript"}},
+    indent = {enable = {"javascriptreact"}},
+    playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false -- Whether the query persists across vim sessions
+    },
+    autotag = {enable = true},
+    rainbow = {enable = true},
+    context_commentstring = {enable = true, config = {javascriptreact = {style_element = '{/*%s*/}'}}}
+    -- refactor = {highlight_definitions = {enable = true}}
+}
+
+-----------------------
+--  nvim-indentline  --
+-----------------------
+vim.g.indent_blankline_buftype_exclude = {'terminal'}
+vim.g.indent_blankline_filetype_exclude = {'help', 'startify', 'dashboard', 'packer', 'neogitstatus'}
+vim.g.indent_blankline_char = '▏'
+vim.g.indent_blankline_use_treesitter = true
+vim.g.indent_blankline_show_trailing_blankline_indent = false
+vim.g.indent_blankline_show_current_context = true
+vim.g.indent_blankline_context_patterns = {
+    'class', 'return', 'function', 'method', '^if', '^while', 'jsx_element', '^for', '^object', '^table', 'block',
+    'arguments', 'if_statement', 'else_clause', 'jsx_element', 'jsx_self_closing_element', 'try_statement',
+    'catch_clause', 'import_statement', 'operation_type'
+}
+
+-----------------
+--  nvim-tree  --
+-----------------
+vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', 'log.json'}
+vim.g.nvim_tree_auto_open = 1
+vim.g.nvim_tree_auto_ignore_ft = {'dashboard', 'startify'}
+vim.g.nvim_tree_tab_open = 1
+vim.g.nvim_tree_indent_markers = 1 --"0 by default, this option shows indent markers when folders are open
+vim.g.nvim_tree_follow = 1 --"0 by default, this option allows the cursor to be updated when entering a buffer
+vim.g.nvim_tree_auto_close = 1 --0 by default, closes the tree when it's the last window
+-- a list of groups can be found at `:help nvim_tree_highlight
+-- vim.cmd([[hi NvimTreeFolderIcon guifg=blue]])
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+    -- mappings
+    ["<CR>"] = tree_cb("edit"),
+    ["l"] = tree_cb("edit"),
+    ["o"] = tree_cb("edit"),
+    ["<2-LeftMouse>"] = tree_cb("edit"),
+    ["<2-RightMouse>"] = tree_cb("cd"),
+    ["<C-]>"] = tree_cb("cd"),
+    ["v"] = tree_cb("vsplit"),
+    ["s"] = tree_cb("split"),
+    ["<C-t>"] = tree_cb("tabnew"),
+    ["h"] = tree_cb("close_node"),
+    ["<BS>"] = tree_cb("dir_up"),
+    ["<S-CR>"] = tree_cb("close_node"),
+    ["<Tab>"] = tree_cb("preview"),
+    ["."] = tree_cb("toggle_ignored"),
+    ["zh"] = tree_cb("toggle_ignored"),
+    ["H"] = tree_cb("toggle_dotfiles"),
+    ["R"] = tree_cb("refresh"),
+    ["a"] = tree_cb("create"),
+    ["d"] = tree_cb("remove"),
+    ["r"] = tree_cb("rename"),
+    ["<C-r>"] = tree_cb("full_rename"),
+    ["d"] = tree_cb("cut"),
+    ["y"] = tree_cb("copy"),
+    ["p"] = tree_cb("paste"),
+    ["[c"] = tree_cb("prev_git_item"),
+    ["]c"] = tree_cb("next_git_item"),
+    ["-"] = tree_cb("dir_up"),
+    ["q"] = tree_cb("close")
+}
+vim.g.nvim_tree_icons = {
+    default = '',
+    symlink = '',
+    git = {
+        unstaged = "",
+        staged = "✓",
+        unmerged = "",
+        renamed = "➜",
+        untracked = ""
+    },
+    folder = {
+        default = "",
+        open = "",
+        empty = "",
+        empty_open = "",
+        symlink = ""
+    }
+}
+
+

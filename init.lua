@@ -1,18 +1,14 @@
--- require 'tt.nvim_utils'
-
--- vim.cmd('source ~/.config/nvim/viml/init.vim') -- some settings not working in lua
-
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
 vim.cmd([[colo monokai]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 
 vim.o.conceallevel = 0
 vim.o.updatetime = 300 -- Faster completion
-vim.o.timeoutlen = 350 -- By default timeoutlen is 1000 ms
+vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.updatetime = 50
 vim.o.enc = 'utf-8'
 vim.o.fenc = 'utf-8'
-vim.o.swapfile = true
+vim.o.swapfile = false
 vim.o.backup = true
 vim.o.hidden = true
 vim.o.showmode = false
@@ -78,8 +74,8 @@ vim.o.shortmess       = vim.o.shortmess .. 's'
 -- UI OPTS
 vim.o.termguicolors  = true
 vim.o.fillchars      = "stlnc:»,vert:║,fold:·"
-vim.o.number         = true
-vim.o.relativenumber = true
+vim.wo.number         = true
+vim.wo.relativenumber = true
 vim.o.pumblend       = 20
 vim.o.pumheight      = 15
 vim.o.guicursor      = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"
@@ -131,23 +127,23 @@ require('plugins')
 require('plugin-configs')
 vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
 require('nvim-compe')
-require('nv-globals')
+-- require('nv-globals')
 -- Lsp
-require('lsp')
-require('lsp.clangd')
-require('lsp.lua-ls')
-require('lsp.bash-ls')
-require('lsp.js-ts-ls')
-require('lsp.python-ls')
-require('lsp.json-ls')
-require('lsp.yaml-ls')
-require('lsp.vim-ls')
-require('lsp.graphql-ls')
-require('lsp.css-ls')
-require('lsp.docker-ls')
-require('lsp.html-ls')
-require('lsp.efm-general-ls')
-require('lsp.virtual_text')
+-- require('lsp')
+-- require('lsp.clangd')
+-- require('lsp.lua-ls')
+-- require('lsp.bash-ls')
+-- require('lsp.js-ts-ls')
+-- require('lsp.python-ls')
+-- require('lsp.json-ls')
+-- require('lsp.yaml-ls')
+-- require('lsp.vim-ls')
+-- require('lsp.graphql-ls')
+-- require('lsp.css-ls')
+-- require('lsp.docker-ls')
+-- require('lsp.html-ls')
+-- require('lsp.efm-general-ls')
+-- require('lsp.virtual_text')
 require('nv-galaxyline')
 
 
