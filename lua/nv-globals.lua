@@ -12,10 +12,10 @@ O = {
         auto_execute = 1
     },
     python = {
-        linter = '',
+        linter = 'flake8',
         -- @usage can be 'yapf', 'black'
-        formatter = '',
-        autoformat = false,
+        formatter = 'black',
+        autoformat = true,
         isort = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
@@ -24,15 +24,15 @@ O = {
     },
     lua = {
         -- @usage can be 'lua-format'
-        formatter = '',
-        autoformat = false,
+        formatter = 'lua-format',
+        autoformat = true,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
     sh = {
         -- @usage can be 'shellcheck'
-        linter = '',
+        linter = 'shellcheck',
         -- @usage can be 'shfmt'
-        formatter = '',
+        formatter = 'shfmt',
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
@@ -46,7 +46,7 @@ O = {
     },
     json = {
         -- @usage can be 'prettier'
-        formatter = '',
+        formatter = 'prettier',
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },

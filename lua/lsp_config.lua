@@ -1,3 +1,14 @@
+
+vim.fn.sign_define("LspDiagnosticsSignError",
+                   {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning",
+                   {texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning"})
+vim.fn.sign_define("LspDiagnosticsSignHint",
+                   {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"})
+vim.fn.sign_define("LspDiagnosticsSignInformation",
+                   {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"})
+
+
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -51,7 +62,7 @@ end
 
 -- Use a loop to conveniently both setup defined serversw
 -- and map buffer local keybindings when the language server attaches
-local servers = {"cpp", "cmake"}
+local servers = {"clangd", "cmake", "pyls"}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
@@ -64,9 +75,9 @@ end
 -- local sumneko_root_path = vim.fn.stdpath('data')..'lspinstall/lua/sumneko-lua-language-server'
 -- local sumneko_binary = lsp_path .. [[/lua/sumneko-lua-language-server]]
 
-nvim_lsp.lua.setup {
+nvim_lsp.sumneko_lua.setup {
   cmd = {"/home/rajprakhar/.local/share/nvim/lspinstall/lua/sumneko-lua/extension/server/bin/Linux/lua-language-server", "-E", "/home/rajprakhar/.local/share/nvim/lspinstall/lua/sumneko-lua/extension/server/main.lua"};
-  -- on_attach = on_attach,
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -99,33 +110,16 @@ nvim_lsp.lua.setup {
 --                                   bashls                                   --
 --------------------------------------------------------------------------------
 
-nvim_lsp.bash.setup{
+nvim_lsp.bashls.setup{
   cmd = {"/home/rajprakhar/.local/share/nvim/lspinstall/bash/node_modules/.bin/bash-language-server", "start"},
   on_attach = on_attach
-}
-
---------------------------------------------------------------------------------
---                                   python                                   --
---------------------------------------------------------------------------------
-nvim_lsp.python.setup {
-    cmd = {"/home/rajprakhar/.local/share/nvim/lspinstall/python/node_modules/.bin/pyright-langserver", "--stdio"},
-    on_attach = on_attach,
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = true,
-            signs = true,
-            underline = true,
-            update_in_insert = true
-
-        })
-    }
 }
 
 --------------------------------------------------------------------------------
 --                                    efm                                     --
 --------------------------------------------------------------------------------
 -- Example configuations here: https://github.com/mattn/efm-langserver
--- TODO this file needs to be refactored eache lang should be it's own file
+-- TODO this file needs to be refactored each lang should be it's own file
 -- python
 local python_arguments = {}
 
@@ -209,11 +203,10 @@ require"lspconfig".efm.setup {
     cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
     on_attach = on_attach,
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml", "markdown"},
+    filetypes = {"lua", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml", "markdown"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            python = python_arguments,
             lua = lua_arguments,
             sh = sh_arguments,
             javascript = tsserver_args,

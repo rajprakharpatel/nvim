@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'               -- shell commands from inside vim
   use 'RishabhRD/nvim-cheat.sh'
   use 'AndrewRadev/switch.vim'
+  use 'metakirby5/codi.vim'
 
 
 
@@ -90,6 +91,8 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-symbols.nvim'
   use 'fhill2/telescope-ultisnips.nvim'
   use 'gbrlsnchs/telescope-lsp-handlers.nvim'
+
+  -- Git
 
   -- Lsp & autocompletion
   use 'mfussenegger/nvim-jdtls'

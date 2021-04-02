@@ -292,7 +292,7 @@ require('nvim_comment').setup({comment_empty = false})
 --  treesitter  --
 ------------------
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"c", "cpp", "lua", "java", "python", "json", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- TODO seems to be broken
     ignore_install = {"haskell"},
     highlight = {
@@ -390,22 +390,9 @@ vim.g.nvim_tree_icons = {
     }
 }
 
------------------------
---  nvim-lspinstall  --
------------------------
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-
+--------------------------------------------------------------------------------
+--                                    Codi                                    --
+--------------------------------------------------------------------------------
+-- change the color
+vim.cmd('highlight CodiVirtualText guifg=cyan')
+vim.cmd([[let g:codi#virtual_text_prefix = "❯ "]])
