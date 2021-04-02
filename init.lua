@@ -1,15 +1,53 @@
+------------------------------------------------------------------------
+--                              modules                               --
+------------------------------------------------------------------------
+
+require('keymaps')
+require('plugins')
+require('plugin-configs')
+vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
+vim.cmd('source ~/.config/nvim/viml/switch.vim')
+require('nvim-compe')
+require('nv-globals')
+-- Lsp
+require('lsp_config')
+-- require('lsp')
+-- require('lsp.clangd')
+-- require('lsp.lua-ls')
+-- require('lsp.bash-ls')
+-- require('lsp.js-ts-ls')
+-- require('lsp.python-ls')
+-- require('lsp.json-ls')
+-- require('lsp.yaml-ls')
+-- require('lsp.vim-ls')
+-- require('lsp.graphql-ls')
+-- require('lsp.css-ls')
+-- require('lsp.docker-ls')
+-- require('lsp.html-ls')
+-- require('lsp.efm-general-ls')
+-- require('lsp.virtual_text')
+require('nv-galaxyline')
+
+------------------------------------------------------------------------
+--                              options                               --
+------------------------------------------------------------------------
+
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
 vim.cmd([[colo monokai]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
-
+vim.cmd([[set nu]])
+vim.cmd([[set rnu]])
+vim.o.scrolloff = 5
+vim.o.sidescrolloff = 5
+vim.o.signcolumn = 'number'
 vim.o.conceallevel = 0
-vim.o.updatetime = 300 -- Faster completion
+vim.o.updatetime = 700 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.updatetime = 50
 vim.o.enc = 'utf-8'
 vim.o.fenc = 'utf-8'
 vim.o.swapfile = false
-vim.o.backup = true
+vim.o.backup = false
 vim.o.hidden = true
 vim.o.showmode = false
 vim.o.ignorecase = true
@@ -42,15 +80,16 @@ vim.o.expandtab       = true
 vim.o.tags            = "" -- let gutentags handle this
 
 vim.o.ttimeoutlen     = 20
-vim.o.shiftwidth      = 2
-vim.o.softtabstop     = 2
-vim.o.tabstop         = 2
+vim.bo.shiftwidth      = 2
+vim.bo.softtabstop     = 2
+vim.bo.tabstop         = 2
 vim.o.synmaxcol       = 200
 vim.o.conceallevel    = 2
 vim.o.cscopetagorder  = 0
 vim.o.cscopepathcomp  = 3
 vim.o.showbreak       = string.rep(' ', 3) -- Make it so that long lines wrap smartly
 
+vim.bo.undofile = true
 vim.o.undofile = true
 vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 vim.o.foldopen        = "search"
@@ -64,7 +103,7 @@ vim.o.inccommand      = "split"
 vim.o.cscopequickfix  = "s-,c-,d-,i-,t-,e-"
 vim.o.path            = '.,,,**'
 vim.o.completeopt     = 'menuone,noselect'
-vim.o.listchars       = 'tab:░░,trail:·,space: ,extends:»,precedes:«,nbsp:⣿'
+vim.o.listchars       = 'tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿'
 vim.o.formatlistpat   = "^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
 vim.o.foldlevelstart  = 99
 vim.o.foldmethod      = "syntax"
@@ -74,8 +113,6 @@ vim.o.shortmess       = vim.o.shortmess .. 's'
 -- UI OPTS
 vim.o.termguicolors  = true
 vim.o.fillchars      = "stlnc:»,vert:║,fold:·"
-vim.wo.number         = true
-vim.wo.relativenumber = true
 vim.o.pumblend       = 20
 vim.o.pumheight      = 15
 vim.o.guicursor      = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"
@@ -104,6 +141,7 @@ function _G.define_augroups(definitions) -- {{{1
 
         vim.cmd('augroup END')
     end
+
 end
 
 
@@ -114,36 +152,13 @@ end
 
 define_augroups({
   relNum = {
+    {'InsertEnter', '*', 'set number'},
     {'InsertEnter', '*', 'set norelativenumber'},
+    {'InsertLeave', '*', 'set number'},
     {'InsertLeave', '*', 'set relativenumber'}
   },
   jdtls = {
     {'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}
   }
 })
-
-require('keymaps')
-require('plugins')
-require('plugin-configs')
-vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
-require('nvim-compe')
--- require('nv-globals')
--- Lsp
--- require('lsp')
--- require('lsp.clangd')
--- require('lsp.lua-ls')
--- require('lsp.bash-ls')
--- require('lsp.js-ts-ls')
--- require('lsp.python-ls')
--- require('lsp.json-ls')
--- require('lsp.yaml-ls')
--- require('lsp.vim-ls')
--- require('lsp.graphql-ls')
--- require('lsp.css-ls')
--- require('lsp.docker-ls')
--- require('lsp.html-ls')
--- require('lsp.efm-general-ls')
--- require('lsp.virtual_text')
-require('nv-galaxyline')
-
 

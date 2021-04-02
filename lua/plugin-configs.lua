@@ -4,7 +4,7 @@ require('vimp')
 --  undo-tree  --
 -----------------
 map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
-vim.o.undofile = true
+vim.bo.undofile = true
 vim.o.undodir="/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 
 --------------
@@ -360,7 +360,7 @@ vim.g.nvim_tree_bindings = {
     ["H"] = tree_cb("toggle_dotfiles"),
     ["R"] = tree_cb("refresh"),
     ["a"] = tree_cb("create"),
-    ["d"] = tree_cb("remove"),
+    ["x"] = tree_cb("remove"),
     ["r"] = tree_cb("rename"),
     ["<C-r>"] = tree_cb("full_rename"),
     ["d"] = tree_cb("cut"),
@@ -390,4 +390,22 @@ vim.g.nvim_tree_icons = {
     }
 }
 
+-----------------------
+--  nvim-lspinstall  --
+-----------------------
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{}
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 

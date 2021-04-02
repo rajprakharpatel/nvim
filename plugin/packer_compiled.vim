@@ -104,6 +104,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/monokai.nvim"
   },
+  ["nvim-cheat.sh"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-cheat.sh"
+  },
   ["nvim-comment"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-comment"
@@ -120,9 +124,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-lspinstall"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
   ["nvim-lsputils"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-lsputils"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -176,6 +188,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/startuptime.vim"
   },
+  ["switch.vim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/switch.vim"
+  },
   tagbar = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/tagbar"
@@ -224,6 +240,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-easymotion"
   },
+  ["vim-eunuch"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-eunuch"
+  },
   ["vim-exchange"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-exchange"
@@ -239,6 +259,10 @@ _G.packer_plugins = {
   ["vim-indent-object"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-indent-object"
+  },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-matchup"
   },
   ["vim-move"] = {
     loaded = true,
