@@ -236,6 +236,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-abolish"
   },
+  ["vim-bookmarks"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-bookmarks"
+  },
   ["vim-easy-align"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-easy-align"

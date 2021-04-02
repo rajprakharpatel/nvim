@@ -58,6 +58,8 @@ return require('packer').startup(function(use)
   use 'RishabhRD/nvim-cheat.sh'
   use 'AndrewRadev/switch.vim'
   use 'metakirby5/codi.vim'
+  use 'MattesGroeger/vim-bookmarks'
+  use 'unblevable/quick-scope'
 
 
 
