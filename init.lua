@@ -23,7 +23,7 @@ vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 5
-vim.wo.signcolumn = 'number'
+vim.wo.signcolumn = 'yes'
 vim.o.conceallevel = 0
 vim.o.updatetime = 700 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
@@ -104,7 +104,7 @@ vim.o.fillchars = "stlnc:»,vert:║,fold:·"
 vim.o.pumblend = 20
 vim.o.pumheight = 15
 vim.o.guicursor = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"
-
+vim.o.signcolumn = 'yes'
 --------------------------------------------------------------------------------
 --                            autocmd! and modules                            --
 --------------------------------------------------------------------------------
@@ -138,14 +138,15 @@ function _G.dump(...)
 end
 
 define_augroups({
-    relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber'}},
+    relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
     jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
+    _lua = {{'FileType', 'lua', 'set ts=4 | set sw=4'}},
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
         {
             'FileType', 'dashboard',
             'setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= '
-        }, {'FileType', 'dashboard', 'set showtabline=0 | autocmd WinEnter <buffer> set showtabline=2'}
+        }, {'FileType', 'dashboard', 'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'}
     }
 
 })

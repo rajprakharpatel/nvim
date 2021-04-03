@@ -33,9 +33,11 @@ require'compe'.setup {
         path = {kind = "  "},
         buffer = {kind = "  "},
         calc = {kind = "  "},
-        vsnip = false,
+        vsnip = {
+            kind = "  ",
+            priority = 9},
         nvim_lsp = {
-          priority = 10000,
+          priority = 9,
           kind = "  "},
         nvim_lua = {kind = "  "},
         spell = {kind = "  "},
@@ -43,10 +45,10 @@ require'compe'.setup {
         tabnine = {
             max_line = 1000,
             max_num_results = 6,
-            priority = 5000
+            priority = 8,
         },
         ultisnips = {
-          priority = 9000,
+          priority = 9,
           kind = "  "},
         snippets_nvim = {kind = "  "},
         treesitter = {kind = "  "},
@@ -99,6 +101,8 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
@@ -108,6 +112,8 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
+  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    return t "<Plug>(vsnip-jump-prev)"
   else
     return t "<S-Tab>"
   end

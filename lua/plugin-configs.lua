@@ -5,7 +5,7 @@ require('vimp')
 -----------------
 map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
 vim.bo.undofile = true
-vim.o.undodir="/home/rajprakhar/.local/share/nvim/shada/undo-dir"
+vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 
 --------------
 --  tagbar  --
@@ -16,10 +16,10 @@ map('', '<F9>', ':TagbarToggle<cr>', {noremap = true})
 -----------------
 -- Trigger configuration. You need to change this to something other than <tab>
 -- if you use one of completion plugins
-vim.g.UltiSnipsExpandTrigger="<c-l>"
-vim.g.UltiSnipsJumpForwardTrigger="<c-j>"
-vim.g.UltiSnipsJumpBackwardTrigger="<c-k>"
-vim.g.UltiSnipsEditSplit="vertical"
+vim.g.UltiSnipsExpandTrigger = "<c-l>"
+vim.g.UltiSnipsJumpForwardTrigger = "<c-j>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<c-k>"
+vim.g.UltiSnipsEditSplit = "vertical"
 
 ----------------
 --  vim-move  --
@@ -88,14 +88,15 @@ vim.g.SimpylFold_fold_docstring = 1
 ----------------
 vim.g.floaterm_shell = 'fish'
 -- vim.g.floaterm_wintype = 'normal'
-vim.cmd("let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']")
-vim.g.floaterm_open_command  = 'vsplit'
-vim.g.floaterm_keymap_new    = '<Leader>ft'
-vim.g.floaterm_keymap_prev   = '<leader>fp'
-vim.g.floaterm_keymap_next   = '<leader>fn'
+vim.cmd(
+    "let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']")
+vim.g.floaterm_open_command = 'vsplit'
+vim.g.floaterm_keymap_new = '<Leader>ft'
+vim.g.floaterm_keymap_prev = '<leader>fp'
+vim.g.floaterm_keymap_next = '<leader>fn'
 vim.g.floaterm_keymap_toggle = '<M-t>'
-vim.g.floaterm_keymap_kill   = '<leader>fk'
---Set floaterm window's background to black
+vim.g.floaterm_keymap_kill = '<leader>fk'
+-- Set floaterm window's background to black
 -- hi Floaterm guibg=black
 -- Set floating window border line color to cyan, and background to orange
 -- hi FloatermBorder guibg=orange guifg=cyan
@@ -114,28 +115,15 @@ vimp.rbind('n', '<leader>lf', '<Plug>LfSplit')
 vim.g.lsp_utils_location_opts = {
     height = 24,
     mode = 'split',
-    list = {
-	border = true,
-	numbering = true
-    },
-    preview = {
-	title = 'Location Preview',
-	border = true,
-    },
+    list = {border = true, numbering = true},
+    preview = {title = 'Location Preview', border = true}
 }
-
 
 vim.g.lsp_utils_symbols_opts = {
     height = 24,
     mode = 'editor',
-    list = {
-	border = true,
-	numbering = false,
-    },
-    preview = {
-	title = 'Symbols Preview',
-	border = true,
-    },
+    list = {border = true, numbering = false},
+    preview = {title = 'Symbols Preview', border = true},
     prompt = {}
 }
 vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
@@ -212,7 +200,7 @@ require('telescope').setup {
             n = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
                 -- ["<C-i>"] = my_cool_custom_action,
             }
         }
@@ -238,25 +226,31 @@ map('n', '<space>gf', '<cmd>lua require(\'telescope.builtin\').git()<cr>', {nore
 map('n', '<space>gb', '<cmd>lua require(\'telescope.builtin\').git_branches()<cr>', {noremap = true})
 map('n', '<space>gbc', '<cmd>lua require(\'telescope.builtin\').git_bcommits()<cr>', {noremap = true})
 map('n', '<space>ts', '<cmd>lua require(\'telescope.builtin\').treesitter()<cr>', {noremap = true})
-map('n', '<space>p', '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>', {noremap = true})
+map('n', '<space>p',
+    '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>',
+    {noremap = true})
 map('n', '<space>p', '<cmd>lua require(\'telescope.builtin\').builtin()<cr>', {noremap = true})
 map('n', '<space>r', '<cmd>lua require(\'telescope.builtin\').reloader()<cr>', {noremap = true})
 map('n', '<space>s', '<cmd>lua require\'telescope.builtin\'.symbols{}<cr>', {noremap = true})
-map('n', '<space>m', '<cmd>lua require(\'telescope\').extensions.media_files.media_files(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>', {noremap = true})
-map('n', '<space>u', '<cmd>lua require\'telescope\'.extensions.ultisnips.ultisnips(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>', {noremap = true})
+map('n', '<space>m',
+    '<cmd>lua require(\'telescope\').extensions.media_files.media_files(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>',
+    {noremap = true})
+map('n', '<space>u',
+    '<cmd>lua require\'telescope\'.extensions.ultisnips.ultisnips(require(\'telescope.themes\').get_dropdown({windblend = 10}))<cr>',
+    {noremap = true})
 
 -----------------
 --  dashboard  --
 -----------------
 vim.g.dashboard_custom_header = {
-'$$\\   $$\\ $$$$$$$$\\  $$$$$$\\  $$\\    $$\\ $$$$$$\\ $$\\      $$\\ ',
-'$$$\\  $$ |$$  _____|$$  __$$\\ $$ |   $$ |\\_$$  _|$$$\\    $$$ |',
-'$$$$\\ $$ |$$ |      $$ /  $$ |$$ |   $$ |  $$ |  $$$$\\  $$$$ |',
-'$$ $$\\$$ |$$$$$\\    $$ |  $$ |\\$$\\  $$  |  $$ |  $$\\$$\\$$ $$ |',
-'$$ \\$$$$ |$$  __|   $$ |  $$ | \\$$\\$$  /   $$ |  $$ \\$$$  $$ |',
-'$$ |\\$$$ |$$ |      $$ |  $$ |  \\$$$  /    $$ |  $$ |\\$  /$$ |',
-'$$ | \\$$ |$$$$$$$$\\  $$$$$$  |   \\$  /   $$$$$$\\ $$ | \\_/ $$ |',
-'\\__|  \\__|\\________| \\______/     \\_/    \\______|\\__|     \\__|',
+    '$$\\   $$\\ $$$$$$$$\\  $$$$$$\\  $$\\    $$\\ $$$$$$\\ $$\\      $$\\ ',
+    '$$$\\  $$ |$$  _____|$$  __$$\\ $$ |   $$ |\\_$$  _|$$$\\    $$$ |',
+    '$$$$\\ $$ |$$ |      $$ /  $$ |$$ |   $$ |  $$ |  $$$$\\  $$$$ |',
+    '$$ $$\\$$ |$$$$$\\    $$ |  $$ |\\$$\\  $$  |  $$ |  $$\\$$\\$$ $$ |',
+    '$$ \\$$$$ |$$  __|   $$ |  $$ | \\$$\\$$  /   $$ |  $$ \\$$$  $$ |',
+    '$$ |\\$$$ |$$ |      $$ |  $$ |  \\$$$  /    $$ |  $$ |\\$  /$$ |',
+    '$$ | \\$$ |$$$$$$$$\\  $$$$$$  |   \\$  /   $$$$$$\\ $$ | \\_/ $$ |',
+    '\\__|  \\__|\\________| \\______/     \\_/    \\______|\\__|     \\__|'
 }
 vim.g.dashboard_default_executive = 'telescope'
 
@@ -334,9 +328,9 @@ vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', 'log.json'}
 vim.g.nvim_tree_auto_open = 1
 vim.g.nvim_tree_auto_ignore_ft = {'dashboard', 'startify'}
 vim.g.nvim_tree_tab_open = 1
-vim.g.nvim_tree_indent_markers = 1 --"0 by default, this option shows indent markers when folders are open
-vim.g.nvim_tree_follow = 1 --"0 by default, this option allows the cursor to be updated when entering a buffer
-vim.g.nvim_tree_auto_close = 1 --0 by default, closes the tree when it's the last window
+vim.g.nvim_tree_indent_markers = 1 -- "0 by default, this option shows indent markers when folders are open
+vim.g.nvim_tree_follow = 1 -- "0 by default, this option allows the cursor to be updated when entering a buffer
+vim.g.nvim_tree_auto_close = 1 -- 0 by default, closes the tree when it's the last window
 -- a list of groups can be found at `:help nvim_tree_highlight
 -- vim.cmd([[hi NvimTreeFolderIcon guifg=blue]])
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -374,20 +368,8 @@ vim.g.nvim_tree_bindings = {
 vim.g.nvim_tree_icons = {
     default = '',
     symlink = '',
-    git = {
-        unstaged = "",
-        staged = "✓",
-        unmerged = "",
-        renamed = "➜",
-        untracked = ""
-    },
-    folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = ""
-    }
+    git = {unstaged = "", staged = "✓", unmerged = "", renamed = "➜", untracked = ""},
+    folder = {default = "", open = "", empty = "", empty_open = "", symlink = ""}
 }
 
 --------------------------------------------------------------------------------
@@ -396,3 +378,123 @@ vim.g.nvim_tree_icons = {
 -- change the color
 vim.cmd('highlight CodiVirtualText guifg=cyan')
 vim.cmd([[let g:codi#virtual_text_prefix = "❯ "]])
+
+--------------------------------------------------------------------------------
+--                                  LspSaga                                   --
+--------------------------------------------------------------------------------
+local saga = require 'lspsaga'
+
+-- add your config value here
+-- default value
+-- use_saga_diagnostic_sign = true
+-- error_sign = '',
+-- warn_sign = '',
+-- hint_sign = '',
+-- infor_sign = '',
+-- dianostic_header_icon = '   ',
+-- code_action_icon = ' ',
+-- code_action_prompt = {
+--   enable = true,
+--   sign = true,
+--   sign_priority = 20,
+--   virtual_text = true,
+-- },
+-- finder_definition_icon = '  ',
+-- finder_reference_icon = '  ',
+-- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+-- finder_action_keys = {
+--   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+-- },
+-- code_action_keys = {
+--   quit = 'q',exec = '<CR>'
+-- },
+-- rename_action_keys = {
+--   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+-- },
+-- definition_preview_icon = '  '
+-- 1: thin border | 2: rounded border | 3: thick border | 4: ascii border
+-- border_style = 1
+-- rename_prompt_prefix = '➤',
+-- if you don't use nvim-lspconfig you must pass your server name and
+-- the related filetypes into this table
+-- like server_filetype_map = {metals = {'sbt', 'scala'}}
+-- server_filetype_map = {}
+
+saga.init_lsp_saga {
+    error_sign = '',
+    warn_sign = '',
+    finder_action_keys = {
+        open = 'o',
+        vsplit = 'v',
+        split = 's',
+        quit = 'q',
+        scroll_down = '<C-f>',
+        scroll_up = '<C-b>' -- quit can be a table
+    },
+    rename_prompt_prefix = '',
+}
+-- lsp provider to find the cursor word definition and reference
+map('n', 'gh', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], {noremap = true, silent = true})
+-- code action
+map('n', '<space>ca', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], {noremap = true, silent = true})
+map('v', '<space>ca', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], {noremap = true, silent = true})
+-- show hover doc
+map('n', '<space>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]],  {noremap = true, silent = true})
+-- show signature help
+map('n', 'gs', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], {noremap = true, silent = true})
+-- scroll down hover doc or scroll in definition preview
+map('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], {noremap = true, silent = true})
+-- scroll up hover doc
+map('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], {noremap = true, silent = true})
+-- rename
+map('n', 'gr', [[<cmd>lua require('lspsaga.rename').rename()<CR>]], {noremap = true, silent = true})
+-- preview definition
+map('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], {noremap = true, silent = true})
+-- show
+map('n', '<leader>cd', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]], {noremap = true, silent = true})
+-- only show diagnostic if cursor is over the area
+map('n', '<leader>cc', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], {noremap = true, silent = true})
+-- jump diagnostic
+map('n', '[e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], {noremap = true, silent = true})
+map('n', ']e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], {noremap = true, silent = true})
+
+
+--------------------------------------------------------------------------------
+--                                lspkind-nvim                                --
+--------------------------------------------------------------------------------
+-- commented options are defaults
+require('lspkind').init({
+    -- with_text = true,
+    -- symbol_map = {
+    --   Text = '',
+    --   Method = 'ƒ',
+    --   Function = '',
+    --   Constructor = '',
+    --   Variable = '',
+    --   Class = '',
+    --   Interface = 'ﰮ',
+    --   Module = '',
+    --   Property = '',
+    --   Unit = '',
+    --   Value = '',
+    --   Enum = '了',
+    --   Keyword = '',
+    --   Snippet = '﬌',
+    --   Color = '',
+    --   File = '',
+    --   Folder = '',
+    --   EnumMember = '',
+    --   Constant = '',
+    --   Struct = ''
+    -- },
+})
+
+--------------------------------------------------------------------------------
+--                                 vim-vsnip                                  --
+--------------------------------------------------------------------------------
+-- Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+-- See https://github.com/hrsh7th/vim-vsnip/pull/50
+map('n', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
+map('x', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
+map('n', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
+map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})

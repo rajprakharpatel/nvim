@@ -188,9 +188,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  ["startuptime.vim"] = {
+  ["quick-scope"] = {
     loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/startuptime.vim"
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/quick-scope"
   },
   ["switch.vim"] = {
     loaded = true,
@@ -264,6 +264,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-floaterm"
   },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-illuminate"
+  },
   ["vim-indent-object"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-indent-object"
@@ -335,6 +339,10 @@ _G.packer_plugins = {
   ["vim-visual-multi"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-visual-multi"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
   vimpeccable = {
     loaded = true,
