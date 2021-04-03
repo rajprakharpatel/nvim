@@ -431,15 +431,16 @@ saga.init_lsp_saga {
         scroll_down = '<C-f>',
         scroll_up = '<C-b>' -- quit can be a table
     },
-    rename_prompt_prefix = '',
+    rename_prompt_prefix = ''
 }
 -- lsp provider to find the cursor word definition and reference
 map('n', 'gh', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], {noremap = true, silent = true})
 -- code action
 map('n', '<space>ca', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], {noremap = true, silent = true})
-map('v', '<space>ca', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], {noremap = true, silent = true})
+map('v', '<space>ca', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]],
+    {noremap = true, silent = true})
 -- show hover doc
-map('n', '<space>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]],  {noremap = true, silent = true})
+map('n', '<space>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], {noremap = true, silent = true})
 -- show signature help
 map('n', 'gs', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], {noremap = true, silent = true})
 -- scroll down hover doc or scroll in definition preview
@@ -451,13 +452,14 @@ map('n', 'gr', [[<cmd>lua require('lspsaga.rename').rename()<CR>]], {noremap = t
 -- preview definition
 map('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], {noremap = true, silent = true})
 -- show
-map('n', '<leader>cd', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]], {noremap = true, silent = true})
+map('n', '<leader>cd', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]],
+    {noremap = true, silent = true})
 -- only show diagnostic if cursor is over the area
-map('n', '<leader>cc', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], {noremap = true, silent = true})
+map('n', '<leader>cc', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]],
+    {noremap = true, silent = true})
 -- jump diagnostic
 map('n', '[e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], {noremap = true, silent = true})
 map('n', ']e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], {noremap = true, silent = true})
-
 
 --------------------------------------------------------------------------------
 --                                lspkind-nvim                                --
@@ -503,28 +505,38 @@ map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
 --                                  gitsigns                                  --
 --------------------------------------------------------------------------------
 require('gitsigns').setup {
-  signs = {
-    -- TODO add hl to colorscheme
-    add          = {hl = 'GitSignsAdd'   , text = '', linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '~', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '﫧',linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '-',linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '*',linehl='GitSignsChangeLn'},
-  },
-  numhl = false,
-  linehl = false,
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-    buffer = true,
-  },
-  watch_index = {
-    interval = 1000
-  },
-  current_line_blame = false,
-  sign_priority = 6,
-  update_debounce = 200,
-  status_formatter = nil, -- Use default
-  use_decoration_api = false
+    signs = {
+        -- TODO add hl to colorscheme
+        add = {hl = 'GitSignsAdd', text = '', linehl = 'GitSignsAddLn'},
+        change = {hl = 'GitSignsChange', text = '~', linehl = 'GitSignsChangeLn'},
+        delete = {hl = 'GitSignsDelete', text = '﫧', linehl = 'GitSignsDeleteLn'},
+        topdelete = {hl = 'GitSignsDelete', text = '-', linehl = 'GitSignsDeleteLn'},
+        changedelete = {hl = 'GitSignsChange', text = '*', linehl = 'GitSignsChangeLn'}
+    },
+    numhl = false,
+    linehl = false,
+    keymaps = {
+        -- Default keymap options
+        noremap = true,
+        buffer = true
+    },
+    watch_index = {interval = 1000},
+    current_line_blame = false,
+    sign_priority = 6,
+    update_debounce = 200,
+    status_formatter = nil, -- Use default
+    use_decoration_api = false
 }
 
+--------------------------------------------------------------------------------
+--                               nvim-colorizer                               --
+--------------------------------------------------------------------------------
+require'colorizer'.setup({
+    RGB = true, -- #RGB hex codes
+    RRGGBB = true, -- #RRGGBB hex codes
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    rgb_fn = true, -- CSS rgb() and rgba() functions
+    hsl_fn = true, -- CSS hsl() and hsla() functions
+    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
+})

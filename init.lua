@@ -138,6 +138,7 @@ function _G.dump(...)
 end
 
 define_augroups({
+    _colorizer = {{'FileType', '*', ':ColorizerAttachToBuffer'}},
     relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
     jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
     _lua = {{'FileType', 'lua', 'set ts=4 | set sw=4'}},

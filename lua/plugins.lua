@@ -38,6 +38,7 @@ return require('packer').startup(function(use)
     use 'junegunn/limelight.vim'
     use 'tanvirtin/monokai.nvim'
     use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
+    use 'norcalli/nvim-colorizer.lua'
 
     -- Helpful Generic Tools
     use 'kshenoy/vim-signature'
