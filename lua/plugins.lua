@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     use 'junegunn/goyo.vim'
     use 'junegunn/limelight.vim'
     use 'tanvirtin/monokai.nvim'
+    use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
 
     -- Helpful Generic Tools
     use 'kshenoy/vim-signature'
@@ -93,6 +94,11 @@ return require('packer').startup(function(use)
     use 'gbrlsnchs/telescope-lsp-handlers.nvim'
 
     -- Git
+    -- use 'TimUntersberger/neogit'
+    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+    -- use 'f-person/git-blame.nvim'
+    use 'tpope/vim-fugitive'
+    use 'tpope/vim-rhubarb'
 
     -- Lsp & autocompletion
     use 'mfussenegger/nvim-jdtls'
@@ -117,13 +123,12 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
-    use 'nvim-treesitter/playground'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
-    use 'windwp/nvim-ts-autotag'
     use 'romgrk/nvim-treesitter-context'
+    use {'nvim-treesitter/playground', disable = true}
+    use {'windwp/nvim-ts-autotag', disable = true}  -- Use treesitter to autoclose and autorename html tag
 
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
-    use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
 
 end)

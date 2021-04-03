@@ -64,9 +64,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/delimitMate"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+  },
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+  },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\nQ\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\23current_line_blame\2\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["goyo.vim"] = {
     loaded = true,
@@ -148,10 +157,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context"
   },
-  ["nvim-ts-autotag"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag"
-  },
   ["nvim-ts-context-commentstring"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring"
@@ -171,10 +176,6 @@ _G.packer_plugins = {
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/packer.nvim"
-  },
-  playground = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -264,6 +265,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-floaterm"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
   ["vim-illuminate"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-illuminate"
@@ -287,6 +292,10 @@ _G.packer_plugins = {
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-repeat"
+  },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-rhubarb"
   },
   ["vim-rooter"] = {
     loaded = true,
@@ -350,6 +359,8 @@ _G.packer_plugins = {
   }
 }
 
+-- Config for: gitsigns.nvim
+try_loadstring("\27LJ\2\nQ\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\23current_line_blame\2\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 END
 
 catch

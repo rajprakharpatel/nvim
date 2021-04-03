@@ -498,3 +498,33 @@ map('n', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
 map('x', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
 map('n', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
 map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
+
+--------------------------------------------------------------------------------
+--                                  gitsigns                                  --
+--------------------------------------------------------------------------------
+require('gitsigns').setup {
+  signs = {
+    -- TODO add hl to colorscheme
+    add          = {hl = 'GitSignsAdd'   , text = '', linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '~', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '﫧',linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '-',linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '*',linehl='GitSignsChangeLn'},
+  },
+  numhl = false,
+  linehl = false,
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+    buffer = true,
+  },
+  watch_index = {
+    interval = 1000
+  },
+  current_line_blame = false,
+  sign_priority = 6,
+  update_debounce = 200,
+  status_formatter = nil, -- Use default
+  use_decoration_api = false
+}
+
