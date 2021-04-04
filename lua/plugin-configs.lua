@@ -430,36 +430,34 @@ saga.init_lsp_saga {
         quit = 'q',
         scroll_down = '<C-f>',
         scroll_up = '<C-b>' -- quit can be a table
-    },
-    rename_prompt_prefix = ''
+    }
 }
 -- lsp provider to find the cursor word definition and reference
 map('n', 'gh', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], {noremap = true, silent = true})
 -- code action
-map('n', '<space>ca', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], {noremap = true, silent = true})
-map('v', '<space>ca', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]],
-    {noremap = true, silent = true})
+map('n', '<space>a', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], {noremap = true, silent = true})
+map('v', '<space>a', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], {noremap = true, silent = true})
 -- show hover doc
-map('n', '<space>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], {noremap = true, silent = true})
+map('n', 'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], {noremap = true, silent = true})
 -- show signature help
-map('n', 'gs', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], {noremap = true, silent = true})
+map('n', '<space>k', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], {noremap = true, silent = true})
 -- scroll down hover doc or scroll in definition preview
 map('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], {noremap = true, silent = true})
 -- scroll up hover doc
 map('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], {noremap = true, silent = true})
 -- rename
-map('n', 'gr', [[<cmd>lua require('lspsaga.rename').rename()<CR>]], {noremap = true, silent = true})
+map('n', '<space>r', [[<cmd>lua require('lspsaga.rename').rename()<CR>]], {noremap = true, silent = true})
 -- preview definition
 map('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], {noremap = true, silent = true})
 -- show
-map('n', '<leader>cd', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]],
+map('n', '<space>l', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]],
     {noremap = true, silent = true})
 -- only show diagnostic if cursor is over the area
-map('n', '<leader>cc', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]],
+map('n', '<space>c', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]],
     {noremap = true, silent = true})
 -- jump diagnostic
-map('n', '[e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], {noremap = true, silent = true})
-map('n', ']e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], {noremap = true, silent = true})
+map('n', '[d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], {noremap = true, silent = true})
+map('n', ']d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], {noremap = true, silent = true})
 
 --------------------------------------------------------------------------------
 --                                lspkind-nvim                                --
@@ -544,50 +542,46 @@ require'colorizer'.setup({
 --------------------------------------------------------------------------------
 --                                buffer-line                                 --
 --------------------------------------------------------------------------------
-require'bufferline'.setup{
-  options = {
-    view = "multiwindow",
-    numbers = "both",
-    number_style = "superscript", -- buffer_id at index 1, ordinal at index 2
-    mappings = true,
-    buffer_close_icon= '',
-    modified_icon = '●',
-    close_icon = '',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
-    max_name_length = 18,
-    max_prefix_length = 15, -- prefix used when a buffer is deduplicated
-    tab_size = 18,
-    diagnostics = "nvim_lsp",
-    diagnostics_indicator = function(count, level, diagnostics_dict)
-      return "("..count..")"
-    end,
-    -- NOTE: this will be called a lot so don't do any heavy processing here
-    custom_filter = function(buf_number)
-      -- filter out filetypes you don't want to see
-      if vim.bo[buf_number].filetype ~= "dashboard" then
-        return true
-      end
-      -- filter out by buffer name
-      if vim.fn.bufname(buf_number) ~= "<nvimtree>" then
-        return true
-      end
-      -- filter out based on arbitrary rules
-      -- e.g. filter out vim wiki buffer from tabline in your work repo
-      if vim.fn.getcwd() == "/win_shada/workspace/Projects" and vim.bo[buf_number].filetype ~= "wiki" then
-        return true
-      end
-    end,
-    show_buffer_close_icons = true,
-    show_close_icon = false,
-    show_tab_indicators = true,
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    -- can also be a table containing 2 custom separators
-    -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style =  'slant',
-    enforce_regular_tabs = false,
-    always_show_bufferline = true,
-    sort_by = 'relative_directory',
-  }
+require'bufferline'.setup {
+    options = {
+        view = "multiwindow",
+        numbers = "both",
+        number_style = "superscript", -- buffer_id at index 1, ordinal at index 2
+        mappings = true,
+        buffer_close_icon = '',
+        modified_icon = '●',
+        close_icon = '',
+        left_trunc_marker = '',
+        right_trunc_marker = '',
+        max_name_length = 18,
+        max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+        tab_size = 18,
+        diagnostics = "nvim_lsp",
+        diagnostics_indicator = function(count, level, diagnostics_dict)
+            return "(" .. count .. ")"
+        end,
+        -- NOTE: this will be called a lot so don't do any heavy processing here
+        custom_filter = function(buf_number)
+            -- filter out filetypes you don't want to see
+            if vim.bo[buf_number].filetype ~= "dashboard" then return true end
+            -- filter out by buffer name
+            if vim.fn.bufname(buf_number) ~= "<nvimtree>" then return true end
+            -- filter out based on arbitrary rules
+            -- e.g. filter out vim wiki buffer from tabline in your work repo
+            if vim.fn.getcwd() == "/win_shada/workspace/Projects" and vim.bo[buf_number].filetype ~= "wiki" then
+                return true
+            end
+        end,
+        show_buffer_close_icons = true,
+        show_close_icon = false,
+        show_tab_indicators = true,
+        persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+        -- can also be a table containing 2 custom separators
+        -- [focused and unfocused]. eg: { '|', '|' }
+        separator_style = 'slant',
+        enforce_regular_tabs = false,
+        always_show_bufferline = true,
+        sort_by = 'relative_directory'
+    }
 }
 
