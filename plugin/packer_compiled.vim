@@ -44,10 +44,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/SimpylFold"
   },
-  ["barbar.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/barbar.nvim"
-  },
   ["codi.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/codi.vim"
@@ -71,10 +67,6 @@ _G.packer_plugins = {
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
-  },
-  ["git-blame.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/git-blame.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -120,9 +112,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/monokai.nvim"
   },
+  ["neo-smooth-scroll.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/neo-smooth-scroll.nvim"
+  },
+  ["nvim-bufferline.lua"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
+  },
   ["nvim-cheat.sh"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-cheat.sh"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
   ["nvim-comment"] = {
     loaded = true,

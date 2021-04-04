@@ -39,6 +39,8 @@ return require('packer').startup(function(use)
     use 'tanvirtin/monokai.nvim'
     use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
+    -- use 'joeytwiddle/sexy_scroller.vim'
+    use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
     use 'kshenoy/vim-signature'
@@ -97,7 +99,6 @@ return require('packer').startup(function(use)
     -- Git
     -- use 'TimUntersberger/neogit'
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
-    -- use 'f-person/git-blame.nvim'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
 
@@ -114,7 +115,7 @@ return require('packer').startup(function(use)
 
     -- Status Line and Bufferline
     use 'glepnir/galaxyline.nvim'
-    use 'romgrk/barbar.nvim'
+    use 'akinsho/nvim-bufferline.lua'
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
