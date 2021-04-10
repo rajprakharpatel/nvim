@@ -2,7 +2,7 @@
 --                              modules                               --
 ------------------------------------------------------------------------
 require('keymaps')
-require('plugins')
+-- require('plugins')
 require('plugin-configs')
 vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
 vim.cmd('source ~/.config/nvim/viml/switch.vim')

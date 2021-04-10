@@ -87,6 +87,12 @@ return require('packer').startup(function(use)
     use 'haya14busa/incsearch-easymotion.vim'
     use 'easymotion/vim-easymotion'
 
+    -- Webdev
+    -- TODO add when i start webdev
+    -- use 'gennaro-tedesco/nvim-jqx'
+    -- use 'turbio/bracey.vim'
+
+
     -- keybind
     use 'svermeulen/vimpeccable'
 
