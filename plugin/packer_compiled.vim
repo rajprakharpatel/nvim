@@ -112,9 +112,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/monokai.nvim"
   },
-  ["neo-smooth-scroll.nvim"] = {
+  ["nvcode-color-schemes.vim"] = {
     loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/neo-smooth-scroll.nvim"
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
   },
   ["nvim-bufferline.lua"] = {
     loaded = true,

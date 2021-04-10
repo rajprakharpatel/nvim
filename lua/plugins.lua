@@ -39,8 +39,9 @@ return require('packer').startup(function(use)
     use 'tanvirtin/monokai.nvim'
     use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
+    use 'ChristianChiarulli/nvcode-color-schemes.vim'
     -- use 'joeytwiddle/sexy_scroller.vim'
-    use 'cossonleo/neo-smooth-scroll.nvim'
+    -- use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
     use 'kshenoy/vim-signature'

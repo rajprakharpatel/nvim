@@ -21,13 +21,13 @@ vim.cmd([[colo monokai]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
-vim.o.scrolloff = 5
+vim.o.scrolloff = 9
 vim.o.sidescrolloff = 5
 vim.wo.signcolumn = 'yes'
 vim.o.conceallevel = 0
 vim.o.updatetime = 700 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
-vim.o.updatetime = 50
+vim.o.updatetime = 700
 vim.o.enc = 'utf-8'
 vim.o.fenc = 'utf-8'
 vim.o.swapfile = false
@@ -80,7 +80,7 @@ vim.bo.undofile = true
 vim.o.undofile = true
 vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 vim.o.foldopen = "search"
-vim.o.fileformat = 'unix'
+-- vim.o.fileformat = 'unix'
 vim.o.jumpoptions = "stack"
 vim.o.diffopt = "hiddenoff,iwhiteall,algorithm:patience"
 vim.o.nrformats = "bin,hex,alpha"
@@ -141,7 +141,7 @@ define_augroups({
     _colorizer = {{'FileType', '*', ':ColorizerAttachToBuffer'}},
     relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
     jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
-    _lua = {{'FileType', 'lua', 'set ts=4 | set sw=4'}},
+    _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
         {
