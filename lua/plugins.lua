@@ -109,6 +109,10 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
 
+    -- Debugging
+    use 'puremourning/vimspector'
+    use 'szw/vim-maximizer'
+
     -- Lsp & autocompletion
     use 'mfussenegger/nvim-jdtls'
     use 'hrsh7th/nvim-compe'
@@ -134,7 +138,7 @@ return require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'romgrk/nvim-treesitter-context'
-    use {'nvim-treesitter/playground', disable = true}
+    use {'nvim-treesitter/playground'}
     use {'windwp/nvim-ts-autotag', disable = true}  -- Use treesitter to autoclose and autorename html tag
 
     -- Explorer

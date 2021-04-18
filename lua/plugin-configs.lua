@@ -204,20 +204,36 @@ require('telescope').setup {
                 -- ["<C-i>"] = my_cool_custom_action,
             }
         }
-    },
+    }
 }
 
-map('n', '<space>br', '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<c-p>', '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>g', '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>b', '<cmd>lua require(\'telescope.builtin\').buffers(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>h', '<cmd>lua require(\'telescope.builtin\').help_tags(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>gf', '<cmd>lua require(\'telescope.builtin\').git(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>gb', '<cmd>lua require(\'telescope.builtin\').git_branches(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>gbc', '<cmd>lua require(\'telescope.builtin\').git_bcommits(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>ts', '<cmd>lua require(\'telescope.builtin\').treesitter(require(\'telescope.themes\').get_dropdown())<cr>', {noremap = true})
-map('n', '<space>p',
-    '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown()<cr>',
+map('n', '<space>br',
+    '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<c-p>',
+    '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>g',
+    '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>b',
+    '<cmd>lua require(\'telescope.builtin\').buffers(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>h',
+    '<cmd>lua require(\'telescope.builtin\').help_tags(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gf', '<cmd>lua require(\'telescope.builtin\').git(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gb',
+    '<cmd>lua require(\'telescope.builtin\').git_branches(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gbc',
+    '<cmd>lua require(\'telescope.builtin\').git_bcommits(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>ts',
+    '<cmd>lua require(\'telescope.builtin\').treesitter(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>p', '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown()<cr>',
     {noremap = true})
 map('n', '<space>rl', '<cmd>lua require(\'telescope.builtin\').reloader()<cr>', {noremap = true})
 map('n', '<space>s', '<cmd>lua require\'telescope.builtin\'.symbols{}<cr>', {noremap = true})
@@ -486,7 +502,7 @@ require('gitsigns').setup {
     sign_priority = 6,
     update_debounce = 20,
     status_formatter = nil, -- Use default
-    use_decoration_api = true;
+    use_decoration_api = true
 }
 
 --------------------------------------------------------------------------------
@@ -548,3 +564,22 @@ require'bufferline'.setup {
     }
 }
 
+------------------
+--  vimspector  --
+------------------
+-- vim.cmd([[let g:vimspector_base_dir='/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vimspector']])
+map('n', '<leader>dd', '<cmd>call vimspector#Launch()<CR>', {noremap = true})
+map('n', '<leader>de', '<cmd>VimspectorReset<CR>', {noremap = true})
+map('n', '<leader>cc', '<cmd>call vimspector#Continue()<CR>',{noremap = true})
+map('n', '<leader>ds', '<cmd>call vimspector#Stop()<CR>',{noremap = true})
+map('n', '<leader>dr', '<cmd>call vimspector#Restart()<CR>',{noremap = true})
+map('n', '<leader>dp', '<cmd>call vimspector#Pause()<CR>',{noremap = true})
+vimp.rbind('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint')
+-- vimp.rbind('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint')
+-- map('n', '<space>db', '<cmd>call vimspector#ToggleBreakpoint()<CR>',{noremap = true})
+-- map('n', '<space>cb', '<cmd>call vimspector#ToggleConditionalBreakpoint()<CR>',{noremap = true})
+-- map('n', '<space>fb', '<cmd>call vimspector#AddFunctionBreakpoint()<CR>',{noremap = true})
+map('n', '<leader>drc', '<cmd>call vimspector#RunToCursor()<CR>',{noremap = true})
+map('n', '<leader>l', '<cmd>call vimspector#StepOver()<CR>',{noremap = true})
+map('n', '<leader>j', '<cmd>call vimspector#StepInto()<CR>',{noremap = true})
+map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>',{noremap = true})
