@@ -17,7 +17,8 @@ require('nv-galaxyline')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-vim.cmd([[colo monokai]])
+-- vim.cmd([[colo monokai]])
+vim.cmd([[colo tokyodark]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])

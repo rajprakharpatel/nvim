@@ -23,7 +23,8 @@ return require('packer').startup(function(use)
 
     -- Useful Plugins
     use 'mbbill/undotree'
-    use 'majutsushi/tagbar'
+    use 'simrat39/symbols-outline.nvim'
+    -- use 'majutsushi/tagbar'          -- using symbols-outline.nvim
     -- pure vim scripts with no dependencies
     use 'tpope/vim-abolish'
     use 'zhimsel/vim-stay'
@@ -40,7 +41,9 @@ return require('packer').startup(function(use)
     use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
     use 'ChristianChiarulli/nvcode-color-schemes.vim'
-    -- use 'joeytwiddle/sexy_scroller.vim'
+    use 'joeytwiddle/sexy_scroller.vim'
+    use 'tiagovla/tokyodark.nvim'
+    use 'folke/lsp-colors.nvim'
     -- use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
@@ -123,6 +126,7 @@ return require('packer').startup(function(use)
     use 'onsails/lspkind-nvim'
     use 'glepnir/lspsaga.nvim'
     use 'kabouzeid/nvim-lspinstall'
+    use 'folke/lsp-trouble.nvim'
 
     -- Status Line and Bufferline
     use 'glepnir/galaxyline.nvim'
