@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
     use 'ChristianChiarulli/nvcode-color-schemes.vim'
-    use 'joeytwiddle/sexy_scroller.vim'
+    -- use 'joeytwiddle/sexy_scroller.vim'
     use 'tiagovla/tokyodark.nvim'
     use 'folke/lsp-colors.nvim'
     -- use 'cossonleo/neo-smooth-scroll.nvim'
@@ -139,7 +139,7 @@ return require('packer').startup(function(use)
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use 'lukas-reineke/indent-blankline.nvim'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'romgrk/nvim-treesitter-context'
     use {'nvim-treesitter/playground'}

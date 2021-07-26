@@ -1,0 +1,26 @@
+vim:ft=jsonc
+{
+  "configurations": {
+    "Launch": {
+      "adapter": "lldb-vscode",
+      "configuration": {
+        "request": "launch",
+        "program": "lldb-vscode",
+        // "args": [ ... ],
+        // "cwd": "<working directory>",
+        "environment": [ ... ],
+        "externalConsole": true,
+        "MIMode": "lldb"
+      }
+    },
+    "Attach": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "attach",
+        "program": "<path to binary>",
+        "MIMode": "<lldb or gdb>"
+      }
+    }
+    ...
+  }
+}

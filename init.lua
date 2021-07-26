@@ -17,8 +17,8 @@ require('nv-galaxyline')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
--- vim.cmd([[colo monokai]])
-vim.cmd([[colo tokyodark]])
+vim.cmd([[colo monokai]])
+-- vim.cmd([[colo tokyodark]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
@@ -43,7 +43,7 @@ vim.o.autoindent = true
 vim.bo.smartindent = true
 vim.wo.wrap = false
 vim.o.textwidth = 79
-vim.o.t_Co = '256'
+vim.go.t_Co = '256'
 vim.o.syntax = 'true'
 vim.o.showmatch = true
 vim.o.whichwrap = vim.o.whichwrap .. "<,>,[,]"
@@ -100,7 +100,7 @@ vim.o.wildignore =
 vim.o.shortmess = vim.o.shortmess .. 's'
 
 -- UI OPTS
-vim.o.termguicolors = true
+vim.go.termguicolors = true
 vim.o.fillchars = "stlnc:»,vert:║,fold:·"
 vim.o.pumblend = 20
 vim.o.pumheight = 15

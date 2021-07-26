@@ -94,7 +94,7 @@ end
 
 -- Use a loop to conveniently both setup defined serversw
 -- and map buffer local keybindings when the language server attaches
-local servers = {"clangd", "cmake", "pyls"}
+local servers = {"clangd", "cmake"}
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
 -- local lsp_path = vim.fn.stdpath('data') .. '/home/rajprakhar/.local/share/nvim/lspinstall'
 --------------------------------------------------------------------------------
