@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/FastFold"
   },
+  ["JABS.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/JABS.nvim"
+  },
   Join = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/Join"
@@ -161,6 +165,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
   },
+  ["nvim-biscuits"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-biscuits"
+  },
   ["nvim-bufferline.lua"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
@@ -196,6 +204,14 @@ _G.packer_plugins = {
   ["nvim-lsputils"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-lsputils"
+  },
+  ["nvim-peekup"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-peekup"
+  },
+  ["nvim-transparent"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-transparent"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -249,6 +265,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/quick-scope"
   },
+  ["sexy_scroller.vim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/sexy_scroller.vim"
+  },
   ["switch.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/switch.vim"
@@ -293,6 +313,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/undotree"
   },
+  ["venn.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/venn.nvim"
+  },
   ["vim-abolish"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-abolish"
@@ -328,10 +352,6 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
-  ["vim-illuminate"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-illuminate"
   },
   ["vim-indent-object"] = {
     loaded = true,

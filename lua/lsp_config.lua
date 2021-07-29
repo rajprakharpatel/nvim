@@ -24,12 +24,12 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     -- buf_set_keymap('n', 'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]],
-                   -- opts)
+    -- opts)
     buf_set_keymap('n', '<c-b>', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     -- buf_set_keymap('n', '<space>k', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]],
-        -- opts)
+    -- opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -48,34 +48,27 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gh', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], opts)
     -- code action
     buf_set_keymap('n', '<space>a', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], opts)
-    buf_set_keymap('v', '<space>a', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]],
-        opts)
+    buf_set_keymap('v', '<space>a', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], opts)
     -- scroll down hover doc or scroll in definition preview
-    buf_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
-        opts)
+    buf_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], opts)
     -- scroll up hover doc
-    buf_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
-        opts)
+    buf_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], opts)
     -- preview definition
-    buf_set_keymap('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]],
-        opts)
+    buf_set_keymap('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], opts)
     -- show
-    buf_set_keymap('n', '<space>l', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]],
-        opts)
+    buf_set_keymap('n', '<space>l', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]], opts)
     -- only show diagnostic if cursor is over the area
-    buf_set_keymap('n', '<space>c', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]],
-        opts)
+    buf_set_keymap('n', '<space>c', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], opts)
     -- jump diagnostic
-    buf_set_keymap('n', '[d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]],
-        opts)
-    buf_set_keymap('n', ']d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]],
-        opts)
+    buf_set_keymap('n', '[d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], opts)
+    buf_set_keymap('n', ']d', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], opts)
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
         buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     elseif client.resolved_capabilities.document_range_formatting then
         buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
+
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
@@ -91,10 +84,17 @@ local on_attach = function(client, bufnr)
     ]], false)
     end
 end
-
+-- Register configs for installed servers in lspconfig.
+require'lspinstall'.setup()
+-- Get list of installed servers and then setup each
+-- server with lspconfig as usual.
+-- local servers = require'lspinstall'.installed_servers()
+-- for _, server in pairs(servers) do
+--   require'lspconfig'[server].setup{}
+-- end
 -- Use a loop to conveniently both setup defined serversw
 -- and map buffer local keybindings when the language server attaches
-local servers = {"clangd", "cmake"}
+local servers = {"clangd", "cmake", "pylsp"}
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
 -- local lsp_path = vim.fn.stdpath('data') .. '/home/rajprakhar/.local/share/nvim/lspinstall'
 --------------------------------------------------------------------------------

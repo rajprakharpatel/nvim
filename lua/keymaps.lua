@@ -88,3 +88,6 @@ map('', '<leader>op', ':set background=dark <bar> :set cursorline <bar> :set col
 -- Pack Install
 map('n', '<leader>pi', ':PackerInstall<cr>', {noremap = true})
 map('n', '<leader>ps', ':PackerSync<cr>', {noremap = true})
+
+-- JABS
+map('n', '<space>b', ':JABSOpen<CR>', {noremap = true})

@@ -20,11 +20,14 @@ return require('packer').startup(function(use)
 
     -- Quality of life improvements
     use 'norcalli/nvim_utils'
+    use 'svermeulen/vimpeccable'
 
     -- Useful Plugins
     use 'mbbill/undotree'
-    use 'simrat39/symbols-outline.nvim'
-    -- use 'majutsushi/tagbar'          -- using symbols-outline.nvim
+
+    -- Buffer Symols
+    use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
+
     -- pure vim scripts with no dependencies
     use 'tpope/vim-abolish'
     use 'zhimsel/vim-stay'
@@ -38,16 +41,21 @@ return require('packer').startup(function(use)
     use 'junegunn/goyo.vim'
     use 'junegunn/limelight.vim'
     use 'tanvirtin/monokai.nvim'
-    use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
+    -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
     use 'ChristianChiarulli/nvcode-color-schemes.vim'
-    -- use 'joeytwiddle/sexy_scroller.vim'
+    use 'joeytwiddle/sexy_scroller.vim'
     use 'tiagovla/tokyodark.nvim'
     use 'folke/lsp-colors.nvim'
+    use {'sunjon/shade.nvim', disable = true} -- dim inactive windows
+    use 'xiyaowong/nvim-transparent' -- make any colorschemme transparent
+    use 'jbyuki/venn.nvim' -- Draw Ascii flow chart in vim
+    use 'notomo/gesture.nvim'
+
     -- use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
-    use 'kshenoy/vim-signature'
+    use 'kshenoy/vim-signature' --  to place, toggle and display marks.
     use 'mg979/vim-visual-multi'
     use 'machakann/vim-swap'
     use 'junegunn/vim-easy-align' -- An alternative is tabular
@@ -66,6 +74,9 @@ return require('packer').startup(function(use)
     use 'AndrewRadev/switch.vim'
     use 'metakirby5/codi.vim'
     use 'MattesGroeger/vim-bookmarks'
+    use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
+    use 'matbme/JABS.nvim' -- easy buffer management
+
 
     -- Target objects
     use 'wellle/targets.vim'
@@ -80,12 +91,13 @@ return require('packer').startup(function(use)
     use {'SirVer/ultisnips', requires = {{'honza/vim-snippets'}}}
     use {'hrsh7th/vim-vsnip', requires = {{'rafamadriz/friendly-snippets'}}}
 
+    -- terminal
     use 'voldikss/vim-floaterm'
     use 'ptzz/lf.vim'
 
     -- search
     use 'unblevable/quick-scope'
-    use 'haya14busa/incsearch.vim'              --replace with vim-hop
+    use 'haya14busa/incsearch.vim' -- replace with vim-hop
     use 'haya14busa/incsearch-fuzzy.vim'
     use 'haya14busa/incsearch-easymotion.vim'
     use 'easymotion/vim-easymotion'
@@ -94,10 +106,6 @@ return require('packer').startup(function(use)
     -- TODO add when i start webdev
     -- use 'gennaro-tedesco/nvim-jqx'
     -- use 'turbio/bracey.vim'
-
-
-    -- keybind
-    use 'svermeulen/vimpeccable'
 
     -- Telescope
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
@@ -127,6 +135,7 @@ return require('packer').startup(function(use)
     use 'glepnir/lspsaga.nvim'
     use 'kabouzeid/nvim-lspinstall'
     use 'folke/lsp-trouble.nvim'
+    -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
 
     -- Status Line and Bufferline
     use 'glepnir/galaxyline.nvim'
@@ -143,7 +152,8 @@ return require('packer').startup(function(use)
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'romgrk/nvim-treesitter-context'
     use {'nvim-treesitter/playground'}
-    use {'windwp/nvim-ts-autotag', disable = true}  -- Use treesitter to autoclose and autorename html tag
+    use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
+    use 'code-biscuits/nvim-biscuits'
 
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'

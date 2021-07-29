@@ -160,10 +160,7 @@ require('telescope').setup {
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        path_display = {
-            "shorten",
-            "absolute",
-        },
+        path_display = {"shorten", "absolute"},
         winblend = 7,
         border = {},
         borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
@@ -214,7 +211,7 @@ map('n', '<c-p>',
 map('n', '<space>g',
     '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
-map('n', '<space>b',
+map('n', '<space>bb',
     '<cmd>lua require(\'telescope.builtin\').buffers(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
 map('n', '<space>h',
@@ -231,7 +228,8 @@ map('n', '<space>gbc',
 map('n', '<space>ts',
     '<cmd>lua require(\'telescope.builtin\').treesitter(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
-map('n', '<space>p', '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown())<cr>',
+map('n', '<space>p',
+    '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
 map('n', '<space>rl', '<cmd>lua require(\'telescope.builtin\').reloader()<cr>', {noremap = true})
 map('n', '<space>s', '<cmd>lua require\'telescope.builtin\'.symbols{}<cr>', {noremap = true})
@@ -264,8 +262,12 @@ vim.g.dashboard_custom_section = {
     d = {description = {' Find Word          '}, command = 'Telescope live_grep'},
     e = {description = {' Marks              '}, command = 'Telescope marks'}
 }
+vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
+vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
 
--- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
+vim.api.nvim_exec([[
+    let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
+]], false)
 
 -- vim.g.dashboard_custom_shortcut = {
 --     a = 'f',
@@ -338,38 +340,22 @@ vim.g.nvim_tree_auto_close = 1 -- 0 by default, closes the tree when it's the la
 -- vim.cmd([[hi NvimTreeFolderIcon guifg=blue]])
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
-      { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
-      { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
-      { key = "<C-v>",                        cb = tree_cb("vsplit") },
-      { key = "<C-x>",                        cb = tree_cb("split") },
-      { key = "<C-t>",                        cb = tree_cb("tabnew") },
-      { key = "<",                            cb = tree_cb("prev_sibling") },
-      { key = ">",                            cb = tree_cb("next_sibling") },
-      { key = "P",                            cb = tree_cb("parent_node") },
-      { key = "<BS>",                         cb = tree_cb("close_node") },
-      { key = "<S-CR>",                       cb = tree_cb("close_node") },
-      { key = "<Tab>",                        cb = tree_cb("preview") },
-      { key = "K",                            cb = tree_cb("first_sibling") },
-      { key = "J",                            cb = tree_cb("last_sibling") },
-      { key = "I",                            cb = tree_cb("toggle_ignored") },
-      { key = "H",                            cb = tree_cb("toggle_dotfiles") },
-      { key = "R",                            cb = tree_cb("refresh") },
-      { key = "a",                            cb = tree_cb("create") },
-      { key = "d",                            cb = tree_cb("remove") },
-      { key = "r",                            cb = tree_cb("rename") },
-      { key = "<C-r>",                        cb = tree_cb("full_rename") },
-      { key = "x",                            cb = tree_cb("cut") },
-      { key = "c",                            cb = tree_cb("copy") },
-      { key = "p",                            cb = tree_cb("paste") },
-      { key = "y",                            cb = tree_cb("copy_name") },
-      { key = "Y",                            cb = tree_cb("copy_path") },
-      { key = "gy",                           cb = tree_cb("copy_absolute_path") },
-      { key = "[c",                           cb = tree_cb("prev_git_item") },
-      { key = "]c",                           cb = tree_cb("next_git_item") },
-      { key = "-",                            cb = tree_cb("dir_up") },
-      { key = "q",                            cb = tree_cb("close") },
-      { key = "g?",                           cb = tree_cb("toggle_help") },
-    }
+    {key = {"<CR>", "o", "l", "<2-LeftMouse>"}, cb = tree_cb("edit")},
+    {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")}, {key = "<C-v>", cb = tree_cb("vsplit")},
+    {key = "<C-x>", cb = tree_cb("split")}, {key = "<C-t>", cb = tree_cb("tabnew")},
+    {key = "<", cb = tree_cb("prev_sibling")}, {key = ">", cb = tree_cb("next_sibling")},
+    {key = {"P", "h"}, cb = tree_cb("parent_node")}, {key = "h", cb = tree_cb("close_node")},
+    {key = "<S-CR>", cb = tree_cb("close_node")}, {key = "<Tab>", cb = tree_cb("preview")},
+    {key = "K", cb = tree_cb("first_sibling")}, {key = "J", cb = tree_cb("last_sibling")},
+    {key = "I", cb = tree_cb("toggle_ignored")}, {key = "H", cb = tree_cb("toggle_dotfiles")},
+    {key = "R", cb = tree_cb("refresh")}, {key = "a", cb = tree_cb("create")}, {key = "d", cb = tree_cb("remove")},
+    {key = "r", cb = tree_cb("rename")}, {key = "<C-r>", cb = tree_cb("full_rename")}, {key = "x", cb = tree_cb("cut")},
+    {key = "c", cb = tree_cb("copy")}, {key = "p", cb = tree_cb("paste")}, {key = "y", cb = tree_cb("copy_name")},
+    {key = "Y", cb = tree_cb("copy_path")}, {key = "gy", cb = tree_cb("copy_absolute_path")},
+    {key = "[c", cb = tree_cb("prev_git_item")}, {key = "]c", cb = tree_cb("next_git_item")},
+    {key = {"<BS>", "-"}, cb = tree_cb("dir_up")}, {key = "q", cb = tree_cb("close")},
+    {key = "g?", cb = tree_cb("toggle_help")}
+}
 vim.g.nvim_tree_icons = {
     default = '',
     symlink = '',
@@ -508,15 +494,17 @@ require('gitsigns').setup {
 --------------------------------------------------------------------------------
 --                               nvim-colorizer                               --
 --------------------------------------------------------------------------------
-require'colorizer'.setup({
-    RGB = true, -- #RGB hex codes
-    RRGGBB = true, -- #RRGGBB hex codes
-    RRGGBBAA = true, -- #RRGGBBAA hex codes
-    rgb_fn = true, -- CSS rgb() and rgba() functions
-    hsl_fn = true, -- CSS hsl() and hsla() functions
-    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-    css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
-})
+vim.cmd [[set termguicolors]]
+require'colorizer'.setup()
+-- require'colorizer'.setup({
+--     RGB = true, -- #RGB hex codes
+--     RRGGBB = true, -- #RRGGBB hex codes
+--     RRGGBBAA = true, -- #RRGGBBAA hex codes
+--     rgb_fn = true, -- CSS rgb() and rgba() functions
+--     hsl_fn = true, -- CSS hsl() and hsla() functions
+--     css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+--     css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
+-- })
 
 --------------------------------------------------------------------------------
 --                                buffer-line                                 --
@@ -588,3 +576,47 @@ map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>', {noremap = true})
 --  symbols-outline.nvim  --
 ----------------------------
 require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
+
+-----------------
+--  Shade.vim  --
+-----------------
+-- require'module'.setup({
+--     overlay_opacity = 50,
+--     opacity_step = 1,
+--     keys = {brightness_up = '<C-Up>', brightness_down = '<C-Down>', toggle = '<Leader>s'}
+-- })
+
+----------------------
+--  nvim-buiscuits  --
+----------------------
+require('nvim-biscuits').setup({})
+
+--------------------
+--  gesture.nvim  --
+--------------------
+vim.cmd[[nnoremap <silent> <LeftDrag> <Cmd>lua require("gesture").draw()<CR>]]
+vim.cmd[[nnoremap <silent> <LeftRelease> <Cmd>lua require("gesture").finish()<CR>]]
+local gesture = require('gesture')
+gesture.register({
+  name = "scroll to bottom",
+  inputs = { gesture.up(), gesture.down() },
+  action = "normal! G"
+})
+gesture.register({
+  name = "next tab",
+  inputs = { gesture.right() },
+  action = "tabnext"
+})
+gesture.register({
+  name = "previous tab",
+  inputs = { gesture.left() },
+  action = function(ctx) -- also can use function
+    vim.cmd("tabprevious")
+  end,
+})
+gesture.register({
+  name = "go back",
+  inputs = { gesture.right(), gesture.left() },
+  -- map to `<C-o>` keycode
+  action = [[lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-o>", true, false, true), "n", true)]]
+})
