@@ -38,8 +38,8 @@ vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
 
 -- Tab switch buffer
-vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<TAB>', ':BufferLineCycleNext<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferLineCyclePrev<CR>', {noremap = true, silent = true})
 
 -- Quick searh syntax
 map('c', ';;', '%s:::g<Left><Left><Left>', {noremap = true})
@@ -64,8 +64,8 @@ vim.cmd('command! Q :Sayonara!')
 map('n', ';', 'A;<esc>', {noremap = true})
 
 -- Comment toggle
-vim.cmd([[map <c-/> :CommentToggle<ESC><CR>]])
-vim.cmd([[map <c-_> :CommentToggle<ESC><CR>]])
+-- vim.cmd([[map <c-/> :CommentToggle<ESC><CR>]])
+-- vim.cmd([[map <c-_> :CommentToggle<ESC><CR>]])
 -- ctrl-s save
 map('n', '<c-s>', '<esc>:w!<cr>', {noremap = true})
 map('i', '<c-s>', '<esc>:w!<cr>a', {noremap = true})
@@ -91,3 +91,24 @@ map('n', '<leader>ps', ':PackerSync<cr>', {noremap = true})
 
 -- JABS
 map('n', '<space>b', ':JABSOpen<CR>', {noremap = true})
+
+-- Symbols Outline
+map('n', '<F9>', ':SymbolsOutline<CR>', {noremap = true})
+
+-- Behave Vim
+map('n', 'Y', 'y$', {noremap = true})
+
+-- Keeping it centered
+map('n', 'n', 'nzzzv', {noremap = true})
+map('n', 'N', 'Nzzzv', {noremap = true})
+map('n', 'J', 'mzJ`z', {noremap = true})
+
+-- Undo break points
+map('i', ',', ',<c-g>u', {noremap = true})
+map('i', '.', '.<c-g>u', {noremap = true})
+map('i', '!', '!<c-g>u', {noremap = true})
+map('i', '?', '?<c-g>u', {noremap = true})
+
+-- Jumplist mutations
+vim.cmd[[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k']]
+vim.cmd[[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]

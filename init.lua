@@ -1,3 +1,4 @@
+STime = os.time()
 ------------------------------------------------------------------------
 --                              modules                               --
 ------------------------------------------------------------------------
@@ -17,7 +18,7 @@ require('nv-galaxyline')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-vim.cmd([[colo monokai]])
+vim.cmd([[colo tokyodark]])
 -- vim.cmd([[colo tokyodark]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
@@ -100,7 +101,7 @@ vim.o.wildignore =
 vim.o.shortmess = vim.o.shortmess .. 's'
 
 -- UI OPTS
-vim.go.termguicolors = true
+vim.opt.termguicolors = true
 vim.o.fillchars = "stlnc:»,vert:║,fold:·"
 vim.o.pumblend = 20
 vim.o.pumheight = 15

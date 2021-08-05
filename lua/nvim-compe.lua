@@ -52,7 +52,8 @@ require'compe'.setup {
           kind = "  "},
         snippets_nvim = {kind = "  "},
         treesitter = {kind = "  "},
-        emoji = {kind = " ﲃ "}
+        emoji = {kind = " ﲃ "},
+        orgmode = true
         -- for emoji press : (idk if that in compe tho)
     }
 }

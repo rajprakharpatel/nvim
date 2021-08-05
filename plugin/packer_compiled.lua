@@ -85,9 +85,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/SimpylFold"
   },
+  ["TrueZen.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
+  },
   ["codi.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/codi.vim"
+  },
+  ["commented.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/commented.nvim"
   },
   ["compe-tabnine"] = {
     loaded = true,
@@ -101,6 +109,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/delimitMate"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/diffview.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/friendly-snippets"
@@ -109,13 +121,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
+  ["gesture.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/gesture.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
-  },
-  ["goyo.vim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/goyo.vim"
   },
   ["incsearch-easymotion.vim"] = {
     loaded = true,
@@ -136,10 +148,6 @@ _G.packer_plugins = {
   ["lf.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/lf.vim"
-  },
-  ["limelight.vim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/limelight.vim"
   },
   ["lsp-colors.nvim"] = {
     loaded = true,
@@ -165,10 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
   },
-  ["nvim-biscuits"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-biscuits"
-  },
   ["nvim-bufferline.lua"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
@@ -180,10 +184,6 @@ _G.packer_plugins = {
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
-  },
-  ["nvim-comment"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-comment"
   },
   ["nvim-compe"] = {
     loaded = true,
@@ -208,6 +208,10 @@ _G.packer_plugins = {
   ["nvim-peekup"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-peekup"
+  },
+  ["nvim-tetris"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-tetris"
   },
   ["nvim-transparent"] = {
     loaded = true,
@@ -237,9 +241,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
+  nvim_context_vt = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim_context_vt"
+  },
   nvim_utils = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim_utils"
+  },
+  ["orgmode.nvim"] = {
+    config = { "\27LJ\2\nê\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\21org_agenda_files\1\0\1\27org_default_notes_file\28~/Dropbox/org/notes.org\1\2\0\0\f~/org/*\nsetup\forgmode\frequire\0" },
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/orgmode.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -268,6 +281,10 @@ _G.packer_plugins = {
   ["sexy_scroller.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/sexy_scroller.vim"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/sniprun"
   },
   ["switch.vim"] = {
     loaded = true,
@@ -304,6 +321,11 @@ _G.packer_plugins = {
   ["tokyodark.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/tokyodark.nvim"
+  },
+  ["twilight.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rtwilight\frequire\0" },
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/twilight.nvim"
   },
   ultisnips = {
     loaded = true,
@@ -448,6 +470,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: orgmode.nvim
+time([[Config for orgmode.nvim]], true)
+try_loadstring("\27LJ\2\nê\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\21org_agenda_files\1\0\1\27org_default_notes_file\28~/Dropbox/org/notes.org\1\2\0\0\f~/org/*\nsetup\forgmode\frequire\0", "config", "orgmode.nvim")
+time([[Config for orgmode.nvim]], false)
+-- Config for: twilight.nvim
+time([[Config for twilight.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rtwilight\frequire\0", "config", "twilight.nvim")
+time([[Config for twilight.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

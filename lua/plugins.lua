@@ -24,8 +24,6 @@ return require('packer').startup(function(use)
 
     -- Useful Plugins
     use 'mbbill/undotree'
-
-    -- Buffer Symols
     use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
 
     -- pure vim scripts with no dependencies
@@ -38,8 +36,17 @@ return require('packer').startup(function(use)
     -- Plugin 'tpope/vim-dispatch'
 
     -- visual Plugins
-    use 'junegunn/goyo.vim'
-    use 'junegunn/limelight.vim'
+    -- use 'junegunn/goyo.vim'
+    -- use 'junegunn/limelight.vim'
+    use "Pocco81/TrueZen.nvim"
+    -- Lua
+    use {
+        "folke/twilight.nvim",
+        config = function()
+            require("twilight").setup {}
+        end
+    }
+
     use 'tanvirtin/monokai.nvim'
     -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     use 'norcalli/nvim-colorizer.lua'
@@ -67,7 +74,8 @@ return require('packer').startup(function(use)
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter' -- automatically sets project directory using rules in vimrc
     use 'Raimondi/delimitMate'
-    use 'terrortylor/nvim-comment'
+    -- use 'terrortylor/nvim-comment'
+    use 'winston0410/commented.nvim'
     use 'andymass/vim-matchup' -- matches cooresponding bracket
     use 'tpope/vim-eunuch' -- shell commands from inside vim
     use 'RishabhRD/nvim-cheat.sh'
@@ -76,7 +84,7 @@ return require('packer').startup(function(use)
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
     use 'matbme/JABS.nvim' -- easy buffer management
-
+    -- Lua
 
     -- Target objects
     use 'wellle/targets.vim'
@@ -119,6 +127,10 @@ return require('packer').startup(function(use)
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
+    use 'sindrets/diffview.nvim'
+
+    use 'alec-gibson/nvim-tetris'
+    use {'michaelb/sniprun', run = 'bash ./install.sh'}
 
     -- Debugging
     use 'puremourning/vimspector'
@@ -147,15 +159,26 @@ return require('packer').startup(function(use)
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'p00f/nvim-ts-rainbow'
     use 'lukas-reineke/indent-blankline.nvim'
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'haringsrob/nvim_context_vt'
     use 'romgrk/nvim-treesitter-context'
     use {'nvim-treesitter/playground'}
     use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
-    use 'code-biscuits/nvim-biscuits'
 
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
+
+    -- Orgmmode
+    use {
+        'kristijanhusak/orgmode.nvim',
+        config = function()
+            require('orgmode').setup {
+                org_agenda_files = {'~/org/*'},
+                org_default_notes_file = '~/Dropbox/org/notes.org'
+            }
+        end
+    }
 
 end)

@@ -7,10 +7,6 @@ map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
 vim.bo.undofile = true
 vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
 
---------------
---  tagbar  --
---------------
-map('', '<F9>', ':TagbarToggle<cr>', {noremap = true})
 -----------------
 --  Ultisnips  --
 -----------------
@@ -36,14 +32,6 @@ vimp.rbind('n', 'ga', '<Plug>(EasyAlign)')
 --  vim-stay  --
 ----------------
 vim.cmd(':set viewoptions=cursor,folds,slash,unix')
-
----------------
---  sonokai  --
----------------
-vim.g.sonokai_transparent_background = 1
--- Default, Atlantis, andromeda, Shusia, Maia"
-vim.g.sonokai_style = 'maia'
-vim.g.sonokai_better_performance = 1
 
 ----------------
 --  FastFold  --
@@ -155,8 +143,8 @@ require('telescope').setup {
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        layout_strategy = "center",
-        layout_config = {horizontal = {mirror = false}, vertical = {mirror = true}},
+        -- layout_strategy = "center",
+        -- layout_config = {horizontal = {mirror = false}, vertical = {mirror = true}},
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -168,8 +156,8 @@ require('telescope').setup {
         use_less = true,
         set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+        -- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+        -- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
@@ -206,7 +194,7 @@ map('n', '<space>br',
     '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
 map('n', '<c-p>',
-    '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_dropdown())<cr>',
+    '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_ivy())<cr>',
     {noremap = true})
 map('n', '<space>g',
     '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
@@ -262,12 +250,14 @@ vim.g.dashboard_custom_section = {
     d = {description = {' Find Word          '}, command = 'Telescope live_grep'},
     e = {description = {' Marks              '}, command = 'Telescope marks'}
 }
-vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
+-- vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
 vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
-
-vim.api.nvim_exec([[
-    let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
-]], false)
+local time = os.time() - STime
+local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.." ..time.. "..' seconds']"
+-- vim.api.nvim_exec([[
+    -- let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
+-- ]], false)
+vim.api.nvim_exec(st, false)
 
 -- vim.g.dashboard_custom_shortcut = {
 --     a = 'f',
@@ -285,7 +275,9 @@ vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer
 --------------------
 --  nvim_comment  --
 --------------------
-require('nvim_comment').setup({comment_empty = false})
+-- require('nvim_comment').setup({comment_empty = false})
+require('commented').setup()
+map('n', '<c-_>', [[:Comment<cr><cr>]], {noremap = true})
 
 ------------------
 --  treesitter  --
@@ -484,7 +476,7 @@ require('gitsigns').setup {
         buffer = true
     },
     watch_index = {interval = 50},
-    current_line_blame = false,
+    current_line_blame = true,
     sign_priority = 6,
     update_debounce = 20,
     status_formatter = nil, -- Use default
@@ -586,37 +578,68 @@ require('symbols-outline').setup({highlight_hovered_items = true, show_guides = 
 --     keys = {brightness_up = '<C-Up>', brightness_down = '<C-Down>', toggle = '<Leader>s'}
 -- })
 
-----------------------
---  nvim-buiscuits  --
-----------------------
-require('nvim-biscuits').setup({})
-
 --------------------
 --  gesture.nvim  --
 --------------------
-vim.cmd[[nnoremap <silent> <LeftDrag> <Cmd>lua require("gesture").draw()<CR>]]
-vim.cmd[[nnoremap <silent> <LeftRelease> <Cmd>lua require("gesture").finish()<CR>]]
+vim.cmd [[nnoremap <silent> <LeftDrag> <Cmd>lua require("gesture").draw()<CR>]]
+vim.cmd [[nnoremap <silent> <LeftRelease> <Cmd>lua require("gesture").finish()<CR>]]
 local gesture = require('gesture')
+gesture.register({name = "scroll to bottom", inputs = {gesture.up(), gesture.down()}, action = "normal! G"})
+gesture.register({name = "next tab", inputs = {gesture.right()}, action = "tabnext"})
 gesture.register({
-  name = "scroll to bottom",
-  inputs = { gesture.up(), gesture.down() },
-  action = "normal! G"
+    name = "previous tab",
+    inputs = {gesture.left()},
+    action = function(ctx) -- also can use function
+        vim.cmd("tabprevious")
+    end
 })
 gesture.register({
-  name = "next tab",
-  inputs = { gesture.right() },
-  action = "tabnext"
+    name = "go back",
+    inputs = {gesture.right(), gesture.left()},
+    -- map to `<C-o>` keycode
+    action = [[lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-o>", true, false, true), "n", true)]]
 })
-gesture.register({
-  name = "previous tab",
-  inputs = { gesture.left() },
-  action = function(ctx) -- also can use function
-    vim.cmd("tabprevious")
-  end,
-})
-gesture.register({
-  name = "go back",
-  inputs = { gesture.right(), gesture.left() },
-  -- map to `<C-o>` keycode
-  action = [[lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-o>", true, false, true), "n", true)]]
-})
+
+----------------
+--  diffview  --
+----------------
+-- Lua
+local cb = require'diffview.config'.diffview_callback
+
+require'diffview'.setup {
+    diff_binaries = false, -- Show diffs for binaries
+    file_panel = {
+        width = 35,
+        use_icons = true -- Requires nvim-web-devicons
+    },
+    key_bindings = {
+        disable_defaults = false, -- Disable the default key bindings
+        -- The `view` bindings are active in the diff buffers, only when the current
+        -- tabpage is a Diffview.
+        view = {
+            ["<tab>"] = cb("select_next_entry"), -- Open the diff for the next file 
+            ["<s-tab>"] = cb("select_prev_entry"), -- Open the diff for the previous file
+            ["<leader>e"] = cb("focus_files"), -- Bring focus to the files panel
+            ["<leader>b"] = cb("toggle_files") -- Toggle the files panel.
+        },
+        file_panel = {
+            ["j"] = cb("next_entry"), -- Bring the cursor to the next file entry
+            ["<down>"] = cb("next_entry"),
+            ["k"] = cb("prev_entry"), -- Bring the cursor to the previous file entry.
+            ["<up>"] = cb("prev_entry"),
+            ["<cr>"] = cb("select_entry"), -- Open the diff for the selected entry.
+            ["o"] = cb("select_entry"),
+            ["<2-LeftMouse>"] = cb("select_entry"),
+            ["-"] = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
+            ["S"] = cb("stage_all"), -- Stage all entries.
+            ["U"] = cb("unstage_all"), -- Unstage all entries.
+            ["X"] = cb("restore_entry"), -- Restore entry to the state on the left side.
+            ["R"] = cb("refresh_files"), -- Update stats and entries in the file list.
+            ["<tab>"] = cb("select_next_entry"),
+            ["<s-tab>"] = cb("select_prev_entry"),
+            ["<leader>e"] = cb("focus_files"),
+            ["<leader>b"] = cb("toggle_files")
+        }
+    }
+}
+
