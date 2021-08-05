@@ -57,7 +57,7 @@ map('n', '<leader>e', ':exe getline(line(\'.\'))<CR>', {noremap = true})
 -- CDF = Change to Directory of Current file
 vim.cmd('command! CDF cd %:p:h')
 -- refresh external changes into file
-map('n', '<F5>', ':checktime', {noremap = true})
+map('n', '<F5>', ':checktime<CR>', {noremap = true})
 -- Quit without closing tab
 vim.cmd('command! Q :Sayonara!')
 -- Add semicolon to end of line with <;>
@@ -121,3 +121,18 @@ map('i', '?', '?<c-g>u', {noremap = true})
 -- Jumplist mutations
 vim.cmd [[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k']]
 vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]
+
+-- Code Runner
+vim.cmd([[
+augroup code
+    autocmd!
+  autocmd filetype cpp nmap <F6> :w <bar> Dispatch!g++ -s -O3 % -o release-%:r && release-%:r < inp > out <CR>
+  autocmd filetype cpp nmap <S-F6> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++11 % -o debug-%:r && debug-%:r < inp > out <CR>
+  autocmd filetype c nmap <F6> :w <bar> Dispatch!gcc -g  % -o %:r && %:r < inp > out <CR>
+  autocmd filetype c nmap <S-F6> :w <bar> FloatermNew! gcc -g  % -o %:r && %:r < inp > out <CR>
+  autocmd filetype java nmap <F6> :w <bar> Dispatch!javac -g % && java -enableassertions %:r < inp > out <CR>
+  " to start debug server on port 5005
+  autocmd filetype java nmap <S-F6> :w <bar> FloatermNew! java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y %:r
+  autocmd filetype python nmap <F6> :w <bar> Dispatch!python % < inp > out <CR>
+augroup END
+]])

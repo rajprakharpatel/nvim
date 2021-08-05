@@ -220,6 +220,7 @@ map('n', '<space>m',
 map('n', '<space>u',
     '<cmd>lua require\'telescope\'.extensions.ultisnips.ultisnips(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
+map('n', '<space>o', '<cmd>lua require(\'telescope.builtin\').oldfiles()<cr>', {noremap = true})
 
 -----------------
 --  dashboard  --
@@ -470,7 +471,6 @@ require('gitsigns').setup {
     sign_priority = 6,
     update_debounce = 20,
     status_formatter = nil, -- Use default
-    use_decoration_api = true
 }
 
 --------------------------------------------------------------------------------
@@ -506,6 +506,7 @@ require'bufferline'.setup {
         max_prefix_length = 15, -- prefix used when a buffer is deduplicated
         tab_size = 18,
         diagnostics = "nvim_lsp",
+---@diagnostic disable-next-line: unused-local
         diagnostics_indicator = function(count, level, diagnostics_dict)
             return "(" .. count .. ")"
         end,
@@ -562,15 +563,13 @@ require('symbols-outline').setup({highlight_hovered_items = true, show_guides = 
 ----------------
 -- Shade.vim  --
 ----------------
-require'shade'.setup({
-  overlay_opacity = 50,
-  opacity_step = 1,
-  keys = {
-    brightness_up    = '<C-Up>',
-    brightness_down  = '<C-Down>',
-    toggle           = '<Leader>s',
-  }
-})
+-- require'shade'.setup({
+  -- overlay_opacity = 50,
+  -- opacity_step = 1,
+  -- keys = {
+    -- toggle           = '<Leader>s',
+  -- }
+-- })
 
 --------------------
 --  gesture.nvim  --
@@ -660,3 +659,30 @@ vim.api.nvim_set_keymap('n', '<leader>ml', [[<Cmd>lua require('material.function
 vim.api.nvim_set_keymap('n', '<leader>md', [[<Cmd>lua require('material.functions').change_style('darker')<CR>]], { noremap = true, silent = true })
 
 map('n', '<leader>~', ":lua require('material.functions').toggle_eob()<CR>", {noremap = true})
+
+--------------
+--  vimade  --
+--------------
+vim.cmd([[
+let g:vimade = {}
+let g:vimade.fadelevel = 0.7
+let g:vimade.enablesigns = 1
+let g:vimade.enabletreesitter = 1
+
+]])
+
+---------------
+--  minimap  --
+---------------
+vim.cmd([[
+let g:minimap_auto_start = 0
+"let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar', 'undotree', 'telescope', 'dashboard']
+"let g:minimap_block_buftypes = ['nofile', 'nowrite', 'quickfix', 'terminal', 'prompt', 'telescope']
+let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'packer']
+let g:minimap_highlight_range = 1
+let g:minimap_git_colors = 1
+let g:minimap_highlight_search = 1
+let g:minimap_cursor_color_priority = 100
+let g:minimap_git_color_priority = 110
+nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
+]])

@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
     use {'Konfekt/FastFold', disable = true}
     use {'tmhedberg/SimpylFold', disable = true}
     use 'mhinz/vim-sayonara'
-    use 'tpope/vim-dispatch'
+    use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
     use 'radenling/vim-dispatch-neovim'
 
     -- visual Plugins
@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
     use 'joeytwiddle/sexy_scroller.vim'
     use 'folke/lsp-colors.nvim'
-    use {'sunjon/shade.nvim', disable = false} -- dim inactive windows
+    use 'TaDaa/vimade'
     -- use 'tanvirtin/monokai.nvim'
     -- use 'ChristianChiarulli/nvcode-color-schemes.vim'
     -- use 'tiagovla/tokyodark.nvim'
@@ -180,4 +180,6 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- Experimenting
+    use {'wfxr/minimap.vim', run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
 end)

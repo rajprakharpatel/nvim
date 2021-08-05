@@ -99,7 +99,10 @@ vim.o.foldmethod = "syntax"
 vim.o.wildignore =
     '*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot'
 vim.o.shortmess = vim.o.shortmess .. 's'
-
+vim.cmd([[
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
+]])
 -- UI OPTS
 vim.opt.termguicolors = true
 vim.o.fillchars = "stlnc:»,vert:║,fold:·"
