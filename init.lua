@@ -18,8 +18,8 @@ require('nv-galaxyline')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-vim.cmd([[colo tokyodark]])
--- vim.cmd([[colo tokyodark]])
+require('material').set()
+-- vim.cmd([[colo material]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
@@ -128,10 +128,8 @@ function _G.define_augroups(definitions) -- {{{1
             local command = table.concat(vim.tbl_flatten {'autocmd', def}, ' ')
             vim.cmd(command)
         end
-
         vim.cmd('augroup END')
     end
-
 end
 
 function _G.dump(...)
@@ -139,11 +137,24 @@ function _G.dump(...)
     print(unpack(objects))
 end
 
+-- Comment toggle
+-- function _G.CommentToggle()
+    -- vim.cmd([[execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/' | nohlsearch]])
+    -- vim.cmd(
+        -- [[execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/' | nohlsearch]])
+-- end
+
 define_augroups({
     _colorizer = {{'FileType', '*', ':ColorizerAttachToBuffer'}},
     relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
     jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
     _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
+    _commentToggling = {
+        {'FileType', 'c,java,cpp,json,scala,jsonc', "let b:comment_leader = '//'"},
+        {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml', "let b:comment_leader = '#'"},
+        {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
+        {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]}
+    },
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
         {

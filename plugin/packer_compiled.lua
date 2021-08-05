@@ -69,10 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  FastFold = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/FastFold"
-  },
   ["JABS.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/JABS.nvim"
@@ -81,10 +77,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/Join"
   },
-  SimpylFold = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/SimpylFold"
-  },
   ["TrueZen.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
@@ -92,10 +84,6 @@ _G.packer_plugins = {
   ["codi.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/codi.vim"
-  },
-  ["commented.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/commented.nvim"
   },
   ["compe-tabnine"] = {
     loaded = true,
@@ -120,10 +108,6 @@ _G.packer_plugins = {
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
-  },
-  ["gesture.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/gesture.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -165,14 +149,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
-  ["monokai.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/monokai.nvim"
-  },
-  ["nvcode-color-schemes.vim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
-  },
   ["nvim-bufferline.lua"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
@@ -213,10 +189,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-tetris"
   },
-  ["nvim-transparent"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-transparent"
-  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
@@ -244,10 +216,6 @@ _G.packer_plugins = {
   nvim_context_vt = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim_context_vt"
-  },
-  nvim_utils = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/nvim_utils"
   },
   ["orgmode.nvim"] = {
     config = { "\27LJ\2\nê\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\21org_agenda_files\1\0\1\27org_default_notes_file\28~/Dropbox/org/notes.org\1\2\0\0\f~/org/*\nsetup\forgmode\frequire\0" },
@@ -281,6 +249,10 @@ _G.packer_plugins = {
   ["sexy_scroller.vim"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/sexy_scroller.vim"
+  },
+  ["shade.nvim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/shade.nvim"
   },
   sniprun = {
     loaded = true,
@@ -318,10 +290,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["tokyodark.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/tokyodark.nvim"
-  },
   ["twilight.nvim"] = {
     config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rtwilight\frequire\0" },
     loaded = true,
@@ -335,10 +303,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/undotree"
   },
-  ["venn.nvim"] = {
-    loaded = true,
-    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/venn.nvim"
-  },
   ["vim-abolish"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-abolish"
@@ -346,6 +310,14 @@ _G.packer_plugins = {
   ["vim-bookmarks"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-bookmarks"
+  },
+  ["vim-dispatch"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-dispatch"
+  },
+  ["vim-dispatch-neovim"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
   },
   ["vim-easy-align"] = {
     loaded = true,
@@ -390,6 +362,10 @@ _G.packer_plugins = {
   ["vim-move"] = {
     loaded = true,
     path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-move"
+  },
+  ["vim-nightfly-guicolors"] = {
+    loaded = true,
+    path = "/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vim-nightfly-guicolors"
   },
   ["vim-pythonsense"] = {
     loaded = true,

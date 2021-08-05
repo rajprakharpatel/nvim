@@ -36,9 +36,9 @@ vim.cmd(':set viewoptions=cursor,folds,slash,unix')
 ----------------
 --  FastFold  --
 ----------------
-map('x', 'iz', ':<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zv[z<cr>', {noremap = true})
-map('x', 'az', ':<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zV[z<cr>', {noremap = true})
-vim.cmd("autocmd BufWinEnter * let b:nrrw_aucmd_create = \"let w:lastfdm = getwinvar(winnr('#'), 'lastfdm')\"")
+-- map('x', 'iz', ':<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zv[z<cr>', {noremap = true})
+-- map('x', 'az', ':<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zV[z<cr>', {noremap = true})
+-- vim.cmd("autocmd BufWinEnter * let b:nrrw_aucmd_create = \"let w:lastfdm = getwinvar(winnr('#'), 'lastfdm')\"")
 
 ----------------
 --  vim-swap  --
@@ -54,12 +54,6 @@ vim.cmd("xmap a, <Plug>(swap-textobject-a)")
 ------------------
 vim.cmd("let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']")
 
-------------------------
---  Goya & limelight  --
-------------------------
-vim.cmd("autocmd! User GoyoEnter Limelight")
-vim.cmd("autocmd! User GoyoLeave Limelight!")
-
 ---------------
 --  matchup  --
 ---------------
@@ -68,8 +62,8 @@ vim.cmd("let g:matchup_matchparen_offscreen = {'method': 'popup'}")
 ------------------
 --  simpylfold  --
 ------------------
-vim.g.SimpylFold_docstring_preview = 1
-vim.g.SimpylFold_fold_docstring = 1
+-- vim.g.SimpylFold_docstring_preview = 1
+-- vim.g.SimpylFold_fold_docstring = 1
 
 ----------------
 --  floaterm  --
@@ -193,8 +187,7 @@ require('telescope').setup {
 map('n', '<space>br',
     '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
-map('n', '<c-p>',
-    '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_ivy())<cr>',
+map('n', '<c-p>', '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_ivy())<cr>',
     {noremap = true})
 map('n', '<space>g',
     '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
@@ -253,9 +246,10 @@ vim.g.dashboard_custom_section = {
 -- vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
 vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
 local time = os.time() - STime
-local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.." ..time.. "..' seconds']"
+local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.." .. time ..
+               "..' seconds']"
 -- vim.api.nvim_exec([[
-    -- let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
+-- let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
 -- ]], false)
 vim.api.nvim_exec(st, false)
 
@@ -276,15 +270,14 @@ vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer
 --  nvim_comment  --
 --------------------
 -- require('nvim_comment').setup({comment_empty = false})
-require('commented').setup()
-map('n', '<c-_>', [[:Comment<cr><cr>]], {noremap = true})
+-- require('commented').setup()
+-- map('n', '<c-_>', [[:Comment<cr><cr>]], {noremap = true})
 
 ------------------
 --  treesitter  --
 ------------------
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {"c", "cpp", "java", "python", "json", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    -- TODO seems to be broken
     ignore_install = {"haskell"},
     highlight = {
         enable = true -- false will disable the whole extension
@@ -304,10 +297,8 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -----------------------
---  nvim-indentline  --
------------------------
 vim.g.indent_blankline_buftype_exclude = {'terminal'}
-vim.g.indent_blankline_filetype_exclude = {'help', 'startify', 'dashboard', 'packer', 'neogitstatus'}
+vim.g.indent_blankline_filetype_exclude = {'help', 'startify', 'dashboard', 'packer', 'neogitstatus', 'qf'}
 vim.g.indent_blankline_char = '▏'
 vim.g.indent_blankline_use_treesitter = true
 vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -461,7 +452,6 @@ map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
 --------------------------------------------------------------------------------
 require('gitsigns').setup {
     signs = {
-        -- TODO add hl to colorscheme
         add = {hl = 'GitSignsAdd', text = '', linehl = 'GitSignsAddLn'},
         change = {hl = 'GitSignsChange', text = '~', linehl = 'GitSignsChangeLn'},
         delete = {hl = 'GitSignsDelete', text = '﫧', linehl = 'GitSignsDeleteLn'},
@@ -569,36 +559,40 @@ map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>', {noremap = true})
 ----------------------------
 require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
 
------------------
---  Shade.vim  --
------------------
--- require'module'.setup({
---     overlay_opacity = 50,
---     opacity_step = 1,
---     keys = {brightness_up = '<C-Up>', brightness_down = '<C-Down>', toggle = '<Leader>s'}
--- })
+----------------
+-- Shade.vim  --
+----------------
+require'shade'.setup({
+  overlay_opacity = 50,
+  opacity_step = 1,
+  keys = {
+    brightness_up    = '<C-Up>',
+    brightness_down  = '<C-Down>',
+    toggle           = '<Leader>s',
+  }
+})
 
 --------------------
 --  gesture.nvim  --
 --------------------
-vim.cmd [[nnoremap <silent> <LeftDrag> <Cmd>lua require("gesture").draw()<CR>]]
-vim.cmd [[nnoremap <silent> <LeftRelease> <Cmd>lua require("gesture").finish()<CR>]]
-local gesture = require('gesture')
-gesture.register({name = "scroll to bottom", inputs = {gesture.up(), gesture.down()}, action = "normal! G"})
-gesture.register({name = "next tab", inputs = {gesture.right()}, action = "tabnext"})
-gesture.register({
-    name = "previous tab",
-    inputs = {gesture.left()},
-    action = function(ctx) -- also can use function
-        vim.cmd("tabprevious")
-    end
-})
-gesture.register({
-    name = "go back",
-    inputs = {gesture.right(), gesture.left()},
-    -- map to `<C-o>` keycode
-    action = [[lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-o>", true, false, true), "n", true)]]
-})
+-- vim.cmd [[nnoremap <silent> <LeftDrag> <Cmd>lua require("gesture").draw()<CR>]]
+-- vim.cmd [[nnoremap <silent> <LeftRelease> <Cmd>lua require("gesture").finish()<CR>]]
+-- local gesture = require('gesture')
+-- gesture.register({name = "scroll to bottom", inputs = {gesture.up(), gesture.down()}, action = "normal! G"})
+-- gesture.register({name = "next tab", inputs = {gesture.right()}, action = "tabnext"})
+-- gesture.register({
+--     name = "previous tab",
+--     inputs = {gesture.left()},
+--     action = function(ctx) -- also can use function
+--         vim.cmd("tabprevious")
+--     end
+-- })
+-- gesture.register({
+--     name = "go back",
+--     inputs = {gesture.right(), gesture.left()},
+--     -- map to `<C-o>` keycode
+--     action = [[lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-o>", true, false, true), "n", true)]]
+-- })
 
 ----------------
 --  diffview  --
@@ -617,7 +611,7 @@ require'diffview'.setup {
         -- The `view` bindings are active in the diff buffers, only when the current
         -- tabpage is a Diffview.
         view = {
-            ["<tab>"] = cb("select_next_entry"), -- Open the diff for the next file 
+            ["<tab>"] = cb("select_next_entry"), -- Open the diff for the next file
             ["<s-tab>"] = cb("select_prev_entry"), -- Open the diff for the previous file
             ["<leader>e"] = cb("focus_files"), -- Bring focus to the files panel
             ["<leader>b"] = cb("toggle_files") -- Toggle the files panel.
@@ -643,3 +637,26 @@ require'diffview'.setup {
     }
 }
 
+----------------
+--  material  --
+----------------
+-- Example config in lua
+vim.g.material_style = 'deep ocean'
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = true
+vim.g.material_italic_functions = true
+vim.g.material_italic_variables = true
+vim.g.material_contrast = true
+vim.g.material_borders = true
+vim.g.material_hide_eob = true
+vim.g.material_variable_color = "#d17CB4"
+-- if Shade is active set this to false or <leader>s to toggle shade
+vim.g.material_disable_background = false --vim.g.material_custom_colors = { black = "#000000", bg = "#0F111A" }
+
+-- Load the colorscheme
+require('material').set()
+
+vim.api.nvim_set_keymap('n', '<leader>ml', [[<Cmd>lua require('material.functions').change_style('lighter')<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>md', [[<Cmd>lua require('material.functions').change_style('darker')<CR>]], { noremap = true, silent = true })
+
+map('n', '<leader>~', ":lua require('material.functions').toggle_eob()<CR>", {noremap = true})

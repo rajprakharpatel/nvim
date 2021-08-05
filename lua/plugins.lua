@@ -19,25 +19,23 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Quality of life improvements
-    use 'norcalli/nvim_utils'
-    use 'svermeulen/vimpeccable'
+    use 'svermeulen/vimpeccable' -- Easy keymapping in lua
 
     -- Useful Plugins
-    use 'mbbill/undotree'
+    use 'mbbill/undotree' -- Undo history like a git tree
     use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
 
     -- pure vim scripts with no dependencies
-    use 'tpope/vim-abolish'
-    use 'zhimsel/vim-stay'
-    use 'wsdjeg/vim-fetch'
-    use 'Konfekt/FastFold'
-    use 'tmhedberg/SimpylFold'
+    use 'tpope/vim-abolish' -- working with variants of word :- search, replace and changing case
+    use 'zhimsel/vim-stay' -- make editing state persisitent
+    use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
+    use {'Konfekt/FastFold', disable = true}
+    use {'tmhedberg/SimpylFold', disable = true}
     use 'mhinz/vim-sayonara'
-    -- Plugin 'tpope/vim-dispatch'
+    use 'tpope/vim-dispatch'
+    use 'radenling/vim-dispatch-neovim'
 
     -- visual Plugins
-    -- use 'junegunn/goyo.vim'
-    -- use 'junegunn/limelight.vim'
     use "Pocco81/TrueZen.nvim"
     -- Lua
     use {
@@ -46,41 +44,42 @@ return require('packer').startup(function(use)
             require("twilight").setup {}
         end
     }
-
-    use 'tanvirtin/monokai.nvim'
-    -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
+    use 'marko-cerovac/material.nvim'
+    use 'bluz71/vim-nightfly-guicolors'
     use 'norcalli/nvim-colorizer.lua'
-    use 'ChristianChiarulli/nvcode-color-schemes.vim'
     use 'joeytwiddle/sexy_scroller.vim'
-    use 'tiagovla/tokyodark.nvim'
     use 'folke/lsp-colors.nvim'
-    use {'sunjon/shade.nvim', disable = true} -- dim inactive windows
-    use 'xiyaowong/nvim-transparent' -- make any colorschemme transparent
-    use 'jbyuki/venn.nvim' -- Draw Ascii flow chart in vim
-    use 'notomo/gesture.nvim'
+    use {'sunjon/shade.nvim', disable = false} -- dim inactive windows
+    -- use 'tanvirtin/monokai.nvim'
+    -- use 'ChristianChiarulli/nvcode-color-schemes.vim'
+    -- use 'tiagovla/tokyodark.nvim'
+    -- use 'xiyaowong/nvim-transparent' -- make any colorschemme transparent
+    -- use 'jbyuki/venn.nvim' -- Draw Ascii flow chart in vim
+    -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
+    -- use 'notomo/gesture.nvim'
 
     -- use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
     use 'kshenoy/vim-signature' --  to place, toggle and display marks.
-    use 'mg979/vim-visual-multi'
-    use 'machakann/vim-swap'
+    use 'mg979/vim-visual-multi' -- emulate multiple cursors
+    use 'machakann/vim-swap' -- swap function args(g<, g>, gs)
     use 'junegunn/vim-easy-align' -- An alternative is tabular
-    use 'tommcdo/vim-exchange'
+    use 'tommcdo/vim-exchange' -- Easy text change operator(cx, cxx, X, cxc)
     use 'pelodelfuego/vim-swoop' -- call SwoopFreezeContext();call SwoopUnFreezeContext() to use with other plugins
     use 'sk1418/Join' -- [range]Join[!] [separator] [count] [flags]
     use 'matze/vim-move' -- move selection as whole around
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter' -- automatically sets project directory using rules in vimrc
-    use 'Raimondi/delimitMate'
+    use 'Raimondi/delimitMate' -- TODO
     -- use 'terrortylor/nvim-comment'
-    use 'winston0410/commented.nvim'
+    -- use 'winston0410/commented.nvim' -- TODO
     use 'andymass/vim-matchup' -- matches cooresponding bracket
     use 'tpope/vim-eunuch' -- shell commands from inside vim
     use 'RishabhRD/nvim-cheat.sh'
-    use 'AndrewRadev/switch.vim'
-    use 'metakirby5/codi.vim'
+    use 'AndrewRadev/switch.vim' -- Switch counter values easily
+    use 'metakirby5/codi.vim' -- REPL virtual text
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
     use 'matbme/JABS.nvim' -- easy buffer management
@@ -101,7 +100,7 @@ return require('packer').startup(function(use)
 
     -- terminal
     use 'voldikss/vim-floaterm'
-    use 'ptzz/lf.vim'
+    use 'ptzz/lf.vim' -- file manager
 
     -- search
     use 'unblevable/quick-scope'
