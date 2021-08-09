@@ -1,5 +1,5 @@
 local map = vim.api.nvim_set_keymap
-require('vimp')
+-- require('vimp')
 -----------------
 --  undo-tree  --
 -----------------
@@ -25,8 +25,10 @@ vim.g.move_key_modifier = 'C'
 ------------------
 --  easy-align  --
 ------------------
-vimp.rbind('x', 'ga', '<Plug>(EasyAlign)')
-vimp.rbind('n', 'ga', '<Plug>(EasyAlign)')
+-- vimp.rbind('x', 'ga', '<Plug>(EasyAlign)')
+-- vimp.rbind('n', 'ga', '<Plug>(EasyAlign)')
+vim.cmd("nmap ga <Plug>(EasyAlign)")
+vim.cmd("xmap ga <Plug>(EasyAlign)")
 
 ----------------
 --  vim-stay  --
@@ -63,7 +65,8 @@ vim.cmd("let g:matchup_matchparen_offscreen = {'method': 'popup'}")
 --  simpylfold  --
 ------------------
 -- vim.g.SimpylFold_docstring_preview = 1
--- vim.g.SimpylFold_fold_docstring = 1
+-- vim.g.SimpylFold_fold_docstring = 0
+-- vim.b.SimpylFold_fold_docstring = 0
 
 ----------------
 --  floaterm  --
@@ -89,8 +92,8 @@ vim.cmd("command! LF FloatermNew lf")
 ----------
 --  lf  --
 ----------
-vimp.rbind('n', '<leader>lf', '<Plug>LfSplit')
-
+-- vimp.rbind('n', '<leader>lf', '<Plug>LfSplit')
+vim.cmd("nmap <leader>lf <Plug>LfSplit")
 ---------------------
 --  nvim-lsputils  --
 ---------------------
@@ -120,69 +123,6 @@ vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handle
 -----------------
 --  Telescope  --
 -----------------
-local actions = require('telescope.actions')
--- Global remapping
-------------------------------
--- '--color=never',
-require('telescope').load_extension('lsp_handlers')
-require('telescope').load_extension('media_files')
-require('telescope').load_extension('ultisnips')
-
-require('telescope').setup {
-    defaults = {
-        vimgrep_arguments = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
-        prompt_prefix = " ",
-        selection_caret = " ",
-        entry_prefix = "  ",
-        initial_mode = "insert",
-        selection_strategy = "reset",
-        sorting_strategy = "ascending",
-        -- layout_strategy = "center",
-        -- layout_config = {horizontal = {mirror = false}, vertical = {mirror = true}},
-        file_sorter = require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = {},
-        generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        path_display = {"shorten", "absolute"},
-        winblend = 7,
-        border = {},
-        borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
-        color_devicons = true,
-        use_less = true,
-        set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
-        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        -- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        -- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-        -- Developer configurations: Not meant for general override
-        buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
-        mappings = {
-            i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                -- To disable a keymap, put [map] = false
-                -- So, to not map "<C-n>", just put
-                -- ["<c-x>"] = false,
-                ["<esc>"] = actions.close,
-
-                -- Otherwise, just set the mapping to the function that you want it to be.
-                -- ["<C-i>"] = actions.select_horizontal,
-
-                -- Add up multiple actions
-                ["<CR>"] = actions.select_default + actions.center
-
-                -- You can perform as many actions in a row as you like
-                -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
-            },
-            n = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
-                -- ["<C-i>"] = my_cool_custom_action,
-            }
-        }
-    }
-}
 
 map('n', '<space>br',
     '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>',
@@ -262,7 +202,7 @@ vim.api.nvim_exec(st, false)
 --     book_marks = 'SPC f b'
 -- }
 -- find_history = 'SPC f h',
-vim.g.dashboard_session_directory = '~/.cache/nvim/session'
+vim.g.dashboard_session_directory = vim.fn.stdpath('cache') .. "/session"
 map('n', '<leader>ss', ':<c-u>SessionSave<cr>', {noremap = true})
 map('n', '<leader>sl', ':<c-u>SessionLoad<cr>', {noremap = true})
 vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2")
@@ -470,7 +410,7 @@ require('gitsigns').setup {
     current_line_blame = true,
     sign_priority = 6,
     update_debounce = 20,
-    status_formatter = nil, -- Use default
+    status_formatter = nil -- Use default
 }
 
 --------------------------------------------------------------------------------
@@ -506,7 +446,7 @@ require'bufferline'.setup {
         max_prefix_length = 15, -- prefix used when a buffer is deduplicated
         tab_size = 18,
         diagnostics = "nvim_lsp",
----@diagnostic disable-next-line: unused-local
+        ---@diagnostic disable-next-line: unused-local
         diagnostics_indicator = function(count, level, diagnostics_dict)
             return "(" .. count .. ")"
         end,
@@ -539,21 +479,21 @@ require'bufferline'.setup {
 --  vimspector  --
 ------------------
 -- vim.cmd([[let g:vimspector_base_dir='/home/rajprakhar/.local/share/nvim/site/pack/packer/start/vimspector']])
-map('n', '<leader>dd', '<cmd>call vimspector#Launch()<CR>', {noremap = true})
-map('n', '<leader>de', '<cmd>VimspectorReset<CR>', {noremap = true})
-map('n', '<leader>cc', '<cmd>call vimspector#Continue()<CR>', {noremap = true})
-map('n', '<leader>ds', '<cmd>call vimspector#Stop()<CR>', {noremap = true})
-map('n', '<leader>dr', '<cmd>call vimspector#Restart()<CR>', {noremap = true})
-map('n', '<leader>dp', '<cmd>call vimspector#Pause()<CR>', {noremap = true})
-vimp.rbind('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint')
+-- map('n', '<leader>dd', '<cmd>call vimspector#Launch()<CR>', {noremap = true})
+-- map('n', '<leader>de', '<cmd>VimspectorReset<CR>', {noremap = true})
+-- map('n', '<leader>cc', '<cmd>call vimspector#Continue()<CR>', {noremap = true})
+-- map('n', '<leader>ds', '<cmd>call vimspector#Stop()<CR>', {noremap = true})
+-- map('n', '<leader>dr', '<cmd>call vimspector#Restart()<CR>', {noremap = true})
+-- map('n', '<leader>dp', '<cmd>call vimspector#Pause()<CR>', {noremap = true})
+-- vimp.rbind('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint')
 -- vimp.rbind('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint')
 -- map('n', '<space>db', '<cmd>call vimspector#ToggleBreakpoint()<CR>',{noremap = true})
 -- map('n', '<space>cb', '<cmd>call vimspector#ToggleConditionalBreakpoint()<CR>',{noremap = true})
 -- map('n', '<space>fb', '<cmd>call vimspector#AddFunctionBreakpoint()<CR>',{noremap = true})
-map('n', '<leader>drc', '<cmd>call vimspector#RunToCursor()<CR>', {noremap = true})
-map('n', '<leader>l', '<cmd>call vimspector#StepOver()<CR>', {noremap = true})
-map('n', '<leader>j', '<cmd>call vimspector#StepInto()<CR>', {noremap = true})
-map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>', {noremap = true})
+-- map('n', '<leader>drc', '<cmd>call vimspector#RunToCursor()<CR>', {noremap = true})
+-- map('n', '<leader>l', '<cmd>call vimspector#StepOver()<CR>', {noremap = true})
+-- map('n', '<leader>j', '<cmd>call vimspector#StepInto()<CR>', {noremap = true})
+-- map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>', {noremap = true})
 
 ----------------------------
 --  symbols-outline.nvim  --
@@ -564,11 +504,11 @@ require('symbols-outline').setup({highlight_hovered_items = true, show_guides = 
 -- Shade.vim  --
 ----------------
 -- require'shade'.setup({
-  -- overlay_opacity = 50,
-  -- opacity_step = 1,
-  -- keys = {
-    -- toggle           = '<Leader>s',
-  -- }
+-- overlay_opacity = 50,
+-- opacity_step = 1,
+-- keys = {
+-- toggle           = '<Leader>s',
+-- }
 -- })
 
 --------------------
@@ -594,49 +534,6 @@ require('symbols-outline').setup({highlight_hovered_items = true, show_guides = 
 -- })
 
 ----------------
---  diffview  --
-----------------
--- Lua
-local cb = require'diffview.config'.diffview_callback
-
-require'diffview'.setup {
-    diff_binaries = false, -- Show diffs for binaries
-    file_panel = {
-        width = 35,
-        use_icons = true -- Requires nvim-web-devicons
-    },
-    key_bindings = {
-        disable_defaults = false, -- Disable the default key bindings
-        -- The `view` bindings are active in the diff buffers, only when the current
-        -- tabpage is a Diffview.
-        view = {
-            ["<tab>"] = cb("select_next_entry"), -- Open the diff for the next file
-            ["<s-tab>"] = cb("select_prev_entry"), -- Open the diff for the previous file
-            ["<leader>e"] = cb("focus_files"), -- Bring focus to the files panel
-            ["<leader>b"] = cb("toggle_files") -- Toggle the files panel.
-        },
-        file_panel = {
-            ["j"] = cb("next_entry"), -- Bring the cursor to the next file entry
-            ["<down>"] = cb("next_entry"),
-            ["k"] = cb("prev_entry"), -- Bring the cursor to the previous file entry.
-            ["<up>"] = cb("prev_entry"),
-            ["<cr>"] = cb("select_entry"), -- Open the diff for the selected entry.
-            ["o"] = cb("select_entry"),
-            ["<2-LeftMouse>"] = cb("select_entry"),
-            ["-"] = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-            ["S"] = cb("stage_all"), -- Stage all entries.
-            ["U"] = cb("unstage_all"), -- Unstage all entries.
-            ["X"] = cb("restore_entry"), -- Restore entry to the state on the left side.
-            ["R"] = cb("refresh_files"), -- Update stats and entries in the file list.
-            ["<tab>"] = cb("select_next_entry"),
-            ["<s-tab>"] = cb("select_prev_entry"),
-            ["<leader>e"] = cb("focus_files"),
-            ["<leader>b"] = cb("toggle_files")
-        }
-    }
-}
-
-----------------
 --  material  --
 ----------------
 -- Example config in lua
@@ -650,13 +547,15 @@ vim.g.material_borders = true
 vim.g.material_hide_eob = true
 vim.g.material_variable_color = "#d17CB4"
 -- if Shade is active set this to false or <leader>s to toggle shade
-vim.g.material_disable_background = false --vim.g.material_custom_colors = { black = "#000000", bg = "#0F111A" }
+vim.g.material_disable_background = false -- vim.g.material_custom_colors = { black = "#000000", bg = "#0F111A" }
 
 -- Load the colorscheme
 require('material').set()
 
-vim.api.nvim_set_keymap('n', '<leader>ml', [[<Cmd>lua require('material.functions').change_style('lighter')<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>md', [[<Cmd>lua require('material.functions').change_style('darker')<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ml', [[<Cmd>lua require('material.functions').change_style('lighter')<CR>]],
+                        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>md', [[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
+                        {noremap = true, silent = true})
 
 map('n', '<leader>~', ":lua require('material.functions').toggle_eob()<CR>", {noremap = true})
 

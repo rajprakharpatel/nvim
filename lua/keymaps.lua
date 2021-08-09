@@ -126,13 +126,14 @@ vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]
 vim.cmd([[
 augroup code
     autocmd!
-  autocmd filetype cpp nmap <F6> :w <bar> Dispatch!g++ -s -O3 % -o release-%:r && release-%:r < inp > out <CR>
-  autocmd filetype cpp nmap <S-F6> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++11 % -o debug-%:r && debug-%:r < inp > out <CR>
-  autocmd filetype c nmap <F6> :w <bar> Dispatch!gcc -g  % -o %:r && %:r < inp > out <CR>
-  autocmd filetype c nmap <S-F6> :w <bar> FloatermNew! gcc -g  % -o %:r && %:r < inp > out <CR>
-  autocmd filetype java nmap <F6> :w <bar> Dispatch!javac -g % && java -enableassertions %:r < inp > out <CR>
+  autocmd filetype cpp nmap <F6> :w <bar> Dispatch! g++ -s -O3 % -o release-%:r && ./release-%:r < inp > out <CR>
+  autocmd filetype cpp nmap <F18> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++11 % -o debug-%:r && ./debug-%:r < inp > out <CR>
+  autocmd filetype c nmap <F6> :w <bar> Dispatch! gcc -g  % -o %:r && ./%:r < inp > out <CR>
+  autocmd filetype c nmap <F18> :w <bar> FloatermNew! gcc -g  % -o %:r && ./%:r < inp > out <CR>
+  autocmd filetype java nmap <F6> :w <bar> Dispatch! javac -g % && java -enableassertions %:r < inp > out <CR>
   " to start debug server on port 5005
-  autocmd filetype java nmap <S-F6> :w <bar> FloatermNew! java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y %:r
-  autocmd filetype python nmap <F6> :w <bar> Dispatch!python % < inp > out <CR>
+  autocmd filetype java nmap <F18> :w <bar> FloatermNew! java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y %:r
+  autocmd filetype python nmap <F6> :w <bar> Dispatch! python % < inp > out <CR>
+  autocmd filetype python nmap <F18> :w <bar> Dispatch! alacritty --hold -e python % <CR>
 augroup END
 ]])

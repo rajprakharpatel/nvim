@@ -1,9 +1,7 @@
--- vim.cmd [[packadd packer.nvim]]
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
 if fn.empty(fn.glob(install_path)) > 0 then
     execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     execute 'packadd packer.nvim'
@@ -12,44 +10,42 @@ end
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
 -- require('packer').init({display = {non_interactive = true}})
-require('packer').init({display = {auto_clean = false}})
-
+require('packer').init({display = {auto_clean = false}, transitive_opt = true})
 return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim'
 
     -- Quality of life improvements
-    use 'svermeulen/vimpeccable' -- Easy keymapping in lua
-
-    -- Useful Plugins
-    use 'mbbill/undotree' -- Undo history like a git tree
-    use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
+    use {'mbbill/undotree', opt = true, cmd = 'UndotreeToggle'} -- Undo history like a git tree
 
     -- pure vim scripts with no dependencies
-    use 'tpope/vim-abolish' -- working with variants of word :- search, replace and changing case
     use 'zhimsel/vim-stay' -- make editing state persisitent
     use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
-    use {'Konfekt/FastFold', disable = true}
-    use {'tmhedberg/SimpylFold', disable = true}
-    use 'mhinz/vim-sayonara'
-    use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
-    use 'radenling/vim-dispatch-neovim'
+    use 'mhinz/vim-sayonara' -- close buffer only
+    use {'tpope/vim-abolish', opt = true, cmd = {'Abolish', 'Subvert'}} -- working with variants of word :- search, replace and changing case
+    use {
+        'tpope/vim-dispatch',
+        requires = 'radenling/vim-dispatch-neovim',
+        cmd = {'Dispatch', 'Dispatch!', 'Start!', 'Make', 'Focus', 'Start'}
+    }
+    -- use {'radenling/vim-dispatch-neovim', opt = true, after = 'vim-dispatch'}
 
     -- visual Plugins
-    use "Pocco81/TrueZen.nvim"
-    -- Lua
+    use 'marko-cerovac/material.nvim'
+    use 'bluz71/vim-nightfly-guicolors'
+    use 'norcalli/nvim-colorizer.lua'
+    use 'TaDaa/vimade'
+    use {"Pocco81/TrueZen.nvim", opt = true, cmd = 'TZMinimalist'}
     use {
         "folke/twilight.nvim",
+        opt = true,
+        cmd = 'twilight',
         config = function()
             require("twilight").setup {}
         end
     }
-    use 'marko-cerovac/material.nvim'
-    use 'bluz71/vim-nightfly-guicolors'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'joeytwiddle/sexy_scroller.vim'
-    use 'folke/lsp-colors.nvim'
-    use 'TaDaa/vimade'
+    use {'joeytwiddle/sexy_scroller.vim', disable = true}
+    use {'folke/lsp-colors.nvim', disable = true}
     -- use 'tanvirtin/monokai.nvim'
     -- use 'ChristianChiarulli/nvcode-color-schemes.vim'
     -- use 'tiagovla/tokyodark.nvim'
@@ -57,7 +53,6 @@ return require('packer').startup(function(use)
     -- use 'jbyuki/venn.nvim' -- Draw Ascii flow chart in vim
     -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     -- use 'notomo/gesture.nvim'
-
     -- use 'cossonleo/neo-smooth-scroll.nvim'
 
     -- Helpful Generic Tools
@@ -66,23 +61,21 @@ return require('packer').startup(function(use)
     use 'machakann/vim-swap' -- swap function args(g<, g>, gs)
     use 'junegunn/vim-easy-align' -- An alternative is tabular
     use 'tommcdo/vim-exchange' -- Easy text change operator(cx, cxx, X, cxc)
-    use 'pelodelfuego/vim-swoop' -- call SwoopFreezeContext();call SwoopUnFreezeContext() to use with other plugins
-    use 'sk1418/Join' -- [range]Join[!] [separator] [count] [flags]
     use 'matze/vim-move' -- move selection as whole around
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter' -- automatically sets project directory using rules in vimrc
-    use 'Raimondi/delimitMate' -- TODO
-    -- use 'terrortylor/nvim-comment'
-    -- use 'winston0410/commented.nvim' -- TODO
-    use 'andymass/vim-matchup' -- matches cooresponding bracket
-    use 'tpope/vim-eunuch' -- shell commands from inside vim
-    use 'RishabhRD/nvim-cheat.sh'
+    -- use 'Raimondi/delimitMate' -- TODO
+    use {'andymass/vim-matchup', event = 'VimEnter'}
     use 'AndrewRadev/switch.vim' -- Switch counter values easily
-    use 'metakirby5/codi.vim' -- REPL virtual text
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
     use 'matbme/JABS.nvim' -- easy buffer management
+    use {'pelodelfuego/vim-swoop', opt = true, cmd = 'Swoop'} -- call SwoopFreezeContext();call SwoopUnFreezeContext() to use with other plugins
+    use {'sk1418/Join', opt = true, cmd = 'Join'} -- [range]Join[!] [separator] [count] [flags]
+    use {'tpope/vim-eunuch', opt = true} -- shell commands from inside vim
+    use {'RishabhRD/nvim-cheat.sh', opt = true, cmd = 'Cheat'}
+    use {'metakirby5/codi.vim', opt = true, cmd = 'Codi'} -- REPL virtual text
     -- Lua
 
     -- Target objects
@@ -100,7 +93,7 @@ return require('packer').startup(function(use)
 
     -- terminal
     use 'voldikss/vim-floaterm'
-    use 'ptzz/lf.vim' -- file manager
+    use {'ptzz/lf.vim', opt = true, cmd = 'Lf'} -- file manager
 
     -- search
     use 'unblevable/quick-scope'
@@ -115,28 +108,135 @@ return require('packer').startup(function(use)
     -- use 'turbio/bracey.vim'
 
     -- Telescope
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
-    use 'nvim-telescope/telescope-media-files.nvim'
-    use 'nvim-telescope/telescope-symbols.nvim'
-    use 'fhill2/telescope-ultisnips.nvim'
-    use 'gbrlsnchs/telescope-lsp-handlers.nvim'
+    use {
+        'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
+        requires = {
+            'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require 'telescope-config'
+        end
+    }
+    use {
+        'nvim-telescope/telescope-media-files.nvim',
+        after = 'telescope.nvim',
+        -- requires = {'nvim-telescope/telescope.nvim'},
+        config = function()
+            require('telescope').load_extension('media_files')
+        end
+    }
+    use {
+        'nvim-telescope/telescope-symbols.nvim',
+        after = 'telescope.nvim',
+    }
+    use {
+        'fhill2/telescope-ultisnips.nvim',
+        after = 'telescope.nvim',
+        config = function()
+            require('telescope').load_extension('ultisnips')
+        end
+    }
+    use {
+        'gbrlsnchs/telescope-lsp-handlers.nvim',
+        after = 'telescope.nvim',
+        config = function()
+            require('telescope').load_extension('lsp_handlers')
+        end
+    }
 
     -- Git
     -- use 'TimUntersberger/neogit'
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
-    use 'sindrets/diffview.nvim'
+    use {'tpope/vim-fugitive', opt = true, cmd = 'G'}
+    use {'tpope/vim-rhubarb', after = 'vim-fugitive'}
+    use {
+        'sindrets/diffview.nvim',
+        opt = true,
+        cmd = 'DiffviewOpen',
+        confog = function()
+            local cb = require'diffview.config'.diffview_callback
 
-    use 'alec-gibson/nvim-tetris'
-    use {'michaelb/sniprun', run = 'bash ./install.sh'}
+            require'diffview'.setup {
+                diff_binaries = false, -- Show diffs for binaries
+                file_panel = {
+                    width = 35,
+                    use_icons = true -- Requires nvim-web-devicons
+                },
+                key_bindings = {
+                    disable_defaults = false, -- Disable the default key bindings
+                    -- The `view` bindings are active in the diff buffers, only when the current
+                    -- tabpage is a Diffview.
+                    view = {
+                        ["<tab>"] = cb("select_next_entry"), -- Open the diff for the next file
+                        ["<s-tab>"] = cb("select_prev_entry"), -- Open the diff for the previous file
+                        ["<leader>e"] = cb("focus_files"), -- Bring focus to the files panel
+                        ["<leader>b"] = cb("toggle_files") -- Toggle the files panel.
+                    },
+                    file_panel = {
+                        ["j"] = cb("next_entry"), -- Bring the cursor to the next file entry
+                        ["<down>"] = cb("next_entry"),
+                        ["k"] = cb("prev_entry"), -- Bring the cursor to the previous file entry.
+                        ["<up>"] = cb("prev_entry"),
+                        ["<cr>"] = cb("select_entry"), -- Open the diff for the selected entry.
+                        ["o"] = cb("select_entry"),
+                        ["<2-LeftMouse>"] = cb("select_entry"),
+                        ["-"] = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
+                        ["S"] = cb("stage_all"), -- Stage all entries.
+                        ["U"] = cb("unstage_all"), -- Unstage all entries.
+                        ["X"] = cb("restore_entry"), -- Restore entry to the state on the left side.
+                        ["R"] = cb("refresh_files"), -- Update stats and entries in the file list.
+                        ["<tab>"] = cb("select_next_entry"),
+                        ["<s-tab>"] = cb("select_prev_entry"),
+                        ["<leader>e"] = cb("focus_files"),
+                        ["<leader>b"] = cb("toggle_files")
+                    }
+                }
+            }
+        end
+    }
+    use {'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris'}
+    use {'michaelb/sniprun', opt = true, cmd = 'SnipRun', run = 'bash ./install.sh'}
 
     -- Debugging
-    use 'puremourning/vimspector'
-    use 'szw/vim-maximizer'
+    use {
+        'mfussenegger/nvim-dap',
+        opt = true,
+        cmd = 'DAP',
+        config = function()
+            require('debugger-config')
+        end
+    }
+    use {"Pocco81/DAPInstall.nvim", opt = true, after = 'nvim-dap'}
+    use {
+        "rcarriga/nvim-dap-ui",
+        requires = {"mfussenegger/nvim-dap"},
+        opt = true,
+        after = 'nvim-dap',
+        config = function()
+            require("dapui").setup()
+        end
+    }
+    use {
+        'mfussenegger/nvim-dap-python',
+        opt = true,
+        after = 'nvim-dap',
+        config = function()
+            require('dap-python').setup(vim.fn.stdpath('data') .. '/dapinstall/python_dbg/bin/python')
+        end
+    }
+    use {
+        'nvim-telescope/telescope-dap.nvim',
+        opt = true,
+        after = {'nvim-dap', 'telescope.nvim'},
+        config = function()
+            require('telescope').load_extension('dap')
+        end
+    }
+    use {'theHamsta/nvim-dap-virtual-text', opt = true, after = 'nvim-dap'}
 
     -- Lsp & autocompletion
-    use 'mfussenegger/nvim-jdtls'
+    use {'mfussenegger/nvim-jdtls', opt = true, ft = {'java'}}
     use 'hrsh7th/nvim-compe'
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
@@ -144,8 +244,8 @@ return require('packer').startup(function(use)
     use {'tzachar/compe-tabnine', run = './install'}
     use 'onsails/lspkind-nvim'
     use 'glepnir/lspsaga.nvim'
-    use 'kabouzeid/nvim-lspinstall'
-    use 'folke/lsp-trouble.nvim'
+    use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
+    use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
     -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
 
     -- Status Line and Bufferline
@@ -158,12 +258,13 @@ return require('packer').startup(function(use)
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'p00f/nvim-ts-rainbow'
     use 'lukas-reineke/indent-blankline.nvim'
     use 'haringsrob/nvim_context_vt'
     use 'romgrk/nvim-treesitter-context'
-    use {'nvim-treesitter/playground'}
+    use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
+    use {'JoosepAlviste/nvim-ts-context-commentstring', disable = true}
+    use {'nvim-treesitter/playground', disable = true}
     use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
 
     -- Explorer
@@ -173,13 +274,58 @@ return require('packer').startup(function(use)
     use {
         'kristijanhusak/orgmode.nvim',
         config = function()
-            require('orgmode').setup {
-                org_agenda_files = {'~/org/*'},
-                org_default_notes_file = '~/Dropbox/org/notes.org'
-            }
+            require('orgmode').setup {org_agenda_files = {'~/org/*'}, org_default_notes_file = '~/org/notes.org'}
         end
     }
 
     -- Experimenting
-    use {'wfxr/minimap.vim', run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
+    use {'wfxr/minimap.vim', opt = true, run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require'nvim-autopairs'.setup {}
+            require("nvim-autopairs.completion.compe").setup(
+                {
+                    map_cr = true, --  map <CR> on insert mode
+                    map_complete = true, -- it will auto insert `(` after select function or method item
+                    auto_select = false -- auto select first item
+                })
+            local npairs = require("nvim-autopairs")
+            local Rule = require('nvim-autopairs.rule')
+            npairs.setup({
+                check_ts = true,
+                ts_config = {
+                    lua = {'string'}, -- it will not add pair on that treesitter node
+                    javascript = {'template_string'},
+                    java = false -- don't check treesitter on java
+                }
+            })
+
+            require('nvim-treesitter.configs').setup {autopairs = {enable = true}}
+
+            local ts_conds = require('nvim-autopairs.ts-conds')
+
+            -- press % => %% is only inside comment or string
+            npairs.add_rules({
+                Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string', 'comment'})),
+                Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
+            })
+            -- put this to  setup function and press <a-e> to use fast_wrap
+            npairs.setup({fast_wrap = {}})
+
+            -- change default fast_wrap
+            npairs.setup({
+                fast_wrap = {
+                    map = '<M-e>',
+                    chars = {'{', '[', '(', '"', "'"},
+                    pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+                    end_key = '$',
+                    keys = 'qwertyuiopzxcvbnmasdfghjkl',
+                    check_comma = true,
+                    hightlight = 'Search'
+                }
+            })
+
+        end
+    }
 end)

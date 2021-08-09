@@ -7,6 +7,16 @@ vim.fn.sign_define("LspDiagnosticsSignHint",
 vim.fn.sign_define("LspDiagnosticsSignInformation",
                    {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"})
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -85,7 +95,7 @@ local on_attach = function(client, bufnr)
     end
 end
 -- Register configs for installed servers in lspconfig.
-require'lspinstall'.setup()
+-- require'lspinstall'.setup()
 -- Get list of installed servers and then setup each
 -- server with lspconfig as usual.
 -- local servers = require'lspinstall'.installed_servers()
@@ -95,7 +105,7 @@ require'lspinstall'.setup()
 -- Use a loop to conveniently both setup defined serversw
 -- and map buffer local keybindings when the language server attaches
 local servers = {"clangd", "cmake", "pylsp"}
-for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
+for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities} end
 -- local lsp_path = vim.fn.stdpath('data') .. '/home/rajprakhar/.local/share/nvim/lspinstall'
 --------------------------------------------------------------------------------
 --                                    Lua                                     --
@@ -121,7 +131,7 @@ nvim_lsp.sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim', 'vimp'}
+                globals = {'vim'}
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files

@@ -81,7 +81,7 @@ vim.o.showbreak = string.rep(' ', 3) -- Make it so that long lines wrap smartly
 vim.bo.undofile = true
 vim.o.undofile = true
 vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
-vim.o.foldopen = "search"
+-- vim.o.foldopen = "search"
 -- vim.o.fileformat = 'unix'
 vim.o.jumpoptions = "stack"
 vim.o.diffopt = "hiddenoff,iwhiteall,algorithm:patience"
@@ -94,8 +94,8 @@ vim.o.path = '.,,,**'
 vim.o.completeopt = 'menuone,noselect'
 vim.o.listchars = 'tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿'
 vim.o.formatlistpat = "^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = "syntax"
+vim.o.foldlevelstart = 0
+vim.wo.foldmethod = "indent"
 vim.o.wildignore =
     '*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot'
 vim.o.shortmess = vim.o.shortmess .. 's'
@@ -139,12 +139,14 @@ function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
 end
-
+function _G.packer(...)
+    if packer_plugins[...] and packer_plugins["vim-fugitive"].loaded then print(....." is loaded") end
+end
 -- Comment toggle
 -- function _G.CommentToggle()
-    -- vim.cmd([[execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/' | nohlsearch]])
-    -- vim.cmd(
-        -- [[execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/' | nohlsearch]])
+-- vim.cmd([[execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/' | nohlsearch]])
+-- vim.cmd(
+-- [[execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/' | nohlsearch]])
 -- end
 
 define_augroups({
