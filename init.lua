@@ -140,7 +140,7 @@ function _G.dump(...)
     print(unpack(objects))
 end
 function _G.packer(...)
-    if packer_plugins[...] and packer_plugins["vim-fugitive"].loaded then print(....." is loaded") end
+    if packer_plugins[...] and packer_plugins["vim-fugitive"].loaded then print(... .. " is loaded") end
 end
 -- Comment toggle
 -- function _G.CommentToggle()
@@ -158,7 +158,8 @@ define_augroups({
         {'FileType', 'c,java,cpp,json,scala,jsonc', "let b:comment_leader = '//'"},
         {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml', "let b:comment_leader = '#'"},
         {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
-        {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]}
+        {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},
+        {'FileType', 'lisp', "let b:comment_leader = ';'"}
     },
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing

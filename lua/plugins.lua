@@ -71,6 +71,7 @@ return require('packer').startup(function(use)
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
     use 'matbme/JABS.nvim' -- easy buffer management
+    use {'sotte/presenting.vim', cmd = 'PresentingStart'}
     use {'pelodelfuego/vim-swoop', opt = true, cmd = 'Swoop'} -- call SwoopFreezeContext();call SwoopUnFreezeContext() to use with other plugins
     use {'sk1418/Join', opt = true, cmd = 'Join'} -- [range]Join[!] [separator] [count] [flags]
     use {'tpope/vim-eunuch', opt = true} -- shell commands from inside vim
@@ -111,9 +112,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
-        requires = {
-            'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'
-        },
+        requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
         config = function()
             require 'telescope-config'
         end
@@ -126,10 +125,7 @@ return require('packer').startup(function(use)
             require('telescope').load_extension('media_files')
         end
     }
-    use {
-        'nvim-telescope/telescope-symbols.nvim',
-        after = 'telescope.nvim',
-    }
+    use {'nvim-telescope/telescope-symbols.nvim', after = 'telescope.nvim'}
     use {
         'fhill2/telescope-ultisnips.nvim',
         after = 'telescope.nvim',
@@ -241,7 +237,7 @@ return require('packer').startup(function(use)
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
     use 'neovim/nvim-lspconfig'
-    use {'tzachar/compe-tabnine', run = './install'}
+    use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
     use 'onsails/lspkind-nvim'
     use 'glepnir/lspsaga.nvim'
     use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
@@ -262,7 +258,13 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     use 'haringsrob/nvim_context_vt'
     use 'romgrk/nvim-treesitter-context'
-    use 'simrat39/symbols-outline.nvim' -- :SymbolOutline
+    use {
+        'simrat39/symbols-outline.nvim',
+        cmd = 'SymbolsOutline',
+        config = function()
+            require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
+        end
+    } -- :SymbolOutline
     use {'JoosepAlviste/nvim-ts-context-commentstring', disable = true}
     use {'nvim-treesitter/playground', disable = true}
     use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
@@ -286,9 +288,9 @@ return require('packer').startup(function(use)
             require'nvim-autopairs'.setup {}
             require("nvim-autopairs.completion.compe").setup(
                 {
-                    map_cr = true, --  map <CR> on insert mode
+                    map_cr = false, --  map <CR> on insert mode
                     map_complete = true, -- it will auto insert `(` after select function or method item
-                    auto_select = false -- auto select first item
+                    auto_select = true -- auto select first item
                 })
             local npairs = require("nvim-autopairs")
             local Rule = require('nvim-autopairs.rule')
@@ -328,4 +330,5 @@ return require('packer').startup(function(use)
 
         end
     }
+    use 'dag/vim-fish'
 end)

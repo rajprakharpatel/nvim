@@ -495,11 +495,6 @@ require'bufferline'.setup {
 -- map('n', '<leader>j', '<cmd>call vimspector#StepInto()<CR>', {noremap = true})
 -- map('n', '<leader>k', '<cmd>call vimspector#StepOout()<CR>', {noremap = true})
 
-----------------------------
---  symbols-outline.nvim  --
-----------------------------
-require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
-
 ----------------
 -- Shade.vim  --
 ----------------

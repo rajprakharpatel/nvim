@@ -8,8 +8,8 @@ map('i', '<c-Space>', 'compe#complete()', {noremap = true, silent = true, expr =
 map('i', '<c-e>', 'compe#close(\'<C-e>\')', {noremap = true, silent = true, expr = true})
 -- map('i', '<cr>', 'compe#confirm({ \'keys\': "\\<Plug>delimitMateCR", \'mode\': \'\' })',
     -- {noremap = true, silent = true, expr = true})
--- map('i', '<cr>', [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]],
-    -- {noremap = true, silent = true, expr = true})
+map('i', '<cr>', [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]],
+    {noremap = true, silent = true, expr = true})
 map('i', '<c-f>', 'compe#scroll({ \'delta\': +4 })', {noremap = true, silent = true, expr = true})
 map('i', '<c-d>', 'compe#scroll({ \'delta\': -4 })', {noremap = true, silent = true, expr = true})
 

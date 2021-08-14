@@ -127,8 +127,8 @@ vim.cmd([[
 augroup code
     autocmd!
   autocmd filetype cpp nmap <F6> :w <bar> Dispatch! g++ -s -O3 % -o release-%:r && ./release-%:r < inp > out <CR>
-  autocmd filetype cpp nmap <F18> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++11 % -o debug-%:r && ./debug-%:r < inp > out <CR>
-  autocmd filetype c nmap <F6> :w <bar> Dispatch! gcc -g  % -o %:r && ./%:r < inp > out <CR>
+  autocmd filetype cpp nmap <F18> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++20 % -o debug-%:r && ./debug-%:r < inp > out <CR>
+  autocmd filetype c nmap <F6> :w <bar> Dispatch! gcc % -o %:r && ./%:r < inp > out <CR>
   autocmd filetype c nmap <F18> :w <bar> FloatermNew! gcc -g  % -o %:r && ./%:r < inp > out <CR>
   autocmd filetype java nmap <F6> :w <bar> Dispatch! javac -g % && java -enableassertions %:r < inp > out <CR>
   " to start debug server on port 5005
@@ -137,3 +137,6 @@ augroup code
   autocmd filetype python nmap <F18> :w <bar> Dispatch! alacritty --hold -e python % <CR>
 augroup END
 ]])
+
+-- Org Notes
+map('n', '<space>n', ':e ~/org/notes.org<CR>', {noremap = true})
