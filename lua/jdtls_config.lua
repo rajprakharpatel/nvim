@@ -3,7 +3,7 @@ function M.setup()
   vim.cmd[[set softtabstop=4]]
   vim.cmd[[set shiftwidth=4]]
   -- vim.cmd[[set noexpandtab]]
-  require('jdtls').start_or_attach({cmd = {'launch_jdtls'}})
+  -- require('jdtls').start_or_attach({cmd = {'launch_jdtls', vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t') .. 'jdtls'}})
   -- Utility servers
   local map = function(type, key, value)
     vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
@@ -27,7 +27,7 @@ function M.setup()
   map('n','<leader>ai',  '<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
   map('n','<leader>ao',  '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
   -- Diagnostics mapping
-  map('n','<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+  map('n','<space>l', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
   map('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>')
   map('n',']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
   map('n','[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')

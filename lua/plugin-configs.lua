@@ -352,7 +352,7 @@ saga.init_lsp_saga {
 --                                lspkind-nvim                                --
 --------------------------------------------------------------------------------
 -- commented options are defaults
-require('lspkind').init({
+-- require('lspkind').init({
     -- with_text = true,
     -- symbol_map = {
     --   Text = '',
@@ -376,7 +376,7 @@ require('lspkind').init({
     --   Constant = '',
     --   Struct = ''
     -- },
-})
+-- })
 
 --------------------------------------------------------------------------------
 --                                 vim-vsnip                                  --

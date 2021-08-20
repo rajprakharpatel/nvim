@@ -11,7 +11,6 @@ require('nvim-compe')
 -- Lsp
 require('nv-globals')
 require('lsp_config')
-require('nv-galaxyline')
 
 ------------------------------------------------------------------------
 --                              options                               --
@@ -152,7 +151,7 @@ end
 define_augroups({
     _colorizer = {{'FileType', '*', ':ColorizerAttachToBuffer'}},
     relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
-    jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
+    -- jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
     _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
     _commentToggling = {
         {'FileType', 'c,java,cpp,json,scala,jsonc', "let b:comment_leader = '//'"},

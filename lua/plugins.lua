@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
     }
     use {'joeytwiddle/sexy_scroller.vim', disable = true}
     use {'folke/lsp-colors.nvim', disable = true}
+    use {'wfxr/minimap.vim', opt = true, run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
     -- use 'tanvirtin/monokai.nvim'
     -- use 'ChristianChiarulli/nvcode-color-schemes.vim'
     -- use 'tiagovla/tokyodark.nvim'
@@ -232,56 +233,27 @@ return require('packer').startup(function(use)
     use {'theHamsta/nvim-dap-virtual-text', opt = true, after = 'nvim-dap'}
 
     -- Lsp & autocompletion
-    use {'mfussenegger/nvim-jdtls', opt = true, ft = {'java'}}
-    use 'hrsh7th/nvim-compe'
+    use {
+        'mfussenegger/nvim-jdtls',
+        ft = 'java',
+        config = function()
+            require('jdtls_config').setup()
+            print('jdtls')
+            vim.cmd([[
+            if has('nvim-0.5')
+                augroup lsp
+                    au!
+                    au FileType java lua require('jdtls').start_or_attach({cmd = {'launch_jdtls', vim.fn.getcwd()}})
+                augroup end
+            endif
+            ]])
+        end
+    }
+    use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
     use 'neovim/nvim-lspconfig'
-    use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
-    use 'onsails/lspkind-nvim'
-    use 'glepnir/lspsaga.nvim'
-    use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
-    use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
-    -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
-
-    -- Status Line and Bufferline
-    use 'glepnir/galaxyline.nvim'
-    use 'akinsho/nvim-bufferline.lua'
-
-    -- Icons
-    use 'kyazdani42/nvim-web-devicons'
-    use 'glepnir/dashboard-nvim'
-
-    -- Treesitter
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'p00f/nvim-ts-rainbow'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use 'haringsrob/nvim_context_vt'
-    use 'romgrk/nvim-treesitter-context'
-    use {
-        'simrat39/symbols-outline.nvim',
-        cmd = 'SymbolsOutline',
-        config = function()
-            require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
-        end
-    } -- :SymbolOutline
-    use {'JoosepAlviste/nvim-ts-context-commentstring', disable = true}
-    use {'nvim-treesitter/playground', disable = true}
-    use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
-
-    -- Explorer
-    use 'kyazdani42/nvim-tree.lua'
-
-    -- Orgmmode
-    use {
-        'kristijanhusak/orgmode.nvim',
-        config = function()
-            require('orgmode').setup {org_agenda_files = {'~/org/*'}, org_default_notes_file = '~/org/notes.org'}
-        end
-    }
-
-    -- Experimenting
-    use {'wfxr/minimap.vim', opt = true, run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
+    use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
     use {
         'windwp/nvim-autopairs',
         config = function()
@@ -330,5 +302,81 @@ return require('packer').startup(function(use)
 
         end
     }
-    use 'dag/vim-fish'
+    -- use 'onsails/lspkind-nvim' -- vs-code like lsp suggestion kind symbols
+    use 'glepnir/lspsaga.nvim'
+    use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
+    use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
+    -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
+
+    -- Status Line and Bufferline
+    use {
+        'glepnir/galaxyline.nvim',
+        opt = true,
+        config = function()
+            require('nv-galaxyline')
+        end
+    }
+    use 'akinsho/nvim-bufferline.lua'
+
+    -- Icons
+    use 'kyazdani42/nvim-web-devicons'
+    use 'glepnir/dashboard-nvim'
+
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'p00f/nvim-ts-rainbow'
+    use 'lukas-reineke/indent-blankline.nvim'
+    use 'haringsrob/nvim_context_vt'
+    use 'romgrk/nvim-treesitter-context'
+    use {
+        'simrat39/symbols-outline.nvim',
+        cmd = 'SymbolsOutline',
+        config = function()
+            require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
+        end
+    } -- :SymbolOutline
+    use {'JoosepAlviste/nvim-ts-context-commentstring', disable = true}
+    use {'nvim-treesitter/playground', disable = true}
+    use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
+
+    -- Explorer
+    use 'kyazdani42/nvim-tree.lua'
+
+    -- Orgmmode
+    use {
+        'kristijanhusak/orgmode.nvim',
+        config = function()
+            require('orgmode').setup {org_agenda_files = {'~/org/*'}, org_default_notes_file = '~/org/notes.org'}
+        end
+    }
+
+    -- Experimenting
+    use {'dag/vim-fish', ft = 'fish'}
+    use {
+        'windwp/windline.nvim',
+        config = function()
+            require('wlsample.evil_line')
+        end
+    }
+    use {
+        'edluffy/specs.nvim',
+        config = function()
+            require('specs').setup {
+                show_jumps = true,
+                min_jump = 5,
+                popup = {
+                    delay_ms = 0, -- delay before popup displays
+                    inc_ms = 4, -- time increments used for fade/resize effects
+                    blend = 20, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                    width = 50,
+                    winhl = "PMenu",
+                    fader = require('specs').linear_fader,
+                    resizer = require('specs').shrink_resizer
+                },
+                ignore_filetypes = {},
+                ignore_buftypes = {nofile = true}
+            }
+
+        end
+    }
 end)

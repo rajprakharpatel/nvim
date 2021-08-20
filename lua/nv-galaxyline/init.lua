@@ -56,10 +56,14 @@ gls.left[1] = {
         highlight = {colors.red, colors.bg}
     }
 }
+
+gls.left[2] = {
+    FileName = {provider = 'FileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
+}
 print(vim.fn.getbufvar(0, 'ts'))
 vim.fn.getbufvar(0, 'ts')
 
-gls.left[2] = {
+gls.left[3] = {
     GitIcon = {
         provider = function()
             return ' '
@@ -71,7 +75,7 @@ gls.left[2] = {
     }
 }
 
-gls.left[3] = {
+gls.left[4] = {
     GitBranch = {
         provider = 'GitBranch',
         condition = condition.check_git_workspace,
@@ -81,7 +85,7 @@ gls.left[3] = {
     }
 }
 
-gls.left[4] = {
+gls.left[5] = {
     DiffAdd = {
         provider = 'DiffAdd',
         condition = condition.hide_in_width,
@@ -89,7 +93,7 @@ gls.left[4] = {
         highlight = {colors.green, colors.bg}
     }
 }
-gls.left[5] = {
+gls.left[6] = {
     DiffModified = {
         provider = 'DiffModified',
         condition = condition.hide_in_width,
@@ -97,7 +101,7 @@ gls.left[5] = {
         highlight = {colors.blue, colors.bg}
     }
 }
-gls.left[6] = {
+gls.left[7] = {
     DiffRemove = {
         provider = 'DiffRemove',
         condition = condition.hide_in_width,
@@ -115,7 +119,9 @@ gls.right[3] = {
     DiagnosticHint = {provider = 'DiagnosticHint', icon = '  ', highlight = {colors.vivid_blue, colors.bg}}
 }
 
-gls.right[4] = {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.info_yellow, colors.bg}}}
+gls.right[4] = {
+    DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.info_yellow, colors.bg}}
+}
 
 gls.right[5] = {
     ShowLspClient = {
