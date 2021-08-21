@@ -79,7 +79,7 @@ vim.o.showbreak = string.rep(' ', 3) -- Make it so that long lines wrap smartly
 
 vim.bo.undofile = true
 vim.o.undofile = true
-vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
+vim.o.undodir = vim.fn.stdpath('data') .. "/shada/undo-dir"
 -- vim.o.foldopen = "search"
 -- vim.o.fileformat = 'unix'
 vim.o.jumpoptions = "stack"

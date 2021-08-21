@@ -326,7 +326,7 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
     use 'lukas-reineke/indent-blankline.nvim'
-    use 'haringsrob/nvim_context_vt'
+    use {'haringsrob/nvim_context_vt', after = 'nvim-treesitter'}
     use 'romgrk/nvim-treesitter-context'
     use {
         'simrat39/symbols-outline.nvim',
