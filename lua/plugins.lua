@@ -44,6 +44,27 @@ return require('packer').startup(function(use)
             require("twilight").setup {}
         end
     }
+    use {
+        'edluffy/specs.nvim',
+        config = function()
+            require('specs').setup {
+                show_jumps = true,
+                min_jump = 5,
+                popup = {
+                    delay_ms = 0, -- delay before popup displays
+                    inc_ms = 4, -- time increments used for fade/resize effects
+                    blend = 20, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                    width = 50,
+                    winhl = "PMenu",
+                    fader = require('specs').linear_fader,
+                    resizer = require('specs').shrink_resizer
+                },
+                ignore_filetypes = {},
+                ignore_buftypes = {nofile = true}
+            }
+
+        end
+    }
     use {'joeytwiddle/sexy_scroller.vim', disable = true}
     use {'folke/lsp-colors.nvim', disable = true}
     use {'wfxr/minimap.vim', opt = true, run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
@@ -258,12 +279,11 @@ return require('packer').startup(function(use)
         'windwp/nvim-autopairs',
         config = function()
             require'nvim-autopairs'.setup {}
-            require("nvim-autopairs.completion.compe").setup(
-                {
-                    map_cr = false, --  map <CR> on insert mode
-                    map_complete = true, -- it will auto insert `(` after select function or method item
-                    auto_select = true -- auto select first item
-                })
+            require("nvim-autopairs.completion.compe").setup({
+                map_cr = false, --  map <CR> on insert mode
+                map_complete = true, -- it will auto insert `(` after select function or method item
+                auto_select = true -- auto select first item
+            })
             local npairs = require("nvim-autopairs")
             local Rule = require('nvim-autopairs.rule')
             npairs.setup({
@@ -358,25 +378,6 @@ return require('packer').startup(function(use)
             require('wlsample.evil_line')
         end
     }
-    use {
-        'edluffy/specs.nvim',
-        config = function()
-            require('specs').setup {
-                show_jumps = true,
-                min_jump = 5,
-                popup = {
-                    delay_ms = 0, -- delay before popup displays
-                    inc_ms = 4, -- time increments used for fade/resize effects
-                    blend = 20, -- starting blend, between 0-100 (fully transparent), see :h winblend
-                    width = 50,
-                    winhl = "PMenu",
-                    fader = require('specs').linear_fader,
-                    resizer = require('specs').shrink_resizer
-                },
-                ignore_filetypes = {},
-                ignore_buftypes = {nofile = true}
-            }
-
-        end
+    use {'nikvdp/neomux', cmd = 'Neomux',
     }
 end)

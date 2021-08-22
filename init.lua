@@ -1,4 +1,5 @@
 STime = os.time()
+vim.cmd([[let $GIT_EDITOR = 'nvr -cc split --remote-wait']])
 ------------------------------------------------------------------------
 --                              modules                               --
 ------------------------------------------------------------------------
@@ -153,9 +154,10 @@ define_augroups({
     relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
     -- jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
     _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
+    _gitFiles = {{'FileType', 'gitcommit,gitrebase,gitconfig', 'set bufhidden=delete'}},
     _commentToggling = {
         {'FileType', 'c,java,cpp,json,scala,jsonc', "let b:comment_leader = '//'"},
-        {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml', "let b:comment_leader = '#'"},
+        {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml,dosini', "let b:comment_leader = '#'"},
         {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
         {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},
         {'FileType', 'lisp', "let b:comment_leader = ';'"}
