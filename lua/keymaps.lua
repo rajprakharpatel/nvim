@@ -40,6 +40,18 @@ vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
 -- Tab switch buffer
 vim.api.nvim_set_keymap('n', '<TAB>', ':BufferLineCycleNext<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferLineCyclePrev<CR>', {noremap = true, silent = true})
+map('n', 'gb', '<cmd>BufferLinePick<CR>', {noremap = true, silent = true})
+map('n', 'bd', '<cmd>BufferLinePickClose<CR>', {noremap = true, silent = true})
+map('n', '<leader>1', '<cmd>BufferLineGoToBuffer 1<CR>', {noremap = true, silent = true})
+map('n', '<leader>2', '<cmd>BufferLineGoToBuffer 2<CR>', {noremap = true, silent = true})
+map('n', '<leader>3', '<cmd>BufferLineGoToBuffer 3<CR>', {noremap = true, silent = true})
+map('n', '<leader>4', '<cmd>BufferLineGoToBuffer 4<CR>', {noremap = true, silent = true})
+map('n', '<leader>5', '<cmd>BufferLineGoToBuffer 5<CR>', {noremap = true, silent = true})
+map('n', '<leader>6', '<cmd>BufferLineGoToBuffer 6<CR>', {noremap = true, silent = true})
+map('n', '<leader>7', '<cmd>BufferLineGoToBuffer 7<CR>', {noremap = true, silent = true})
+map('n', '<leader>8', '<cmd>BufferLineGoToBuffer 8<CR>', {noremap = true, silent = true})
+map('n', '<leader>9', '<cmd>BufferLineGoToBuffer 9<CR>', {noremap = true, silent = true})
+
 
 -- Quick searh syntax
 map('c', ';;', '%s:::g<Left><Left><Left>', {noremap = true})

@@ -9,8 +9,9 @@ vim.fn.sign_define("LspDiagnosticsSignInformation",
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport =
-    {properties = {'documentation', 'detail', 'additionalTextEdits'}}
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {'documentation', 'detail', 'additionalTextEdits'}
+}
 
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
@@ -74,7 +75,6 @@ local on_attach = function(client, bufnr)
         buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
-
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec([[
@@ -101,7 +101,20 @@ end
 -- and map buffer local keybindings when the language server attaches
 local servers = {"clangd", "cmake", "pylsp"}
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities} end
--- local lsp_path = vim.fn.stdpath('data') .. '/home/rajprakhar/.local/share/nvim/lspinstall'
+
+-------------
+--  jdtls  --
+-------------
+
+require'lspconfig'.jdtls.setup {
+    cmd = {'jdtls'},
+    on_attach =  on_attach,
+    root_dir = function(fname)
+        return require'lspconfig'.util.root_pattern('pom.xml', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
+    end
+}
+
+-- local lsp_path = vim.fn.stdpath('data') .. '/lspinstall'
 --------------------------------------------------------------------------------
 --                                    Lua                                     --
 --------------------------------------------------------------------------------
@@ -111,10 +124,7 @@ for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, cap
 -- local sumneko_binary = lsp_path .. [[/lua/sumneko-lua-language-server]]
 
 nvim_lsp.sumneko_lua.setup {
-    cmd = {
-        "/home/rajprakhar/.local/share/nvim/lspinstall/lua/sumneko-lua/extension/server/bin/Linux/lua-language-server",
-        "-E", "/home/rajprakhar/.local/share/nvim/lspinstall/lua/sumneko-lua/extension/server/main.lua"
-    },
+    cmd = {"/usr/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua"},
     on_attach = on_attach,
     settings = {
         Lua = {
@@ -146,16 +156,12 @@ nvim_lsp.sumneko_lua.setup {
 --                                   bashls                                   --
 --------------------------------------------------------------------------------
 
-nvim_lsp.bashls.setup {
-    cmd = {"/home/rajprakhar/.local/share/nvim/lspinstall/bash/node_modules/.bin/bash-language-server", "start"},
-    on_attach = on_attach
-}
+nvim_lsp.bashls.setup {cmd = {"bash-language-server", "start"}, on_attach = on_attach}
 
 --------------------------------------------------------------------------------
 --                                    efm                                     --
 --------------------------------------------------------------------------------
 -- Example configuations here: https://github.com/mattn/efm-langserver
--- TODO this file needs to be refactored each lang should be it's own file
 -- python
 local python_arguments = {}
 
@@ -238,7 +244,7 @@ require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
     on_attach = on_attach,
-    init_options = {documentFormatting = true, codeAction = false},
+    init_options = {documentFormatting = true, codeAction = true},
     filetypes = {"lua", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml", "markdown"},
     settings = {
         rootMarkers = {".git/"},

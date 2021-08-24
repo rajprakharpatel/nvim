@@ -5,7 +5,7 @@ local map = vim.api.nvim_set_keymap
 -----------------
 map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
 vim.bo.undofile = true
-vim.o.undodir = "/home/rajprakhar/.local/share/nvim/shada/undo-dir"
+vim.o.undodir = vim.fn.stdpath('data') .. "/shada/undo-dir"
 
 -----------------
 --  Ultisnips  --
@@ -436,7 +436,8 @@ require'bufferline'.setup {
         view = "multiwindow",
         numbers = "both",
         number_style = "superscript", -- buffer_id at index 1, ordinal at index 2
-        mappings = true,
+        middle_mouse_command = "bdelete %d",
+        right_mouse_command = "vertical sbuffer %d",
         buffer_close_icon = '',
         modified_icon = '●',
         close_icon = '',
@@ -457,10 +458,7 @@ require'bufferline'.setup {
             -- filter out by buffer name
             if vim.fn.bufname(buf_number) ~= "<nvimtree>" then return true end
             -- filter out based on arbitrary rules
-            -- e.g. filter out vim wiki buffer from tabline in your work repo
-            if vim.fn.getcwd() == "/win_shada/workspace/Projects" and vim.bo[buf_number].filetype ~= "wiki" then
-                return true
-            end
+            -- just return true if want to disable
         end,
         show_buffer_close_icons = true,
         show_close_icon = false,
