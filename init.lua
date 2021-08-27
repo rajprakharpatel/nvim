@@ -151,12 +151,18 @@ end
 
 define_augroups({
     _colorizer = {{'FileType', '*', ':ColorizerAttachToBuffer'}},
-    relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
-    -- jdtls = {{'FileType', 'java', 'lua require(\'jdtls_config\').setup()'}},
+    _relNum = {{'InsertEnter', '*', 'set norelativenumber'}, {'InsertLeave', '*', 'set relativenumber | set nu'}},
+    _jdtls = {
+        {
+            'FileType', 'java',
+            [[lua require('jdtls').start_or_attach({cmd = {'jdtls'}, on_attach = require('jdtls_config').on_attach, capabilities = require('jdtls_config').capabilities})]]
+        }
+        -- {'FileType', 'java', [[lua require('jdtls_config').on_attach()]]}
+    },
     _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
     _gitFiles = {{'FileType', 'gitcommit,gitrebase,gitconfig', 'set bufhidden=delete'}},
     _commentToggling = {
-        {'FileType', 'c,java,cpp,json,scala,jsonc', "let b:comment_leader = '//'"},
+        {'FileType', 'c,java,cpp,json,scala,jsonc,groovy', "let b:comment_leader = '//'"},
         {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml,dosini', "let b:comment_leader = '#'"},
         {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
         {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},

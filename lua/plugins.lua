@@ -254,30 +254,7 @@ return require('packer').startup(function(use)
     use {'theHamsta/nvim-dap-virtual-text', opt = true, after = 'nvim-dap'}
 
     -- Lsp & autocompletion
-    -- use {
-        -- 'mfussenegger/nvim-jdtls',
-        -- disable = true,
-        -- ft = 'java',
-        -- config = function()
-            -- require('jdtls_config').setup()
-            -- print('jdtls')
-            -- vim.cmd([[
-            -- if has('nvim-0.5')
-            -- augroup lsp
-            -- au!
-            -- au FileType java lua require('jdtls').start_or_attach({cmd = {'launch_jdtls', vim.fn.getcwd()}})
-            -- augroup end
-            -- endif
-            -- ]])
-            -- require'lspconfig'.jdtls.setup {
-                -- cmd = {'jdtls'},
-                -- root_dir = function(fname)
-                    -- return require'lspconfig'.util.rooter_pattern('pom.xml', 'gradle.build', '.git')(fname) or
-                               -- vim.fn.getcwd()
-                -- end
-            -- }
-        -- end
-    -- }
+    use {'mfussenegger/nvim-jdtls'}
     use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
@@ -387,4 +364,10 @@ return require('packer').startup(function(use)
         end
     }
     use {'nikvdp/neomux', cmd = 'Neomux'}
+    use {
+        'nacro90/numb.nvim',
+        config = function()
+            require('numb').setup()
+        end
+    }
 end)
