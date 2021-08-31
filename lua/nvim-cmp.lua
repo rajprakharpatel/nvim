@@ -40,7 +40,7 @@ cmp.setup {
                 nuspell = "[nuspell]",
                 emoji = "[😀]",
                 cmp_tabnine = "[Tabnine]",
-                vim_dadbod_completion = "[DadBod]"
+                ['vim-dadbod-completion'] = "[DadBod]"
             })[entry.source.name]
             return vim_item
             -- 暈
@@ -81,7 +81,7 @@ cmp.setup {
     },
     sources = {
         {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'}, {name = 'buffer'}, {name = 'vsnip'},
-        {name = "ultisnips"}, {name = 'vim_dadbod_completion'}, {name = 'calc'}, {name = 'emoji'}, {name = 'latex_symbols'},
+        {name = "ultisnips"}, {name = 'vim-dadbod-completion'}, {name = 'calc'}, {name = 'emoji'}, {name = 'latex_symbols'},
         {name = 'path'}, {name = 'nuspell'}
     }
 }
