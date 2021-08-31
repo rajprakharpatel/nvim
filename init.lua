@@ -18,8 +18,8 @@ require('lsp_config')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-require('material').set()
--- vim.cmd([[colo material]])
+-- require('material').set()
+vim.cmd([[colo hybrid_reverse]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
@@ -140,7 +140,10 @@ function _G.dump(...)
     print(unpack(objects))
 end
 function _G.packer(...)
-    if packer_plugins[...] and packer_plugins["vim-fugitive"].loaded then print(... .. " is loaded") end
+    if packer_plugins[...] and packer_plugins[...].loaded then print(... .. " is loaded") end
+end
+function _G.packer_load(...)
+    vim.cmd([[:PackerLoad ]] .. ...)
 end
 -- Comment toggle
 -- function _G.CommentToggle()

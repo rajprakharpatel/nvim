@@ -1,5 +1,5 @@
-local fk = function(str)
-    return vim.fn.feedkeys(vim.api.nvim_replace_termcodes(str, true, true, true))
+local fk = function(str, ...)
+    return vim.fn.feedkeys(vim.api.nvim_replace_termcodes(str, true, true, true), ...)
 end
 
 local check_back_space = function()
@@ -39,7 +39,8 @@ cmp.setup {
                 spell = "[spell]",
                 nuspell = "[nuspell]",
                 emoji = "[😀]",
-                cmp_tabnine = "[Tabnine]"
+                cmp_tabnine = "[Tabnine]",
+                vim_dadbod_completion = "[DadBod]"
             })[entry.source.name]
             return vim_item
             -- 暈
@@ -53,22 +54,22 @@ cmp.setup {
         -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
         ['<Tab>'] = function(fallback)
             if vim.fn.pumvisible() == 1 then
-                fk "<C-n>"
+                fk("<C-n>", 'n')
             elseif check_back_space() then
-                fk "<Tab>"
+                fk("<Tab>", 'n')
             elseif vim.fn['vsnip#available']() == 1 then
-                fk '<Plug>(vsnip-expand-or-jump)'
+                fk('<Plug>(vsnip-expand-or-jump)', '')
             else
                 fallback()
             end
         end,
         ['<S-Tab>'] = function(fallback)
             if vim.fn.pumvisible() == 1 then
-                fk "<C-p>"
+                fk("<C-p>", 'n')
             elseif check_back_space() then
-                fk "<S-Tab>"
+                fk("<S-Tab>", 'n')
             elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-                fk '<Plug>(vsnip-jumo-prev)'
+                fk('<Plug>(vsnip-jumo-prev)', '')
             else
                 fallback()
             end
@@ -80,7 +81,7 @@ cmp.setup {
     },
     sources = {
         {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'}, {name = 'buffer'}, {name = 'vsnip'},
-        {name = "ultisnips"}, {name = 'nuspell'}, {name = 'calc'}, {name = 'emoji'}, {name = 'latex_symbols'},
-        {name = 'path'}
+        {name = "ultisnips"}, {name = 'vim_dadbod_completion'}, {name = 'calc'}, {name = 'emoji'}, {name = 'latex_symbols'},
+        {name = 'path'}, {name = 'nuspell'}
     }
 }

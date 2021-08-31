@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
     -- Quality of life improvements
     use {'mbbill/undotree', opt = true, cmd = 'UndotreeToggle'} -- Undo history like a git tree
 
-    -- pure vim scripts with no dependencies
+    -- pure vim/lua scripts with no dependencies
     use 'zhimsel/vim-stay' -- make editing state persisitent
     use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
     use 'mhinz/vim-sayonara' -- close buffer only
@@ -28,14 +28,20 @@ return require('packer').startup(function(use)
         requires = 'radenling/vim-dispatch-neovim',
         cmd = {'Dispatch', 'Dispatch!', 'Start!', 'Make', 'Focus', 'Start'}
     }
-    -- use {'radenling/vim-dispatch-neovim', opt = true, after = 'vim-dispatch'}
+    use {
+        'nacro90/numb.nvim',
+        config = function()
+            require('numb').setup()
+        end
+    }
 
     -- visual Plugins
     use 'marko-cerovac/material.nvim'
     use 'bluz71/vim-nightfly-guicolors'
+    use 'kristijanhusak/vim-hybrid-material'
     use 'norcalli/nvim-colorizer.lua'
     use 'TaDaa/vimade'
-    use {"Pocco81/TrueZen.nvim", opt = true, cmd = 'TZMinimalist'}
+    use {"Pocco81/TrueZen.nvim", opt = true, cmd = {'TZMinimalist', 'TZFocus', 'TZAtaraxis'}}
     use {
         "folke/twilight.nvim",
         opt = true,
@@ -117,6 +123,7 @@ return require('packer').startup(function(use)
     -- terminal
     use 'voldikss/vim-floaterm'
     use {'ptzz/lf.vim', opt = true, cmd = 'Lf'} -- file manager
+    use {'nikvdp/neomux', cmd = 'Neomux'}
 
     -- search
     use 'unblevable/quick-scope'
@@ -261,7 +268,7 @@ return require('packer').startup(function(use)
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
-            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},
+            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},{"kristijanhusak/vim-dadbod-completion"},
             {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
         },
         config = function()
@@ -277,11 +284,11 @@ return require('packer').startup(function(use)
         'windwp/nvim-autopairs',
         config = function()
             require'nvim-autopairs'.setup {}
-            -- require("nvim-autopairs.completion.compe").setup({
-            -- map_cr = false, --  map <CR> on insert mode
-            -- map_complete = true, -- it will auto insert `(` after select function or method item
-            -- auto_select = true -- auto select first item
-            -- })
+            require("nvim-autopairs.completion.cmp").setup({
+            map_cr = true, --  map <CR> on insert mode
+            map_complete = true, -- it will auto insert `(` after select function or method item
+            auto_select = true -- auto select first item
+            })
             local npairs = require("nvim-autopairs")
             local Rule = require('nvim-autopairs.rule')
             npairs.setup({
@@ -334,6 +341,12 @@ return require('packer').startup(function(use)
             require('nv-galaxyline')
         end
     }
+    use {
+        'windwp/windline.nvim',
+        config = function()
+            require('wlsample.evil_line')
+        end
+    }
     use 'akinsho/nvim-bufferline.lua'
 
     -- Icons
@@ -360,7 +373,7 @@ return require('packer').startup(function(use)
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
 
-    -- Orgmmode
+    -- Orgmmode and notetaking
     use {
         'kristijanhusak/orgmode.nvim',
         config = function()
@@ -370,17 +383,10 @@ return require('packer').startup(function(use)
 
     -- Experimenting
     use {'dag/vim-fish', ft = 'fish'}
-    use {
-        'windwp/windline.nvim',
-        config = function()
-            require('wlsample.evil_line')
-        end
-    }
-    use {'nikvdp/neomux', cmd = 'Neomux'}
-    use {
-        'nacro90/numb.nvim',
-        config = function()
-            require('numb').setup()
-        end
-    }
+    use {'tpope/vim-dadbod', cmd = 'DB'}
+    use {'kristijanhusak/vim-dadbod-ui', cmd = 'DBUI',
+    config = function ()
+        packer_load('vim-dadbod')
+    end
+}
 end)
