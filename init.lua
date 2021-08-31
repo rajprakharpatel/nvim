@@ -8,7 +8,7 @@ require('plugins')
 require('plugin-configs')
 vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
 vim.cmd('source ~/.config/nvim/viml/switch.vim')
-require('nvim-compe')
+-- require('nvim-compe')
 -- Lsp
 require('nv-globals')
 require('lsp_config')

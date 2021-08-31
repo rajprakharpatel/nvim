@@ -434,8 +434,9 @@ require'colorizer'.setup()
 require'bufferline'.setup {
     options = {
         view = "multiwindow",
-        numbers = "both",
-        number_style = "superscript", -- buffer_id at index 1, ordinal at index 2
+        numbers = function(opts)
+            return string.format('%s%s', opts.id, opts.raise(opts.ordinal))
+        end,
         middle_mouse_command = "bdelete %d",
         right_mouse_command = "vertical sbuffer %d",
         buffer_close_icon = '',
@@ -448,8 +449,17 @@ require'bufferline'.setup {
         tab_size = 18,
         diagnostics = "nvim_lsp",
         ---@diagnostic disable-next-line: unused-local
-        diagnostics_indicator = function(count, level, diagnostics_dict)
-            return "(" .. count .. ")"
+        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            if context.buffer:current() then
+                return ''
+            end
+            local s = ' '
+            for e, n in pairs(diagnostics_dict) do
+                local sym = e == "error" and " "
+                or (e == "warning" and " " or "ℹ️")
+                s= s .. n .. sym
+            end
+            return s
         end,
         -- NOTE: this will be called a lot so don't do any heavy processing here
         custom_filter = function(buf_number)

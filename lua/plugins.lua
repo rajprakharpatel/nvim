@@ -255,20 +255,33 @@ return require('packer').startup(function(use)
 
     -- Lsp & autocompletion
     use {'mfussenegger/nvim-jdtls'}
-    use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
+    -- use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
+            "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
+            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},
+            {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
+        },
+        config = function()
+            require 'nvim-cmp'
+        end
+    }
+
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
     use 'neovim/nvim-lspconfig'
-    use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
+    -- use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
     use {
         'windwp/nvim-autopairs',
         config = function()
             require'nvim-autopairs'.setup {}
-            require("nvim-autopairs.completion.compe").setup({
-                map_cr = false, --  map <CR> on insert mode
-                map_complete = true, -- it will auto insert `(` after select function or method item
-                auto_select = true -- auto select first item
-            })
+            -- require("nvim-autopairs.completion.compe").setup({
+            -- map_cr = false, --  map <CR> on insert mode
+            -- map_complete = true, -- it will auto insert `(` after select function or method item
+            -- auto_select = true -- auto select first item
+            -- })
             local npairs = require("nvim-autopairs")
             local Rule = require('nvim-autopairs.rule')
             npairs.setup({
@@ -307,7 +320,7 @@ return require('packer').startup(function(use)
 
         end
     }
-    -- use 'onsails/lspkind-nvim' -- vs-code like lsp suggestion kind symbols
+    use 'onsails/lspkind-nvim' -- vs-code like lsp suggestion kind symbols
     use 'glepnir/lspsaga.nvim'
     use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
     use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
