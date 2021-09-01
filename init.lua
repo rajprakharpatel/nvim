@@ -18,8 +18,8 @@ require('lsp_config')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
--- require('material').set()
-vim.cmd([[colo hybrid_reverse]])
+vim.cmd([[colo material]])
+-- vim.cmd([[colo hybrid_reverse]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])

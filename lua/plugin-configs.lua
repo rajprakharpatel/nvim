@@ -561,19 +561,33 @@ require'bufferline'.setup {
 ----------------
 -- Example config in lua
 vim.g.material_style = 'deep ocean'
-vim.g.material_italic_comments = true
-vim.g.material_italic_keywords = true
-vim.g.material_italic_functions = true
-vim.g.material_italic_variables = true
-vim.g.material_contrast = true
-vim.g.material_borders = true
-vim.g.material_hide_eob = true
+require("material").setup({
+    contrast = true,
+    borders = true,
+    italics = {
+        comments = true,
+        strings = false,
+        Keywords = true,
+        fisnctions = false,
+        variables = true
+    },
+    contrast_windows = {
+        "terminal",
+        "packer",
+        "qf",
+        "NvimTree"
+    },
+    text_contrast = {
+        lighter = false,
+        darker = false
+    },
+    disable = {
+        background = false,
+        term_colors = false,
+        eob_lines = true
+    }
+})
 vim.g.material_variable_color = "#d17CB4"
--- if Shade is active set this to false or <leader>s to toggle shade
-vim.g.material_disable_background = false -- vim.g.material_custom_colors = { black = "#000000", bg = "#0F111A" }
-
--- Load the colorscheme
-require('material').set()
 
 vim.api.nvim_set_keymap('n', '<leader>ml', [[<Cmd>lua require('material.functions').change_style('lighter')<CR>]],
                         {noremap = true, silent = true})
