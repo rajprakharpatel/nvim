@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
     -- pure vim/lua scripts with no dependencies
     use 'zhimsel/vim-stay' -- make editing state persisitent
     use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
-    use 'mhinz/vim-sayonara' -- close buffer only
+    use {'mhinz/vim-sayonara', cmd = "Sayonara"} -- close buffer only
     use {'tpope/vim-abolish', opt = true, cmd = {'Abolish', 'Subvert'}} -- working with variants of word :- search, replace and changing case
     use {
         'tpope/vim-dispatch',
@@ -268,8 +268,8 @@ return require('packer').startup(function(use)
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
-            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},{"kristijanhusak/vim-dadbod-completion"},
-            {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
+            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},
+            {"kristijanhusak/vim-dadbod-completion"}, {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
         },
         config = function()
             require 'nvim-cmp'
@@ -285,9 +285,9 @@ return require('packer').startup(function(use)
         config = function()
             require'nvim-autopairs'.setup {}
             require("nvim-autopairs.completion.cmp").setup({
-            map_cr = true, --  map <CR> on insert mode
-            map_complete = true, -- it will auto insert `(` after select function or method item
-            auto_select = true -- auto select first item
+                map_cr = true, --  map <CR> on insert mode
+                map_complete = true, -- it will auto insert `(` after select function or method item
+                auto_select = true -- auto select first item
             })
             local npairs = require("nvim-autopairs")
             local Rule = require('nvim-autopairs.rule')
@@ -384,9 +384,20 @@ return require('packer').startup(function(use)
     -- Experimenting
     use {'dag/vim-fish', ft = 'fish'}
     use {'tpope/vim-dadbod', cmd = 'DB'}
-    use {'kristijanhusak/vim-dadbod-ui', cmd = 'DBUI',
-    config = function ()
-        packer_load('vim-dadbod')
-    end
-}
+    use {
+        'kristijanhusak/vim-dadbod-ui',
+        cmd = 'DBUI',
+        config = function()
+            packer_load('vim-dadbod')
+        end
+    }
+    -- Lua
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup {
+            }
+        end
+    }
+
 end)
