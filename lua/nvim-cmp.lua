@@ -11,7 +11,7 @@ local cmp = require 'cmp'
 cmp.setup {
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+        vim.fn["vsnip#anonymous"](args.body)
         end
     },
     documentation = {
@@ -34,6 +34,7 @@ cmp.setup {
                 vsnip = "[vsnip]",
                 luasnip = "[LuaSnip]",
                 ultisnips = "[Ultisnips]",
+                snippy = "[snippy]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[Latex]",
                 spell = "[spell]",
@@ -80,8 +81,8 @@ cmp.setup {
         ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true})
     },
     sources = {
-        {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'}, {name = 'buffer'}, {name = 'vsnip'},
-        {name = "ultisnips"}, {name = 'vim-dadbod-completion'}, {name = 'calc'}, {name = 'emoji'}, {name = 'latex_symbols'},
-        {name = 'path'}, {name = 'nuspell'}
+        {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'}, {name = 'snippy'}, {name = 'buffer'},
+        {name = 'vsnip'}, {name = "ultisnips"}, {name = 'orgmode'}, {name = 'vim-dadbod-completion'}, {name = 'calc'},
+        {name = 'emoji'}, {name = 'latex_symbols'}, {name = 'path'}, {name = 'nuspell'}
     }
 }

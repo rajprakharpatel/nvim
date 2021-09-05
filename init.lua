@@ -4,7 +4,7 @@ vim.cmd([[let $GIT_EDITOR = 'nvr -cc split --remote-wait']])
 --                              modules                               --
 ------------------------------------------------------------------------
 require('keymaps')
-require('plugins')
+-- require('plugins')
 require('plugin-configs')
 vim.cmd('source ~/.config/nvim/viml/inc_easy_fuzzy.vim')
 vim.cmd('source ~/.config/nvim/viml/switch.vim')
@@ -23,7 +23,7 @@ vim.cmd([[colo material]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
-vim.o.scrolloff = 9
+vim.o.scrolloff = 5
 vim.o.sidescrolloff = 5
 vim.wo.signcolumn = 'yes'
 vim.o.conceallevel = 0

@@ -92,13 +92,13 @@ map('i', '<c-s>', '<esc>:w!<cr>a', {noremap = true})
 -- Control-C Copy to system clipboard
 map('v', '<c-c>', '"+y', {noremap = true})
 map('n', '<c-c>', '"+yy', {noremap = true})
-map('i', '<c-c>', '<esc>"yyaa', {noremap = true})
+map('i', '<c-c>', '<esc>"+yya', {noremap = true})
 
--- Control-V Paste in insert and command mode
--- imap <C-V> <esc>"+pa
-map('v', '<c-v>', "+p", {noremap = true})
--- paste last yank in commad mode
+-- Replace selected text with system clipboard content
+map('v', '<c-v>', '"+p', {noremap = true})
+-- paste last yank in commad mode not system clipboard
 map('c', '<c-v>', '<c-r>0', {noremap = true})
+map('i', '<c-v>', '<c-r>0', {noremap = true})
 
 -- Toggle Transparency of background
 map('', '<leader>tr', ':hi Normal guibg=NONE ctermbg=NONE <bar> :set nocursorline <bar> :set colorcolumn=0<CR>',
@@ -109,9 +109,6 @@ map('', '<leader>op', ':set background=dark <bar> :set cursorline <bar> :set col
 map('n', '<leader>pi', ':PackerInstall<cr>', {noremap = true})
 map('n', '<leader>ps', ':PackerSync<cr>', {noremap = true})
 map('n', '<leader>pc', ':PackerClean<cr>', {noremap = true})
-
--- JABS
-map('n', '<space>b', ':JABSOpen<CR>', {noremap = true})
 
 -- Symbols Outline
 map('n', '<F9>', ':SymbolsOutline<CR>', {noremap = true})

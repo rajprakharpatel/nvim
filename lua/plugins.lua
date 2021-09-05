@@ -14,6 +14,10 @@ require('packer').init({display = {auto_clean = false}, transitive_opt = true})
 return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim'
+    use {'lewis6991/impatient.nvim', rocks = 'mpack',
+    config = function ()
+        require("impatient")
+    end}
 
     -- Quality of life improvements
     use {'mbbill/undotree', opt = true, cmd = 'UndotreeToggle'} -- Undo history like a git tree
@@ -98,7 +102,6 @@ return require('packer').startup(function(use)
     use 'AndrewRadev/switch.vim' -- Switch counter values easily
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
-    use 'matbme/JABS.nvim' -- easy buffer management
     use {'sotte/presenting.vim', cmd = 'PresentingStart'}
     use {'pelodelfuego/vim-swoop', opt = true, cmd = 'Swoop'} -- call SwoopFreezeContext();call SwoopUnFreezeContext() to use with other plugins
     use {'sk1418/Join', opt = true, cmd = 'Join'} -- [range]Join[!] [separator] [count] [flags]
@@ -117,7 +120,7 @@ return require('packer').startup(function(use)
     use 'michaeljsmith/vim-indent-object'
 
     -- Snippets
-    use {'SirVer/ultisnips', requires = {{'honza/vim-snippets'}}}
+    use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
     use {'hrsh7th/vim-vsnip', requires = {{'rafamadriz/friendly-snippets'}}}
 
     -- terminal
@@ -376,8 +379,12 @@ return require('packer').startup(function(use)
     -- Orgmmode and notetaking
     use {
         'kristijanhusak/orgmode.nvim',
+        requires = {'akinsho/org-bullets.nvim',
+        config = function ()
+            require('org-bullets').setup()
+        end},
         config = function()
-            require('orgmode').setup {org_agenda_files = {'~/org/*'}, org_default_notes_file = '~/org/notes.org'}
+            require('orgmode').setup {org_agenda_files = {'~/org/**/*'}, org_default_notes_file = '~/org/notes.org'}
         end
     }
 
@@ -391,7 +398,6 @@ return require('packer').startup(function(use)
             packer_load('vim-dadbod')
         end
     }
-    -- Lua
     use {
         "folke/which-key.nvim",
         config = function()

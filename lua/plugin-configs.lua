@@ -393,10 +393,10 @@ map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
 --------------------------------------------------------------------------------
 require('gitsigns').setup {
     signs = {
-        add = {hl = 'GitSignsAdd', text = '', linehl = 'GitSignsAddLn'},
+        add = {hl = 'GitSignsAdd', text = '+', linehl = 'GitSignsAddLn'},
         change = {hl = 'GitSignsChange', text = '~', linehl = 'GitSignsChangeLn'},
-        delete = {hl = 'GitSignsDelete', text = '﫧', linehl = 'GitSignsDeleteLn'},
-        topdelete = {hl = 'GitSignsDelete', text = '-', linehl = 'GitSignsDeleteLn'},
+        delete = {hl = 'GitSignsDelete', text = '-', linehl = 'GitSignsDeleteLn'},
+        topdelete = {hl = 'GitSignsDelete', text = '﫧', linehl = 'GitSignsDeleteLn'},
         changedelete = {hl = 'GitSignsChange', text = '*', linehl = 'GitSignsChangeLn'}
     },
     numhl = true,
