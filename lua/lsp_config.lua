@@ -16,6 +16,8 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
+    require("lsp_signature").on_attach()
+
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
@@ -30,13 +32,11 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]],
-    opts)
+    buf_set_keymap('n', 'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], opts)
     buf_set_keymap('n', '<c-b>', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     -- buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>k', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]],
-    opts)
+    buf_set_keymap('n', '<space>k', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -57,9 +57,9 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>a', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], opts)
     buf_set_keymap('v', '<space>a', [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], opts)
     -- scroll down hover doc or scroll in definition preview
-    buf_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], opts)
+    -- buf_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], opts)
     -- scroll up hover doc
-    buf_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], opts)
+    -- buf_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], opts)
     -- preview definition
     buf_set_keymap('n', '<space>pd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], opts)
     -- show
@@ -108,11 +108,11 @@ for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, cap
 -------------
 
 -- require'lspconfig'.jdtls.setup {
-    -- cmd = {'jdtls'},
-    -- on_attach =  on_attach,
-    -- root_dir = function(fname)
-        -- return require'lspconfig'.util.root_pattern('pom.xml', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
-    -- end
+-- cmd = {'jdtls'},
+-- on_attach =  on_attach,
+-- root_dir = function(fname)
+-- return require'lspconfig'.util.root_pattern('pom.xml', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
+-- end
 -- }
 
 -- local lsp_path = vim.fn.stdpath('data') .. '/lspinstall'
@@ -268,4 +268,20 @@ require"lspconfig".efm.setup {
 
 -- Also find way to toggle format on save
 -- maybe this will help: https://superuser.com/questions/439078/how-to-disable-autocmd-or-augroup-in-vim
+
+--------------------------------------------------------------------------------
+--                                 sqls.nvim                                  --
+--------------------------------------------------------------------------------
+require'lspconfig'.sqls.setup {
+    on_attach = function(client)
+        client.resolved_capabilities.execute_command = true
+
+        require'sqls'.setup {
+            picker = 'telescope',
+            -- settings = {
+                -- sqls = {connections = {{driver = 'mysql', dataSourceName = 'world:rajp@tcp(127.0.0.1:3306)/world'}}}
+            -- }
+        }
+    end
+}
 

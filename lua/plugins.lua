@@ -14,10 +14,13 @@ require('packer').init({display = {auto_clean = false}, transitive_opt = true})
 return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim'
-    use {'lewis6991/impatient.nvim', rocks = 'mpack',
-    config = function ()
-        require("impatient")
-    end}
+    use {
+        'lewis6991/impatient.nvim',
+        rocks = 'mpack',
+        config = function()
+            require("impatient")
+        end
+    }
 
     -- Quality of life improvements
     use {'mbbill/undotree', opt = true, cmd = 'UndotreeToggle'} -- Undo history like a git tree
@@ -282,6 +285,7 @@ return require('packer').startup(function(use)
     use 'RishabhRD/nvim-lsputils'
     use 'RishabhRD/popfix'
     use 'neovim/nvim-lspconfig'
+    use 'ray-x/lsp_signature.nvim'
     -- use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
     use {
         'windwp/nvim-autopairs',
@@ -379,10 +383,12 @@ return require('packer').startup(function(use)
     -- Orgmmode and notetaking
     use {
         'kristijanhusak/orgmode.nvim',
-        requires = {'akinsho/org-bullets.nvim',
-        config = function ()
-            require('org-bullets').setup()
-        end},
+        requires = {
+            'akinsho/org-bullets.nvim',
+            config = function()
+                require('org-bullets').setup()
+            end
+        },
         config = function()
             require('orgmode').setup {org_agenda_files = {'~/org/**/*'}, org_default_notes_file = '~/org/notes.org'}
         end
@@ -391,19 +397,25 @@ return require('packer').startup(function(use)
     -- Experimenting
     use {'dag/vim-fish', ft = 'fish'}
     use {'tpope/vim-dadbod', cmd = 'DB'}
-    use {
-        'kristijanhusak/vim-dadbod-ui',
-        cmd = 'DBUI',
-        config = function()
-            packer_load('vim-dadbod')
-        end
-    }
+    use {'kristijanhusak/vim-dadbod-ui', cmd = 'DBUI', requires = 'tpope/vim-dadbod'}
     use {
         "folke/which-key.nvim",
         config = function()
-            require("which-key").setup {
-            }
+            require("which-key").setup {}
         end
     }
-
+    use {
+        "AckslD/nvim-neoclip.lua",
+        config = function()
+            require("neoclip").setup({keys = {i = {select = '<CR>', paste = '<m-p>', pate_behind = '<m-k>'}}})
+        end
+    }
+    use {
+        'jghauser/mkdir.nvim',
+        config = function()
+            require('mkdir')
+        end
+    }
+    use {'seandewar/nvimesweeper', cmd = 'Nvimesweeper'}
+    use {'nanotee/sqls.nvim'}
 end)

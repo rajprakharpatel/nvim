@@ -218,10 +218,9 @@ vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer
 --  treesitter  --
 ------------------
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ignore_install = {"haskell"},
+    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml", "vim"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
-        enable = true -- false will disable the whole extension
+        enable = true, -- false will disable the whole extension
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     indent = {enable = {"javascriptreact"}},
@@ -450,14 +449,11 @@ require'bufferline'.setup {
         diagnostics = "nvim_lsp",
         ---@diagnostic disable-next-line: unused-local
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            if context.buffer:current() then
-                return ''
-            end
+            if context.buffer:current() then return '' end
             local s = ' '
             for e, n in pairs(diagnostics_dict) do
-                local sym = e == "error" and " "
-                or (e == "warning" and " " or "ℹ️")
-                s= s .. n .. sym
+                local sym = e == "error" and " " or (e == "warning" and " " or "ℹ️")
+                s = s .. n .. sym
             end
             return s
         end,
@@ -564,28 +560,10 @@ vim.g.material_style = 'deep ocean'
 require("material").setup({
     contrast = true,
     borders = true,
-    italics = {
-        comments = true,
-        strings = false,
-        Keywords = true,
-        fisnctions = false,
-        variables = true
-    },
-    contrast_windows = {
-        "terminal",
-        "packer",
-        "qf",
-        "NvimTree"
-    },
-    text_contrast = {
-        lighter = false,
-        darker = false
-    },
-    disable = {
-        background = false,
-        term_colors = false,
-        eob_lines = true
-    }
+    italics = {comments = true, strings = false, Keywords = true, fisnctions = false, variables = true},
+    contrast_windows = {"terminal", "packer", "qf", "NvimTree"},
+    text_contrast = {lighter = false, darker = false},
+    disable = {background = false, term_colors = false, eob_lines = true}
 })
 vim.g.material_variable_color = "#d17CB4"
 

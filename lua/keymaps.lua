@@ -52,7 +52,6 @@ map('n', '<leader>7', '<cmd>BufferLineGoToBuffer 7<CR>', {noremap = true, silent
 map('n', '<leader>8', '<cmd>BufferLineGoToBuffer 8<CR>', {noremap = true, silent = true})
 map('n', '<leader>9', '<cmd>BufferLineGoToBuffer 9<CR>', {noremap = true, silent = true})
 
-
 -- Quick searh syntax
 map('c', ';;', '%s:::g<Left><Left><Left>', {noremap = true})
 -- Quick mapping to put \(\) in your pattern string
@@ -152,3 +151,6 @@ map('n', '<space>n', ':e ~/org/notes.org<CR>', {noremap = true})
 
 -- Neomux
 map('n', '<space>t', '<cmd>Neomux<CR>', {noremap = true})
+
+-- Neoclip
+map('n', "<space>'", "<cmd> lua require('telescope').extensions.neoclip.default()<CR>", {noremap = true})
