@@ -217,10 +217,21 @@ vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer
 ------------------
 --  treesitter  --
 ------------------
+local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
+parser_config.org = {
+    install_info = {
+        url = 'https://github.com/milisims/tree-sitter-org',
+        revision = 'main',
+        files = {'src/parser.c', 'src/scanner.cc'}
+    },
+    filetype = 'org'
+}
+
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml", "vim"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml", "vim", "org"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
         enable = true, -- false will disable the whole extension
+        additional_vim_regex_highlighting = {'org'}
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     indent = {enable = {"javascriptreact"}},

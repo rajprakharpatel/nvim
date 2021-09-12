@@ -19,7 +19,7 @@ require('lsp_config')
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-vim.cmd([[colo material]])
+vim.cmd([[colo nightfly]])
 -- vim.cmd([[set guifont=SauceCodePro\ Nerd\ Font:h11]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])

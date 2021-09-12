@@ -41,6 +41,12 @@ return require('packer').startup(function(use)
             require('numb').setup()
         end
     }
+    use {
+        'jghauser/mkdir.nvim',
+        config = function()
+            require('mkdir')
+        end
+    }
 
     -- visual Plugins
     use 'marko-cerovac/material.nvim'
@@ -373,7 +379,7 @@ return require('packer').startup(function(use)
             require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
         end
     } -- :SymbolOutline
-    use {'JoosepAlviste/nvim-ts-context-commentstring', disable = true}
+    use {'JoosepAlviste/nvim-ts-context-commentstring', disable = false}
     use {'nvim-treesitter/playground', disable = true}
     use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
 
@@ -396,7 +402,7 @@ return require('packer').startup(function(use)
 
     -- Experimenting
     use {'dag/vim-fish', ft = 'fish'}
-    use {'tpope/vim-dadbod', cmd = 'DB'}
+    -- use {'tpope/vim-dadbod', cmd = 'DB'}
     use {'kristijanhusak/vim-dadbod-ui', cmd = 'DBUI', requires = 'tpope/vim-dadbod'}
     use {
         "folke/which-key.nvim",
@@ -410,12 +416,16 @@ return require('packer').startup(function(use)
             require("neoclip").setup({keys = {i = {select = '<CR>', paste = '<m-p>', pate_behind = '<m-k>'}}})
         end
     }
-    use {
-        'jghauser/mkdir.nvim',
-        config = function()
-            require('mkdir')
-        end
-    }
     use {'seandewar/nvimesweeper', cmd = 'Nvimesweeper'}
     use {'nanotee/sqls.nvim'}
+    use {
+        'lukas-reineke/headlines.nvim',
+        config = function()
+            require('headlines').setup()
+        end
+    }
+
+    -- :[range]Wandbox [--compiler={compiler}] [--options={options}] [--compiler-options={options}] [--file={file}] [--runtime-options] [--stdin] [--stdin-file={stdin-file}]
+    use {'rhysd/wandbox-vim', cmd = {'Wandbox', 'Quickrun', 'WandboxOptionList'}}
+
 end)
