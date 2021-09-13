@@ -63,7 +63,7 @@ vim.o.ttimeout = true
 vim.o.wildignorecase = true
 vim.o.shiftround = true
 vim.o.magic = true
-vim.o.expandtab = true
+vim.o.expandtab = false
 vim.o.tags = "" -- let gutentags handle this
 
 vim.o.ttimeoutlen = 20

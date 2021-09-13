@@ -11,24 +11,17 @@ local cmp = require 'cmp'
 cmp.setup {
     snippet = {
         expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+            vim.fn["vsnip#anonymous"](args.body)
         end
     },
     documentation = {
-        -- border = {
-        -- '═', '║', '╒', '╓', '╔', '╕', '╖', '╗', '╘', '╙', '╚', '╛', '╜', '╝', '╞',
-        -- '╟'
-        -- }
-        border = {'╔', '═', '╗', '║', '╝', '═', '╚', '║'}
+        border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'}
+        -- border = {'╔', '═', '╗', '║', '╝', '═', '╚', '║'}
     },
     formatting = {
         format = function(entry, vim_item)
-            -- fancy icons and a name of kind
-            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-            -- vim_item.kind = require("lspkind").presets.default[vim_item.kind]
-
             -- set a name for each source
-            vim_item.menu = ({
+            local source_mapping = {
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
                 vsnip = "[vsnip]",
@@ -42,7 +35,25 @@ cmp.setup {
                 emoji = "[😀]",
                 cmp_tabnine = "[Tabnine]",
                 ['vim-dadbod-completion'] = "[DadBod]"
-            })[entry.source.name]
+            }
+            -- fancy icons and a name of kind
+            -- vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+            vim_item.kind = require("lspkind").presets.default[vim_item.kind]
+            local menu = source_mapping[entry.source.name]
+            if entry.source.name == 'cmp_tabnine' then
+                if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+                    menu = entry.completion_item.data.detail .. ' ' .. menu
+                end
+                vim_item.kind = ''
+            end
+            if entry.source.name == 'nuspell' then
+                if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+                    menu = entry.completion_item.data.detail .. ' ' .. menu
+                end
+                vim_item.kind = '暈'
+            end
+
+            vim_item.menu = menu
             return vim_item
             -- 暈
         end

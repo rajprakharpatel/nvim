@@ -280,7 +280,7 @@ return require('packer').startup(function(use)
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
-            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'},
+            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'}, "quangnguyen30192/cmp-nvim-ultisnips",
             {"kristijanhusak/vim-dadbod-completion"}, {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
         },
         config = function()
@@ -427,5 +427,12 @@ return require('packer').startup(function(use)
 
     -- :[range]Wandbox [--compiler={compiler}] [--options={options}] [--compiler-options={options}] [--file={file}] [--runtime-options] [--stdin] [--stdin-file={stdin-file}]
     use {'rhysd/wandbox-vim', cmd = {'Wandbox', 'Quickrun', 'WandboxOptionList'}}
-
+    -- Easier easyalign (omaps - gl<motion/object>key)
+    use {
+        'tommcdo/vim-lion',
+        config = function()
+            vim.g.lion_squeeze_spaces = 1
+        end
+    }
+    use {'tpope/vim-unimpaired'} -- various useful [<key>,]<key> mappings
 end)
