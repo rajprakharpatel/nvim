@@ -1,3 +1,4 @@
+local map = vim.api.nvim_set_keymap
 local actions = require('telescope.actions')
 
 require('telescope').setup {
@@ -7,15 +8,15 @@ require('telescope').setup {
         },
         prompt_prefix = " ",
         selection_caret = " ",
-        entry_prefix = "  ",
+        entry_prefix = "",
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        file_sorter = require'telescope.sorters'.get_fuzzy_file,
+        -- file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
-        generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        path_display = {"shorten", "absolute"},
-        winblend = 5,
+        -- generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+        -- path_display = {"shorten", "absolute"},
+        winblend = 30,
         border = {},
         borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         color_devicons = true,
@@ -52,3 +53,46 @@ require('telescope').setup {
         }
     }
 }
+
+-----------------
+--  Telescope  --
+-----------------
+
+map('n', '<space>br',
+    '<cmd>lua require(\'telescope.builtin\').file_browser(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<c-p>', '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_ivy())<cr>',
+    {noremap = true})
+map('n', '<space>g',
+    '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>bb',
+    '<cmd>lua require(\'telescope.builtin\').buffers(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>h',
+    '<cmd>lua require(\'telescope.builtin\').help_tags(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gf', '<cmd>lua require(\'telescope.builtin\').git(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gb',
+    '<cmd>lua require(\'telescope.builtin\').git_branches(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>gbc',
+    '<cmd>lua require(\'telescope.builtin\').git_bcommits(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>ts',
+    '<cmd>lua require(\'telescope.builtin\').treesitter(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>p',
+    '<cmd>lua require(\'telescope.builtin\').builtin(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>rl', '<cmd>lua require(\'telescope.builtin\').reloader()<cr>', {noremap = true})
+map('n', '<space>s', '<cmd>lua require\'telescope.builtin\'.symbols{}<cr>', {noremap = true})
+map('n', '<space>m',
+    '<cmd>lua require(\'telescope\').extensions.media_files.media_files(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>u',
+    '<cmd>lua require\'telescope\'.extensions.ultisnips.ultisnips(require(\'telescope.themes\').get_dropdown())<cr>',
+    {noremap = true})
+map('n', '<space>o', '<cmd>lua require(\'telescope.builtin\').oldfiles()<cr>', {noremap = true})
+
