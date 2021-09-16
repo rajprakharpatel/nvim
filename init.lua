@@ -169,7 +169,7 @@ define_augroups({
         {'FileType', 'c,java,cpp,json,scala,jsonc,groovy', "let b:comment_leader = '//'"},
         {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml,dosini', "let b:comment_leader = '#'"},
         {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
-        {'FileType', 'lua', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},
+        {'FileType', 'lua,mysql', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},
         {'FileType', 'lisp', "let b:comment_leader = ';'"}
     },
     _dashboard = {

@@ -1,0 +1,29 @@
+extends sql
+
+snippet ct "CREATE TABLE" b
+CREATE TABLE ${1:table}(
+${2:id_column} INT NOT NULL AUTO_INCREMENT,
+${0},
+PRIMARY KEY ($2)
+);
+endsnippet
+
+snippet ctn "CREATE TABLE IF NOT EXISTS" b
+CREATE TABLE IF NOT EXISTS ${1:table}(
+${2:id_column} INT NOT NULL AUTO_INCREMENT,
+${0}
+PRIMARY KEY ($2)
+);
+endsnippet
+
+snippet fk "FOREIGN KEY"
+${1:col_name} ${2:INT} ${3:NOT NULL},
+FOREIGN KEY ($1) REFERENCES ${4:ref_table}($1)$0
+endsnippet
+
+snippet lf "description" b
+endsnippet
+	
+snippet sf "SELECT * FROM"
+SELECT ${1:*} FROM ${2:`!v getreg("0")`};
+endsnippet

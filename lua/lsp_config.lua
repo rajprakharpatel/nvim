@@ -274,6 +274,7 @@ require"lspconfig".efm.setup {
 --------------------------------------------------------------------------------
 require'lspconfig'.sqls.setup {
     on_attach = function(client)
+		on_attach(client)
         client.resolved_capabilities.execute_command = true
 
         require'sqls'.setup {
