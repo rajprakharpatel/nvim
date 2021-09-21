@@ -63,7 +63,7 @@ cmp.setup {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-        ['<Tab>'] = function(fallback)
+		--[[['<Tab>'] = function(fallback)
             if vim.fn.pumvisible() == 1 then
                 fk("<C-n>", 'n')
             elseif check_back_space() then
@@ -84,7 +84,33 @@ cmp.setup {
             else
                 fallback()
             end
+        end,]]
+
+
+		['<Tab>'] = function(fallback)
+            if cmp.visible() then
+				cmp.select_next_item()
+            elseif check_back_space() then
+                fk("<Tab>", 'n')
+            elseif vim.fn['vsnip#available']() == 1 then
+                fk('<Plug>(vsnip-expand-or-jump)', '')
+            else
+                fallback()
+            end
         end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+				cmp.select_prev_item()
+            elseif check_back_space() then
+                fk("<S-Tab>", 'n')
+            elseif vim.fn['vsnip#jumpable'](-1) == 1 then
+                fk('<Plug>(vsnip-jumo-prev)', '')
+            else
+                fallback()
+            end
+        end,
+
+
         -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),

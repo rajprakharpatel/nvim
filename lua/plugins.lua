@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim'
     use {
+		opt = true,
         'lewis6991/impatient.nvim',
         rocks = 'mpack',
         config = function()
@@ -343,6 +344,7 @@ return require('packer').startup(function(use)
     -- use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
     use {
         "hrsh7th/nvim-cmp",
+		branch = 'custom-menu',
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
