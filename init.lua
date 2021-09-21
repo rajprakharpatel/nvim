@@ -20,7 +20,7 @@ require('lsp_config')
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
 vim.cmd([[colo nightfly]])
--- vim.cmd([[set guifont=SauceCodePro\ Nerd\ Font:h11]])
+vim.cmd([[set guifont=SauceCodePro\ Nerd\ Font:h11]])
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object
 vim.cmd([[set nu]])
 vim.cmd([[set rnu]])
@@ -136,10 +136,28 @@ function _G.define_augroups(definitions) -- {{{1
     end
 end
 
-function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
-    print(unpack(objects))
+function _G.loadrequire(module)
+    local function requiref(module)
+        require(module)
+				print("Module Loaded")
+    end
+    res = pcall(requiref,module)
+    if not(res) then
+			print("Module not found")
+    end
 end
+
+function _G.put(...)
+  local objects = {}
+  for i = 1, select('#', ...) do
+    local v = select(i, ...)
+    table.insert(objects, vim.inspect(v))
+  end
+
+  print(table.concat(objects, '\n'))
+  return ...
+end
+
 function _G.packer(...)
     if packer_plugins[...] and packer_plugins[...].loaded then print(... .. " is loaded") end
 end

@@ -100,7 +100,7 @@ end
 -- end
 -- Use a loop to conveniently both setup defined serversw
 -- and map buffer local keybindings when the language server attaches
-local servers = {"clangd", "cmake", "pylsp"}
+local servers = {"clangd", "cmake", "pylsp", "vimls"}
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities} end
 
 -------------
@@ -123,7 +123,7 @@ for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach, cap
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 -- local sumneko_root_path = vim.fn.stdpath('data')..'lspinstall/lua/sumneko-lua-language-server'
 -- local sumneko_binary = lsp_path .. [[/lua/sumneko-lua-language-server]]
-
+--[[
 nvim_lsp.sumneko_lua.setup {
     cmd = {"/usr/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua"},
     on_attach = on_attach,
@@ -152,6 +152,42 @@ nvim_lsp.sumneko_lua.setup {
         }
     }
 }
+]]
+
+--------------------------------------------------------------------------------
+--                         lua for plugin development                         --
+--------------------------------------------------------------------------------
+
+local luadev = require("lua-dev").setup({
+    library = {vimruntime = true, types = true, plugins = true},
+    lspconfig = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = {"/usr/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua"},
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    -- Setup your lua path
+                    path = vim.split(package.path, ';')
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'}
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                    }
+                }
+            }
+        }
+    }
+})
+nvim_lsp.sumneko_lua.setup(luadev)
 
 --------------------------------------------------------------------------------
 --                                   bashls                                   --
@@ -273,14 +309,21 @@ require"lspconfig".efm.setup {
 --                                 sqls.nvim                                  --
 --------------------------------------------------------------------------------
 require'lspconfig'.sqls.setup {
-    on_attach = function(client)
-		on_attach(client)
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
         client.resolved_capabilities.execute_command = true
 
+        local function buf_set_keymap(...)
+            vim.api.nvim_buf_set_keymap(bufnr, ...)
+        end
+
+        buf_set_keymap('n', '<m-l>', '<plug>(sqls-execute-query)jj', {silent = true})
+        buf_set_keymap('n', '<s-m-l>', '<cmd>SqlsExecuteQuery<CR>', {silent = true})
+        -- connections config in ~/.config/sqls/config.yml
         require'sqls'.setup {
-            picker = 'telescope',
+            picker = 'telescope'
             -- settings = {
-                -- sqls = {connections = {{driver = 'mysql', dataSourceName = 'world:rajp@tcp(127.0.0.1:3306)/world'}}}
+            -- sqls = {connections = {{driver = 'mysql', dataSourceName = 'world:rajp@tcp(127.0.0.1:3306)/world'}}}
             -- }
         }
     end

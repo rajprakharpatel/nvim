@@ -55,7 +55,6 @@ cmp.setup {
 
             vim_item.menu = menu
             return vim_item
-            -- 暈
         end
     },
 

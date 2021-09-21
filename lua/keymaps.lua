@@ -154,3 +154,14 @@ map('n', '<space>t', '<cmd>Neomux<CR>', {noremap = true})
 
 -- Neoclip
 map('n', "<space>'", "<cmd> lua require('telescope').extensions.neoclip.default()<CR>", {noremap = true})
+
+-- change split orientation
+map('n', '<space><s-h>', '<C-w>t<C-w>K', {noremap = true})
+map('n', '<space><s-k>', '<C-w>t<C-w>H', {noremap = true})
+map('n', '<m-v>', '<cmd>vsplit<cr>', {noremap = true})
+map('n', '<m-s>', '<cmd>split<cr>', {noremap = true})
+map('n', '<m-q>', '<cmd>quit<cr>', {noremap = true})
+
+-- wandbox.nvim in development
+vim.cmd([[nnoremap <Plug>WandboxRun <cmd>lua require("wandbox").test()<CR>]])
+map('n', '<space>wt', '<Plug>WandboxRun', {noremap = false})

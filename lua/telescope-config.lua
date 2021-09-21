@@ -12,9 +12,9 @@ require('telescope').setup {
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        -- file_sorter = require'telescope.sorters'.get_fuzzy_file,
+        file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
-        -- generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+        generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
         -- path_display = {"shorten", "absolute"},
         winblend = 30,
         border = {},
@@ -63,7 +63,7 @@ map('n', '<space>br',
     {noremap = true})
 map('n', '<c-p>', '<cmd>lua require(\'telescope.builtin\').find_files(require(\'telescope.themes\').get_ivy())<cr>',
     {noremap = true})
-map('n', '<space>g',
+map('n', '<space>gr',
     '<cmd>lua require(\'telescope.builtin\').live_grep(require(\'telescope.themes\').get_dropdown())<cr>',
     {noremap = true})
 map('n', '<space>bb',

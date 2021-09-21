@@ -48,21 +48,67 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- visual Plugins
-    use 'marko-cerovac/material.nvim'
+    -- colorschemes
+    use {
+        'marko-cerovac/material.nvim',
+        cmd = 'colo material',
+        config = function()
+            vim.g.material_style = 'deep ocean'
+            require("material").setup({
+                contrast = true,
+                borders = true,
+                italics = {comments = true, strings = false, Keywords = true, fisnctions = false, variables = true},
+                contrast_windows = {"terminal", "packer", "qf", "NvimTree"},
+                text_contrast = {lighter = false, darker = false},
+                disable = {background = false, term_colors = false, eob_lines = true}
+            })
+            vim.g.material_variable_color = "#d17CB4"
+
+            vim.api.nvim_set_keymap('n', '<leader>ml',
+                                    [[<Cmd>lua require('material.functions').change_style('lighter')<CR>]],
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap('n', '<leader>md',
+                                    [[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
+                                    {noremap = true, silent = true})
+
+            vim.api.nvim_set_keymap('n', '<leader>~', ":lua require('material.functions').toggle_eob()<CR>",
+                                    {noremap = true})
+        end
+    }
+    use {'projekt0n/github-nvim-theme', cmd = 'colo github'}
     use 'bluz71/vim-nightfly-guicolors'
-    use 'kristijanhusak/vim-hybrid-material'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'TaDaa/vimade'
-    use {"Pocco81/TrueZen.nvim", opt = true, cmd = {'TZMinimalist', 'TZFocus', 'TZAtaraxis'}}
+    use {'kristijanhusak/vim-hybrid-material', cmd = {'colo hybrid_material', 'colo hybrid_reverse'}}
+    use {"savq/melange", cmd = 'colo melange'}
+    use {'sainnhe/gruvbox-material', cmd = 'colo gruvbox-material'}
+    use {'sainnhe/sonokai', cmd = 'colo sonokai'}
+    use {'tanvirtin/monokai.nvim', cmd = 'colo monokai'}
+    use {'ChristianChiarulli/nvcode-color-schemes.vim', cmd = {'colo gruvbox', 'colo nvcode', 'colo aurora'}}
+    use {'tiagovla/tokyodark.nvim', cmd = 'colo tokyodark'}
+    use {
+        'xiyaowong/nvim-transparent',
+        config = function()
+            require("transparent").setup({enable = true})
+        end
+    } -- make any colorschemme transparent
+    use {
+        'sainnhe/everforest',
+        cmd = 'colo everforest',
+        config = function()
+            vim.g.everforest_background = 'hard'
+        end
+    }
     use {
         "folke/twilight.nvim",
-        opt = true,
-        cmd = 'twilight',
+        cmd = 'colo twilight',
         config = function()
             require("twilight").setup {}
         end
     }
+
+    -- visual Plugins
+    use 'norcalli/nvim-colorizer.lua'
+    use 'TaDaa/vimade'
+    use {"Pocco81/TrueZen.nvim", opt = true, cmd = {'TZMinimalist', 'TZFocus', 'TZAtaraxis'}}
     use {
         'edluffy/specs.nvim',
         config = function()
@@ -86,13 +132,34 @@ return require('packer').startup(function(use)
     }
     use {'joeytwiddle/sexy_scroller.vim', disable = true}
     use {'folke/lsp-colors.nvim', disable = true}
-    use {'wfxr/minimap.vim', opt = true, run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
-    -- use 'tanvirtin/monokai.nvim'
-    -- use 'ChristianChiarulli/nvcode-color-schemes.vim'
-    -- use 'tiagovla/tokyodark.nvim'
-    -- use 'xiyaowong/nvim-transparent' -- make any colorschemme transparent
-    -- use 'jbyuki/venn.nvim' -- Draw Ascii flow chart in vim
-    -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
+    use {'wfxr/minimap.vim', run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
+    use {
+        'jbyuki/venn.nvim', -- Draw Ascii flow chart in vim
+        cmd = 'Venn',
+        config = function()
+            -- enable or disable keymappings for venn
+            function _G.toggle_venn()
+                local venn_enabled = vim.inspect(vim.b.venn_enabled)
+                if (venn_enabled == "nil") then
+                    vim.b.venn_enabled = true
+                    vim.cmd [[setlocal ve=all]]
+                    -- draw a line on HJKL keystokes
+                    vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<cr>", {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<cr>", {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<cr>", {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<cr>", {noremap = true})
+                    -- draw a box by pressing "f" with visual selection
+                    vim.api.nvim_buf_set_keymap(0, "vt", "f", ":VBox<cr>", {noremap = true})
+                else
+                    vim.cmd [[setlocal ve=]]
+                    vim.cmd [[mapclear <buffer>]]
+                    vim.b.venn_enabled = nil
+                end
+            end
+            -- toggle keymappings for venn using <leader>v
+            vim.api.nvim_set_keymap('n', '<leader>v', ":lua toggle_venn()<cr>", {noremap = true})
+        end
+    } -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     -- use 'notomo/gesture.nvim'
     -- use 'cossonleo/neo-smooth-scroll.nvim'
 
@@ -106,7 +173,6 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter' -- automatically sets project directory using rules in vimrc
-    -- use 'Raimondi/delimitMate' -- TODO
     use {'andymass/vim-matchup', event = 'VimEnter'}
     use 'AndrewRadev/switch.vim' -- Switch counter values easily
     use 'MattesGroeger/vim-bookmarks'
@@ -281,7 +347,8 @@ return require('packer').startup(function(use)
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
             "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'}, "quangnguyen30192/cmp-nvim-ultisnips",
-            {"kristijanhusak/vim-dadbod-completion"}, {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
+            {"kristijanhusak/vim-dadbod-completion", ft = {'sql', 'mysql'}},
+            {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
         },
         config = function()
             require 'nvim-cmp'
@@ -349,13 +416,14 @@ return require('packer').startup(function(use)
     -- Status Line and Bufferline
     use {
         'glepnir/galaxyline.nvim',
-        opt = true,
+        opt = false,
         config = function()
             require('nv-galaxyline')
         end
     }
     use {
         'windwp/windline.nvim',
+        opt = true,
         config = function()
             require('wlsample.evil_line')
         end
@@ -402,8 +470,15 @@ return require('packer').startup(function(use)
 
     -- Experimenting
     use {'dag/vim-fish', ft = 'fish'}
-    -- use {'tpope/vim-dadbod', cmd = 'DB'}
-    use {'kristijanhusak/vim-dadbod-ui', cmd = 'DBUI', requires = 'tpope/vim-dadbod'}
+    use {'tpope/vim-dadbod', cmd = 'DB'}
+    use {
+        'kristijanhusak/vim-dadbod-ui',
+        cmd = 'DBUI',
+        config = function()
+            vim.cmd([[packadd vim-dadbod]])
+            vim.g.db_ui_auto_execute_table_helpers = 1
+        end
+    }
     use {
         "folke/which-key.nvim",
         config = function()
@@ -420,6 +495,7 @@ return require('packer').startup(function(use)
     use {'nanotee/sqls.nvim'}
     use {
         'lukas-reineke/headlines.nvim',
+        ft = {'orgmode', 'rmd', 'markdown', 'vimwiki'},
         config = function()
             require('headlines').setup()
         end
@@ -435,4 +511,11 @@ return require('packer').startup(function(use)
         end
     }
     use {'tpope/vim-unimpaired'} -- various useful [<key>,]<key> mappings
+    use {'dhruvasagar/vim-table-mode', cmd = 'TableModeToggle'}
+
+    -- Plugin development
+    use {"~/workspace/wandbox.nvim"}
+    use "folke/lua-dev.nvim"
+    use "rafcamlet/nvim-luapad"
+    use_rocks {'luasocket'}
 end)
