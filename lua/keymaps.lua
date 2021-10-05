@@ -162,6 +162,3 @@ map('n', '<m-v>', '<cmd>vsplit<cr>', {noremap = true})
 map('n', '<m-s>', '<cmd>split<cr>', {noremap = true})
 map('n', '<m-q>', '<cmd>quit<cr>', {noremap = true})
 
--- wandbox.nvim in development
-vim.cmd([[nnoremap <Plug>WandboxRun <cmd>lua require("wandbox").test()<CR>]])
-map('n', '<space>wt', '<Plug>WandboxRun', {noremap = false})

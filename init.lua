@@ -1,4 +1,4 @@
-STime = os.time()
+STime = vim.fn.localtime()
 vim.cmd([[let $GIT_EDITOR = 'nvr -cc split --remote-wait']])
 ------------------------------------------------------------------------
 --                              modules                               --
@@ -141,7 +141,7 @@ function _G.loadrequire(module)
         require(module)
 				print("Module Loaded")
     end
-    res = pcall(requiref,module)
+    local res = pcall(requiref,module)
     if not(res) then
 			print("Module not found")
     end
@@ -184,7 +184,7 @@ define_augroups({
     _lua = {{'FileType', 'lua,java,python', 'set ts=4 | set sw=4'}},
     _gitFiles = {{'FileType', 'gitcommit,gitrebase,gitconfig', 'set bufhidden=delete'}},
     _commentToggling = {
-        {'FileType', 'c,java,cpp,json,scala,jsonc,groovy', "let b:comment_leader = '//'"},
+        {'FileType', 'c,java,cpp,json,scala,jsonc,groovy,typescript,typescriptreact,javascript,javascriptreact', "let b:comment_leader = '//'"},
         {'FileType', 'sh,ruby,python,cmake,ps1,conf,fstab,yaml,fish,toml,dosini', "let b:comment_leader = '#'"},
         {'FileType', 'tex', "let b:comment_leader = '%'"}, {'FileType', 'mail', "let b:comment_leader = '>'"},
         {'FileType', 'lua,mysql', "let b:comment_leader = '--'"}, {'FileType', 'vim', [[let b:comment_leader = '"']]},

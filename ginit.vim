@@ -3,8 +3,8 @@
 """""""""""""
 
 let g:neovide_refresh_rate=120
-let g:neovide_transparency=0.87
-let g:neovide_cursor_animation_length=0.2
+let g:neovide_transparency=0.8
+let g:neovide_cursor_animation_length=0.87
 let g:neovide_cursor_trail_length=0.8
 let g:neovide_cursor_antialiasing=v:true
 let g:neovide_cursor_vfx_mode = "railgun" "torpedo, pixiedust, wireframe, sonicboom, ripple

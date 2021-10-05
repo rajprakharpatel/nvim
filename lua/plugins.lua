@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim'
     use {
-		opt = true,
+        opt = false,
         'lewis6991/impatient.nvim',
         rocks = 'mpack',
         config = function()
@@ -344,7 +344,7 @@ return require('packer').startup(function(use)
     -- use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
     use {
         "hrsh7th/nvim-cmp",
-		branch = 'custom-menu',
+        branch = 'custom-menu',
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
@@ -454,7 +454,43 @@ return require('packer').startup(function(use)
     use {'windwp/nvim-ts-autotag', disable = true} -- Use treesitter to autoclose and autorename html tag
 
     -- Explorer
-    use 'kyazdani42/nvim-tree.lua'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        cmd = 'NvimTreeToggle',
+        config = function()
+            vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', 'log.json', '.root'}
+            vim.g.nvim_tree_auto_ignore_ft = {'dashboard', 'startify', 'quickfix'}
+            vim.g.nvim_tree_indent_markers = 1 -- "0 by default, this option shows indent markers when folders are open
+            local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+            local nvim_tree_bindings = {
+                {key = {"<CR>", "o", "l", "<2-LeftMouse>"}, cb = tree_cb("edit")},
+                {key = {"<1-RightMouse>", "<C-]>"}, cb = tree_cb("cd")}, {key = "<C-v>", cb = tree_cb("vsplit")},
+                {key = "<C-x>", cb = tree_cb("split")}, {key = "<C-t>", cb = tree_cb("tabnew")},
+                {key = "<", cb = tree_cb("prev_sibling")}, {key = ">", cb = tree_cb("next_sibling")},
+                {key = {"P", "h"}, cb = tree_cb("parent_node")}, {key = "h", cb = tree_cb("close_node")},
+                {key = "<S-CR>", cb = tree_cb("close_node")}, {key = "<Tab>", cb = tree_cb("preview")},
+                {key = "K", cb = tree_cb("first_sibling")}, {key = "J", cb = tree_cb("last_sibling")},
+                {key = "I", cb = tree_cb("toggle_ignored")}, {key = "H", cb = tree_cb("toggle_dotfiles")},
+                {key = "R", cb = tree_cb("refresh")}, {key = "a", cb = tree_cb("create")},
+                {key = "d", cb = tree_cb("remove")}, {key = "r", cb = tree_cb("rename")},
+                {key = "<C-r>", cb = tree_cb("full_rename")}, {key = "x", cb = tree_cb("cut")},
+                {key = "c", cb = tree_cb("copy")}, {key = "p", cb = tree_cb("paste")},
+                {key = "y", cb = tree_cb("copy_name")}, {key = "Y", cb = tree_cb("copy_path")},
+                {key = "gy", cb = tree_cb("copy_absolute_path")}, {key = "[c", cb = tree_cb("prev_git_item")},
+                {key = "]c", cb = tree_cb("next_git_item")}, {key = {"<BS>", "-"}, cb = tree_cb("dir_up")},
+                {key = "q", cb = tree_cb("close")}, {key = "g?", cb = tree_cb("toggle_help")}
+            }
+            require'nvim-tree'.setup({
+                auto_close = true,
+                hijack_cursor = true,
+                update_cwd = true,
+                lsp_diagnostics = true,
+                auto_resize = true
+                -- mappings = {custom_only = false, list = nvim_tree_bindings}
+            })
+        end
+    }
 
     -- Orgmmode and notetaking
     use {
@@ -504,7 +540,7 @@ return require('packer').startup(function(use)
     }
 
     -- :[range]Wandbox [--compiler={compiler}] [--options={options}] [--compiler-options={options}] [--file={file}] [--runtime-options] [--stdin] [--stdin-file={stdin-file}]
-    use {'rhysd/wandbox-vim', cmd = {'Wandbox', 'Quickrun', 'WandboxOptionList'}}
+    -- use {'rhysd/wandbox-vim', cmd = {'Wandbox', 'Quickrun', 'WandboxOptionList'}}
     -- Easier easyalign (omaps - gl<motion/object>key)
     use {
         'tommcdo/vim-lion',
@@ -516,8 +552,23 @@ return require('packer').startup(function(use)
     use {'dhruvasagar/vim-table-mode', cmd = 'TableModeToggle'}
 
     -- Plugin development
-    use {"~/workspace/wandbox.nvim"}
+    use {
+        "~/workspace/wandbox.nvim",
+        romcks = 'luasocket',
+        config = function()
+            require("wandbox").setup({client_list = {'curl'}})
+            vim.api.nvim_set_keymap('n', '<leader>wa', '<cmd>lua require("wandbox").run()<CR>', {noremap = true})
+        end
+    }
     use "folke/lua-dev.nvim"
     use "rafcamlet/nvim-luapad"
-    use_rocks {'luasocket'}
+    use {
+        "mattn/emmet-vim",
+        config = function()
+            vim.g.user_emmet_leader_key = '<spc>'
+
+        end
+    }
+-- 	use {'aurieh/discord.nvim'}
+	use 'andweeb/presence.nvim'
 end)
