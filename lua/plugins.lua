@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
     use 'zhimsel/vim-stay' -- make editing state persisitent
     use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
     use {'mhinz/vim-sayonara', cmd = "Sayonara"} -- close buffer only
-    use {'tpope/vim-abolish', opt = true, cmd = {'Abolish', 'Subvert'}} -- working with variants of word :- search, replace and changing case
+    use {'tpope/vim-abolish', opt = true, cmd = {'Abolish', 'Subvert'}} -- working with variants of word :- search, replace and changing cas
     use {
         'tpope/vim-dispatch',
         requires = 'radenling/vim-dispatch-neovim',
@@ -344,7 +344,6 @@ return require('packer').startup(function(use)
     -- use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
     use {
         "hrsh7th/nvim-cmp",
-        branch = 'custom-menu',
         requires = {
             {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
             "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
@@ -410,7 +409,11 @@ return require('packer').startup(function(use)
         end
     }
     use 'onsails/lspkind-nvim' -- vs-code like lsp suggestion kind symbols
-    use 'glepnir/lspsaga.nvim'
+	-- TODO: change back to glepnir version when it's fixed
+    use {'tami5/lspsaga.nvim',
+		config = function ()
+			require('lspsaga').init_lsp_saga()
+		end}
     use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
     use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
     -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
@@ -486,8 +489,8 @@ return require('packer').startup(function(use)
                 hijack_cursor = true,
                 update_cwd = true,
                 lsp_diagnostics = true,
-                auto_resize = true
-                -- mappings = {custom_only = false, list = nvim_tree_bindings}
+                auto_resize = true,
+                mappings = {custom_only = false, list = nvim_tree_bindings}
             })
         end
     }
@@ -569,6 +572,5 @@ return require('packer').startup(function(use)
 
         end
     }
--- 	use {'aurieh/discord.nvim'}
 	use 'andweeb/presence.nvim'
 end)
