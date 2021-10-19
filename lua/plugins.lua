@@ -3,7 +3,7 @@ local fn = vim.fn
 
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+    execute('!git clone httpg://github.com/wbthomason/packer.nvim ' .. install_path)
     execute 'packadd packer.nvim'
 end
 
@@ -409,11 +409,13 @@ return require('packer').startup(function(use)
         end
     }
     use 'onsails/lspkind-nvim' -- vs-code like lsp suggestion kind symbols
-	-- TODO: change back to glepnir version when it's fixed
-    use {'tami5/lspsaga.nvim',
-		config = function ()
-			require('lspsaga').init_lsp_saga()
-		end}
+    -- TODO: change back to glepnir version when it's fixed
+    use {
+        'tami5/lspsaga.nvim',
+        config = function()
+            require('lspsaga').init_lsp_saga()
+        end
+    }
     use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
     use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
     -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
@@ -509,7 +511,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Experimenting
+    -- Experimental
     use {'dag/vim-fish', ft = 'fish'}
     use {'tpope/vim-dadbod', cmd = 'DB'}
     use {
@@ -553,6 +555,20 @@ return require('packer').startup(function(use)
     }
     use {'tpope/vim-unimpaired'} -- various useful [<key>,]<key> mappings
     use {'dhruvasagar/vim-table-mode', cmd = 'TableModeToggle'}
+    use 'andweeb/presence.nvim'
+    use {
+        'gelguy/wilder.nvim',
+        run = ':UpdateRemotePlugins',
+        requires = {'romgrk/fzy-lua-native'},
+        config = function()
+        end
+    }
+    use {
+        "luukvbaal/stabilize.nvim",
+        config = function()
+            require("stabilize").setup()
+        end
+    }
 
     -- Plugin development
     use {
@@ -572,5 +588,4 @@ return require('packer').startup(function(use)
 
         end
     }
-	use 'andweeb/presence.nvim'
 end)
