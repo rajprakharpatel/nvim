@@ -1,10 +1,11 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
-
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone httpg://github.com/wbthomason/packer.nvim ' .. install_path)
-    execute 'packadd packer.nvim'
+    packer_bootstrap = fn.system({
+        'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path
+    })
+    vim.cmd('packadd packer.nvim')
 end
 
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
@@ -27,7 +28,7 @@ return require('packer').startup(function(use)
     use {'mbbill/undotree', opt = true, cmd = 'UndotreeToggle'} -- Undo history like a git tree
 
     -- pure vim/lua scripts with no dependencies
-    use 'zhimsel/vim-stay' -- make editing state persisitent
+    use {'zhimsel/vim-stay'} -- make editing state persisitent
     use 'wsdjeg/vim-fetch' -- fetch line and column if given with filename
     use {'mhinz/vim-sayonara', cmd = "Sayonara"} -- close buffer only
     use {'tpope/vim-abolish', opt = true, cmd = {'Abolish', 'Subvert'}} -- working with variants of word :- search, replace and changing cas
@@ -417,7 +418,7 @@ return require('packer').startup(function(use)
         end
     }
     use {'kabouzeid/nvim-lspinstall', cmd = 'LspInstall'}
-    use {'folke/lsp-trouble.nvim', cmd = 'Trouble'}
+    use {'folke/lsp-trouble.nvim', disable = true, cmd = 'Trouble'}
     -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}} -- pre-configuration on top of lspconfig
 
     -- Status Line and Bufferline
@@ -559,14 +560,28 @@ return require('packer').startup(function(use)
     use {
         'gelguy/wilder.nvim',
         run = ':UpdateRemotePlugins',
-        requires = {'romgrk/fzy-lua-native'},
+        requires = {'romgrk/fzy-lua-native', {'nixprime/cpsm', run = './install.sh'}},
         config = function()
         end
     }
     use {
         "luukvbaal/stabilize.nvim",
+        disable = true,
         config = function()
             require("stabilize").setup()
+        end
+    }
+    use {
+        "mattn/emmet-vim",
+        config = function()
+            vim.g.user_emmet_leader_key = '<spc>'
+
+        end
+    }
+    use {
+        'rcarriga/nvim-notify',
+        config = function()
+            require("notify").setup({timeout = 3000, background_colour = "#000000"})
         end
     }
 
@@ -581,11 +596,6 @@ return require('packer').startup(function(use)
     }
     use "folke/lua-dev.nvim"
     use "rafcamlet/nvim-luapad"
-    use {
-        "mattn/emmet-vim",
-        config = function()
-            vim.g.user_emmet_leader_key = '<spc>'
-
-        end
-    }
+    use 'rhysd/wandbox-vim'
+    if packer_bootstrap then require('packer').sync() end
 end)

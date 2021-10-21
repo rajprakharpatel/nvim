@@ -73,6 +73,9 @@ map('n', '<F5>', ':checktime<CR>', {noremap = true})
 vim.cmd('command! Q :Sayonara!')
 -- Add semicolon to end of line with <;>
 map('n', ';', 'A;<esc>', {noremap = true})
+-- clear quickfixlist
+vim.cmd("command! ClearQuickfixList cexpr []")
+map('n', '<leader>cf', '<cmd>ClearQuickfixList<CR>', {noremap = true})
 
 -- CommentToggle
 vim.cmd([[
