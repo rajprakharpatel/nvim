@@ -1,9 +1,11 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') ..
+                         '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({
-        'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path
+        'git', 'clone', '--depth', '1',
+        'https://github.com/wbthomason/packer.nvim', install_path
     })
     vim.cmd('packadd packer.nvim')
 end
@@ -59,10 +61,20 @@ return require('packer').startup(function(use)
             require("material").setup({
                 contrast = true,
                 borders = true,
-                italics = {comments = true, strings = false, Keywords = true, fisnctions = false, variables = true},
+                italics = {
+                    comments = true,
+                    strings = false,
+                    Keywords = true,
+                    fisnctions = false,
+                    variables = true
+                },
                 contrast_windows = {"terminal", "packer", "qf", "NvimTree"},
                 text_contrast = {lighter = false, darker = false},
-                disable = {background = false, term_colors = false, eob_lines = true}
+                disable = {
+                    background = false,
+                    term_colors = false,
+                    eob_lines = true
+                }
             })
             vim.g.material_variable_color = "#d17CB4"
 
@@ -73,18 +85,25 @@ return require('packer').startup(function(use)
                                     [[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
                                     {noremap = true, silent = true})
 
-            vim.api.nvim_set_keymap('n', '<leader>~', ":lua require('material.functions').toggle_eob()<CR>",
+            vim.api.nvim_set_keymap('n', '<leader>~',
+                                    ":lua require('material.functions').toggle_eob()<CR>",
                                     {noremap = true})
         end
     }
     use {'projekt0n/github-nvim-theme', cmd = 'colo github'}
     use 'bluz71/vim-nightfly-guicolors'
-    use {'kristijanhusak/vim-hybrid-material', cmd = {'colo hybrid_material', 'colo hybrid_reverse'}}
+    use {
+        'kristijanhusak/vim-hybrid-material',
+        cmd = {'colo hybrid_material', 'colo hybrid_reverse'}
+    }
     use {"savq/melange", cmd = 'colo melange'}
     use {'sainnhe/gruvbox-material', cmd = 'colo gruvbox-material'}
     use {'sainnhe/sonokai', cmd = 'colo sonokai'}
     use {'tanvirtin/monokai.nvim', cmd = 'colo monokai'}
-    use {'ChristianChiarulli/nvcode-color-schemes.vim', cmd = {'colo gruvbox', 'colo nvcode', 'colo aurora'}}
+    use {
+        'ChristianChiarulli/nvcode-color-schemes.vim',
+        cmd = {'colo gruvbox', 'colo nvcode', 'colo aurora'}
+    }
     use {'tiagovla/tokyodark.nvim', cmd = 'colo tokyodark'}
     use {
         'xiyaowong/nvim-transparent',
@@ -110,7 +129,11 @@ return require('packer').startup(function(use)
     -- visual Plugins
     use 'norcalli/nvim-colorizer.lua'
     use 'TaDaa/vimade'
-    use {"Pocco81/TrueZen.nvim", opt = true, cmd = {'TZMinimalist', 'TZFocus', 'TZAtaraxis'}}
+    use {
+        "Pocco81/TrueZen.nvim",
+        opt = true,
+        cmd = {'TZMinimalist', 'TZFocus', 'TZAtaraxis'}
+    }
     use {
         'edluffy/specs.nvim',
         config = function()
@@ -134,7 +157,11 @@ return require('packer').startup(function(use)
     }
     use {'joeytwiddle/sexy_scroller.vim', disable = true}
     use {'folke/lsp-colors.nvim', disable = true}
-    use {'wfxr/minimap.vim', run = 'cargo install --locked code-minimap', cmd = 'Minimap'}
+    use {
+        'wfxr/minimap.vim',
+        run = 'cargo install --locked code-minimap',
+        cmd = 'Minimap'
+    }
     use {
         'jbyuki/venn.nvim', -- Draw Ascii flow chart in vim
         cmd = 'Venn',
@@ -146,12 +173,17 @@ return require('packer').startup(function(use)
                     vim.b.venn_enabled = true
                     vim.cmd [[setlocal ve=all]]
                     -- draw a line on HJKL keystokes
-                    vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<cr>", {noremap = true})
-                    vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<cr>", {noremap = true})
-                    vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<cr>", {noremap = true})
-                    vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<cr>", {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<cr>",
+                                                {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<cr>",
+                                                {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<cr>",
+                                                {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<cr>",
+                                                {noremap = true})
                     -- draw a box by pressing "f" with visual selection
-                    vim.api.nvim_buf_set_keymap(0, "vt", "f", ":VBox<cr>", {noremap = true})
+                    vim.api.nvim_buf_set_keymap(0, "vt", "f", ":VBox<cr>",
+                                                {noremap = true})
                 else
                     vim.cmd [[setlocal ve=]]
                     vim.cmd [[mapclear <buffer>]]
@@ -159,7 +191,8 @@ return require('packer').startup(function(use)
                 end
             end
             -- toggle keymappings for venn using <leader>v
-            vim.api.nvim_set_keymap('n', '<leader>v', ":lua toggle_venn()<cr>", {noremap = true})
+            vim.api.nvim_set_keymap('n', '<leader>v', ":lua toggle_venn()<cr>",
+                                    {noremap = true})
         end
     } -- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
     -- use 'notomo/gesture.nvim'
@@ -301,7 +334,12 @@ return require('packer').startup(function(use)
         end
     }
     use {'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris'}
-    use {'michaelb/sniprun', opt = true, cmd = 'SnipRun', run = 'bash ./install.sh'}
+    use {
+        'michaelb/sniprun',
+        opt = true,
+        cmd = 'SnipRun',
+        run = 'bash ./install.sh'
+    }
 
     -- Debugging
     use {
@@ -327,7 +365,8 @@ return require('packer').startup(function(use)
         opt = true,
         after = 'nvim-dap',
         config = function()
-            require('dap-python').setup(vim.fn.stdpath('data') .. '/dapinstall/python_dbg/bin/python')
+            require('dap-python').setup(
+                vim.fn.stdpath('data') .. '/dapinstall/python_dbg/bin/python')
         end
     }
     use {
@@ -346,9 +385,12 @@ return require('packer').startup(function(use)
     use {
         "hrsh7th/nvim-cmp",
         requires = {
-            {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
-            "hrsh7th/vim-vsnip", "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc", "kdheepak/cmp-latex-symbols",
-            "hrsh7th/cmp-emoji", {"tzachar/cmp-tabnine", run = './install.sh'}, "quangnguyen30192/cmp-nvim-ultisnips",
+            {"hrsh7th/cmp-nvim-lua", ft = 'lua'}, "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/vim-vsnip",
+            "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc",
+            "kdheepak/cmp-latex-symbols", "hrsh7th/cmp-emoji",
+            {"tzachar/cmp-tabnine", run = './install.sh'},
+            "quangnguyen30192/cmp-nvim-ultisnips",
             {"kristijanhusak/vim-dadbod-completion", ft = {'sql', 'mysql'}},
             {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
         },
@@ -382,14 +424,18 @@ return require('packer').startup(function(use)
                 }
             })
 
-            require('nvim-treesitter.configs').setup {autopairs = {enable = true}}
+            require('nvim-treesitter.configs').setup {
+                autopairs = {enable = true}
+            }
 
             local ts_conds = require('nvim-autopairs.ts-conds')
 
             -- press % => %% is only inside comment or string
             npairs.add_rules({
-                Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string', 'comment'})),
-                Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
+                Rule("%", "%", "lua"):with_pair(
+                    ts_conds.is_ts_node({'string', 'comment'})),
+                Rule("$", "$", "lua"):with_pair(
+                    ts_conds.is_not_ts_node({'function'}))
             })
             -- put this to  setup function and press <a-e> to use fast_wrap
             npairs.setup({fast_wrap = {}})
@@ -452,7 +498,10 @@ return require('packer').startup(function(use)
         'simrat39/symbols-outline.nvim',
         cmd = 'SymbolsOutline',
         config = function()
-            require('symbols-outline').setup({highlight_hovered_items = true, show_guides = true})
+            require('symbols-outline').setup({
+                highlight_hovered_items = true,
+                show_guides = true
+            })
         end
     } -- :SymbolOutline
     use {'JoosepAlviste/nvim-ts-context-commentstring', disable = false}
@@ -465,27 +514,48 @@ return require('packer').startup(function(use)
         requires = 'kyazdani42/nvim-web-devicons',
         cmd = 'NvimTreeToggle',
         config = function()
-            vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', 'log.json', '.root'}
-            vim.g.nvim_tree_auto_ignore_ft = {'dashboard', 'startify', 'quickfix'}
+            vim.g.nvim_tree_ignore = {
+                '.git', 'node_modules', '.cache', 'log.json', '.root'
+            }
+            vim.g.nvim_tree_auto_ignore_ft = {
+                'dashboard', 'startify', 'quickfix'
+            }
             vim.g.nvim_tree_indent_markers = 1 -- "0 by default, this option shows indent markers when folders are open
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
             local nvim_tree_bindings = {
-                {key = {"<CR>", "o", "l", "<2-LeftMouse>"}, cb = tree_cb("edit")},
-                {key = {"<1-RightMouse>", "<C-]>"}, cb = tree_cb("cd")}, {key = "<C-v>", cb = tree_cb("vsplit")},
-                {key = "<C-x>", cb = tree_cb("split")}, {key = "<C-t>", cb = tree_cb("tabnew")},
-                {key = "<", cb = tree_cb("prev_sibling")}, {key = ">", cb = tree_cb("next_sibling")},
-                {key = {"P", "h"}, cb = tree_cb("parent_node")}, {key = "h", cb = tree_cb("close_node")},
-                {key = "<S-CR>", cb = tree_cb("close_node")}, {key = "<Tab>", cb = tree_cb("preview")},
-                {key = "K", cb = tree_cb("first_sibling")}, {key = "J", cb = tree_cb("last_sibling")},
-                {key = "I", cb = tree_cb("toggle_ignored")}, {key = "H", cb = tree_cb("toggle_dotfiles")},
-                {key = "R", cb = tree_cb("refresh")}, {key = "a", cb = tree_cb("create")},
-                {key = "d", cb = tree_cb("remove")}, {key = "r", cb = tree_cb("rename")},
-                {key = "<C-r>", cb = tree_cb("full_rename")}, {key = "x", cb = tree_cb("cut")},
-                {key = "c", cb = tree_cb("copy")}, {key = "p", cb = tree_cb("paste")},
-                {key = "y", cb = tree_cb("copy_name")}, {key = "Y", cb = tree_cb("copy_path")},
-                {key = "gy", cb = tree_cb("copy_absolute_path")}, {key = "[c", cb = tree_cb("prev_git_item")},
-                {key = "]c", cb = tree_cb("next_git_item")}, {key = {"<BS>", "-"}, cb = tree_cb("dir_up")},
-                {key = "q", cb = tree_cb("close")}, {key = "g?", cb = tree_cb("toggle_help")}
+                {
+                    key = {"<CR>", "o", "l", "<2-LeftMouse>"},
+                    cb = tree_cb("edit")
+                }, {key = {"<1-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
+                {key = "<C-v>", cb = tree_cb("vsplit")},
+                {key = "<C-x>", cb = tree_cb("split")},
+                {key = "<C-t>", cb = tree_cb("tabnew")},
+                {key = "<", cb = tree_cb("prev_sibling")},
+                {key = ">", cb = tree_cb("next_sibling")},
+                {key = {"P", "h"}, cb = tree_cb("parent_node")},
+                {key = "h", cb = tree_cb("close_node")},
+                {key = "<S-CR>", cb = tree_cb("close_node")},
+                {key = "<Tab>", cb = tree_cb("preview")},
+                {key = "K", cb = tree_cb("first_sibling")},
+                {key = "J", cb = tree_cb("last_sibling")},
+                {key = "I", cb = tree_cb("toggle_ignored")},
+                {key = "H", cb = tree_cb("toggle_dotfiles")},
+                {key = "R", cb = tree_cb("refresh")},
+                {key = "a", cb = tree_cb("create")},
+                {key = "d", cb = tree_cb("remove")},
+                {key = "r", cb = tree_cb("rename")},
+                {key = "<C-r>", cb = tree_cb("full_rename")},
+                {key = "x", cb = tree_cb("cut")},
+                {key = "c", cb = tree_cb("copy")},
+                {key = "p", cb = tree_cb("paste")},
+                {key = "y", cb = tree_cb("copy_name")},
+                {key = "Y", cb = tree_cb("copy_path")},
+                {key = "gy", cb = tree_cb("copy_absolute_path")},
+                {key = "[c", cb = tree_cb("prev_git_item")},
+                {key = "]c", cb = tree_cb("next_git_item")},
+                {key = {"<BS>", "-"}, cb = tree_cb("dir_up")},
+                {key = "q", cb = tree_cb("close")},
+                {key = "g?", cb = tree_cb("toggle_help")}
             }
             require'nvim-tree'.setup({
                 auto_close = true,
@@ -508,7 +578,10 @@ return require('packer').startup(function(use)
             end
         },
         config = function()
-            require('orgmode').setup {org_agenda_files = {'~/org/**/*'}, org_default_notes_file = '~/org/notes.org'}
+            require('orgmode').setup {
+                org_agenda_files = {'~/org/**/*'},
+                org_default_notes_file = '~/org/notes.org'
+            }
         end
     }
 
@@ -532,7 +605,15 @@ return require('packer').startup(function(use)
     use {
         "AckslD/nvim-neoclip.lua",
         config = function()
-            require("neoclip").setup({keys = {i = {select = '<CR>', paste = '<m-p>', pate_behind = '<m-k>'}}})
+            require("neoclip").setup({
+                keys = {
+                    i = {
+                        select = '<CR>',
+                        paste = '<m-p>',
+                        pate_behind = '<m-k>'
+                    }
+                }
+            })
         end
     }
     use {'seandewar/nvimesweeper', cmd = 'Nvimesweeper'}
@@ -560,7 +641,9 @@ return require('packer').startup(function(use)
     use {
         'gelguy/wilder.nvim',
         run = ':UpdateRemotePlugins',
-        requires = {'romgrk/fzy-lua-native', {'nixprime/cpsm', run = './install.sh'}},
+        requires = {
+            'romgrk/fzy-lua-native', {'nixprime/cpsm', run = './install.sh'}
+        },
         config = function()
         end
     }
@@ -581,21 +664,27 @@ return require('packer').startup(function(use)
     use {
         'rcarriga/nvim-notify',
         config = function()
-            require("notify").setup({timeout = 3000, background_colour = "#000000"})
+            require("notify").setup({
+                timeout = 3000,
+                background_colour = "#000000"
+            })
         end
     }
 
     -- Plugin development
     use {
         "~/workspace/wandbox.nvim",
+        disable = false,
         romcks = 'luasocket',
         config = function()
             require("wandbox").setup({client_list = {'curl'}})
-            vim.api.nvim_set_keymap('n', '<leader>wa', '<cmd>lua require("wandbox").run()<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('n', '<space>wa',
+                                    [[<cmd>lua require("wandbox").run({client_list = {'wget'}, open_qf = true})<CR>]],
+                                    {noremap = true})
         end
     }
     use "folke/lua-dev.nvim"
     use "rafcamlet/nvim-luapad"
-    use 'rhysd/wandbox-vim'
+    use {'rhysd/wandbox-vim', opt = true}
     if packer_bootstrap then require('packer').sync() end
 end)
