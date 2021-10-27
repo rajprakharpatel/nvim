@@ -1,3 +1,11 @@
 snippet map "map a key to command in nvim" b
 map('${1:n}', '$2', '$3', {noremap = ${4:true}})
 endsnippet
+
+snippet lv "local variable" b
+local ${1:variable} = ${2}
+endsnippet
+
+snippet r "return statement"
+return ${1:statement}
+endsnippet

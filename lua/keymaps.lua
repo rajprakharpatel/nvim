@@ -108,9 +108,10 @@ map('', '<leader>tr', ':hi Normal guibg=NONE ctermbg=NONE <bar> :set nocursorlin
 map('', '<leader>op', ':set background=dark <bar> :set cursorline <bar> :set colorcolumn=80<CR>', {noremap = true})
 
 -- Pack Install
-map('n', '<leader>pi', ':PackerInstall<cr>', {noremap = true})
-map('n', '<leader>ps', ':PackerSync<cr>', {noremap = true})
-map('n', '<leader>pc', ':PackerClean<cr>', {noremap = true})
+local pre_cmd =  '<cmd>source ' .. vim.fn.stdpath('config') .. '/lua/plugins.lua | '
+map('n', '<leader>pi', pre_cmd .. 'PackerInstall<cr>', {noremap = true})
+map('n', '<leader>ps', pre_cmd .. 'PackerSync<cr>', {noremap = true})
+map('n', '<leader>pc', pre_cmd .. 'PackerClean<cr>', {noremap = true})
 
 -- Symbols Outline
 map('n', '<F9>', ':SymbolsOutline<CR>', {noremap = true})

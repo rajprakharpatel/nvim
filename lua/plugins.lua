@@ -10,7 +10,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd('packadd packer.nvim')
 end
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+local plugins = vim.fn.stdpath('config').. '/lua/plugins.lua'
+vim.cmd('autocmd BufWritePost ' .. plugins .. ' PackerCompile') -- Auto compile when there are changes in plugins.lua
 
 -- require('packer').init({display = {non_interactive = true}})
 require('packer').init({display = {auto_clean = false}, transitive_opt = true})
@@ -55,7 +56,7 @@ return require('packer').startup(function(use)
     -- colorschemes
     use {
         'marko-cerovac/material.nvim',
-        cmd = 'colo material',
+        -- cmd = 'colo material',
         config = function()
             vim.g.material_style = 'deep ocean'
             require("material").setup({
@@ -91,7 +92,7 @@ return require('packer').startup(function(use)
         end
     }
     use {'projekt0n/github-nvim-theme', cmd = 'colo github'}
-    use 'bluz71/vim-nightfly-guicolors'
+    use {'bluz71/vim-nightfly-guicolors', cmd = 'colo nightfly'}
     use {
         'kristijanhusak/vim-hybrid-material',
         cmd = {'colo hybrid_material', 'colo hybrid_reverse'}
@@ -99,7 +100,7 @@ return require('packer').startup(function(use)
     use {"savq/melange", cmd = 'colo melange'}
     use {'sainnhe/gruvbox-material', cmd = 'colo gruvbox-material'}
     use {'sainnhe/sonokai', cmd = 'colo sonokai'}
-    use {'tanvirtin/monokai.nvim', cmd = 'colo monokai'}
+    use {'tanvirtin/monokai.nvim'}
     use {
         'ChristianChiarulli/nvcode-color-schemes.vim',
         cmd = {'colo gruvbox', 'colo nvcode', 'colo aurora'}
@@ -107,8 +108,9 @@ return require('packer').startup(function(use)
     use {'tiagovla/tokyodark.nvim', cmd = 'colo tokyodark'}
     use {
         'xiyaowong/nvim-transparent',
+		cmd = 'TransparentToggle',
         config = function()
-            require("transparent").setup({enable = true})
+            require("transparent").setup({enable = false})
         end
     } -- make any colorschemme transparent
     use {
@@ -208,7 +210,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'airblade/vim-rooter' -- automatically sets project directory using rules in vimrc
-    use {'andymass/vim-matchup', event = 'VimEnter'}
+    use {'andymass/vim-matchup', disable = false, event = 'VimEnter'}
     use 'AndrewRadev/switch.vim' -- Switch counter values easily
     use 'MattesGroeger/vim-bookmarks'
     use 'gennaro-tedesco/nvim-peekup' -- "" to open <ESC> to close
@@ -389,7 +391,7 @@ return require('packer').startup(function(use)
             "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/vim-vsnip",
             "hrsh7th/cmp-vsnip", "hrsh7th/cmp-calc",
             "kdheepak/cmp-latex-symbols", "hrsh7th/cmp-emoji",
-            {"tzachar/cmp-tabnine", run = './install.sh'},
+            {"tzachar/cmp-tabnine",disable = true, run = './install.sh'},
             "quangnguyen30192/cmp-nvim-ultisnips",
             {"kristijanhusak/vim-dadbod-completion", ft = {'sql', 'mysql'}},
             {"f3fora/cmp-nuspell", rocks = {'lua-nuspell'}} -- Install nuspell c++ library(sudo pacman -S nuspell)
@@ -515,7 +517,7 @@ return require('packer').startup(function(use)
         cmd = 'NvimTreeToggle',
         config = function()
             vim.g.nvim_tree_ignore = {
-                '.git', 'node_modules', '.cache', 'log.json', '.root'
+                '.git', '.github', '.cache', 'log.json', '.root'
             }
             vim.g.nvim_tree_auto_ignore_ft = {
                 'dashboard', 'startify', 'quickfix'
@@ -525,7 +527,7 @@ return require('packer').startup(function(use)
             local nvim_tree_bindings = {
                 {
                     key = {"<CR>", "o", "l", "<2-LeftMouse>"},
-                    cb = tree_cb("edit")
+                    cb = tree_cb("edit"), "n"
                 }, {key = {"<1-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
                 {key = "<C-v>", cb = tree_cb("vsplit")},
                 {key = "<C-x>", cb = tree_cb("split")},
@@ -561,9 +563,20 @@ return require('packer').startup(function(use)
                 auto_close = true,
                 hijack_cursor = true,
                 update_cwd = true,
-                lsp_diagnostics = true,
+				diagnostics = {
+					enable = true,
+					icons = {
+						hint = "",
+						info = "",
+						warning = "",
+						error = "",
+					}
+				},
                 auto_resize = true,
-                mappings = {custom_only = false, list = nvim_tree_bindings}
+                mappings = {custom_only = true, list = nvim_tree_bindings},
+				view = {
+					auto_resize = true,
+				}
             })
         end
     }
