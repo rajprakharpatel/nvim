@@ -11,7 +11,7 @@ vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/switch.vim")
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/wilder.vim")
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/init.vim")
 -- Lsp
-require("nv-globals")
+-- require("nv-globals")
 require("lsp_config")
 
 ------------------------------------------------------------------------

@@ -3,9 +3,9 @@ local map = vim.api.nvim_set_keymap
 -----------------
 --  undo-tree  --
 -----------------
-map('n', '<F7>', ':UndotreeToggle<cr>', {noremap = true})
+map("n", "<F7>", ":UndotreeToggle<cr>", { noremap = true })
 vim.bo.undofile = true
-vim.o.undodir = vim.fn.stdpath('data') .. "/shada/undo-dir"
+vim.o.undodir = vim.fn.stdpath("data") .. "/shada/undo-dir"
 
 -----------------
 --  Ultisnips  --
@@ -20,7 +20,7 @@ vim.g.UltiSnipsEditSplit = "vertical"
 ----------------
 --  vim-move  --
 ----------------
-vim.g.move_key_modifier = 'C'
+vim.g.move_key_modifier = "C"
 
 ------------------
 --  easy-align  --
@@ -33,7 +33,7 @@ vim.cmd("xmap ga <Plug>(EasyAlign)")
 ----------------
 --  vim-stay  --
 ----------------
-vim.cmd(':set viewoptions=cursor,folds,slash,unix')
+vim.cmd(":set viewoptions=cursor,folds,slash,unix")
 
 ----------------
 --  FastFold  --
@@ -71,16 +71,17 @@ vim.cmd("let g:matchup_matchparen_offscreen = {'method': 'popup'}")
 ----------------
 --  floaterm  --
 ----------------
-vim.g.floaterm_shell = 'fish'
+vim.g.floaterm_shell = "fish"
 -- vim.g.floaterm_wintype = 'normal'
 vim.cmd(
-    "let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']")
-vim.g.floaterm_open_command = 'vsplit'
-vim.g.floaterm_keymap_new = '<Leader>ft'
-vim.g.floaterm_keymap_prev = '<leader>fp'
-vim.g.floaterm_keymap_next = '<leader>fn'
-vim.g.floaterm_keymap_toggle = '<M-t>'
-vim.g.floaterm_keymap_kill = '<leader>fk'
+	"let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']"
+)
+vim.g.floaterm_open_command = "vsplit"
+vim.g.floaterm_keymap_new = "<Leader>ft"
+vim.g.floaterm_keymap_prev = "<leader>fp"
+vim.g.floaterm_keymap_next = "<leader>fn"
+vim.g.floaterm_keymap_toggle = "<M-t>"
+vim.g.floaterm_keymap_kill = "<leader>fk"
 -- Set floaterm window's background to black
 -- hi Floaterm guibg=black
 -- Set floating window border line color to cyan, and background to orange
@@ -96,55 +97,56 @@ vim.cmd("nmap <leader>lf <Plug>LfSplit")
 --  nvim-lsputils  --
 ---------------------
 vim.g.lsp_utils_location_opts = {
-    height = 24,
-    mode = 'split',
-    list = {border = true, numbering = true},
-    preview = {title = 'Location Preview', border = true}
+	height = 24,
+	mode = "split",
+	list = { border = true, numbering = true },
+	preview = { title = "Location Preview", border = true },
 }
 
 vim.g.lsp_utils_symbols_opts = {
-    height = 24,
-    mode = 'editor',
-    list = {border = true, numbering = false},
-    preview = {title = 'Symbols Preview', border = true},
-    prompt = {}
+	height = 24,
+	mode = "editor",
+	list = { border = true, numbering = false },
+	preview = { title = "Symbols Preview", border = true },
+	prompt = {},
 }
-vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
 
 -----------------
 --  dashboard  --
 -----------------
 vim.g.dashboard_custom_header = {
-    '$$\\   $$\\ $$$$$$$$\\  $$$$$$\\  $$\\    $$\\ $$$$$$\\ $$\\      $$\\ ',
-    '$$$\\  $$ |$$  _____|$$  __$$\\ $$ |   $$ |\\_$$  _|$$$\\    $$$ |',
-    '$$$$\\ $$ |$$ |      $$ /  $$ |$$ |   $$ |  $$ |  $$$$\\  $$$$ |',
-    '$$ $$\\$$ |$$$$$\\    $$ |  $$ |\\$$\\  $$  |  $$ |  $$\\$$\\$$ $$ |',
-    '$$ \\$$$$ |$$  __|   $$ |  $$ | \\$$\\$$  /   $$ |  $$ \\$$$  $$ |',
-    '$$ |\\$$$ |$$ |      $$ |  $$ |  \\$$$  /    $$ |  $$ |\\$  /$$ |',
-    '$$ | \\$$ |$$$$$$$$\\  $$$$$$  |   \\$  /   $$$$$$\\ $$ | \\_/ $$ |',
-    '\\__|  \\__|\\________| \\______/     \\_/    \\______|\\__|     \\__|'
+	"$$\\   $$\\ $$$$$$$$\\  $$$$$$\\  $$\\    $$\\ $$$$$$\\ $$\\      $$\\ ",
+	"$$$\\  $$ |$$  _____|$$  __$$\\ $$ |   $$ |\\_$$  _|$$$\\    $$$ |",
+	"$$$$\\ $$ |$$ |      $$ /  $$ |$$ |   $$ |  $$ |  $$$$\\  $$$$ |",
+	"$$ $$\\$$ |$$$$$\\    $$ |  $$ |\\$$\\  $$  |  $$ |  $$\\$$\\$$ $$ |",
+	"$$ \\$$$$ |$$  __|   $$ |  $$ | \\$$\\$$  /   $$ |  $$ \\$$$  $$ |",
+	"$$ |\\$$$ |$$ |      $$ |  $$ |  \\$$$  /    $$ |  $$ |\\$  /$$ |",
+	"$$ | \\$$ |$$$$$$$$\\  $$$$$$  |   \\$  /   $$$$$$\\ $$ | \\_/ $$ |",
+	"\\__|  \\__|\\________| \\______/     \\_/    \\______|\\__|     \\__|",
 }
-vim.g.dashboard_default_executive = 'telescope'
+vim.g.dashboard_default_executive = "telescope"
 
 vim.g.dashboard_custom_section = {
-    a = {description = {' Find File          '}, command = 'Telescope find_files'},
-    b = {description = {' Recently Used Files'}, command = 'Telescope oldfiles'},
-    c = {description = {' Load Last Session  '}, command = 'SessionLoad'},
-    d = {description = {' Find Word          '}, command = 'Telescope live_grep'},
-    e = {description = {' Marks              '}, command = 'Telescope marks'}
+	a = { description = { " Find File          " }, command = "Telescope find_files" },
+	b = { description = { " Recently Used Files" }, command = "Telescope oldfiles" },
+	c = { description = { " Load Last Session  " }, command = "SessionLoad" },
+	d = { description = { " Find Word          " }, command = "Telescope live_grep" },
+	e = { description = { " Marks              " }, command = "Telescope marks" },
 }
 -- vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
-vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
+vim.cmd("let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))")
 local time = vim.fn.localtime() - STime
-local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.." .. time ..
-               "..' seconds']"
+local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.."
+	.. time
+	.. "..' seconds']"
 -- vim.api.nvim_exec([[
 -- let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins ']
 -- ]], false)
@@ -158,9 +160,9 @@ vim.api.nvim_exec(st, false)
 --     book_marks = 'SPC f b'
 -- }
 -- find_history = 'SPC f h',
-vim.g.dashboard_session_directory = vim.fn.stdpath('cache') .. "/session"
-map('n', '<leader>ss', ':<c-u>SessionSave<cr>', {noremap = true})
-map('n', '<leader>sl', ':<c-u>SessionLoad<cr>', {noremap = true})
+vim.g.dashboard_session_directory = vim.fn.stdpath("cache") .. "/session"
+map("n", "<leader>ss", ":<c-u>SessionSave<cr>", { noremap = true })
+map("n", "<leader>sl", ":<c-u>SessionLoad<cr>", { noremap = true })
 vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2")
 
 --------------------
@@ -173,60 +175,77 @@ vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer
 ------------------
 --  treesitter  --
 ------------------
-local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.org = {
-    install_info = {
-        url = 'https://github.com/milisims/tree-sitter-org',
-        revision = 'main',
-        files = {'src/parser.c', 'src/scanner.cc'}
-    },
-    filetype = 'org'
+	install_info = {
+		url = "https://github.com/milisims/tree-sitter-org",
+		revision = "main",
+		files = { "src/parser.c", "src/scanner.cc" },
+	},
+	filetype = "org",
 }
 
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"c", "cpp", "java", "python", "json", "yaml", "vim", "org"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    highlight = {
-        enable = true, -- false will disable the whole extension
-        additional_vim_regex_highlighting = {'org'}
-    },
-    -- indent = {enable = true, disable = {"python", "html", "javascript"}},
-    indent = {enable = {"javascriptreact"}},
-    playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false -- Whether the query persists across vim sessions
-    },
-    autotag = {enable = true},
-    rainbow = {enable = true},
-    context_commentstring = {enable = true, config = {javascriptreact = {style_element = '{/*%s*/}'}}}
-    -- refactor = {highlight_definitions = {enable = true}}
-}
+require("nvim-treesitter.configs").setup({
+	ensure_installed = { "c", "cpp", "java", "python", "json", "yaml", "vim", "org" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	highlight = {
+		enable = true, -- false will disable the whole extension
+		additional_vim_regex_highlighting = { "org" },
+	},
+	-- indent = {enable = true, disable = {"python", "html", "javascript"}},
+	indent = { enable = { "javascriptreact" } },
+	playground = {
+		enable = true,
+		disable = {},
+		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+		persist_queries = false, -- Whether the query persists across vim sessions
+	},
+	autotag = { enable = true },
+	rainbow = { enable = true },
+	context_commentstring = { enable = true, config = { javascriptreact = { style_element = "{/*%s*/}" } } },
+	-- refactor = {highlight_definitions = {enable = true}}
+})
 
 -----------------------
-vim.g.indent_blankline_buftype_exclude = {'terminal'}
-vim.g.indent_blankline_filetype_exclude = {'help', 'startify', 'dashboard', 'packer', 'neogitstatus', 'qf'}
-vim.g.indent_blankline_char = '▏'
+vim.g.indent_blankline_buftype_exclude = { "terminal" }
+vim.g.indent_blankline_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "qf" }
+vim.g.indent_blankline_char = "▏"
 vim.g.indent_blankline_use_treesitter = true
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 vim.g.indent_blankline_show_current_context = true
 vim.g.indent_blankline_context_patterns = {
-    'class', 'return', 'function', 'method', '^if', '^while', 'jsx_element', '^for', '^object', '^table', 'block',
-    'arguments', 'if_statement', 'else_clause', 'jsx_element', 'jsx_self_closing_element', 'try_statement',
-    'catch_clause', 'import_statement', 'operation_type'
+	"class",
+	"return",
+	"function",
+	"method",
+	"^if",
+	"^while",
+	"jsx_element",
+	"^for",
+	"^object",
+	"^table",
+	"block",
+	"arguments",
+	"if_statement",
+	"else_clause",
+	"jsx_element",
+	"jsx_self_closing_element",
+	"try_statement",
+	"catch_clause",
+	"import_statement",
+	"operation_type",
 }
 
 --------------------------------------------------------------------------------
 --                                    Codi                                    --
 --------------------------------------------------------------------------------
 -- change the color
-vim.cmd('highlight CodiVirtualText guifg=cyan')
+vim.cmd("highlight CodiVirtualText guifg=cyan")
 vim.cmd([[let g:codi#virtual_text_prefix = "❯ "]])
 
 --------------------------------------------------------------------------------
 --                                  LspSaga                                   --
 --------------------------------------------------------------------------------
-local saga = require 'lspsaga'
+local saga = require("lspsaga")
 
 -- add your config value here
 -- default value
@@ -264,18 +283,18 @@ local saga = require 'lspsaga'
 -- like server_filetype_map = {metals = {'sbt', 'scala'}}
 -- server_filetype_map = {}
 
-saga.init_lsp_saga {
-    error_sign = '',
-    warn_sign = '',
-    finder_action_keys = {
-        open = 'o',
-        vsplit = 'v',
-        split = 's',
-        quit = 'q',
-        scroll_down = '<C-f>',
-        scroll_up = '<C-b>' -- quit can be a table
-    }
-}
+saga.init_lsp_saga({
+	error_sign = "",
+	warn_sign = "",
+	finder_action_keys = {
+		open = "o",
+		vsplit = "v",
+		split = "s",
+		quit = "q",
+		scroll_down = "<C-f>",
+		scroll_up = "<C-b>", -- quit can be a table
+	},
+})
 
 --------------------------------------------------------------------------------
 --                                lspkind-nvim                                --
@@ -312,41 +331,41 @@ saga.init_lsp_saga {
 --------------------------------------------------------------------------------
 -- Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 -- See https://github.com/hrsh7th/vim-vsnip/pull/50
-map('n', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
-map('x', '<M-s>', [[<Plug>(vsnip-select-text)]], {noremap = true})
-map('n', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
-map('x', '<M-S>', [[<Plug>(vsnip-cut-text)]], {noremap = true})
+map("n", "<M-s>", [[<Plug>(vsnip-select-text)]], { noremap = true })
+map("x", "<M-s>", [[<Plug>(vsnip-select-text)]], { noremap = true })
+map("n", "<M-S>", [[<Plug>(vsnip-cut-text)]], { noremap = true })
+map("x", "<M-S>", [[<Plug>(vsnip-cut-text)]], { noremap = true })
 
 --------------------------------------------------------------------------------
 --                                  gitsigns                                  --
 --------------------------------------------------------------------------------
-require('gitsigns').setup {
-    signs = {
-        add = {hl = 'GitSignsAdd', text = '+', linehl = 'GitSignsAddLn'},
-        change = {hl = 'GitSignsChange', text = '~', linehl = 'GitSignsChangeLn'},
-        delete = {hl = 'GitSignsDelete', text = '-', linehl = 'GitSignsDeleteLn'},
-        topdelete = {hl = 'GitSignsDelete', text = '﫧', linehl = 'GitSignsDeleteLn'},
-        changedelete = {hl = 'GitSignsChange', text = '*', linehl = 'GitSignsChangeLn'}
-    },
-    numhl = true,
-    linehl = false,
-    keymaps = {
-        -- Default keymap options
-        noremap = true,
-        buffer = true
-    },
-    watch_gitdir = {interval = 50},
-    current_line_blame = true,
-    sign_priority = 6,
-    update_debounce = 20,
-    status_formatter = nil -- Use default
-}
+require("gitsigns").setup({
+	signs = {
+		add = { hl = "GitSignsAdd", text = "+", linehl = "GitSignsAddLn" },
+		change = { hl = "GitSignsChange", text = "~", linehl = "GitSignsChangeLn" },
+		delete = { hl = "GitSignsDelete", text = "-", linehl = "GitSignsDeleteLn" },
+		topdelete = { hl = "GitSignsDelete", text = "﫧", linehl = "GitSignsDeleteLn" },
+		changedelete = { hl = "GitSignsChange", text = "*", linehl = "GitSignsChangeLn" },
+	},
+	numhl = true,
+	linehl = false,
+	keymaps = {
+		-- Default keymap options
+		noremap = true,
+		buffer = true,
+	},
+	watch_gitdir = { interval = 50 },
+	current_line_blame = true,
+	sign_priority = 6,
+	update_debounce = 20,
+	status_formatter = nil, -- Use default
+})
 
 --------------------------------------------------------------------------------
 --                               nvim-colorizer                               --
 --------------------------------------------------------------------------------
-vim.cmd [[set termguicolors]]
-require'colorizer'.setup()
+vim.cmd([[set termguicolors]])
+require("colorizer").setup()
 -- require'colorizer'.setup({
 --     RGB = true, -- #RGB hex codes
 --     RRGGBB = true, -- #RRGGBB hex codes
@@ -360,74 +379,87 @@ require'colorizer'.setup()
 --------------------------------------------------------------------------------
 --                                buffer-line                                 --
 --------------------------------------------------------------------------------
-require'bufferline'.setup {
-    options = {
-        view = "multiwindow",
-        numbers = function(opts)
-            return string.format('%s%s', opts.id, opts.raise(opts.ordinal))
-        end,
-        middle_mouse_command = "bdelete %d",
-        right_mouse_command = "vertical sbuffer %d",
-        buffer_close_icon = '',
-        modified_icon = '●',
-        close_icon = '',
-        left_trunc_marker = '',
-        right_trunc_marker = '',
-        max_name_length = 18,
-        max_prefix_length = 15, -- prefix used when a buffer is deduplicated
-        tab_size = 18,
-        diagnostics = "nvim_lsp",
-        ---@diagnostic disable-next-line: unused-local
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            if context.buffer:current() then return '' end
-            local s = ' '
-            for e, n in pairs(diagnostics_dict) do
-                local sym = e == "error" and " " or (e == "warning" and " " or "ℹ️")
-                s = s .. n .. sym
-            end
-            return s
-        end,
-        -- NOTE: this will be called a lot so don't do any heavy processing here
-        custom_filter = function(buf_number)
-            -- filter out filetypes you don't want to see
-            if vim.bo[buf_number].filetype ~= "dashboard" then return true end
-            -- filter out by buffer name
-            if vim.fn.bufname(buf_number) ~= "<nvimtree>" then return true end
-            -- filter out based on arbitrary rules
-            -- just return true if want to disable
-        end,
-        show_buffer_close_icons = true,
-        show_close_icon = false,
-        show_tab_indicators = true,
-        persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-        -- can also be a table containing 2 custom separators
-        -- [focused and unfocused]. eg: { '|', '|' }
-        separator_style = 'slant',
-        enforce_regular_tabs = false,
-        always_show_bufferline = true,
-        sort_by = 'relative_directory',
+require("bufferline").setup({
+	options = {
+		view = "multiwindow",
+		numbers = function(opts)
+			return string.format("%s%s", opts.id, opts.raise(opts.ordinal))
+		end,
+		middle_mouse_command = "bdelete %d",
+		right_mouse_command = "vertical sbuffer %d",
+		buffer_close_icon = "",
+		modified_icon = "●",
+		close_icon = "",
+		left_trunc_marker = "",
+		right_trunc_marker = "",
+		max_name_length = 18,
+		max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+		tab_size = 18,
+		diagnostics = "nvim_lsp",
+		---@diagnostic disable-next-line: unused-local
+		diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			if context.buffer:current() then
+				return ""
+			end
+			local s = " "
+			for e, n in pairs(diagnostics_dict) do
+				local sym = e == "error" and " " or (e == "warning" and " " or "ℹ️")
+				s = s .. n .. sym
+			end
+			return s
+		end,
+		-- NOTE: this will be called a lot so don't do any heavy processing here
+		custom_filter = function(buf_number)
+			-- filter out filetypes you don't want to see
+			if vim.bo[buf_number].filetype ~= "dashboard" then
+				return true
+			end
+			-- filter out by buffer name
+			if vim.fn.bufname(buf_number) ~= "<nvimtree>" then
+				return true
+			end
+			-- filter out based on arbitrary rules
+			-- just return true if want to disable
+		end,
+		show_buffer_close_icons = true,
+		show_close_icon = false,
+		show_tab_indicators = true,
+		persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+		-- can also be a table containing 2 custom separators
+		-- [focused and unfocused]. eg: { '|', '|' }
+		separator_style = "slant",
+		enforce_regular_tabs = false,
+		always_show_bufferline = true,
+		sort_by = "relative_directory",
 
-        custom_areas = {
-            right = function()
-                local result = {}
-                local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-                local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-                local info = vim.lsp.diagnostic.get_count(0, [[Information]])
-                local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+		custom_areas = {
+			right = function()
+				local result = {}
+				local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+				local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+				local info = vim.lsp.diagnostic.get_count(0, [[Information]])
+				local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
 
-                if error ~= 0 then table.insert(result, {text = "  " .. error, guifg = "#EC5241"}) end
+				if error ~= 0 then
+					table.insert(result, { text = "  " .. error, guifg = "#EC5241" })
+				end
 
-                if warning ~= 0 then table.insert(result, {text = "  " .. warning, guifg = "#EFB839"}) end
+				if warning ~= 0 then
+					table.insert(result, { text = "  " .. warning, guifg = "#EFB839" })
+				end
 
-                if hint ~= 0 then table.insert(result, {text = "  " .. hint, guifg = "#A3BA5E"}) end
+				if hint ~= 0 then
+					table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E" })
+				end
 
-                if info ~= 0 then table.insert(result, {text = "  " .. info, guifg = "#7EA9A7"}) end
-                return result
-            end
-        }
-
-    }
-}
+				if info ~= 0 then
+					table.insert(result, { text = "  " .. info, guifg = "#7EA9A7" })
+				end
+				return result
+			end,
+		},
+	},
+})
 
 ------------------
 --  vimspector  --
