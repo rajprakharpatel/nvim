@@ -79,8 +79,8 @@ local on_attach = function(client, bufnr)
 	-- only show diagnostic if cursor is over the area
 	buf_set_keymap("n", "<space>c", [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], opts)
 	-- jump diagnostic
-	buf_set_keymap("n", "[d", [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], opts)
-	buf_set_keymap("n", "]d", [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], opts)
+	buf_set_keymap("n", "[d", [[<cmd>:Lspsaga diagnostic_jump_prev<CR>]], opts)
+	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
 		buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)

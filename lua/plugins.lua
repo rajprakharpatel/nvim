@@ -634,7 +634,19 @@ return require("packer").startup({
 		use({
 			"folke/which-key.nvim",
 			config = function()
-				require("which-key").setup({})
+				require("which-key").setup({
+					plugins = {
+						spelling = {
+							enabled = true,
+							suggestions = 20,
+						},
+					},
+					key_labels = {
+						["<space>"] = "SPC",
+						["<cr>"] = "RET",
+						["<tab>"] = "TAB",
+					},
+				})
 			end,
 		})
 		use({

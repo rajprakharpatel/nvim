@@ -3,6 +3,7 @@ vim.cmd([[let $GIT_EDITOR = 'nvr -cc split --remote-wait']])
 ------------------------------------------------------------------------
 --                              modules                               --
 ------------------------------------------------------------------------
+require("whichkey")
 require("keymaps")
 -- require('plugins')
 require("plugin-configs")

@@ -155,7 +155,7 @@ augroup END
 ]])
 
 -- Org Notes
-map("n", "<space>n", ":e ~/org/notes.org<CR>", { noremap = true })
+-- map("n", "<space>n", ":e ~/org/notes.org<CR>", { noremap = true })
 
 -- Neomux
 map("n", "<space>tt", "<cmd>Neomux<CR>", { noremap = true })
