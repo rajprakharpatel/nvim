@@ -708,6 +708,8 @@ return require("packer").startup({
 		})
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "github/copilot.vim" })
+		use({ "nikvdp/ejs-syntax" })
+		-- 		use({ "folke/trouble.nvim" })
 
 		-- Plugin development
 		use({
