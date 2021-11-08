@@ -10,7 +10,7 @@ require("plugin-configs")
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/inc_easy_fuzzy.vim")
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/switch.vim")
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/wilder.vim")
-vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/init.vim")
+-- vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/init.vim")
 -- Lsp
 -- require("nv-globals")
 require("lsp_config")
@@ -20,7 +20,7 @@ require("lsp_config")
 ------------------------------------------------------------------------
 
 vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
-vim.cmd([[colo monokai_soda]])
+-- vim.cmd([[colo material]])
 vim.cmd([[set guifont=SauceCodePro\ Nerd\ Font:h11]])
 vim.cmd("set iskeyword+=-") -- treat dash separated words as a word text object
 vim.cmd([[set nu]])

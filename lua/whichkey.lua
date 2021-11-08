@@ -18,13 +18,37 @@ local pre_cmd = "<cmd>source " .. vim.fn.stdpath("config") .. "/lua/plugins.lua 
 -- Normal mode mappings with prefix space
 wk.register({
 
+	-- Files
+	f = {
+		name = "Files",
+		f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+		r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+		g = { "<cmd>Telescope git_files<cr>", "Git Files" },
+		c = {
+			function()
+				local yank = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+				vim.fn.setreg("+", yank)
+			end,
+			"Copy File Content",
+		},
+		y = {
+			function()
+				vim.fn.setreg("+", vim.fn.expand("%:p"))
+			end,
+			"Copy absolute path",
+		},
+		Y = {
+			function()
+				vim.fn.setreg("+", vim.fn.expand("%"))
+			end,
+			"Copy path from project root",
+		},
+	},
+
 	-- Telescope
 	t = {
 		name = "Telescope",
-		f = { "<cmd>Telescope find_files<cr>", "Find File" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-		g = { "<cmd>Telescope git_files<cr>", "Git Files" },
 		e = { "<cmd>Telescope file_browser<cr>", "File Explorer" },
 		s = { "<cmd>Telescope live_grep<cr>", "Grep String" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorschemes" },
@@ -39,19 +63,23 @@ wk.register({
 
 	-- Orgmode
 	o = {
-		name = "Orgmode",
-		n = { "<cmd>edit ~/org/notes.org<cr>" },
-	},
-
-	-- New
-	n = {
-		name = "New",
+		name = "Open",
+		n = { "<cmd>e ~/org/notes.org<cr>", "Notes" },
+		a = { "<cmd>lua require('orgmode').action('agenda.prompt')", "Org agenda" },
+		e = { "<cmd>NvimTreeToggle<cr>", "File Browser" },
+		c = { "<cmd>Cheat<cr>", "Cheatsheet" },
 		t = {
 			name = "terminal",
 			n = { "<cmd>Neomux<cr>", "Neomux Terminal" },
 			s = { "<cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>", "lspsaga terminal" },
 			f = { "<cmd>FloatermNew<cr>", "Floaterm" },
 		},
+	},
+
+	-- New
+	n = {
+		name = "New",
+		t = { "<cmd>lua require('orgmode').action('capture.prompt')<cr>", "Task" },
 	},
 
 	-- Modify
@@ -61,6 +89,7 @@ wk.register({
 
 	-- Plugin
 	p = {
+		name = "Plugins",
 		i = { pre_cmd .. "PackerInstall<cr>", "Install" },
 		s = { pre_cmd .. "PackerSync<cr>", "Sync" },
 		c = { pre_cmd .. "PackerClean<cr>", "Clean" },
@@ -69,7 +98,7 @@ wk.register({
 	-- Toggle/Switch
 	s = {
 		name = "Switch/Toggle",
-		t = { "<cmd>TransparentToggle", "Transparency" },
+		t = { "<cmd>TransparentToggle<cr>", "Transparency" },
 		H = { "<C-w>t<C-w>K", "Change split to horizontal" },
 		V = { "<C-w>t<C-w>H", "Change split to vertical" },
 	},

@@ -138,4 +138,4 @@ map(
 	"<cmd>lua require'telescope'.extensions.ultisnips.ultisnips(require('telescope.themes').get_dropdown())<cr>",
 	{ noremap = true }
 )
-map("n", "<space>o", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { noremap = true })
+-- map("n", "<space>o", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { noremap = true })
