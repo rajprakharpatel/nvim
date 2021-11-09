@@ -1,4 +1,5 @@
 local map = vim.api.nvim_set_keymap
+require "keymaps.whichkey"
 -- vim.g.mapleader = '\\'
 
 -- no hl
@@ -178,7 +179,7 @@ map(
 -- Pack Install
 local pre_cmd = "<cmd>source "
 	.. vim.fn.stdpath "config"
-	.. "/lua/plugins.lua | "
+	.. "/lua/plugin/init.lua | "
 map("n", "<leader>pi", pre_cmd .. "PackerInstall<cr>", { noremap = true })
 map("n", "<leader>ps", pre_cmd .. "PackerSync<cr>", { noremap = true })
 map("n", "<leader>pc", pre_cmd .. "PackerClean<cr>", { noremap = true })

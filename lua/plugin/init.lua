@@ -13,10 +13,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd "packadd packer.nvim"
 end
 
-local plugins = vim.fn.stdpath "config" .. "/lua/plugins.lua"
+local plugins = vim.fn.stdpath "config" .. "/lua/plugin/init.lua"
 vim.cmd("autocmd BufWritePost " .. plugins .. " PackerCompile") -- Auto compile when there are changes in plugins.lua
 
--- require('packer').init({display = {non_interactive = true}})
 require("packer").init {
 	display = { auto_clean = false },
 	transitive_opt = true,
@@ -33,7 +32,7 @@ return require("packer").startup {
 		}
 
 		-- Quality of life improvements
-		use { "mbbill/undotree", opt = true, cmd = "UndotreeToggle" }
+		use { "mbbill/undotree", disable = false, cmd = "UndotreeToggle" }
 
 		-- pure vim/lua scripts with no dependencies
 		use { "zhimsel/vim-stay" }
@@ -42,11 +41,12 @@ return require("packer").startup {
 		-- working with variants of word :- search, replace and changing cas
 		use {
 			"tpope/vim-abolish",
-			opt = true,
+			disable = false,
 			cmd = { "Abolish", "Subvert" },
 		}
 		use {
 			"tpope/vim-dispatch",
+			disable = false,
 			requires = "radenling/vim-dispatch-neovim",
 			cmd = {
 				"Dispatch",
@@ -57,14 +57,20 @@ return require("packer").startup {
 				"Start",
 			},
 		}
+
+		-- preview lines by :<num>
 		use {
 			"nacro90/numb.nvim",
+			disable = false,
 			config = function()
 				require("numb").setup()
 			end,
 		}
+
+		-- Automatically make dirs when opening new paths
 		use {
 			"jghauser/mkdir.nvim",
+			disable = false,
 			config = function()
 				require "mkdir"
 			end,
@@ -73,62 +79,17 @@ return require("packer").startup {
 		-- colorschemes
 		use {
 			"marko-cerovac/material.nvim",
+			disable = false,
 			-- cmd = 'colo material',
 			config = function()
-				vim.g.material_style = "deep ocean"
-				vim.cmd "colo material"
-				require("material").setup {
-					contrast = true,
-					borders = true,
-					italics = {
-						comments = true,
-						strings = true,
-						Keywords = true,
-						functions = true,
-						variables = true,
-					},
-					contrast_windows = {
-						"terminal",
-						"packer",
-						"qf",
-						"NvimTree",
-						"undotree",
-						"diff",
-					},
-					text_contrast = { lighter = false, darker = true },
-					disable = {
-						background = false,
-						term_colors = false,
-						eob_lines = false,
-					},
-				}
-				vim.g.material_variable_color = "#d17CB4"
-
-				vim.api.nvim_set_keymap(
-					"n",
-					"<leader>ml",
-					[[<Cmd>lua require('material.functions').change_style('lighter')<CR>]],
-					{ noremap = true, silent = true }
-				)
-				vim.api.nvim_set_keymap(
-					"n",
-					"<leader>md",
-					[[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
-					{ noremap = true, silent = true }
-				)
-
-				vim.api.nvim_set_keymap(
-					"n",
-					"<leader>~",
-					":lua require('material.functions').toggle_eob()<CR>",
-					{ noremap = true }
-				)
+				require "plugin.material"
 			end,
 		}
 		use { "projekt0n/github-nvim-theme", cmd = "colo github" }
 		use { "bluz71/vim-nightfly-guicolors", cmd = "colo nightfly" }
 		use {
 			"kristijanhusak/vim-hybrid-material",
+			disable = false,
 			cmd = { "colo hybrid_material", "colo hybrid_reverse" },
 		}
 		use { "savq/melange", cmd = "colo melange" }
@@ -137,11 +98,13 @@ return require("packer").startup {
 		use { "tanvirtin/monokai.nvim" }
 		use {
 			"ChristianChiarulli/nvcode-color-schemes.vim",
+			disable = false,
 			cmd = { "colo gruvbox", "colo nvcode", "colo aurora" },
 		}
 		use { "tiagovla/tokyodark.nvim", cmd = "colo tokyodark" }
 		use {
 			"xiyaowong/nvim-transparent",
+			disable = false,
 			cmd = "TransparentToggle",
 			config = function()
 				require("transparent").setup { enable = false }
@@ -149,6 +112,7 @@ return require("packer").startup {
 		}
 		use {
 			"sainnhe/everforest",
+			disable = false,
 			cmd = "colo everforest",
 			config = function()
 				vim.g.everforest_background = "hard"
@@ -156,6 +120,7 @@ return require("packer").startup {
 		}
 		use {
 			"folke/twilight.nvim",
+			disable = false,
 			cmd = "colo twilight",
 			config = function()
 				require("twilight").setup {}
@@ -167,100 +132,35 @@ return require("packer").startup {
 		use "TaDaa/vimade"
 		use {
 			"Pocco81/TrueZen.nvim",
-			opt = true,
+			disable = false,
 			cmd = { "TZMinimalist", "TZFocus", "TZAtaraxis" },
 		}
 		use {
 			"edluffy/specs.nvim",
+			disable = false,
 			config = function()
-				require("specs").setup {
-					show_jumps = true,
-					min_jump = 5,
-					popup = {
-						delay_ms = 0, -- delay before popup displays
-						inc_ms = 4, -- time increments used for fade/resize effects
-						blend = 20, -- starting blend, between 0-100 (fully transparent), see :h winblend
-						width = 50,
-						winhl = "PMenu",
-						fader = require("specs").linear_fader,
-						resizer = require("specs").shrink_resizer,
-					},
-					ignore_filetypes = {},
-					ignore_buftypes = { nofile = true },
-				}
+				require "plugin.specs"
 			end,
 		}
 		use { "joeytwiddle/sexy_scroller.vim", disable = true }
 		use { "folke/lsp-colors.nvim", disable = true }
 		use {
 			"wfxr/minimap.vim",
+			disable = false,
 			run = "cargo install --locked code-minimap",
 			cmd = "Minimap",
 		}
 		use {
 			"jbyuki/venn.nvim", -- Draw Ascii flow chart in vim
+			disable = false,
 			cmd = "Venn",
 			config = function()
-				-- enable or disable keymappings for venn
-				function _G.toggle_venn()
-					local venn_enabled = vim.inspect(vim.b.venn_enabled)
-					if venn_enabled == "nil" then
-						vim.b.venn_enabled = true
-						vim.cmd [[setlocal ve=all]]
-						-- draw a line on HJKL keystokes
-						vim.api.nvim_buf_set_keymap(
-							0,
-							"n",
-							"J",
-							"<C-v>j:VBox<cr>",
-							{ noremap = true }
-						)
-						vim.api.nvim_buf_set_keymap(
-							0,
-							"n",
-							"K",
-							"<C-v>k:VBox<cr>",
-							{ noremap = true }
-						)
-						vim.api.nvim_buf_set_keymap(
-							0,
-							"n",
-							"L",
-							"<C-v>l:VBox<cr>",
-							{ noremap = true }
-						)
-						vim.api.nvim_buf_set_keymap(
-							0,
-							"n",
-							"H",
-							"<C-v>h:VBox<cr>",
-							{ noremap = true }
-						)
-						-- draw a box by pressing "f" with visual selection
-						vim.api.nvim_buf_set_keymap(
-							0,
-							"vt",
-							"f",
-							":VBox<cr>",
-							{ noremap = true }
-						)
-					else
-						vim.cmd [[setlocal ve=]]
-						vim.cmd [[mapclear <buffer>]]
-						vim.b.venn_enabled = nil
-					end
-				end
-				-- toggle keymappings for venn using <leader>v
-				vim.api.nvim_set_keymap(
-					"n",
-					"<leader>v",
-					":lua toggle_venn()<cr>",
-					{ noremap = true }
-				)
+				require "plugin.venn"
 			end,
 		}
 		use {
 			"rcarriga/nvim-notify",
+			disable = false,
 			config = function()
 				require("notify").setup {
 					timeout = 3000,
@@ -283,7 +183,13 @@ return require("packer").startup {
 		use "tpope/vim-repeat"
 		use "airblade/vim-rooter"
 		use { "andymass/vim-matchup", disable = false, event = "VimEnter" }
-		use "AndrewRadev/switch.vim"
+		use {
+			"AndrewRadev/switch.vim",
+			disable = false,
+			config = function()
+				vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/switch.vim")
+			end,
+		}
 		use "MattesGroeger/vim-bookmarks"
 		use "gennaro-tedesco/nvim-peekup"
 		use { "sotte/presenting.vim", cmd = "PresentingStart" }
@@ -318,24 +224,38 @@ return require("packer").startup {
 		use "haya14busa/incsearch.vim"
 		use "haya14busa/incsearch-fuzzy.vim"
 		use "haya14busa/incsearch-easymotion.vim"
-		use "easymotion/vim-easymotion"
+		use {
+			"easymotion/vim-easymotion",
+			disable = false,
+			requires = {
+				"haya14busa/incsearch.vim",
+				"haya14busa/incsearch-fuzzy.vim",
+				"haya14busa/incsearch-easymotion.vim",
+			},
+			config = function()
+				vim.cmd(
+					"source " .. vim.fn.stdpath "config" .. "/viml/inc_easy_fuzzy.vim"
+				)
+			end,
+		}
 
 		-- Webdev
-		-- TODO add when i start webdev
 		-- use 'gennaro-tedesco/nvim-jqx'
-		-- use 'turbio/bracey.vim'
+		use "turbio/bracey.vim"
 
 		-- Telescope
 		use {
 			"nvim-telescope/telescope.nvim",
+			disable = false,
 			cmd = "Telescope",
 			requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
 			config = function()
-				require "telescope-config"
+				require "plugin.telescope"
 			end,
 		}
 		use {
 			"nvim-telescope/telescope-media-files.nvim",
+			disable = false,
 			after = "telescope.nvim",
 			-- requires = {'nvim-telescope/telescope.nvim'},
 			config = function()
@@ -344,10 +264,12 @@ return require("packer").startup {
 		}
 		use {
 			"nvim-telescope/telescope-symbols.nvim",
+			disable = false,
 			after = "telescope.nvim",
 		}
 		use {
 			"fhill2/telescope-ultisnips.nvim",
+			disable = false,
 			after = "telescope.nvim",
 			config = function()
 				require("telescope").load_extension "ultisnips"
@@ -355,6 +277,7 @@ return require("packer").startup {
 		}
 		use {
 			"gbrlsnchs/telescope-lsp-handlers.nvim",
+			disable = false,
 			after = "telescope.nvim",
 			config = function()
 				require("telescope").load_extension "lsp_handlers"
@@ -365,59 +288,23 @@ return require("packer").startup {
 		-- use 'TimUntersberger/neogit'
 		use {
 			"lewis6991/gitsigns.nvim",
+			disable = false,
 			requires = { "nvim-lua/plenary.nvim" },
 		}
 		use { "tpope/vim-fugitive", opt = true, cmd = "G" }
 		use { "tpope/vim-rhubarb", after = "vim-fugitive" }
 		use {
 			"sindrets/diffview.nvim",
-			opt = true,
+			disable = false,
 			cmd = "DiffviewOpen",
 			confog = function()
-				local cb = require("diffview.config").diffview_callback
-
-				require("diffview").setup {
-					diff_binaries = false, -- Show diffs for binaries
-					file_panel = {
-						width = 35,
-						use_icons = true, -- Requires nvim-web-devicons
-					},
-					key_bindings = {
-						disable_defaults = false, -- Disable the default key bindings
-						-- The `view` bindings are active in the diff buffers, only when the current
-						-- tabpage is a Diffview.
-						view = {
-							["<tab>"] = cb "select_next_entry", -- Open the diff for the next file
-							["<s-tab>"] = cb "select_prev_entry", -- Open the diff for the previous file
-							["<leader>e"] = cb "focus_files", -- Bring focus to the files panel
-							["<leader>b"] = cb "toggle_files", -- Toggle the files panel.
-						},
-						file_panel = {
-							["j"] = cb "next_entry", -- Bring the cursor to the next file entry
-							["<down>"] = cb "next_entry",
-							["k"] = cb "prev_entry", -- Bring the cursor to the previous file entry.
-							["<up>"] = cb "prev_entry",
-							["<cr>"] = cb "select_entry", -- Open the diff for the selected entry.
-							["o"] = cb "select_entry",
-							["<2-LeftMouse>"] = cb "select_entry",
-							["-"] = cb "toggle_stage_entry", -- Stage / unstage the selected entry.
-							["S"] = cb "stage_all", -- Stage all entries.
-							["U"] = cb "unstage_all", -- Unstage all entries.
-							["X"] = cb "restore_entry", -- Restore entry to the state on the left side.
-							["R"] = cb "refresh_files", -- Update stats and entries in the file list.
-							["<tab>"] = cb "select_next_entry",
-							["<s-tab>"] = cb "select_prev_entry",
-							["<leader>e"] = cb "focus_files",
-							["<leader>b"] = cb "toggle_files",
-						},
-					},
-				}
+				require "plugin.diffview"
 			end,
 		}
 		use { "alec-gibson/nvim-tetris", opt = true, cmd = "Tetris" }
 		use {
 			"michaelb/sniprun",
-			opt = true,
+			disable = false,
 			cmd = "SnipRun",
 			run = "bash ./install.sh",
 		}
@@ -425,17 +312,17 @@ return require("packer").startup {
 		-- Debugging
 		use {
 			"mfussenegger/nvim-dap",
-			opt = true,
+			disable = false,
 			cmd = "DAP",
 			config = function()
-				require "debugger-config"
+				require "debugger"
 			end,
 		}
 		use { "Pocco81/DAPInstall.nvim", opt = true, after = "nvim-dap" }
 		use {
 			"rcarriga/nvim-dap-ui",
+			disable = false,
 			requires = { "mfussenegger/nvim-dap" },
-			opt = true,
 			after = "nvim-dap",
 			config = function()
 				require("dapui").setup()
@@ -443,7 +330,7 @@ return require("packer").startup {
 		}
 		use {
 			"mfussenegger/nvim-dap-python",
-			opt = true,
+			disable = false,
 			after = "nvim-dap",
 			config = function()
 				require("dap-python").setup(
@@ -453,7 +340,7 @@ return require("packer").startup {
 		}
 		use {
 			"nvim-telescope/telescope-dap.nvim",
-			opt = true,
+			disable = false,
 			after = { "nvim-dap", "telescope.nvim" },
 			config = function()
 				require("telescope").load_extension "dap"
@@ -461,15 +348,15 @@ return require("packer").startup {
 		}
 		use {
 			"theHamsta/nvim-dap-virtual-text",
-			opt = true,
+			disable = false,
 			after = "nvim-dap",
 		}
 
 		-- Lsp & autocompletion
 		use { "mfussenegger/nvim-jdtls" }
-		-- use 'hrsh7th/nvim-compe' -- Completion plugin incompatible with endwise
 		use {
 			"hrsh7th/nvim-cmp",
+			disable = false,
 			requires = {
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua" },
 				"hrsh7th/cmp-buffer",
@@ -491,7 +378,7 @@ return require("packer").startup {
 				{ "f3fora/cmp-nuspell", rocks = { "lua-nuspell" } }, -- Install nuspell c++ library(sudo pacman -S nuspell)
 			},
 			config = function()
-				require "nvim-cmp"
+				require "completion"
 			end,
 		}
 
@@ -502,62 +389,16 @@ return require("packer").startup {
 		-- use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
 		use {
 			"windwp/nvim-autopairs",
+			disable = false,
 			config = function()
-				local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-				local cmp = require "cmp"
-				cmp.event:on(
-					"confirm_done",
-					cmp_autopairs.on_confirm_done { map_char = { tex = "" } }
-				)
-				local npairs = require "nvim-autopairs"
-				local Rule = require "nvim-autopairs.rule"
-				npairs.setup {
-					disable_in_macro = true,
-					map_c_w = true,
-					check_ts = true,
-					ts_config = {
-						lua = { "string" }, -- it will not add pair on that treesitter node
-						javascript = { "template_string" },
-						java = false, -- don't check treesitter on java
-					},
-				}
-
-				require("nvim-treesitter.configs").setup {
-					autopairs = { enable = true },
-				}
-
-				local ts_conds = require "nvim-autopairs.ts-conds"
-
-				-- press % => %% is only inside comment or string
-				npairs.add_rules {
-					Rule("%", "%", "lua"):with_pair(
-						ts_conds.is_ts_node { "string", "comment" }
-					),
-					Rule("$", "$", "lua"):with_pair(
-						ts_conds.is_not_ts_node { "function" }
-					),
-				}
-				-- put this to  setup function and press <a-e> to use fast_wrap
-				npairs.setup { fast_wrap = {} }
-
-				-- change default fast_wrap
-				npairs.setup {
-					fast_wrap = {
-						map = "<M-e>",
-						chars = { "{", "[", "(", '"', "'" },
-						pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-						end_key = "$",
-						keys = "qwertyuiopzxcvbnmasdfghjkl",
-						check_comma = true,
-						hightlight = "Search",
-					},
-				}
+				require "plugin.autopairs"
 			end,
 		}
 		use "onsails/lspkind-nvim"
 		-- TODO: change back to glepnir version when it's fixed
 		use {
 			"tami5/lspsaga.nvim",
+			disable = false,
 			config = function()
 				require("lspsaga").init_lsp_saga()
 			end,
@@ -565,21 +406,22 @@ return require("packer").startup {
 		use { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" }
 		use { "folke/lsp-trouble.nvim", disable = true, cmd = "Trouble" }
 
-		-- Status Line and Bufferline
+		-- Status Line
 		use {
 			"glepnir/galaxyline.nvim",
-			opt = false,
+			disable = true,
 			config = function()
-				require "nv-galaxyline"
+				require "plugin.galaxyline"
 			end,
 		}
 		use {
 			"windwp/windline.nvim",
-			opt = true,
+			disable = false,
 			config = function()
 				require "wlsample.evil_line"
 			end,
 		}
+		-- Bufferline
 		use "akinsho/nvim-bufferline.lua"
 
 		-- Icons
@@ -594,6 +436,7 @@ return require("packer").startup {
 		use "romgrk/nvim-treesitter-context"
 		use {
 			"simrat39/symbols-outline.nvim",
+			disable = false,
 			cmd = "SymbolsOutline",
 			config = function()
 				require("symbols-outline").setup {
@@ -609,91 +452,18 @@ return require("packer").startup {
 		-- Explorer
 		use {
 			"kyazdani42/nvim-tree.lua",
+			disable = false,
 			requires = "kyazdani42/nvim-web-devicons",
 			cmd = "NvimTreeToggle",
 			config = function()
-				vim.g.nvim_tree_ignore = {
-					".git",
-					".github",
-					".cache",
-					"log.json",
-					".root",
-				}
-				vim.g.nvim_tree_auto_ignore_ft = {
-					"dashboard",
-					"startify",
-					"quickfix",
-				}
-				vim.g.nvim_tree_indent_markers = 1 -- "0 by default, this option shows indent markers when folders are open
-				local tree_cb = require("nvim-tree.config").nvim_tree_callback
-				local nvim_tree_bindings = {
-					{
-						key = { "<CR>", "o", "l", "<2-LeftMouse>" },
-						cb = tree_cb "edit",
-						"n",
-					},
-					{
-						key = { "<1-RightMouse>", "<C-]>" },
-						cb = tree_cb "cd",
-					},
-					{ key = "<C-v>", cb = tree_cb "vsplit" },
-					{ key = "<C-x>", cb = tree_cb "split" },
-					{ key = "<C-t>", cb = tree_cb "tabnew" },
-					{ key = "<", cb = tree_cb "prev_sibling" },
-					{ key = ">", cb = tree_cb "next_sibling" },
-					{ key = { "P", "h" }, cb = tree_cb "parent_node" },
-					{ key = "h", cb = tree_cb "close_node" },
-					{ key = "<S-CR>", cb = tree_cb "close_node" },
-					{ key = "<Tab>", cb = tree_cb "preview" },
-					{ key = "K", cb = tree_cb "first_sibling" },
-					{ key = "J", cb = tree_cb "last_sibling" },
-					{ key = "I", cb = tree_cb "toggle_ignored" },
-					{ key = "H", cb = tree_cb "toggle_dotfiles" },
-					{ key = "R", cb = tree_cb "refresh" },
-					{ key = "a", cb = tree_cb "create" },
-					{ key = "d", cb = tree_cb "remove" },
-					{ key = "r", cb = tree_cb "rename" },
-					{ key = "<C-r>", cb = tree_cb "full_rename" },
-					{ key = "x", cb = tree_cb "cut" },
-					{ key = "c", cb = tree_cb "copy" },
-					{ key = "p", cb = tree_cb "paste" },
-					{ key = "y", cb = tree_cb "copy_name" },
-					{ key = "Y", cb = tree_cb "copy_path" },
-					{ key = "gy", cb = tree_cb "copy_absolute_path" },
-					{ key = "[c", cb = tree_cb "prev_git_item" },
-					{ key = "]c", cb = tree_cb "next_git_item" },
-					{ key = { "<BS>", "-" }, cb = tree_cb "dir_up" },
-					{ key = "q", cb = tree_cb "close" },
-					{ key = "g?", cb = tree_cb "toggle_help" },
-				}
-				require("nvim-tree").setup {
-					auto_close = true,
-					hijack_cursor = true,
-					update_cwd = true,
-					diagnostics = {
-						enable = true,
-						icons = {
-							hint = "",
-							info = "",
-							warning = "",
-							error = "",
-						},
-					},
-					auto_resize = true,
-					mappings = {
-						custom_only = true,
-						list = nvim_tree_bindings,
-					},
-					view = {
-						auto_resize = true,
-					},
-				}
+				require "plugin.nvimtree"
 			end,
 		}
 
 		-- Orgmmode and notetaking
 		use {
 			"kristijanhusak/orgmode.nvim",
+			disable = false,
 			requires = {
 				"akinsho/org-bullets.nvim",
 				config = function()
@@ -713,6 +483,7 @@ return require("packer").startup {
 		use { "tpope/vim-dadbod", cmd = "DB" }
 		use {
 			"kristijanhusak/vim-dadbod-ui",
+			disable = false,
 			cmd = "DBUI",
 			config = function()
 				vim.cmd [[packadd vim-dadbod]]
@@ -721,6 +492,7 @@ return require("packer").startup {
 		}
 		use {
 			"folke/which-key.nvim",
+			disable = false,
 			config = function()
 				require("which-key").setup {
 					plugins = {
@@ -739,6 +511,7 @@ return require("packer").startup {
 		}
 		use {
 			"AckslD/nvim-neoclip.lua",
+			disable = false,
 			config = function()
 				require("neoclip").setup {
 					keys = {
@@ -755,6 +528,7 @@ return require("packer").startup {
 		use { "nanotee/sqls.nvim" }
 		use {
 			"lukas-reineke/headlines.nvim",
+			disable = false,
 			ft = { "orgmode", "rmd", "markdown", "vimwiki" },
 			config = function()
 				require("headlines").setup()
@@ -765,6 +539,7 @@ return require("packer").startup {
 		-- Easier easyalign (omaps - gl<motion/object>key)
 		use {
 			"tommcdo/vim-lion",
+			disable = false,
 			config = function()
 				vim.g.lion_squeeze_spaces = 1
 			end,
@@ -774,12 +549,15 @@ return require("packer").startup {
 		use "andweeb/presence.nvim"
 		use {
 			"gelguy/wilder.nvim",
+			disable = false,
 			run = ":UpdateRemotePlugins",
 			requires = {
 				"romgrk/fzy-lua-native",
 				{ "nixprime/cpsm", run = "./install.sh" },
 			},
-			config = function() end,
+			config = function()
+				vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/wilder.vim")
+			end,
 		}
 		use {
 			"luukvbaal/stabilize.nvim",
@@ -790,6 +568,7 @@ return require("packer").startup {
 		}
 		use {
 			"mattn/emmet-vim",
+			disable = false,
 			config = function()
 				vim.g.user_emmet_leader_key = "<spc>"
 			end,
@@ -802,9 +581,8 @@ return require("packer").startup {
 
 		-- Plugin development
 		use {
-			"~/workspace/wandbox.nvim",
+			"rajprakharpatel/wandbox.nvim",
 			disable = false,
-			romcks = "luasocket",
 			config = function()
 				require("wandbox").setup { client_list = { "curl" } }
 				vim.api.nvim_set_keymap(
@@ -817,7 +595,6 @@ return require("packer").startup {
 		}
 		use "folke/lua-dev.nvim"
 		use "rafcamlet/nvim-luapad"
-		use { "rhysd/wandbox-vim", disable = true }
 		if packer_bootstrap then
 			require("packer").sync()
 		end
