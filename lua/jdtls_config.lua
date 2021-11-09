@@ -54,11 +54,7 @@ function M.on_attach(client, bufnr)
 	buf_set_keymap("n", "<C-b>", "<cmd>lua vim.lsp.buf.references()<CR>")
 	buf_set_keymap("n", "<space>k", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-	buf_set_keymap(
-		"n",
-		"<space>D",
-		"<cmd>lua vim.lsp.buf.type_definition()<CR>"
-	)
+	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
 	buf_set_keymap(
 		"n",
 		"<leader>ds",
@@ -84,16 +80,8 @@ function M.on_attach(client, bufnr)
 	)
 	-- Few language severs support these three
 	buf_set_keymap("n", "<c-a-l>", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-	buf_set_keymap(
-		"n",
-		"<leader>ai",
-		"<cmd>lua vim.lsp.buf.incoming_calls()<CR>"
-	)
-	buf_set_keymap(
-		"n",
-		"<leader>ao",
-		"<cmd>lua vim.lsp.buf.outgoing_calls()<CR>"
-	)
+	buf_set_keymap("n", "<leader>ai", "<cmd>lua vim.lsp.buf.incoming_calls()<CR>")
+	buf_set_keymap("n", "<leader>ao", "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>")
 	-- Diagnostics mapping
 	-- buf_set_keymap('n', '<space>l', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
 	buf_set_keymap(
@@ -158,7 +146,7 @@ function M.on_attach(client, bufnr)
 	)
 	-- buf_set_keymap('n', [[<leader>aR]], [[<Cmd>lua require('jdtls').code_action(false, 'refactor')<CR>]])
 
-	local jdtls_ui = require("jdtls.ui")
+	local jdtls_ui = require "jdtls.ui"
 	function jdtls_ui.pick_one_async(items, _, _, cb)
 		require("lsputil.codeAction").code_action_handler(
 			nil,
@@ -170,13 +158,11 @@ function M.on_attach(client, bufnr)
 			cb
 		)
 	end
-	vim.cmd([[command! -buffer JdtCompile lua require('jdtls').compile()]])
-	vim.cmd(
-		[[command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()]]
-	)
-	vim.cmd([[command! -buffer JdtJol lua require('jdtls').jol()]])
-	vim.cmd([[command! -buffer JdtBytecode lua require('jdtls').javap()]])
-	vim.cmd([[command! -buffer JdtJshell lua require('jdtls').jshell()]])
+	vim.cmd [[command! -buffer JdtCompile lua require('jdtls').compile()]]
+	vim.cmd [[command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()]]
+	vim.cmd [[command! -buffer JdtJol lua require('jdtls').jol()]]
+	vim.cmd [[command! -buffer JdtBytecode lua require('jdtls').javap()]]
+	vim.cmd [[command! -buffer JdtJshell lua require('jdtls').jshell()]]
 	vim.g.lsp_utils_location_opts = {
 		height = 24,
 		mode = "split",
@@ -207,31 +193,23 @@ function M.on_attach(client, bufnr)
 		)
 	end
 	vim.lsp.handlers["textDocument/codeAction"] =
-		require(
-			"lsputil.codeAction"
-		).code_action_handler
+		require("lsputil.codeAction").code_action_handler
 	vim.lsp.handlers["textDocument/references"] =
-		require(
-			"lsputil.locations"
-		).references_handler
+		require("lsputil.locations").references_handler
 	vim.lsp.handlers["textDocument/definition"] =
-		require(
-			"lsputil.locations"
-		).definition_handler
+		require("lsputil.locations").definition_handler
 	vim.lsp.handlers["textDocument/declaration"] =
+		require("lsputil.locations").declaration_handler
+	vim.lsp.handlers["textDocument/typeDefinition"] =
 		require(
 			"lsputil.locations"
-		).declaration_handler
-	vim.lsp.handlers["textDocument/typeDefinition"] = require(
-		"lsputil.locations"
-	).typeDefinition_handler
-	vim.lsp.handlers["textDocument/implementation"] = require(
-		"lsputil.locations"
-	).implementation_handler
-	vim.lsp.handlers["textDocument/documentSymbol"] =
+		).typeDefinition_handler
+	vim.lsp.handlers["textDocument/implementation"] =
 		require(
-			"lsputil.symbols"
-		).document_handler
+			"lsputil.locations"
+		).implementation_handler
+	vim.lsp.handlers["textDocument/documentSymbol"] =
+		require("lsputil.symbols").document_handler
 	vim.lsp.handlers["workspace/symbol"] =
 		require("lsputil.symbols").workspace_handler
 end

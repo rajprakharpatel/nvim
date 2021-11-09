@@ -1,2 +1,5 @@
 **~
+tmp*
+temp*
+*.log
 plugin/packer_compiled.lua

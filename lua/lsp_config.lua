@@ -26,7 +26,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = require "lspconfig"
 local on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach()
 
@@ -215,7 +215,7 @@ local servers = {
 	"cssls",
 }
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
+	nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
 
 -------------
@@ -273,7 +273,7 @@ nvim_lsp.sumneko_lua.setup {
 --                         lua for plugin development                         --
 --------------------------------------------------------------------------------
 
-local luadev = require("lua-dev").setup({
+local luadev = require("lua-dev").setup {
 	library = { vimruntime = true, types = true, plugins = true },
 	lspconfig = {
 		capabilities = capabilities,
@@ -298,24 +298,24 @@ local luadev = require("lua-dev").setup({
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+						[vim.fn.expand "$VIMRUNTIME/lua"] = true,
+						[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
 					},
 				},
 			},
 		},
 	},
-})
+}
 nvim_lsp.sumneko_lua.setup(luadev)
 
 --------------------------------------------------------------------------------
 --                                   bashls                                   --
 --------------------------------------------------------------------------------
 
-nvim_lsp.bashls.setup({
+nvim_lsp.bashls.setup {
 	cmd = { "bash-language-server", "start" },
 	on_attach = on_attach,
-})
+}
 
 --------------------------------------------------------------------------------
 --                                    efm                                     --
@@ -448,7 +448,7 @@ require("lspconfig").efm.setup({
 --------------------------------------------------------------------------------
 --                                 sqls.nvim                                  --
 --------------------------------------------------------------------------------
-require("lspconfig").sqls.setup({
+require("lspconfig").sqls.setup {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 		client.resolved_capabilities.execute_command = true
@@ -470,27 +470,27 @@ require("lspconfig").sqls.setup({
 			{ silent = true }
 		)
 		-- connections config in ~/.config/sqls/config.yml
-		require("sqls").setup({
+		require("sqls").setup {
 			picker = "telescope",
 			-- settings = {
 			-- sqls = {connections = {{driver = 'mysql', dataSourceName = 'world:rajp@tcp(127.0.0.1:3306)/world'}}}
 			-- }
-		})
+		}
 	end,
-})
+}
 
 --------------------------------------------------------------------------------
 --                              null-ls.nvim								  --
 --------------------------------------------------------------------------------
-local null_ls = require("null-ls")
+local null_ls = require "null-ls"
 
 local sources = {
 	null_ls.builtins.formatting.prettier,
 	null_ls.builtins.formatting.rustfmt,
 	null_ls.builtins.diagnostics.shellcheck,
-	null_ls.builtins.formatting.shfmt.with({
+	null_ls.builtins.formatting.shfmt.with {
 		extra_args = { "-i", "2", "-ci" },
-	}),
+	},
 	null_ls.builtins.diagnostics.eslint_d,
 	null_ls.builtins.formatting.fish_indent,
 	null_ls.builtins.diagnostics.write_good,
@@ -499,9 +499,9 @@ local sources = {
 	null_ls.builtins.diagnostics.luacheck,
 	null_ls.builtins.formatting.stylua,
 }
-require("null-ls").config({
+require("null-ls").config {
 	sources = sources,
-})
-require("lspconfig")["null-ls"].setup({
+}
+require("lspconfig")["null-ls"].setup {
 	on_attach = on_attach,
-})
+}

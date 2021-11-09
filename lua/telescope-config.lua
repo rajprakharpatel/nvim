@@ -1,7 +1,7 @@
 local map = vim.api.nvim_set_keymap
-local actions = require("telescope.actions")
+local actions = require "telescope.actions"
 
-require("telescope").setup({
+require("telescope").setup {
 	defaults = {
 		vimgrep_arguments = {
 			"rg",
@@ -67,7 +67,7 @@ require("telescope").setup({
 			},
 		},
 	},
-})
+}
 
 -----------------
 --  Telescope  --

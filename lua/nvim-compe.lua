@@ -2,7 +2,7 @@
 --  nvim-compe  --
 ------------------
 local map = vim.api.nvim_set_keymap
-vim.cmd("set shortmess+=c")
+vim.cmd "set shortmess+=c"
 
 map(
 	"i",
@@ -38,13 +38,11 @@ map(
 )
 
 -- To make <cr> select the first completion item and confirm the completion when no item has been selected:
-vim.cmd(
-	"inoremap <expr> <cr> pumvisible() ? compe#confirm({'keys': \"\\<C-n>\\<cr>\", 'mode': '' }) :\"\\<C-g>u\\<CR>\""
-)
+vim.cmd "inoremap <expr> <cr> pumvisible() ? compe#confirm({'keys': \"\\<C-n>\\<cr>\", 'mode': '' }) :\"\\<C-g>u\\<CR>\""
 
 vim.o.completeopt = "menuone,noselect"
 
-require("compe").setup({
+require("compe").setup {
 	enabled = true,
 	autocomplete = true,
 	debug = false,
@@ -82,7 +80,7 @@ require("compe").setup({
 		orgmode = true,
 		-- for emoji press : (idk if that in compe tho)
 	},
-})
+}
 -- 
 -- 
 -- 
@@ -114,8 +112,8 @@ local t = function(str)
 end
 
 local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+	local col = vim.fn.col "." - 1
+	if col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
 		return true
 	else
 		return false
@@ -127,22 +125,22 @@ end
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
 	if vim.fn.pumvisible() == 1 then
-		return t("<C-n>")
+		return t "<C-n>"
 	elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-		return t("<Plug>(vsnip-expand-or-jump)")
+		return t "<Plug>(vsnip-expand-or-jump)"
 	elseif check_back_space() then
-		return t("<Tab>")
+		return t "<Tab>"
 	else
 		return vim.fn["compe#complete"]()
 	end
 end
 _G.s_tab_complete = function()
 	if vim.fn.pumvisible() == 1 then
-		return t("<C-p>")
+		return t "<C-p>"
 	elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-		return t("<Plug>(vsnip-jump-prev)")
+		return t "<Plug>(vsnip-jump-prev)"
 	else
-		return t("<S-Tab>")
+		return t "<S-Tab>"
 	end
 end
 

@@ -4,7 +4,7 @@ local map = vim.api.nvim_set_keymap
 -----------------
 map("n", "<F7>", ":UndotreeToggle<cr>", { noremap = true })
 vim.bo.undofile = true
-vim.o.undodir = vim.fn.stdpath("data") .. "/shada/undo-dir"
+vim.o.undodir = vim.fn.stdpath "data" .. "/shada/undo-dir"
 
 -----------------
 --  Ultisnips  --
@@ -26,13 +26,13 @@ vim.g.move_key_modifier = "C"
 ------------------
 -- vimp.rbind('x', 'ga', '<Plug>(EasyAlign)')
 -- vimp.rbind('n', 'ga', '<Plug>(EasyAlign)')
-vim.cmd("nmap ga <Plug>(EasyAlign)")
-vim.cmd("xmap ga <Plug>(EasyAlign)")
+vim.cmd "nmap ga <Plug>(EasyAlign)"
+vim.cmd "xmap ga <Plug>(EasyAlign)"
 
 ----------------
 --  vim-stay  --
 ----------------
-vim.cmd(":set viewoptions=cursor,folds,slash,unix")
+vim.cmd ":set viewoptions=cursor,folds,slash,unix"
 
 ----------------
 --  FastFold  --
@@ -44,23 +44,21 @@ vim.cmd(":set viewoptions=cursor,folds,slash,unix")
 ----------------
 --  vim-swap  --
 ----------------
-vim.cmd("omap i, <Plug>(swap-textobject-i)")
-vim.cmd("omap i, <Plug>(swap-textobject-i)")
-vim.cmd("xmap i, <Plug>(swap-textobject-i)")
-vim.cmd("omap a, <Plug>(swap-textobject-a)")
-vim.cmd("xmap a, <Plug>(swap-textobject-a)")
+vim.cmd "omap i, <Plug>(swap-textobject-i)"
+vim.cmd "omap i, <Plug>(swap-textobject-i)"
+vim.cmd "xmap i, <Plug>(swap-textobject-i)"
+vim.cmd "omap a, <Plug>(swap-textobject-a)"
+vim.cmd "xmap a, <Plug>(swap-textobject-a)"
 
 ------------------
 --  vim-rooter  --
 ------------------
-vim.cmd(
-	"let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']"
-)
+vim.cmd "let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']"
 
 ---------------
 --  matchup  --
 ---------------
-vim.cmd("let g:matchup_matchparen_offscreen = {'method': 'popup'}")
+vim.cmd "let g:matchup_matchparen_offscreen = {'method': 'popup'}"
 
 ------------------
 --  simpylfold  --
@@ -74,9 +72,7 @@ vim.cmd("let g:matchup_matchparen_offscreen = {'method': 'popup'}")
 ----------------
 vim.g.floaterm_shell = "fish"
 -- vim.g.floaterm_wintype = 'normal'
-vim.cmd(
-	"let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']"
-)
+vim.cmd "let g:floaterm_rootmarkers = ['.project', '.vscode', '.idea', '.git', '.hg', '.svn', '.root', '.gitignore', '.CP']"
 vim.g.floaterm_open_command = "vsplit"
 vim.g.floaterm_keymap_new = "<Leader>ft"
 vim.g.floaterm_keymap_prev = "<leader>fp"
@@ -93,7 +89,7 @@ vim.g.floaterm_keymap_kill = "<leader>fk"
 --  lf  --
 ----------
 -- vimp.rbind('n', '<leader>lf', '<Plug>LfSplit')
-vim.cmd("nmap <leader>lf <Plug>LfSplit")
+vim.cmd "nmap <leader>lf <Plug>LfSplit"
 ---------------------
 --  nvim-lsputils  --
 ---------------------
@@ -120,13 +116,9 @@ vim.lsp.handlers["textDocument/definition"] =
 vim.lsp.handlers["textDocument/declaration"] =
 	require("lsputil.locations").declaration_handler
 vim.lsp.handlers["textDocument/typeDefinition"] =
-	require(
-		"lsputil.locations"
-	).typeDefinition_handler
+	require("lsputil.locations").typeDefinition_handler
 vim.lsp.handlers["textDocument/implementation"] =
-	require(
-		"lsputil.locations"
-	).implementation_handler
+	require("lsputil.locations").implementation_handler
 vim.lsp.handlers["textDocument/documentSymbol"] =
 	require("lsputil.symbols").document_handler
 vim.lsp.handlers["workspace/symbol"] =
@@ -170,9 +162,7 @@ vim.g.dashboard_custom_section = {
 	},
 }
 -- vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
-vim.cmd(
-	"let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
-)
+vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
 local time = vim.fn.localtime() - STime
 local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.."
 	.. time
@@ -190,12 +180,10 @@ vim.api.nvim_exec(st, false)
 --     book_marks = 'SPC f b'
 -- }
 -- find_history = 'SPC f h',
-vim.g.dashboard_session_directory = vim.fn.stdpath("cache") .. "/session"
+vim.g.dashboard_session_directory = vim.fn.stdpath "cache" .. "/session"
 map("n", "<leader>ss", ":<c-u>SessionSave<cr>", { noremap = true })
 map("n", "<leader>sl", ":<c-u>SessionLoad<cr>", { noremap = true })
-vim.cmd(
-	"autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
-)
+vim.cmd "autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
 
 --------------------
 --  nvim_comment  --
@@ -217,7 +205,7 @@ parser_config.org = {
 	filetype = "org",
 }
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
 	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	ensure_installed = {
 		"c",
@@ -249,7 +237,7 @@ require("nvim-treesitter.configs").setup({
 		config = { javascriptreact = { style_element = "{/* %s */}" } },
 	},
 	refactor = { highlight_definitions = { enable = true } },
-})
+}
 
 ------------------------
 --  indent_blankline  --
@@ -294,13 +282,13 @@ vim.g.indent_blankline_context_patterns = {
 --                                    Codi                                    --
 --------------------------------------------------------------------------------
 -- change the color
-vim.cmd("highlight CodiVirtualText guifg=cyan")
-vim.cmd([[let g:codi#virtual_text_prefix = "❯ "]])
+vim.cmd "highlight CodiVirtualText guifg=cyan"
+vim.cmd [[let g:codi#virtual_text_prefix = "❯ "]]
 
 --------------------------------------------------------------------------------
 --                                  LspSaga                                   --
 --------------------------------------------------------------------------------
-local saga = require("lspsaga")
+local saga = require "lspsaga"
 
 -- add your config value here
 -- default value
@@ -338,7 +326,7 @@ local saga = require("lspsaga")
 -- like server_filetype_map = {metals = {'sbt', 'scala'}}
 -- server_filetype_map = {}
 
-saga.init_lsp_saga({
+saga.init_lsp_saga {
 	error_sign = "",
 	warn_sign = "",
 	finder_action_keys = {
@@ -349,7 +337,7 @@ saga.init_lsp_saga({
 		scroll_down = "<C-f>",
 		scroll_up = "<C-b>", -- quit can be a table
 	},
-})
+}
 
 --------------------------------------------------------------------------------
 --                                lspkind-nvim                                --
@@ -394,7 +382,7 @@ map("x", "<M-S>", [[<Plug>(vsnip-cut-text)]], { noremap = true })
 --------------------------------------------------------------------------------
 --                                  gitsigns                                  --
 --------------------------------------------------------------------------------
-require("gitsigns").setup({
+require("gitsigns").setup {
 	signs = {
 		add = { hl = "GitSignsAdd", text = "+", linehl = "GitSignsAddLn" },
 		change = {
@@ -430,12 +418,12 @@ require("gitsigns").setup({
 	sign_priority = 6,
 	update_debounce = 20,
 	status_formatter = nil, -- Use default
-})
+}
 
 --------------------------------------------------------------------------------
 --                               nvim-colorizer                               --
 --------------------------------------------------------------------------------
-vim.cmd([[set termguicolors]])
+vim.cmd [[set termguicolors]]
 require("colorizer").setup()
 -- require'colorizer'.setup({
 --     RGB = true, -- #RGB hex codes
@@ -450,7 +438,7 @@ require("colorizer").setup()
 --------------------------------------------------------------------------------
 --                                buffer-line                                 --
 --------------------------------------------------------------------------------
-require("bufferline").setup({
+require("bufferline").setup {
 	options = {
 		view = "multiwindow",
 		numbers = function(opts)
@@ -513,37 +501,28 @@ require("bufferline").setup({
 				local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
 
 				if error ~= 0 then
-					table.insert(
-						result,
-						{ text = "  " .. error, guifg = "#EC5241" }
-					)
+					table.insert(result, { text = "  " .. error, guifg = "#EC5241" })
 				end
 
 				if warning ~= 0 then
-					table.insert(
-						result,
-						{ text = "  " .. warning, guifg = "#EFB839" }
-					)
+					table.insert(result, {
+						text = "  " .. warning,
+						guifg = "#EFB839",
+					})
 				end
 
 				if hint ~= 0 then
-					table.insert(
-						result,
-						{ text = "  " .. hint, guifg = "#A3BA5E" }
-					)
+					table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E" })
 				end
 
 				if info ~= 0 then
-					table.insert(
-						result,
-						{ text = "  " .. info, guifg = "#7EA9A7" }
-					)
+					table.insert(result, { text = "  " .. info, guifg = "#7EA9A7" })
 				end
 				return result
 			end,
 		},
 	},
-})
+}
 
 ------------------
 --  vimspector  --
@@ -601,18 +580,18 @@ require("bufferline").setup({
 --------------
 --  vimade  --
 --------------
-vim.cmd([[
+vim.cmd [[
 let g:vimade = {}
 let g:vimade.fadelevel = 0.7
 let g:vimade.enablesigns = 1
 let g:vimade.enabletreesitter = 1
 
-]])
+]]
 
 ---------------
 --  minimap  --
 ---------------
-vim.cmd([[
+vim.cmd [[
 let g:minimap_auto_start = 0
 "let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar', 'undotree', 'telescope', 'dashboard']
 "let g:minimap_block_buftypes = ['nofile', 'nowrite', 'quickfix', 'terminal', 'prompt', 'telescope']
@@ -623,4 +602,4 @@ let g:minimap_highlight_search = 1
 let g:minimap_cursor_color_priority = 100
 let g:minimap_git_color_priority = 110
 nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
-]])
+]]

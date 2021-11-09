@@ -1,4 +1,4 @@
-local wk = require("which-key")
+local wk = require "which-key"
 
 -- default opts
 --[[
@@ -14,7 +14,7 @@ local opts = {
 }]]
 
 local pre_cmd = "<cmd>source "
-	.. vim.fn.stdpath("config")
+	.. vim.fn.stdpath "config"
 	.. "/lua/plugins.lua | "
 
 -- Normal mode mappings with prefix space
@@ -35,13 +35,13 @@ wk.register({
 		},
 		y = {
 			function()
-				vim.fn.setreg("+", vim.fn.expand("%:p"))
+				vim.fn.setreg("+", vim.fn.expand "%:p")
 			end,
 			"Copy absolute path",
 		},
 		Y = {
 			function()
-				vim.fn.setreg("+", vim.fn.expand("%"))
+				vim.fn.setreg("+", vim.fn.expand "%")
 			end,
 			"Copy path from project root",
 		},

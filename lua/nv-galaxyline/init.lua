@@ -1,4 +1,4 @@
-local gl = require("galaxyline")
+local gl = require "galaxyline"
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
@@ -20,7 +20,7 @@ local colors = {
 	error_red = "#F44747",
 	info_yellow = "#FFCC66",
 }
-local condition = require("galaxyline.condition")
+local condition = require "galaxyline.condition"
 local gls = gl.section
 gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
@@ -183,9 +183,7 @@ gls.right[7] = {
 gls.right[8] = {
 	Tabstop = {
 		provider = function()
-			return "Spaces: "
-				.. vim.api.nvim_buf_get_option(0, "shiftwidth")
-				.. " "
+			return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
 		end,
 		condition = condition.hide_in_width,
 		separator = " ",

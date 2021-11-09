@@ -6,12 +6,12 @@ local fk = function(str, ...)
 end
 
 local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+	local col = vim.fn.col "." - 1
+	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
-local cmp = require("cmp")
-cmp.setup({
+local cmp = require "cmp"
+cmp.setup {
 	snippet = {
 		expand = function(args)
 			vim.fn["UltiSnips#Anon"](args.body)
@@ -69,18 +69,18 @@ cmp.setup({
 	},
 
 	mapping = {
-		["<C-y>"] = cmp.mapping.confirm({
+		["<C-y>"] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
-		}),
+		},
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-e>"] = cmp.mapping.close(),
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({
+		["<CR>"] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
-		}),
+		},
 
 		["<Tab>"] = function(fallback)
 			if cmp.visible() then
@@ -125,4 +125,4 @@ cmp.setup({
 		native_menu = false,
 		ghost_text = true,
 	},
-})
+}

@@ -19,7 +19,7 @@ map("n", "<a-j>", "<C-w>j", { silent = true })
 map("n", "<a-k>", "<C-w>k", { silent = true })
 map("n", "<a-l>", "<C-w>l", { silent = true })
 
-vim.cmd([[
+vim.cmd [[
 tnoremap <a-h> <C-\><C-N><C-w>h
 tnoremap <a-j> <C-\><C-N><C-w>j
 tnoremap <a-k> <C-\><C-N><C-w>k
@@ -28,15 +28,15 @@ inoremap <a-h> <C-\><C-N><C-w>h
 inoremap <a-j> <C-\><C-N><C-w>j
 inoremap <a-k> <C-\><C-N><C-w>k
 inoremap <a-l> <C-\><C-N><C-w>l
-]])
+]]
 
 -- resize with arrows
-vim.cmd([[
+vim.cmd [[
   nnoremap <silent> <C-Up>    :resize -2<CR>
   nnoremap <silent> <C-Down>  :resize +2<CR>
   nnoremap <silent> <C-Left>  :vertical resize -2<CR>
   nnoremap <silent> <C-Right> :vertical resize +2<CR>
-]])
+]]
 
 -- better indenting
 vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
@@ -131,15 +131,15 @@ map("n", "<leader>lr", ":luafile %<cr>", { noremap = true })
 -- Run current line as a command with '\e'
 map("n", "<leader>e", ":exe getline(line('.'))<CR>", { noremap = true })
 -- CDF = Change to Directory of Current file
-vim.cmd("command! CDF cd %:p:h")
+vim.cmd "command! CDF cd %:p:h"
 -- refresh external changes into file
 map("n", "<F5>", ":checktime<CR>", { noremap = true })
 -- Quit without closing tab
-vim.cmd("command! Q :Sayonara!")
+vim.cmd "command! Q :Sayonara!"
 -- Add semicolon to end of line with <;>
 map("n", ";", "A;<esc>", { noremap = true })
 -- clear quickfixlist
-vim.cmd("command! ClearQuickfixList cexpr []")
+vim.cmd "command! ClearQuickfixList cexpr []"
 map("n", "<leader>cf", "<cmd>ClearQuickfixList<CR>", { noremap = true })
 
 -- CommentToggle
@@ -177,7 +177,7 @@ map(
 
 -- Pack Install
 local pre_cmd = "<cmd>source "
-	.. vim.fn.stdpath("config")
+	.. vim.fn.stdpath "config"
 	.. "/lua/plugins.lua | "
 map("n", "<leader>pi", pre_cmd .. "PackerInstall<cr>", { noremap = true })
 map("n", "<leader>ps", pre_cmd .. "PackerSync<cr>", { noremap = true })
@@ -201,11 +201,11 @@ map("i", "!", "!<c-g>u", { noremap = true })
 map("i", "?", "?<c-g>u", { noremap = true })
 
 -- Jumplist mutations
-vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k']])
-vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']])
+vim.cmd [[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k']]
+vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]
 
 -- Code Runner
-vim.cmd([[
+vim.cmd [[
 augroup code
     autocmd!
   autocmd filetype cpp nmap <F6> :w <bar> Dispatch! g++ -s -O3 % -o release-%:r && ./release-%:r < inp > out <CR>
@@ -218,7 +218,7 @@ augroup code
   autocmd filetype python nmap <F6> :w <bar> Dispatch! python % < inp > out <CR>
   autocmd filetype python nmap <F18> :w <bar> Dispatch! alacritty --hold -e python % <CR>
 augroup END
-]])
+]]
 
 -- Org Notes
 -- map("n", "<space>n", ":e ~/org/notes.org<CR>", { noremap = true })

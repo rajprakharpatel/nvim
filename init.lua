@@ -1,30 +1,30 @@
 STime = vim.fn.localtime()
-vim.cmd([[let $GIT_EDITOR = 'nvr -cc split --remote-wait']])
+vim.cmd [[let $GIT_EDITOR = 'nvr -cc split --remote-wait']]
 ------------------------------------------------------------------------
 --                              modules                               --
 ------------------------------------------------------------------------
-require("whichkey")
-require("keymaps")
+require "whichkey"
+require "keymaps"
 -- require('plugins')
-require("plugin-configs")
-vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/inc_easy_fuzzy.vim")
-vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/switch.vim")
-vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/wilder.vim")
+require "plugin-configs"
+vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/inc_easy_fuzzy.vim")
+vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/switch.vim")
+vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/wilder.vim")
 -- vim.cmd("source " .. vim.fn.stdpath("config") .. "/viml/init.vim")
 -- Lsp
 -- require("nv-globals")
-require("lsp_config")
+require "lsp_config"
 
 ------------------------------------------------------------------------
 --                              options                               --
 ------------------------------------------------------------------------
 
-vim.cmd([[set comments=sl:/*,mb:\ *,elx:\ */]])
+vim.cmd [[set comments=sl:/*,mb:\ *,elx:\ */]]
 -- vim.cmd([[colo material]])
-vim.cmd([[set guifont=SauceCodePro\ Nerd\ Font:h11]])
-vim.cmd("set iskeyword+=-") -- treat dash separated words as a word text object
-vim.cmd([[set nu]])
-vim.cmd([[set rnu]])
+vim.cmd [[set guifont=SauceCodePro\ Nerd\ Font:h11]]
+vim.cmd "set iskeyword+=-"
+vim.cmd [[set nu]]
+vim.cmd [[set rnu]]
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 5
 vim.wo.signcolumn = "yes"
@@ -82,7 +82,7 @@ vim.o.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 
 vim.bo.undofile = true
 vim.o.undofile = true
-vim.o.undodir = vim.fn.stdpath("data") .. "/shada/undo-dir"
+vim.o.undodir = vim.fn.stdpath "data" .. "/shada/undo-dir"
 -- vim.o.foldopen = "search"
 -- vim.o.fileformat = 'unix'
 vim.o.jumpoptions = "stack"
@@ -102,10 +102,10 @@ vim.wo.foldmethod = "indent"
 vim.o.wildignore =
 	"*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot"
 vim.o.shortmess = vim.o.shortmess .. "s"
-vim.cmd([[
+vim.cmd [[
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
-]])
+]]
 -- UI OPTS
 vim.opt.termguicolors = true
 vim.o.fillchars = "stlnc:»,vert:║,fold:·"
@@ -128,27 +128,24 @@ function _G.define_augroups(definitions) -- {{{1
 	-- just like how they would normally be defined from Vim itself
 	for group_name, definition in pairs(definitions) do
 		vim.cmd("augroup " .. group_name)
-		vim.cmd("autocmd!")
+		vim.cmd "autocmd!"
 
 		for _, def in ipairs(definition) do
-			local command = table.concat(
-				vim.tbl_flatten({ "autocmd", def }),
-				" "
-			)
+			local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")
 			vim.cmd(command)
 		end
-		vim.cmd("augroup END")
+		vim.cmd "augroup END"
 	end
 end
 
 function _G.loadrequire(module)
 	local function requiref(module)
 		require(module)
-		print("Module Loaded")
+		print "Module Loaded"
 	end
 	local res = pcall(requiref, module)
 	if not res then
-		print("Module not found")
+		print "Module not found"
 	end
 end
 
@@ -181,9 +178,9 @@ end
 -- [[execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/' | nohlsearch]])
 -- end
 
-local plugins_lua = vim.fn.stdpath("config") .. "/lua/plugins.lua"
+local plugins_lua = vim.fn.stdpath "config" .. "/lua/plugins.lua"
 
-define_augroups({
+define_augroups {
 	_colorizer = { { "FileType", "*", ":ColorizerAttachToBuffer" } },
 	_relNum = {
 		{ "InsertEnter", "*", "set norelativenumber" },
@@ -230,4 +227,4 @@ define_augroups({
 			"source " .. plugins_lua,
 		},
 	},
-})
+}
