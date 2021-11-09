@@ -17,13 +17,15 @@ local plugins = vim.fn.stdpath("config") .. "/lua/plugins.lua"
 vim.cmd("autocmd BufWritePost " .. plugins .. " PackerCompile") -- Auto compile when there are changes in plugins.lua
 
 -- require('packer').init({display = {non_interactive = true}})
-require("packer").init({ display = { auto_clean = false }, transitive_opt = true })
+require("packer").init({
+	display = { auto_clean = false },
+	transitive_opt = true,
+})
 return require("packer").startup({
 	function(use)
 		-- Packer can manage itself as an optional plugin
 		use("wbthomason/packer.nvim")
 		use({
-			opt = false,
 			"lewis6991/impatient.nvim",
 			config = function()
 				require("impatient").enable_profile()
@@ -38,11 +40,22 @@ return require("packer").startup({
 		use("wsdjeg/vim-fetch") -- fetch line and column if given with filename
 		use({ "mhinz/vim-sayonara", cmd = "Sayonara" }) -- close buffer only
 		-- working with variants of word :- search, replace and changing cas
-		use({ "tpope/vim-abolish", opt = true, cmd = { "Abolish", "Subvert" } })
+		use({
+			"tpope/vim-abolish",
+			opt = true,
+			cmd = { "Abolish", "Subvert" },
+		})
 		use({
 			"tpope/vim-dispatch",
 			requires = "radenling/vim-dispatch-neovim",
-			cmd = { "Dispatch", "Dispatch!", "Start!", "Make", "Focus", "Start" },
+			cmd = {
+				"Dispatch",
+				"Dispatch!",
+				"Start!",
+				"Make",
+				"Focus",
+				"Start",
+			},
 		})
 		use({
 			"nacro90/numb.nvim",
@@ -69,17 +82,24 @@ return require("packer").startup({
 					borders = true,
 					italics = {
 						comments = true,
-						strings = false,
+						strings = true,
 						Keywords = true,
-						fisnctions = false,
+						functions = true,
 						variables = true,
 					},
-					contrast_windows = { "terminal", "packer", "qf", "NvimTree" },
-					text_contrast = { lighter = false, darker = false },
+					contrast_windows = {
+						"terminal",
+						"packer",
+						"qf",
+						"NvimTree",
+						"undotree",
+						"diff",
+					},
+					text_contrast = { lighter = false, darker = true },
 					disable = {
 						background = false,
 						term_colors = false,
-						eob_lines = true,
+						eob_lines = false,
 					},
 				})
 				vim.g.material_variable_color = "#d17CB4"
@@ -188,12 +208,42 @@ return require("packer").startup({
 						vim.b.venn_enabled = true
 						vim.cmd([[setlocal ve=all]])
 						-- draw a line on HJKL keystokes
-						vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<cr>", { noremap = true })
-						vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<cr>", { noremap = true })
-						vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<cr>", { noremap = true })
-						vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<cr>", { noremap = true })
+						vim.api.nvim_buf_set_keymap(
+							0,
+							"n",
+							"J",
+							"<C-v>j:VBox<cr>",
+							{ noremap = true }
+						)
+						vim.api.nvim_buf_set_keymap(
+							0,
+							"n",
+							"K",
+							"<C-v>k:VBox<cr>",
+							{ noremap = true }
+						)
+						vim.api.nvim_buf_set_keymap(
+							0,
+							"n",
+							"L",
+							"<C-v>l:VBox<cr>",
+							{ noremap = true }
+						)
+						vim.api.nvim_buf_set_keymap(
+							0,
+							"n",
+							"H",
+							"<C-v>h:VBox<cr>",
+							{ noremap = true }
+						)
 						-- draw a box by pressing "f" with visual selection
-						vim.api.nvim_buf_set_keymap(0, "vt", "f", ":VBox<cr>", { noremap = true })
+						vim.api.nvim_buf_set_keymap(
+							0,
+							"vt",
+							"f",
+							":VBox<cr>",
+							{ noremap = true }
+						)
 					else
 						vim.cmd([[setlocal ve=]])
 						vim.cmd([[mapclear <buffer>]])
@@ -201,7 +251,12 @@ return require("packer").startup({
 					end
 				end
 				-- toggle keymappings for venn using <leader>v
-				vim.api.nvim_set_keymap("n", "<leader>v", ":lua toggle_venn()<cr>", { noremap = true })
+				vim.api.nvim_set_keymap(
+					"n",
+					"<leader>v",
+					":lua toggle_venn()<cr>",
+					{ noremap = true }
+				)
 			end,
 		})
 		use({
@@ -287,7 +342,10 @@ return require("packer").startup({
 				require("telescope").load_extension("media_files")
 			end,
 		})
-		use({ "nvim-telescope/telescope-symbols.nvim", after = "telescope.nvim" })
+		use({
+			"nvim-telescope/telescope-symbols.nvim",
+			after = "telescope.nvim",
+		})
 		use({
 			"fhill2/telescope-ultisnips.nvim",
 			after = "telescope.nvim",
@@ -305,7 +363,10 @@ return require("packer").startup({
 
 		-- Git
 		-- use 'TimUntersberger/neogit'
-		use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+		use({
+			"lewis6991/gitsigns.nvim",
+			requires = { "nvim-lua/plenary.nvim" },
+		})
 		use({ "tpope/vim-fugitive", opt = true, cmd = "G" })
 		use({ "tpope/vim-rhubarb", after = "vim-fugitive" })
 		use({
@@ -385,7 +446,10 @@ return require("packer").startup({
 			opt = true,
 			after = "nvim-dap",
 			config = function()
-				require("dap-python").setup(vim.fn.stdpath("data") .. "/dapinstall/python_dbg/bin/python")
+				require("dap-python").setup(
+					vim.fn.stdpath("data")
+						.. "/dapinstall/python_dbg/bin/python"
+				)
 			end,
 		})
 		use({
@@ -396,7 +460,11 @@ return require("packer").startup({
 				require("telescope").load_extension("dap")
 			end,
 		})
-		use({ "theHamsta/nvim-dap-virtual-text", opt = true, after = "nvim-dap" })
+		use({
+			"theHamsta/nvim-dap-virtual-text",
+			opt = true,
+			after = "nvim-dap",
+		})
 
 		-- Lsp & autocompletion
 		use({ "mfussenegger/nvim-jdtls" })
@@ -411,9 +479,16 @@ return require("packer").startup({
 				"hrsh7th/cmp-calc",
 				"kdheepak/cmp-latex-symbols",
 				"hrsh7th/cmp-emoji",
-				{ "tzachar/cmp-tabnine", disable = true, run = "./install.sh" },
+				{
+					"tzachar/cmp-tabnine",
+					disable = true,
+					run = "./install.sh",
+				},
 				"quangnguyen30192/cmp-nvim-ultisnips",
-				{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql" } },
+				{
+					"kristijanhusak/vim-dadbod-completion",
+					ft = { "sql", "mysql" },
+				},
 				{ "f3fora/cmp-nuspell", rocks = { "lua-nuspell" } }, -- Install nuspell c++ library(sudo pacman -S nuspell)
 			},
 			config = function()
@@ -431,7 +506,10 @@ return require("packer").startup({
 			config = function()
 				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 				local cmp = require("cmp")
-				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+				cmp.event:on(
+					"confirm_done",
+					cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+				)
 				local npairs = require("nvim-autopairs")
 				local Rule = require("nvim-autopairs.rule")
 				npairs.setup({
@@ -453,8 +531,12 @@ return require("packer").startup({
 
 				-- press % => %% is only inside comment or string
 				npairs.add_rules({
-					Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
-					Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({ "function" })),
+					Rule("%", "%", "lua"):with_pair(
+						ts_conds.is_ts_node({ "string", "comment" })
+					),
+					Rule("$", "$", "lua"):with_pair(
+						ts_conds.is_not_ts_node({ "function" })
+					),
 				})
 				-- put this to  setup function and press <a-e> to use fast_wrap
 				npairs.setup({ fast_wrap = {} })
@@ -464,7 +546,11 @@ return require("packer").startup({
 					fast_wrap = {
 						map = "<M-e>",
 						chars = { "{", "[", "(", '"', "'" },
-						pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+						pattern = string.gsub(
+							[[ [%'%"%)%>%]%)%}%,] ]],
+							"%s+",
+							""
+						),
 						end_key = "$",
 						keys = "qwertyuiopzxcvbnmasdfghjkl",
 						check_comma = true,
@@ -551,7 +637,10 @@ return require("packer").startup({
 						cb = tree_cb("edit"),
 						"n",
 					},
-					{ key = { "<1-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
+					{
+						key = { "<1-RightMouse>", "<C-]>" },
+						cb = tree_cb("cd"),
+					},
 					{ key = "<C-v>", cb = tree_cb("vsplit") },
 					{ key = "<C-x>", cb = tree_cb("split") },
 					{ key = "<C-t>", cb = tree_cb("tabnew") },
@@ -596,7 +685,10 @@ return require("packer").startup({
 						},
 					},
 					auto_resize = true,
-					mappings = { custom_only = true, list = nvim_tree_bindings },
+					mappings = {
+						custom_only = true,
+						list = nvim_tree_bindings,
+					},
 					view = {
 						auto_resize = true,
 					},
