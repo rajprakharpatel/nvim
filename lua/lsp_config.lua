@@ -44,48 +44,138 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	-- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap("n", "K", [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"K",
+		[[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]],
+		opts
+	)
 	buf_set_keymap("n", "<c-b>", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	-- buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap("n", "<space>k", [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], opts)
-	buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	buf_set_keymap(
+		"n",
+		"<space>k",
+		[[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]],
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"<leader>wa",
+		"<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"<leader>wr",
+		"<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"<leader>wl",
+		"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"<space>D",
+		"<cmd>lua vim.lsp.buf.type_definition()<CR>",
+		opts
+	)
 	-- buf_set_keymap('n', '<space>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap("n", "<space>r", [[<cmd>lua require('lspsaga.rename').rename()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"<space>r",
+		[[<cmd>lua require('lspsaga.rename').rename()<CR>]],
+		opts
+	)
 	-- buf_set_keymap('n', '<space>l', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 	-- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 	-- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+	buf_set_keymap(
+		"n",
+		"<space>q",
+		"<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
+		opts
+	)
 
 	-- Few language severs support these three
-	buf_set_keymap("n", "<leader>ai", "<cmd>lua vim.lsp.buf.incoming_calls()<CR>", opts)
-	buf_set_keymap("n", "<leader>ao", "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>", opts)
+	buf_set_keymap(
+		"n",
+		"<leader>ai",
+		"<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"<leader>ao",
+		"<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
+		opts
+	)
 	-- lsp provider to find the cursor word definition and reference
-	buf_set_keymap("n", "gh", [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"gh",
+		[[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]],
+		opts
+	)
 	-- code action
-	buf_set_keymap("n", "<space>a", [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], opts)
-	buf_set_keymap("v", "<space>a", [[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"<space>a",
+		[[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]],
+		opts
+	)
+	buf_set_keymap(
+		"v",
+		"<space>a",
+		[[<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]],
+		opts
+	)
 	-- scroll down hover doc or scroll in definition preview
 	-- buf_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], opts)
 	-- scroll up hover doc
 	-- buf_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], opts)
 	-- preview definition
-	buf_set_keymap("n", "<space>pd", [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"<space>pd",
+		[[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]],
+		opts
+	)
 	-- show
-	buf_set_keymap("n", "<space>l", [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"<space>l",
+		[[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]],
+		opts
+	)
 	-- only show diagnostic if cursor is over the area
-	buf_set_keymap("n", "<space>c", [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], opts)
+	buf_set_keymap(
+		"n",
+		"<space>c",
+		[[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]],
+		opts
+	)
 	-- jump diagnostic
 	buf_set_keymap("n", "[d", [[<cmd>:Lspsaga diagnostic_jump_prev<CR>]], opts)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+		buf_set_keymap(
+			"n",
+			"<m-c-l>",
+			"<cmd>lua vim.lsp.buf.formatting()<CR>",
+			opts
+		)
 	elseif client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("n", "<m-c-l>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+		buf_set_keymap(
+			"n",
+			"<m-c-l>",
+			"<cmd>lua vim.lsp.buf.range_formatting()<CR>",
+			opts
+		)
 	end
 
 	-- Set autocommands conditional on server_capabilities
@@ -367,8 +457,18 @@ require("lspconfig").sqls.setup({
 			vim.api.nvim_buf_set_keymap(bufnr, ...)
 		end
 
-		buf_set_keymap("n", "<m-l>", "<plug>(sqls-execute-query)jj", { silent = true })
-		buf_set_keymap("n", "<s-m-l>", "<cmd>SqlsExecuteQuery<CR>", { silent = true })
+		buf_set_keymap(
+			"n",
+			"<m-l>",
+			"<plug>(sqls-execute-query)jj",
+			{ silent = true }
+		)
+		buf_set_keymap(
+			"n",
+			"<s-m-l>",
+			"<cmd>SqlsExecuteQuery<CR>",
+			{ silent = true }
+		)
 		-- connections config in ~/.config/sqls/config.yml
 		require("sqls").setup({
 			picker = "telescope",

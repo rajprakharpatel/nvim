@@ -1,5 +1,8 @@
 local fk = function(str, ...)
-	return vim.fn.feedkeys(vim.api.nvim_replace_termcodes(str, true, true, true), ...)
+	return vim.fn.feedkeys(
+		vim.api.nvim_replace_termcodes(str, true, true, true),
+		...
+	)
 end
 
 local check_back_space = function()
@@ -36,17 +39,25 @@ cmp.setup({
 				["vim-dadbod-completion"] = "[DadBod]",
 			}
 			-- fancy icons and a name of kind
-			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+			vim_item.kind = require("lspkind").presets.default[vim_item.kind]
+				.. " "
+				.. vim_item.kind
 			-- vim_item.kind = require("lspkind").presets.default[vim_item.kind]
 			local menu = source_mapping[entry.source.name]
 			if entry.source.name == "cmp_tabnine" then
-				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+				if
+					entry.completion_item.data ~= nil
+					and entry.completion_item.data.detail ~= nil
+				then
 					menu = entry.completion_item.data.detail .. " " .. menu
 				end
 				vim_item.kind = "" .. " suggestion"
 			end
 			if entry.source.name == "nuspell" then
-				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+				if
+					entry.completion_item.data ~= nil
+					and entry.completion_item.data.detail ~= nil
+				then
 					menu = entry.completion_item.data.detail .. " " .. menu
 				end
 				vim_item.kind = "暈" .. "Spelling"

@@ -95,7 +95,8 @@ vim.o.cscopequickfix = "s-,c-,d-,i-,t-,e-"
 vim.o.path = ".,,,**"
 vim.o.completeopt = "menuone,noselect"
 vim.o.listchars = "tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿"
-vim.o.formatlistpat = "^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
+vim.o.formatlistpat =
+	"^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
 vim.o.foldlevelstart = 0
 vim.wo.foldmethod = "indent"
 vim.o.wildignore =
@@ -130,7 +131,10 @@ function _G.define_augroups(definitions) -- {{{1
 		vim.cmd("autocmd!")
 
 		for _, def in ipairs(definition) do
-			local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
+			local command = table.concat(
+				vim.tbl_flatten({ "autocmd", def }),
+				" "
+			)
 			vim.cmd(command)
 		end
 		vim.cmd("augroup END")

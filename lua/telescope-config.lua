@@ -24,7 +24,16 @@ require("telescope").setup({
 		-- path_display = {"shorten", "absolute"},
 		-- winblend = 30,
 		border = {},
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		borderchars = {
+			"─",
+			"│",
+			"─",
+			"│",
+			"╭",
+			"╮",
+			"╯",
+			"╰",
+		},
 		color_devicons = true,
 		use_less = true,
 		set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -124,8 +133,18 @@ map(
 	"<cmd>lua require('telescope.builtin').builtin(require('telescope.themes').get_dropdown())<cr>",
 	{ noremap = true }
 )
-map("n", "<space>rl", "<cmd>lua require('telescope.builtin').reloader()<cr>", { noremap = true })
-map("n", "<space>s", "<cmd>lua require'telescope.builtin'.symbols{}<cr>", { noremap = true })
+map(
+	"n",
+	"<space>rl",
+	"<cmd>lua require('telescope.builtin').reloader()<cr>",
+	{ noremap = true }
+)
+map(
+	"n",
+	"<space>s",
+	"<cmd>lua require'telescope.builtin'.symbols{}<cr>",
+	{ noremap = true }
+)
 map(
 	"n",
 	"<space>m",

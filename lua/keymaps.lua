@@ -5,7 +5,12 @@ local map = vim.api.nvim_set_keymap
 map("n", "<leader>h", ":nohl<cr>", { noremap = true, silent = true })
 
 -- explorer
-vim.api.nvim_set_keymap("n", "<space>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<space>e",
+	":NvimTreeToggle<CR>",
+	{ noremap = true, silent = true }
+)
 
 -- To use `ALT+{h,j,k,l}`  to navigate windowsfrom any mode:
 -- better window movement
@@ -38,19 +43,79 @@ vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
 
 -- Tab switch buffer
-vim.api.nvim_set_keymap("n", "<TAB>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<TAB>",
+	":BufferLineCycleNext<CR>",
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<S-TAB>",
+	":BufferLineCyclePrev<CR>",
+	{ noremap = true, silent = true }
+)
 map("n", "gb", "<cmd>BufferLinePick<CR>", { noremap = true, silent = true })
-map("n", "bd", "<cmd>BufferLinePickClose<CR>", { noremap = true, silent = true })
-map("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { noremap = true, silent = true })
-map("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { noremap = true, silent = true })
-map("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { noremap = true, silent = true })
-map("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { noremap = true, silent = true })
-map("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { noremap = true, silent = true })
-map("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", { noremap = true, silent = true })
-map("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", { noremap = true, silent = true })
-map("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", { noremap = true, silent = true })
-map("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", { noremap = true, silent = true })
+map(
+	"n",
+	"bd",
+	"<cmd>BufferLinePickClose<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>1",
+	"<cmd>BufferLineGoToBuffer 1<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>2",
+	"<cmd>BufferLineGoToBuffer 2<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>3",
+	"<cmd>BufferLineGoToBuffer 3<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>4",
+	"<cmd>BufferLineGoToBuffer 4<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>5",
+	"<cmd>BufferLineGoToBuffer 5<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>6",
+	"<cmd>BufferLineGoToBuffer 6<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>7",
+	"<cmd>BufferLineGoToBuffer 7<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>8",
+	"<cmd>BufferLineGoToBuffer 8<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>9",
+	"<cmd>BufferLineGoToBuffer 9<CR>",
+	{ noremap = true, silent = true }
+)
 
 -- Quick searh syntax
 map("c", ";;", "%s:::g<Left><Left><Left>", { noremap = true })
@@ -103,10 +168,17 @@ map(
 	":hi Normal guibg=NONE ctermbg=NONE <bar> :set nocursorline <bar> :set colorcolumn=0<CR>",
 	{ noremap = true }
 )
-map("", "<leader>op", ":set background=dark <bar> :set cursorline <bar> :set colorcolumn=80<CR>", { noremap = true })
+map(
+	"",
+	"<leader>op",
+	":set background=dark <bar> :set cursorline <bar> :set colorcolumn=80<CR>",
+	{ noremap = true }
+)
 
 -- Pack Install
-local pre_cmd = "<cmd>source " .. vim.fn.stdpath("config") .. "/lua/plugins.lua | "
+local pre_cmd = "<cmd>source "
+	.. vim.fn.stdpath("config")
+	.. "/lua/plugins.lua | "
 map("n", "<leader>pi", pre_cmd .. "PackerInstall<cr>", { noremap = true })
 map("n", "<leader>ps", pre_cmd .. "PackerSync<cr>", { noremap = true })
 map("n", "<leader>pc", pre_cmd .. "PackerClean<cr>", { noremap = true })
@@ -155,7 +227,12 @@ augroup END
 map("n", "<space>tt", "<cmd>Neomux<CR>", { noremap = true })
 
 -- Neoclip
-map("n", "<space>'", "<cmd> lua require('telescope').extensions.neoclip.default()<CR>", { noremap = true })
+map(
+	"n",
+	"<space>'",
+	"<cmd> lua require('telescope').extensions.neoclip.default()<CR>",
+	{ noremap = true }
+)
 
 -- change split orientation
 map("n", "<space><s-h>", "<C-w>t<C-w>K", { noremap = true })

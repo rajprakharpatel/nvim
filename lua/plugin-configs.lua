@@ -53,7 +53,9 @@ vim.cmd("xmap a, <Plug>(swap-textobject-a)")
 ------------------
 --  vim-rooter  --
 ------------------
-vim.cmd("let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']")
+vim.cmd(
+	"let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']"
+)
 
 ---------------
 --  matchup  --
@@ -109,14 +111,26 @@ vim.g.lsp_utils_symbols_opts = {
 	preview = { title = "Symbols Preview", border = true },
 	prompt = {},
 }
-vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
-vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
-vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
-vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
-vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
-vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
-vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
-vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
+vim.lsp.handlers["textDocument/codeAction"] =
+	require("lsputil.codeAction").code_action_handler
+vim.lsp.handlers["textDocument/references"] =
+	require("lsputil.locations").references_handler
+vim.lsp.handlers["textDocument/definition"] =
+	require("lsputil.locations").definition_handler
+vim.lsp.handlers["textDocument/declaration"] =
+	require("lsputil.locations").declaration_handler
+vim.lsp.handlers["textDocument/typeDefinition"] =
+	require(
+		"lsputil.locations"
+	).typeDefinition_handler
+vim.lsp.handlers["textDocument/implementation"] =
+	require(
+		"lsputil.locations"
+	).implementation_handler
+vim.lsp.handlers["textDocument/documentSymbol"] =
+	require("lsputil.symbols").document_handler
+vim.lsp.handlers["workspace/symbol"] =
+	require("lsputil.symbols").workspace_handler
 
 -----------------
 --  dashboard  --
@@ -134,14 +148,31 @@ vim.g.dashboard_custom_header = {
 vim.g.dashboard_default_executive = "telescope"
 
 vim.g.dashboard_custom_section = {
-	a = { description = { " Find File          " }, command = "Telescope find_files" },
-	b = { description = { " Recently Used Files" }, command = "Telescope oldfiles" },
-	c = { description = { " Load Last Session  " }, command = "SessionLoad" },
-	d = { description = { " Find Word          " }, command = "Telescope live_grep" },
-	e = { description = { " Marks              " }, command = "Telescope marks" },
+	a = {
+		description = { " Find File          " },
+		command = "Telescope find_files",
+	},
+	b = {
+		description = { " Recently Used Files" },
+		command = "Telescope oldfiles",
+	},
+	c = {
+		description = { " Load Last Session  " },
+		command = "SessionLoad",
+	},
+	d = {
+		description = { " Find Word          " },
+		command = "Telescope live_grep",
+	},
+	e = {
+		description = { " Marks              " },
+		command = "Telescope marks",
+	},
 }
 -- vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
-vim.cmd("let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))")
+vim.cmd(
+	"let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
+)
 local time = vim.fn.localtime() - STime
 local st = "let g:dashboard_custom_footer = ['NeoVim loaded '..packages..' plugins  in '.."
 	.. time
@@ -162,7 +193,9 @@ vim.api.nvim_exec(st, false)
 vim.g.dashboard_session_directory = vim.fn.stdpath("cache") .. "/session"
 map("n", "<leader>ss", ":<c-u>SessionSave<cr>", { noremap = true })
 map("n", "<leader>sl", ":<c-u>SessionLoad<cr>", { noremap = true })
-vim.cmd("autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2")
+vim.cmd(
+	"autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
+)
 
 --------------------
 --  nvim_comment  --
@@ -186,7 +219,16 @@ parser_config.org = {
 
 require("nvim-treesitter.configs").setup({
 	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = { "c", "cpp", "java", "python", "json", "yaml", "vim", "org" },
+	ensure_installed = {
+		"c",
+		"cpp",
+		"java",
+		"python",
+		"json",
+		"yaml",
+		"vim",
+		"org",
+	},
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		additional_vim_regex_highlighting = { "org" },
@@ -213,7 +255,14 @@ require("nvim-treesitter.configs").setup({
 --  indent_blankline  --
 ------------------------
 vim.g.indent_blankline_buftype_exclude = { "terminal" }
-vim.g.indent_blankline_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "qf" }
+vim.g.indent_blankline_filetype_exclude = {
+	"help",
+	"startify",
+	"dashboard",
+	"packer",
+	"neogitstatus",
+	"qf",
+}
 vim.g.indent_blankline_char = "▏"
 vim.g.indent_blankline_use_treesitter = true
 vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -348,10 +397,26 @@ map("x", "<M-S>", [[<Plug>(vsnip-cut-text)]], { noremap = true })
 require("gitsigns").setup({
 	signs = {
 		add = { hl = "GitSignsAdd", text = "+", linehl = "GitSignsAddLn" },
-		change = { hl = "GitSignsChange", text = "~", linehl = "GitSignsChangeLn" },
-		delete = { hl = "GitSignsDelete", text = "-", linehl = "GitSignsDeleteLn" },
-		topdelete = { hl = "GitSignsDelete", text = "﫧", linehl = "GitSignsDeleteLn" },
-		changedelete = { hl = "GitSignsChange", text = "*", linehl = "GitSignsChangeLn" },
+		change = {
+			hl = "GitSignsChange",
+			text = "~",
+			linehl = "GitSignsChangeLn",
+		},
+		delete = {
+			hl = "GitSignsDelete",
+			text = "-",
+			linehl = "GitSignsDeleteLn",
+		},
+		topdelete = {
+			hl = "GitSignsDelete",
+			text = "﫧",
+			linehl = "GitSignsDeleteLn",
+		},
+		changedelete = {
+			hl = "GitSignsChange",
+			text = "*",
+			linehl = "GitSignsChangeLn",
+		},
 	},
 	numhl = true,
 	linehl = false,
@@ -409,7 +474,8 @@ require("bufferline").setup({
 			end
 			local s = " "
 			for e, n in pairs(diagnostics_dict) do
-				local sym = e == "error" and " " or (e == "warning" and " " or "ℹ️")
+				local sym = e == "error" and " "
+					or (e == "warning" and " " or "ℹ️")
 				s = s .. n .. sym
 			end
 			return s
@@ -447,19 +513,31 @@ require("bufferline").setup({
 				local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
 
 				if error ~= 0 then
-					table.insert(result, { text = "  " .. error, guifg = "#EC5241" })
+					table.insert(
+						result,
+						{ text = "  " .. error, guifg = "#EC5241" }
+					)
 				end
 
 				if warning ~= 0 then
-					table.insert(result, { text = "  " .. warning, guifg = "#EFB839" })
+					table.insert(
+						result,
+						{ text = "  " .. warning, guifg = "#EFB839" }
+					)
 				end
 
 				if hint ~= 0 then
-					table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E" })
+					table.insert(
+						result,
+						{ text = "  " .. hint, guifg = "#A3BA5E" }
+					)
 				end
 
 				if info ~= 0 then
-					table.insert(result, { text = "  " .. info, guifg = "#7EA9A7" })
+					table.insert(
+						result,
+						{ text = "  " .. info, guifg = "#7EA9A7" }
+					)
 				end
 				return result
 			end,

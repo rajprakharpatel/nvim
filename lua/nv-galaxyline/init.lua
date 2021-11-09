@@ -50,7 +50,9 @@ gls.left[1] = {
 				["!"] = colors.blue,
 				t = colors.blue,
 			}
-			vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
+			vim.api.nvim_command(
+				"hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()]
+			)
 			return "▊ "
 		end,
 		highlight = { colors.red, colors.bg },
@@ -115,18 +117,34 @@ gls.left[7] = {
 }
 
 gls.right[1] = {
-	DiagnosticError = { provider = "DiagnosticError", icon = "  ", highlight = { colors.error_red, colors.bg } },
+	DiagnosticError = {
+		provider = "DiagnosticError",
+		icon = "  ",
+		highlight = { colors.error_red, colors.bg },
+	},
 }
 gls.right[2] = {
-	DiagnosticWarn = { provider = "DiagnosticWarn", icon = "  ", highlight = { colors.orange, colors.bg } },
+	DiagnosticWarn = {
+		provider = "DiagnosticWarn",
+		icon = "  ",
+		highlight = { colors.orange, colors.bg },
+	},
 }
 
 gls.right[3] = {
-	DiagnosticHint = { provider = "DiagnosticHint", icon = "  ", highlight = { colors.vivid_blue, colors.bg } },
+	DiagnosticHint = {
+		provider = "DiagnosticHint",
+		icon = "  ",
+		highlight = { colors.vivid_blue, colors.bg },
+	},
 }
 
 gls.right[4] = {
-	DiagnosticInfo = { provider = "DiagnosticInfo", icon = "  ", highlight = { colors.info_yellow, colors.bg } },
+	DiagnosticInfo = {
+		provider = "DiagnosticInfo",
+		icon = "  ",
+		highlight = { colors.info_yellow, colors.bg },
+	},
 }
 
 gls.right[5] = {
@@ -165,7 +183,9 @@ gls.right[7] = {
 gls.right[8] = {
 	Tabstop = {
 		provider = function()
-			return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
+			return "Spaces: "
+				.. vim.api.nvim_buf_get_option(0, "shiftwidth")
+				.. " "
 		end,
 		condition = condition.hide_in_width,
 		separator = " ",
@@ -222,4 +242,9 @@ gls.short_line_left[2] = {
 	},
 }
 
-gls.short_line_right[1] = { BufferIcon = { provider = "BufferIcon", highlight = { colors.grey, colors.bg } } }
+gls.short_line_right[1] = {
+	BufferIcon = {
+		provider = "BufferIcon",
+		highlight = { colors.grey, colors.bg },
+	},
+}

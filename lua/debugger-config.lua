@@ -5,10 +5,30 @@ local map = vim.api.nvim_set_keymap
 -------------------
 
 map("n", "<space>cc", ":lua require'dap'.continue()<CR>", { noremap = true })
-map("n", "<space>oo", ":lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
-map("n", "<space>ii", ":lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
-map("n", "<space>ou", ":lua require'dap'.step_out()<CR>", { noremap = true, silent = true })
-map("n", "<space>db", ":lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
+map(
+	"n",
+	"<space>oo",
+	":lua require'dap'.step_over()<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<space>ii",
+	":lua require'dap'.step_into()<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<space>ou",
+	":lua require'dap'.step_out()<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<space>db",
+	":lua require'dap'.toggle_breakpoint()<CR>",
+	{ noremap = true, silent = true }
+)
 map(
 	"n",
 	"<space>dbc",
@@ -21,23 +41,78 @@ map(
 	":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
 	{ noremap = true, silent = true }
 )
-map("n", "<space>drpl", ":lua require'dap'.repl.open()<CR>", { noremap = true, silent = true })
-map("n", "<space>drl", ":lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
+map(
+	"n",
+	"<space>drpl",
+	":lua require'dap'.repl.open()<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<space>drl",
+	":lua require'dap'.run_last()<CR>",
+	{ noremap = true, silent = true }
+)
 map(
 	"n",
 	"<space>de",
 	':lua require"dap".disconnect();require"dap".close();require"dap".run_last()<CR>',
 	{ noremap = true, silent = true }
 )
-map("n", "<space>dh", ':lua require"dap.ui.variables".hover()<CR>', { noremap = true, silent = true })
-map("n", "<leader>dk", ':lua require"dap".up()<CR>', { noremap = true, silent = true })
-map("n", "<leader>dj", ':lua require"dap".down()<CR>', { noremap = true, silent = true })
-map("n", "<leader>di", ':lua require"dap.ui.variables".visual_hover()<CR>', { noremap = true, silent = true })
-map("n", "<leader>d?", ':lua require"dap.ui.variables".scopes()<CR>', { noremap = true, silent = true })
-map("n", "<leader>dea", ':lua require"dap".set_exception_breakpoints({"all"})<CR>', { noremap = true, silent = true })
-map("n", "<leader>da", ':lua require"debugHelper".attach()<CR>', { noremap = true, silent = true })
-map("n", "<leader>dA", ':lua require"debugHelper".attachToRemote()<CR>', { noremap = true, silent = true })
-map("n", "<leader>di", ':lua require"dap.ui.widgets".hover()<CR>', { noremap = true, silent = true })
+map(
+	"n",
+	"<space>dh",
+	':lua require"dap.ui.variables".hover()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>dk",
+	':lua require"dap".up()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>dj",
+	':lua require"dap".down()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>di",
+	':lua require"dap.ui.variables".visual_hover()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>d?",
+	':lua require"dap.ui.variables".scopes()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>dea",
+	':lua require"dap".set_exception_breakpoints({"all"})<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>da",
+	':lua require"debugHelper".attach()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>dA",
+	':lua require"debugHelper".attachToRemote()<CR>',
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>di",
+	':lua require"dap.ui.widgets".hover()<CR>',
+	{ noremap = true, silent = true }
+)
 map(
 	"n",
 	"<leader>d?",
@@ -49,9 +124,24 @@ map(
 --  telescope-dap.nvim  --
 --------------------------
 -- require('telescope').load_extension('dap')
-map("n", "<leader>ds", ":Telescope dap frames<CR>", { noremap = true, silent = true })
-map("n", "<leader>dc", ":Telescope dap commands<CR>", { noremap = true, silent = true })
-map("n", "<leader>db", ":Telescope dap list_breakpoints<CR>", { noremap = true, silent = true })
+map(
+	"n",
+	"<leader>ds",
+	":Telescope dap frames<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>dc",
+	":Telescope dap commands<CR>",
+	{ noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader>db",
+	":Telescope dap list_breakpoints<CR>",
+	{ noremap = true, silent = true }
+)
 
 -----------------------------
 --  nvim-dap-virtual-text  --
@@ -74,7 +164,11 @@ dap.configurations.cpp = {
 		type = "lldb",
 		request = "launch",
 		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+			return vim.fn.input(
+				"Path to executable: ",
+				vim.fn.getcwd() .. "/",
+				"file"
+			)
 		end,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = true,

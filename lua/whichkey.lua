@@ -13,7 +13,9 @@ local opts = {
 	nowait = false, -- use `nowait` when creating keymaps
 }]]
 
-local pre_cmd = "<cmd>source " .. vim.fn.stdpath("config") .. "/lua/plugins.lua | "
+local pre_cmd = "<cmd>source "
+	.. vim.fn.stdpath("config")
+	.. "/lua/plugins.lua | "
 
 -- Normal mode mappings with prefix space
 wk.register({
@@ -65,13 +67,19 @@ wk.register({
 	o = {
 		name = "Open",
 		n = { "<cmd>e ~/org/notes.org<cr>", "Notes" },
-		a = { "<cmd>lua require('orgmode').action('agenda.prompt')", "Org agenda" },
+		a = {
+			"<cmd>lua require('orgmode').action('agenda.prompt')",
+			"Org agenda",
+		},
 		e = { "<cmd>NvimTreeToggle<cr>", "File Browser" },
 		c = { "<cmd>Cheat<cr>", "Cheatsheet" },
 		t = {
 			name = "terminal",
 			n = { "<cmd>Neomux<cr>", "Neomux Terminal" },
-			s = { "<cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>", "lspsaga terminal" },
+			s = {
+				"<cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>",
+				"lspsaga terminal",
+			},
 			f = { "<cmd>FloatermNew<cr>", "Floaterm" },
 		},
 	},
@@ -79,7 +87,10 @@ wk.register({
 	-- New
 	n = {
 		name = "New",
-		t = { "<cmd>lua require('orgmode').action('capture.prompt')<cr>", "Task" },
+		t = {
+			"<cmd>lua require('orgmode').action('capture.prompt')<cr>",
+			"Task",
+		},
 	},
 
 	-- Modify
