@@ -35,7 +35,12 @@ return require("packer").startup {
 		use { "mbbill/undotree", disable = false, cmd = "UndotreeToggle" }
 
 		-- pure vim/lua scripts with no dependencies
-		use { "zhimsel/vim-stay" }
+		use {
+			"zhimsel/vim-stay",
+			config = function()
+				vim.cmd ":set viewoptions=cursor,folds,slash,unix"
+			end,
+		}
 		use "wsdjeg/vim-fetch"
 		use { "mhinz/vim-sayonara", cmd = "Sayonara" }
 		-- working with variants of word :- search, replace and changing cas
@@ -175,14 +180,44 @@ return require("packer").startup {
 		-- Helpful Generic Tools
 		use "kshenoy/vim-signature"
 		use "mg979/vim-visual-multi"
-		use "machakann/vim-swap"
-		use "junegunn/vim-easy-align"
+		use {
+			"machakann/vim-swap",
+			config = function()
+				vim.cmd "omap i, <Plug>(swap-textobject-i)"
+				vim.cmd "omap i, <Plug>(swap-textobject-i)"
+				vim.cmd "xmap i, <Plug>(swap-textobject-i)"
+				vim.cmd "omap a, <Plug>(swap-textobject-a)"
+				vim.cmd "xmap a, <Plug>(swap-textobject-a)"
+			end,
+		}
+		use {
+			"junegunn/vim-easy-align",
+			config = function()
+				vim.cmd "nmap ga <Plug>(EasyAlign)"
+				vim.cmd "xmap ga <Plug>(EasyAlign)"
+			end,
+		}
 		use "tommcdo/vim-exchange"
-		use "matze/vim-move"
+		use {
+			"matze/vim-move",
+			config = function()
+				vim.g.move_key_modifier = "C"
+			end,
+		}
 		use "tpope/vim-surround"
 		use "tpope/vim-repeat"
-		use "airblade/vim-rooter"
-		use { "andymass/vim-matchup", disable = false, event = "VimEnter" }
+		use {
+			"airblade/vim-rooter",
+			vim.cmd "let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']",
+		}
+		use {
+			"andymass/vim-matchup",
+			disable = false,
+			config = function()
+				vim.cmd "let g:matchup_matchparen_offscreen = {'method': 'popup'}"
+			end,
+			event = "VimEnter",
+		}
 		use {
 			"AndrewRadev/switch.vim",
 			disable = false,
@@ -290,6 +325,9 @@ return require("packer").startup {
 			"lewis6991/gitsigns.nvim",
 			disable = false,
 			requires = { "nvim-lua/plenary.nvim" },
+			config = function()
+				require "plugin.gitsigns"
+			end,
 		}
 		use { "tpope/vim-fugitive", opt = true, cmd = "G" }
 		use { "tpope/vim-rhubarb", after = "vim-fugitive" }
@@ -382,7 +420,12 @@ return require("packer").startup {
 			end,
 		}
 
-		use "RishabhRD/nvim-lsputils"
+		use {
+			"RishabhRD/nvim-lsputils",
+			config = function()
+				require "plugin.lsputils"
+			end,
+		}
 		use "RishabhRD/popfix"
 		use "neovim/nvim-lspconfig"
 		use "ray-x/lsp_signature.nvim"
@@ -422,14 +465,30 @@ return require("packer").startup {
 			end,
 		}
 		-- Bufferline
-		use "akinsho/nvim-bufferline.lua"
+		use {
+			"akinsho/nvim-bufferline.lua",
+			config = function()
+				require "plugin.bufferline"
+			end,
+		}
 
 		-- Icons
 		use "kyazdani42/nvim-web-devicons"
-		use "glepnir/dashboard-nvim"
+		use {
+			"glepnir/dashboard-nvim",
+			config = function()
+				require "plugin.dashboard"
+			end,
+		}
 
 		-- Treesitter
-		use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+		use {
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+			config = function()
+				require "plugin.treesitter"
+			end,
+		}
 		use "p00f/nvim-ts-rainbow"
 		use "lukas-reineke/indent-blankline.nvim"
 		use { "haringsrob/nvim_context_vt", after = "nvim-treesitter" }
