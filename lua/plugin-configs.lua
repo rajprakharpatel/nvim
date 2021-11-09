@@ -1,5 +1,4 @@
 local map = vim.api.nvim_set_keymap
--- require('vimp')
 -----------------
 --  undo-tree  --
 -----------------
@@ -186,7 +185,8 @@ parser_config.org = {
 }
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "c", "cpp", "java", "python", "json", "yaml", "vim", "org" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	ensure_installed = { "c", "cpp", "java", "python", "json", "yaml", "vim", "org" },
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		additional_vim_regex_highlighting = { "org" },
@@ -201,11 +201,17 @@ require("nvim-treesitter.configs").setup({
 	},
 	autotag = { enable = true },
 	rainbow = { enable = true },
-	context_commentstring = { enable = true, config = { javascriptreact = { style_element = "{/*%s*/}" } } },
-	-- refactor = {highlight_definitions = {enable = true}}
+	context_commentstring = {
+		enable = true,
+		enable_autocmd = false,
+		config = { javascriptreact = { style_element = "{/* %s */}" } },
+	},
+	refactor = { highlight_definitions = { enable = true } },
 })
 
------------------------
+------------------------
+--  indent_blankline  --
+------------------------
 vim.g.indent_blankline_buftype_exclude = { "terminal" }
 vim.g.indent_blankline_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "qf" }
 vim.g.indent_blankline_char = "▏"

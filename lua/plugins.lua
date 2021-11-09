@@ -521,7 +521,7 @@ return require("packer").startup({
 				})
 			end,
 		}) -- :SymbolOutline
-		use({ "JoosepAlviste/nvim-ts-context-commentstring", disable = false })
+		use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 		use({ "nvim-treesitter/playground", disable = true })
 		use({ "windwp/nvim-ts-autotag", disable = true }) -- Use treesitter to autoclose and autorename html tag
 
@@ -710,6 +710,7 @@ return require("packer").startup({
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "github/copilot.vim" })
 		use({ "nikvdp/ejs-syntax" })
+		use({ "tpope/vim-commentary" })
 		-- 		use({ "folke/trouble.nvim" })
 
 		-- Plugin development

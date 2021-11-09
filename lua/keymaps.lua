@@ -78,14 +78,8 @@ vim.cmd("command! ClearQuickfixList cexpr []")
 map("n", "<leader>cf", "<cmd>ClearQuickfixList<CR>", { noremap = true })
 
 -- CommentToggle
-vim.cmd([[
-function! CommentToggle()
-    execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/' | nohlsearch
-    execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/' | nohlsearch
-endfunction
-map <c-/> :call CommentToggle()<ESC><CR>
-map <c-_> :call CommentToggle()<ESC><CR>
-]])
+-- map('n', '<c-/>', '<cmd>Commentary<cr>', {noremap = true})
+map("n", "<c-_>", "<cmd>Commentary<cr>", { noremap = true })
 
 -- ctrl-s save
 map("n", "<c-s>", "<esc>:w!<cr>", { noremap = true })
