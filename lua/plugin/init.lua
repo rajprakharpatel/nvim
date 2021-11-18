@@ -274,23 +274,36 @@ return require("packer").startup {
 
 		-- search
 		use "unblevable/quick-scope"
-		use "haya14busa/incsearch.vim"
-		use "haya14busa/incsearch-fuzzy.vim"
-		use "haya14busa/incsearch-easymotion.vim"
 		use {
-			"easymotion/vim-easymotion",
-			disable = false,
-			requires = {
-				"haya14busa/incsearch.vim",
-				"haya14busa/incsearch-fuzzy.vim",
-				"haya14busa/incsearch-easymotion.vim",
-			},
+			"phaazon/hop.nvim",
 			config = function()
-				vim.cmd(
-					"source " .. vim.fn.stdpath "config" .. "/viml/inc_easy_fuzzy.vim"
-				)
+				require("hop").setup()
 			end,
 		}
+		use {
+			"ggandor/lightspeed.nvim",
+			event = "BufWinEnter",
+			config = function()
+				require("lightspeed").setup {
+					exit_after_idle_msecs = { labeled = 5000, unlabeled = 1000 },
+				}
+			end,
+		}
+
+		-- use {
+		-- 	"easymotion/vim-easymotion",
+		-- 	disable = false,
+		-- 	requires = {
+		-- 		"haya14busa/incsearch.vim",
+		-- 		"haya14busa/incsearch-fuzzy.vim",
+		-- 		"haya14busa/incsearch-easymotion.vim",
+		-- 	},
+		-- 	config = function()
+		-- 		vim.cmd(
+		-- 			"source " .. vim.fn.stdpath "config" .. "/viml/inc_easy_fuzzy.vim"
+		-- 		)
+		-- 	end,
+		-- }
 
 		-- Webdev
 		-- use 'gennaro-tedesco/nvim-jqx'
