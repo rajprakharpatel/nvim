@@ -30,6 +30,7 @@ return require("packer").startup {
 				require("impatient").enable_profile()
 			end,
 		}
+		use "nathom/filetype.nvim"
 
 		-- Quality of life improvements
 		use { "mbbill/undotree", disable = false, cmd = "UndotreeToggle" }
@@ -133,7 +134,13 @@ return require("packer").startup {
 		}
 
 		-- visual sugar
-		use "norcalli/nvim-colorizer.lua"
+		use {
+			"norcalli/nvim-colorizer.lua",
+			event = "BufWinEnter",
+			config = function()
+				require("colorizer").setup()
+			end,
+		}
 		use "TaDaa/vimade"
 		use {
 			"Pocco81/TrueZen.nvim",
@@ -208,7 +215,9 @@ return require("packer").startup {
 		use "tpope/vim-repeat"
 		use {
 			"airblade/vim-rooter",
-			vim.cmd "let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim']",
+			config = function()
+				vim.cmd "let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim', '.vscode']"
+			end,
 		}
 		use {
 			"andymass/vim-matchup",
@@ -246,11 +255,20 @@ return require("packer").startup {
 		use "michaeljsmith/vim-indent-object"
 
 		-- Snippets
-		use { "SirVer/ultisnips", requires = "honza/vim-snippets" }
+		use {
+			"SirVer/ultisnips",
+			requires = "honza/vim-snippets",
+			config = function()
+				require "plugin.ultisnips"
+			end,
+		}
 		-- use {'hrsh7th/vim-vsnip', requires = {{'rafamadriz/friendly-snippets'}}}
 
 		-- terminal
-		use "voldikss/vim-floaterm"
+		use {
+			"voldikss/vim-floaterm",
+			cmd = { "FloatermToggle", "FloatermNew", "FloatermSend" },
+		}
 		use { "ptzz/lf.vim", opt = true, cmd = "Lf" }
 		use { "nikvdp/neomux", cmd = "Neomux" }
 
@@ -325,6 +343,7 @@ return require("packer").startup {
 			"lewis6991/gitsigns.nvim",
 			disable = false,
 			requires = { "nvim-lua/plenary.nvim" },
+			event = "BufRead",
 			config = function()
 				require "plugin.gitsigns"
 			end,
@@ -415,6 +434,7 @@ return require("packer").startup {
 				},
 				{ "f3fora/cmp-nuspell", rocks = { "lua-nuspell" } }, -- Install nuspell c++ library(sudo pacman -S nuspell)
 			},
+			after = "lspkind-nvim",
 			config = function()
 				require "completion"
 			end,
@@ -436,8 +456,9 @@ return require("packer").startup {
 			config = function()
 				require "plugin.autopairs"
 			end,
+			after = "nvim-cmp",
 		}
-		use "onsails/lspkind-nvim"
+		use { "onsails/lspkind-nvim", event = "InsertEnter" }
 		-- TODO: change back to glepnir version when it's fixed
 		use {
 			"tami5/lspsaga.nvim",
@@ -625,18 +646,13 @@ return require("packer").startup {
 				require("stabilize").setup()
 			end,
 		}
-		use {
-			"mattn/emmet-vim",
-			disable = false,
-			config = function()
-				vim.g.user_emmet_leader_key = "<spc>"
-			end,
-		}
 		use { "jose-elias-alvarez/null-ls.nvim" }
 		use { "github/copilot.vim" }
 		use { "nikvdp/ejs-syntax" }
-		use { "tpope/vim-commentary" }
-		-- 		use({ "folke/trouble.nvim" })
+		use { "tpope/vim-commentary", event = "BufWinEnter" }
+		-- relative line numbers on operator pending mode
+		-- use "vim-scripts/RelOps"
+		-- use({ "folke/trouble.nvim" })
 
 		-- Plugin development
 		use {

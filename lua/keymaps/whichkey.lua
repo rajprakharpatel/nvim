@@ -15,7 +15,7 @@ local opts = {
 
 local pre_cmd = "<cmd>source "
 	.. vim.fn.stdpath "config"
-	.. "/lua/plugins.lua | "
+	.. "/lua/plugin/init.lua | "
 
 -- Normal mode mappings with prefix space
 wk.register({
