@@ -113,6 +113,16 @@ wk.register({
 		H = { "<C-w>t<C-w>K", "Change split to horizontal" },
 		V = { "<C-w>t<C-w>H", "Change split to vertical" },
 	},
+
+	-- Harpoon
+	h = {
+		name = "Harpoon",
+		h = {
+			"<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
+			"Quick Menu",
+		},
+		m = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add File" },
+	},
 }, {
 	mode = "n",
 	prefix = "<space>",

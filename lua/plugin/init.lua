@@ -410,29 +410,35 @@ return require("packer").startup {
 		}
 
 		-- Lsp & autocompletion
-		use { "mfussenegger/nvim-jdtls" }
+		use { "mfussenegger/nvim-jdtls", ft = "java" }
 		use {
 			"hrsh7th/nvim-cmp",
 			disable = false,
+			event = "InsertEnter",
 			requires = {
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua" },
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-calc",
-				"kdheepak/cmp-latex-symbols",
-				"hrsh7th/cmp-emoji",
+				{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
+				{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+				{ "hrsh7th/cmp-path", event = "InsertEnter" },
+				{ "hrsh7th/cmp-calc", event = "InsertEnter" },
+				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
+				{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
 				{
 					"tzachar/cmp-tabnine",
+					event = "InsertEnter",
 					disable = true,
 					run = "./install.sh",
 				},
-				"quangnguyen30192/cmp-nvim-ultisnips",
+				{ "quangnguyen30192/cmp-nvim-ultisnips", event = "InsertEnter" },
 				{
 					"kristijanhusak/vim-dadbod-completion",
 					ft = { "sql", "mysql" },
 				},
-				{ "f3fora/cmp-nuspell", rocks = { "lua-nuspell" } }, -- Install nuspell c++ library(sudo pacman -S nuspell)
+				{
+					"f3fora/cmp-nuspell",
+					event = "InsertEnter",
+					rocks = { "lua-nuspell" },
+				}, -- Install nuspell c++ library(sudo pacman -S nuspell)
 			},
 			after = "lspkind-nvim",
 			config = function()
@@ -447,7 +453,13 @@ return require("packer").startup {
 			end,
 		}
 		use "RishabhRD/popfix"
-		use "neovim/nvim-lspconfig"
+		use {
+			"neovim/nvim-lspconfig",
+			event = "VimEnter",
+			config = function()
+				require "lsp"
+			end,
+		}
 		use "ray-x/lsp_signature.nvim"
 		-- use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
 		use {
@@ -630,6 +642,7 @@ return require("packer").startup {
 		use {
 			"gelguy/wilder.nvim",
 			disable = false,
+			event = "CmdlineEnter",
 			run = ":UpdateRemotePlugins",
 			requires = {
 				"romgrk/fzy-lua-native",
@@ -650,6 +663,9 @@ return require("packer").startup {
 		use { "github/copilot.vim" }
 		use { "nikvdp/ejs-syntax" }
 		use { "tpope/vim-commentary", event = "BufWinEnter" }
+		use {
+			"theprimeagen/harpoon",
+		}
 		-- relative line numbers on operator pending mode
 		-- use "vim-scripts/RelOps"
 		-- use({ "folke/trouble.nvim" })

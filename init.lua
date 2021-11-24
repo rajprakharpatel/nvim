@@ -5,6 +5,7 @@ _G.STime = vim.fn.localtime()
 
 -- util
 require "util"
+
 -- options
 require "options"
 
@@ -15,4 +16,4 @@ require "keymaps"
 require "plugin.config"
 
 -- Lsp
-require "lsp"
+-- require "lsp"
