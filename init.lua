@@ -7,6 +7,7 @@ _G.STime = vim.fn.localtime()
 require "util"
 
 -- options
+vim.cmd "colo gruvbox"
 require "options"
 
 -- Keymaps

@@ -105,7 +105,7 @@ vim.o.signcolumn = "yes"
 local plugins_lua = vim.fn.stdpath "config" .. "/lua/plugin/init.lua"
 
 define_augroups {
-	_colorizer = { { "FileType", "*", ":ColorizerAttachToBuffer" } },
+	-- _colorizer = { { "FileType", "*", ":ColorizerAttachToBuffer" } },
 	_relNum = {
 		{ "InsertEnter", "*", "set norelativenumber" },
 		{ "InsertLeave", "*", "set relativenumber | set nu" },

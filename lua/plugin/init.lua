@@ -67,7 +67,7 @@ return require("packer").startup {
 		-- preview lines by :<num>
 		use {
 			"nacro90/numb.nvim",
-			disable = false,
+			disable = true,
 			config = function()
 				require("numb").setup()
 			end,
@@ -85,7 +85,7 @@ return require("packer").startup {
 		-- colorschemes
 		use {
 			"marko-cerovac/material.nvim",
-			disable = false,
+			disable = true,
 			-- cmd = 'colo material',
 			config = function()
 				require "plugin.material"
@@ -95,7 +95,7 @@ return require("packer").startup {
 		use { "bluz71/vim-nightfly-guicolors", cmd = "colo nightfly" }
 		use {
 			"kristijanhusak/vim-hybrid-material",
-			disable = false,
+			disable = true,
 			cmd = { "colo hybrid_material", "colo hybrid_reverse" },
 		}
 		use { "savq/melange", cmd = "colo melange" }
@@ -144,27 +144,25 @@ return require("packer").startup {
 		use "TaDaa/vimade"
 		use {
 			"Pocco81/TrueZen.nvim",
-			disable = false,
+			disable = true,
 			cmd = { "TZMinimalist", "TZFocus", "TZAtaraxis" },
 		}
 		use {
 			"edluffy/specs.nvim",
-			disable = false,
+			disable = true,
 			config = function()
 				require "plugin.specs"
 			end,
 		}
-		use { "joeytwiddle/sexy_scroller.vim", disable = true }
-		use { "folke/lsp-colors.nvim", disable = true }
 		use {
 			"wfxr/minimap.vim",
-			disable = false,
+			disable = true,
 			run = "cargo install --locked code-minimap",
 			cmd = "Minimap",
 		}
 		use {
 			"jbyuki/venn.nvim", -- Draw Ascii flow chart in vim
-			disable = false,
+			disable = true,
 			cmd = "Venn",
 			config = function()
 				require "plugin.venn"
@@ -172,7 +170,7 @@ return require("packer").startup {
 		}
 		use {
 			"rcarriga/nvim-notify",
-			disable = false,
+			disable = true,
 			config = function()
 				require("notify").setup {
 					timeout = 3000,
@@ -294,7 +292,15 @@ return require("packer").startup {
 
 		-- Webdev
 		-- use 'gennaro-tedesco/nvim-jqx'
-		use "turbio/bracey.vim"
+		use { "turbio/bracey.vim", ft = { "html", "css", "javascript" } }
+		use {
+			"vuki656/package-info.nvim",
+			ft = "json",
+			requires = "MunifTanjim/nui.nvim",
+			config = function()
+				require("package-info").setup()
+			end,
+		}
 
 		-- Telescope
 		use {
@@ -358,10 +364,10 @@ return require("packer").startup {
 				require "plugin.diffview"
 			end,
 		}
-		use { "alec-gibson/nvim-tetris", opt = true, cmd = "Tetris" }
+		use { "alec-gibson/nvim-tetris", disable = true, cmd = "Tetris" }
 		use {
 			"michaelb/sniprun",
-			disable = false,
+			disable = true,
 			cmd = "SnipRun",
 			run = "bash ./install.sh",
 		}
@@ -378,7 +384,7 @@ return require("packer").startup {
 		use { "Pocco81/DAPInstall.nvim", opt = true, after = "nvim-dap" }
 		use {
 			"rcarriga/nvim-dap-ui",
-			disable = false,
+			disable = true,
 			requires = { "mfussenegger/nvim-dap" },
 			after = "nvim-dap",
 			config = function()
@@ -387,7 +393,7 @@ return require("packer").startup {
 		}
 		use {
 			"mfussenegger/nvim-dap-python",
-			disable = false,
+			disable = true,
 			after = "nvim-dap",
 			config = function()
 				require("dap-python").setup(
@@ -397,7 +403,7 @@ return require("packer").startup {
 		}
 		use {
 			"nvim-telescope/telescope-dap.nvim",
-			disable = false,
+			disable = true,
 			after = { "nvim-dap", "telescope.nvim" },
 			config = function()
 				require("telescope").load_extension "dap"
@@ -405,7 +411,7 @@ return require("packer").startup {
 		}
 		use {
 			"theHamsta/nvim-dap-virtual-text",
-			disable = false,
+			disable = true,
 			after = "nvim-dap",
 		}
 
@@ -445,7 +451,7 @@ return require("packer").startup {
 				require "completion"
 			end,
 		}
-
+		use "b0o/SchemaStore.nvim"
 		use {
 			"RishabhRD/nvim-lsputils",
 			config = function()
@@ -455,7 +461,7 @@ return require("packer").startup {
 		use "RishabhRD/popfix"
 		use {
 			"neovim/nvim-lspconfig",
-			event = "VimEnter",
+			event = "InsertEnter",
 			config = function()
 				require "lsp"
 			end,
@@ -485,14 +491,14 @@ return require("packer").startup {
 		-- Status Line
 		use {
 			"glepnir/galaxyline.nvim",
-			disable = true,
+			disable = false,
 			config = function()
 				require "plugin.galaxyline"
 			end,
 		}
 		use {
 			"windwp/windline.nvim",
-			disable = false,
+			disable = true,
 			config = function()
 				require "wlsample.evil_line"
 			end,
@@ -500,6 +506,7 @@ return require("packer").startup {
 		-- Bufferline
 		use {
 			"akinsho/nvim-bufferline.lua",
+			event = "BufWinEnter",
 			config = function()
 				require "plugin.bufferline"
 			end,

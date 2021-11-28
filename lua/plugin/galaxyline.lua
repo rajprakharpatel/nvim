@@ -1,3 +1,4 @@
+local package = require "package-info"
 local gl = require "galaxyline"
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
@@ -113,6 +114,13 @@ gls.left[7] = {
 		condition = condition.hide_in_width,
 		icon = "  ",
 		highlight = { colors.red, colors.bg },
+	},
+}
+gls.left[8] = {
+	PackageInfoStatus = {
+		provider = function()
+			return package.get_status()
+		end,
 	},
 }
 

@@ -73,7 +73,7 @@ wk.register({
 		},
 		e = { "<cmd>NvimTreeToggle<cr>", "File Browser" },
 		c = { "<cmd>Cheat<cr>", "Cheatsheet" },
-		t = {
+		m = {
 			name = "terminal",
 			n = { "<cmd>Neomux<cr>", "Neomux Terminal" },
 			s = {
@@ -82,14 +82,24 @@ wk.register({
 			},
 			f = { "<cmd>FloatermNew<cr>", "Floaterm" },
 		},
-	},
-
-	-- New
-	n = {
-		name = "New",
 		t = {
 			"<cmd>lua require('orgmode').action('capture.prompt')<cr>",
 			"Task",
+		},
+	},
+
+	-- NPM
+	n = {
+		name = "npm",
+		s = { "<cmd>lua require('package-info').show()<CR>", "show" },
+		h = { "lua require('package-info').hide()<CR>", "hide" },
+		u = { "<cmd>lua require('package-info').update()<CR>", "update" },
+		d = { "<cmd>lua require('package-info').delete()<CR>", "delete" },
+		i = { "<cmd>lua require('package-info').install()<CR>", "install" },
+		r = { "<cmd>lua require('package-info').reinstall()<CR>", "reinstall" },
+		c = {
+			"<cmd>lua require('package-info').change_version()<CR>",
+			"change version",
 		},
 	},
 

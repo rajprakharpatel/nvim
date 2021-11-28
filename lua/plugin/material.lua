@@ -1,5 +1,4 @@
 vim.g.material_style = "deep ocean"
-vim.cmd "colo material"
 require("material").setup {
 	contrast = true,
 	borders = true,
