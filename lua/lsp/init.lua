@@ -300,6 +300,34 @@ require("lspconfig").sqls.setup {
 	end,
 }
 --------------------------------------------------------------------------------
+--                              emmet-ls      								  --
+--------------------------------------------------------------------------------
+require("lspconfig").emmet_ls.setup {
+	filetypes = {
+		"html",
+		"css",
+		"scss",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"haml",
+		"xml",
+		"xsl",
+		"pug",
+		"slim",
+		"sass",
+		"stylus",
+		"less",
+		"sss",
+	},
+	root_dir = function()
+		return vim.loop.cwd()
+	end,
+	capabilities = capabilities,
+}
+
+--------------------------------------------------------------------------------
 --                              jsonls      								  --
 --------------------------------------------------------------------------------
 nvim_lsp.jsonls.setup {

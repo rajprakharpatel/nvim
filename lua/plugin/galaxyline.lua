@@ -123,6 +123,14 @@ gls.left[8] = {
 		end,
 	},
 }
+gls.left[9] = {
+	Treesitter = {
+		provider = function()
+			return vim.fn.call("nvim_treesitter#statusline", { 90 })
+		end,
+		highlight = { colors.vivid_blue, colors.bg },
+	},
+}
 
 gls.right[1] = {
 	DiagnosticError = {

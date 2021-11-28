@@ -28,7 +28,7 @@ require("nvim-treesitter.configs").setup {
 		additional_vim_regex_highlighting = { "org" },
 	},
 	-- indent = {enable = true, disable = {"python", "html", "javascript"}},
-	indent = { enable = { "javascriptreact" } },
+	-- indent = { enable = { "javascriptreact" } },
 	playground = {
 		enable = true,
 		disable = {},
@@ -44,3 +44,6 @@ require("nvim-treesitter.configs").setup {
 	},
 	refactor = { highlight_definitions = { enable = true } },
 }
+
+vim.cmd "set foldmethod=expr"
+vim.cmd "set foldexpr=nvim_treesitter#foldexpr()"

@@ -460,7 +460,7 @@ return require("packer").startup {
 		use "RishabhRD/popfix"
 		use {
 			"neovim/nvim-lspconfig",
-			event = "InsertEnter",
+			event = "VimEnter",
 			config = function()
 				require "lsp"
 			end,
