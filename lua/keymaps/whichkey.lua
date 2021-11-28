@@ -127,11 +127,24 @@ wk.register({
 	-- Harpoon
 	h = {
 		name = "Harpoon",
-		h = {
+		q = {
 			"<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
 			"Quick Menu",
 		},
-		m = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add File" },
+		m = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Mark File" },
+		["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", "File 1" },
+		t = {
+			"<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>",
+			"Terminal 1",
+		},
+		s = {
+			"<cmd>lua require('harpoon.term').sendCommand(1, 1)<CR>",
+			"Send predefined command",
+		},
+		h = {
+			"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>",
+			"terminal menu",
+		},
 	},
 }, {
 	mode = "n",

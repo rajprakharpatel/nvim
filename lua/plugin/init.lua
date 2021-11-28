@@ -295,7 +295,6 @@ return require("packer").startup {
 		use { "turbio/bracey.vim", ft = { "html", "css", "javascript" } }
 		use {
 			"vuki656/package-info.nvim",
-			ft = "json",
 			requires = "MunifTanjim/nui.nvim",
 			config = function()
 				require("package-info").setup()
