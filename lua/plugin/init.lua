@@ -24,12 +24,12 @@ return require("packer").startup {
 	function(use)
 		-- Packer can manage itself as an optional plugin
 		use "wbthomason/packer.nvim"
-		use {
-			"lewis6991/impatient.nvim",
-			config = function()
-				require("impatient").enable_profile()
-			end,
-		}
+		-- use {
+		-- 	"lewis6991/impatient.nvim",
+		-- 	config = function()
+		-- 		require("impatient").enable_profile()
+		-- 	end,
+		-- }
 		use "nathom/filetype.nvim"
 
 		-- Quality of life improvements
@@ -460,7 +460,8 @@ return require("packer").startup {
 		use "RishabhRD/popfix"
 		use {
 			"neovim/nvim-lspconfig",
-			event = "VimEnter",
+			after = { "cmp-nvim-lsp" },
+			event = "InsertEnter",
 			config = function()
 				require "lsp"
 			end,
