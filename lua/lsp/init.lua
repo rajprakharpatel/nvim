@@ -366,10 +366,10 @@ local sources = {
 	null_ls.builtins.diagnostics.luacheck,
 	null_ls.builtins.formatting.stylua,
 }
-require("null-ls").config {
+require("null-ls").setup {
 	sources = sources,
 }
-require("lspconfig")["null-ls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
+-- require("lspconfig")["null-ls"].setup {
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- }

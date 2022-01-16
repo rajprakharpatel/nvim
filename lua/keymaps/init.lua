@@ -1,6 +1,5 @@
 local map = vim.api.nvim_set_keymap
 require "keymaps.whichkey"
--- vim.g.mapleader = '\\'
 
 -- no hl
 map("n", "<leader>h", ":nohl<cr>", { noremap = true, silent = true })
@@ -119,7 +118,7 @@ map(
 )
 
 -- Quick searh syntax
-map("c", ";;", "%s:::g<Left><Left><Left>", { noremap = true })
+map("c", ";;", "%s:", { noremap = true })
 -- Quick mapping to put \(\) in your pattern string
 map("c", ";\\", "\\ \\(\\)<Left><Left>", { noremap = true })
 
@@ -176,14 +175,6 @@ map(
 	{ noremap = true }
 )
 
--- Pack Install
-local pre_cmd = "<cmd>source "
-	.. vim.fn.stdpath "config"
-	.. "/lua/plugin/init.lua | "
-map("n", "<leader>pi", pre_cmd .. "PackerInstall<cr>", { noremap = true })
-map("n", "<leader>ps", pre_cmd .. "PackerSync<cr>", { noremap = true })
-map("n", "<leader>pc", pre_cmd .. "PackerClean<cr>", { noremap = true })
-
 -- Symbols Outline
 map("n", "<F9>", ":SymbolsOutline<CR>", { noremap = true })
 
@@ -209,8 +200,8 @@ vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]
 vim.cmd [[
 augroup code
     autocmd!
-  autocmd filetype cpp nmap <F6> :w <bar> Dispatch! g++ -s -O3 % -o release-%:r && ./release-%:r < inp > out <CR>
-  autocmd filetype cpp nmap <F18> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++20 % -o debug-%:r && ./debug-%:r < inp > out <CR>
+  autocmd filetype cpp nmap <F6> :w <bar> Dispatch! g++ -s -O3 % -o release-%:t && ./release-%:t < inp > out <CR>
+  autocmd filetype cpp nmap <F18> :w <bar> FloatermNew! g++ -ulimit -ggdb -Og -Wall -Wno-unused-result -std=c++20 % -o debug-%:t && ./debug-%:t < inp > out <CR>
   autocmd filetype c nmap <F6> :w <bar> Dispatch! gcc % -o %:r && ./%:r < inp > out <CR>
   autocmd filetype c nmap <F18> :w <bar> FloatermNew! gcc -g  % -o %:r && ./%:r < inp > out <CR>
   autocmd filetype java nmap <F6> :w <bar> Dispatch! javac -g % && java -enableassertions %:r < inp > out <CR>
@@ -220,9 +211,6 @@ augroup code
   autocmd filetype python nmap <F18> :w <bar> Dispatch! alacritty --hold -e python % <CR>
 augroup END
 ]]
-
--- Org Notes
--- map("n", "<space>n", ":e ~/org/notes.org<CR>", { noremap = true })
 
 -- Neomux
 map("n", "<space>tt", "<cmd>Neomux<CR>", { noremap = true })
@@ -242,8 +230,6 @@ map("n", "<m-v>", "<cmd>vsplit<cr>", { noremap = true })
 map("n", "<m-s>", "<cmd>split<cr>", { noremap = true })
 map("n", "<m-q>", "<cmd>quit<cr>", { noremap = true })
 
--- telescope
-map("n", "<space>tf", "<cmd>Telescope find_files<CR>", { noremap = true })
-
 -- miscellaneous
 map("i", "<C-u>", "<esc>mzgUiw`za", { noremap = true })
+map("v", "<M-k>", '<Cmd>lua require("dapui").eval()<CR>', { noremap = true })

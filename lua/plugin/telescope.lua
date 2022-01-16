@@ -2,6 +2,12 @@ local map = vim.api.nvim_set_keymap
 local actions = require "telescope.actions"
 
 require("telescope").setup {
+	extensions = {
+		bookmarks = {
+			selected_browser = "brave",
+			url_open_command = "brave",
+		},
+	},
 	defaults = {
 		vimgrep_arguments = {
 			"rg",

@@ -85,10 +85,11 @@ return require("packer").startup {
 		-- colorschemes
 		use {
 			"marko-cerovac/material.nvim",
-			disable = true,
+			disable = false,
 			-- cmd = 'colo material',
 			config = function()
 				require "plugin.material"
+				vim.cmd "colo material"
 			end,
 		}
 		use { "projekt0n/github-nvim-theme", cmd = "colo github" }
@@ -107,7 +108,10 @@ return require("packer").startup {
 			disable = false,
 			cmd = { "colo gruvbox", "colo nvcode", "colo aurora" },
 		}
-		use { "tiagovla/tokyodark.nvim", cmd = "colo tokyodark" }
+		use {
+			"tiagovla/tokyodark.nvim",
+			-- cmd = "colo tokyodark",
+		}
 		use {
 			"xiyaowong/nvim-transparent",
 			disable = false,
@@ -141,7 +145,6 @@ return require("packer").startup {
 				require("colorizer").setup()
 			end,
 		}
-		use "TaDaa/vimade"
 		use {
 			"Pocco81/TrueZen.nvim",
 			disable = true,
@@ -312,6 +315,33 @@ return require("packer").startup {
 			end,
 		}
 		use {
+			"dhruvmanila/telescope-bookmarks.nvim",
+			disable = false,
+			after = "telescope.nvim",
+			-- requires = {'nvim-telescope/telescope.nvim'},
+			config = function()
+				require("telescope").load_extension "bookmarks"
+			end,
+		}
+		use {
+			"cljoly/telescope-repo.nvim",
+			disable = false,
+			after = "telescope.nvim",
+			-- requires = {'nvim-telescope/telescope.nvim'},
+			config = function()
+				require("telescope").load_extension "repo"
+			end,
+		}
+		use {
+			"tom-anders/telescope-vim-bookmarks.nvim",
+			disable = false,
+			after = "telescope.nvim",
+			-- requires = {'nvim-telescope/telescope.nvim'},
+			config = function()
+				require("telescope").load_extension "vim_bookmarks"
+			end,
+		}
+		use {
 			"nvim-telescope/telescope-media-files.nvim",
 			disable = false,
 			after = "telescope.nvim",
@@ -383,8 +413,8 @@ return require("packer").startup {
 		use { "Pocco81/DAPInstall.nvim", opt = true, after = "nvim-dap" }
 		use {
 			"rcarriga/nvim-dap-ui",
-			disable = true,
-			requires = { "mfussenegger/nvim-dap" },
+			disable = false,
+			-- cmd = "DAP",
 			after = "nvim-dap",
 			config = function()
 				require("dapui").setup()
@@ -392,26 +422,28 @@ return require("packer").startup {
 		}
 		use {
 			"mfussenegger/nvim-dap-python",
-			disable = true,
+			disable = false,
 			after = "nvim-dap",
 			config = function()
-				require("dap-python").setup(
-					vim.fn.stdpath "data" .. "/dapinstall/python_dbg/bin/python"
-				)
+				require("dap-python").setup "python"
 			end,
 		}
 		use {
 			"nvim-telescope/telescope-dap.nvim",
-			disable = true,
+			disable = false,
 			after = { "nvim-dap", "telescope.nvim" },
 			config = function()
+				vim.cmd [[DAP]]
 				require("telescope").load_extension "dap"
 			end,
 		}
 		use {
 			"theHamsta/nvim-dap-virtual-text",
-			disable = true,
+			disable = false,
 			after = "nvim-dap",
+			config = function()
+				require("nvim-dap-virtual-text").setup()
+			end,
 		}
 
 		-- Lsp & autocompletion
@@ -419,11 +451,15 @@ return require("packer").startup {
 		use {
 			"hrsh7th/nvim-cmp",
 			disable = false,
-			event = "InsertEnter",
+			event = "VimEnter",
 			requires = {
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua" },
 				{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
-				{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+				{
+					"hrsh7th/cmp-nvim-lsp",
+					event = "InsertEnter",
+					requires = "nvim-lspconfig",
+				},
 				{ "hrsh7th/cmp-path", event = "InsertEnter" },
 				{ "hrsh7th/cmp-calc", event = "InsertEnter" },
 				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
@@ -611,16 +647,13 @@ return require("packer").startup {
 		use {
 			"AckslD/nvim-neoclip.lua",
 			disable = false,
+			requires = { "tami5/sqlite.lua", module = "sqlite" },
+			after = "telescope.nvim",
 			config = function()
 				require("neoclip").setup {
-					keys = {
-						i = {
-							select = "<CR>",
-							paste = "<m-p>",
-							pate_behind = "<m-k>",
-						},
-					},
+					enable_persistant_history = true,
 				}
+				require("telescope").load_extension "neoclip"
 			end,
 		}
 		use { "seandewar/nvimesweeper", cmd = "Nvimesweeper" }

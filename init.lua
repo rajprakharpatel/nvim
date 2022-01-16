@@ -7,7 +7,6 @@ _G.STime = vim.fn.localtime()
 require "util"
 
 -- options
-vim.cmd "colo gruvbox"
 require "options"
 
 -- Keymaps
@@ -18,3 +17,5 @@ require "plugin.config"
 
 -- Lsp
 -- require "lsp"
+
+vim.cmd [[colo material]]

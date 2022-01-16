@@ -1,6 +1,14 @@
 vim.g.material_style = "deep ocean"
 require("material").setup {
-	contrast = true,
+	contrast = {
+		sidebars = false,
+		floating_windows = false,
+		line_numbers = false,
+		sign_column = false,
+		cursor_line = false,
+		non_current_windows = true,
+		popup_menu = false,
+	},
 	borders = true,
 	italics = {
 		comments = true,
@@ -9,7 +17,7 @@ require("material").setup {
 		functions = true,
 		variables = true,
 	},
-	contrast_windows = {
+	contrast_filetypes = {
 		"terminal",
 		"packer",
 		"qf",
@@ -17,7 +25,7 @@ require("material").setup {
 		"undotree",
 		"diff",
 	},
-	text_contrast = { lighter = false, darker = true },
+	high_visibility = { lighter = false, darker = true },
 	disable = {
 		background = false,
 		term_colors = false,

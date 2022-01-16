@@ -60,6 +60,7 @@ wk.register({
 		o = { "<cmd>Telescope vim_options<cr>", "Options" },
 		m = { "<cmd>Telescope marks<cr>", "Marks" },
 		l = { "<cmd>Telescope lsp_references<cr>", "LSP References" },
+		d = { "<cmd>Telescope<cr>", "Debugger breakpoints" },
 		["'"] = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
 	},
 
@@ -106,6 +107,45 @@ wk.register({
 	-- Modify
 	m = {
 		name = "Modify",
+	},
+
+	-- debugger
+	d = {
+		name = "Debugger",
+		b = {
+			"<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+			"toggle breakpoint",
+		},
+		d = { "<cmd>lua require'dap'.continue()<CR>", "Start or continue" },
+		a = { "<cmd>lua require'dap'.step_over()<CR>", "Step Over/Ahead" },
+		o = { "<cmd>lua require'dap'.step_out()<CR>", "Step Out" },
+		i = { "<cmd>lua require'dap'.step_into()<CR>", "Step into" },
+		c = {
+			"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+			"Breakpoint Condition",
+		},
+		m = {
+			"<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+			"Breakpoint Message",
+		},
+		r = { "<cmd>lua require'dap'.repl.open()<CR>", "Repl Open" },
+		s = { "<cmd>lua require('dapui').toggle()<CR>", "Debugger Start/Stop" },
+		e = { "<cmd>lua require('dapui').eval()<CR>", "Eval Expression" },
+		h = {
+			"<cmd>lua require'dap.ui.variables'.hover()<CR>",
+			"Hover variables",
+		},
+		["?"] = {
+			"<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
+		},
+		t = {
+			name = "Telescope",
+			c = { "<cmd>Telescope dap commands<CR>", "commands" },
+			g = { "<cmd>Telescope dap configurations<CR>", "configurations" },
+			b = { "<cmd>Telescope dap list_breakpoints<CR>", "breakpoint" },
+			v = { "<cmd>Telescope dap variables<CR>", "variables" },
+			f = { "<cmd>Telescope dap frames<CR>", "frames" },
+		},
 	},
 
 	-- Plugin
