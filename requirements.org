@@ -1,0 +1,35 @@
+#+Title:Programs Required for all functionalities
+#+Description:Programs name are based on package names in the arch and aur.
+
+* Searching
+- fzf
+- silver-searcher(ag)
+- fd(alternative to find)
+- ripgrep(alternative to grep)
+
+* LSP
+1. Python
+#+begin_src bash
+pipx install 'python-lsp-server[all]'
+#+end_src
+
+2. C/CPP
+just install clang which includes ~clangd~ (the LSP)
+#+BEGIN_SRC bash
+sudo pacman -S clang
+#+END_SRC
+
+3. Bash
+~bash-language-server~ from either system package manager or npm
+#+BEGIN_SRC bash
+sudo npm i -g bash-language-server
+#+END_SRC
+
+4. Cmake
+~cmake-language-server~ from system package manager
+#+BEGIN_SRC bash
+sudo pacman -S cmake-language-server
+#+END_SRC
+
+5. Java
+~jdtls~ from aur

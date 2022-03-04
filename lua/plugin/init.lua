@@ -464,6 +464,7 @@ return require("packer").startup {
 				{ "hrsh7th/cmp-calc", event = "InsertEnter" },
 				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
 				{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
+				{ "hrsh7th/cmp-cmdline", event = "InsertEnter", disable = true },
 				{
 					"tzachar/cmp-tabnine",
 					event = "InsertEnter",
@@ -651,7 +652,7 @@ return require("packer").startup {
 			after = "telescope.nvim",
 			config = function()
 				require("neoclip").setup {
-					enable_persistant_history = true,
+					enable_persistent_history = true,
 				}
 				require("telescope").load_extension "neoclip"
 			end,
@@ -703,9 +704,9 @@ return require("packer").startup {
 		use { "github/copilot.vim" }
 		use { "nikvdp/ejs-syntax" }
 		use { "tpope/vim-commentary", event = "BufWinEnter" }
-		use {
-			"theprimeagen/harpoon",
-		}
+		use { "theprimeagen/harpoon" }
+		use { "stevearc/vim-arduino" }
+		use { "ray-x/guihua.lua" }
 		-- relative line numbers on operator pending mode
 		-- use "vim-scripts/RelOps"
 		-- use({ "folke/trouble.nvim" })

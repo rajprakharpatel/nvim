@@ -20,6 +20,7 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" },
@@ -90,13 +91,13 @@ local on_attach = function(client, bufnr)
 		[[<cmd>lua require('lspsaga.rename').rename()<CR>]],
 		opts
 	)
-	-- buf_set_keymap('n', '<space>l', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-	-- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	-- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+	-- buf_set_keymap('n', '<space>l', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts)
+	-- buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+	-- buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap(
 		"n",
 		"<space>q",
-		"<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
+		"<cmd>lua vim.diagnostic.set_loclist()<CR>",
 		opts
 	)
 
@@ -163,6 +164,12 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
+		vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])
 		buf_set_keymap(
 			"n",
 			"<m-c-l>",
@@ -368,6 +375,8 @@ local sources = {
 }
 require("null-ls").setup {
 	sources = sources,
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 -- require("lspconfig")["null-ls"].setup {
 -- 	on_attach = on_attach,

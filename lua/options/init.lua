@@ -98,6 +98,8 @@ vim.o.pumheight = 15
 vim.o.guicursor = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"
 vim.o.signcolumn = "yes"
 
+-- python path
+vim.g.python3_host_prog = "/usr/bin/python"
 --------------------------------------------------------------------------------
 --                                 autocmd!                                   --
 --------------------------------------------------------------------------------
@@ -114,7 +116,7 @@ define_augroups {
 		{
 			"FileType",
 			"java",
-			[[lua require('jdtls').start_or_attach({cmd = {'jdtls'}, on_attach = require('lsp.jdtls').on_attach, capabilities = require('lsp.jdtls').capabilities})]],
+			[[lua require('lsp.jdtls').setup()]],
 		},
 		-- {'FileType', 'java', [[lua require('jdtls_config').on_attach()]]}
 	},

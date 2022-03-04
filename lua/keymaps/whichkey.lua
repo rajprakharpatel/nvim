@@ -154,6 +154,8 @@ wk.register({
 		i = { pre_cmd .. "PackerInstall<cr>", "Install" },
 		s = { pre_cmd .. "PackerSync<cr>", "Sync" },
 		c = { pre_cmd .. "PackerClean<cr>", "Clean" },
+		e = {"<cmd>edit " .. vim.fn.stdpath "config" .. "/lua/plugin/init.lua<CR>", "Edit"}
+
 	},
 
 	-- Toggle/Switch
