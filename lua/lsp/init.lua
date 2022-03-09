@@ -164,12 +164,12 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
-		vim.cmd([[
+		vim.cmd [[
             augroup LspFormatting
                 autocmd! * <buffer>
                 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
             augroup END
-            ]])
+            ]]
 		buf_set_keymap(
 			"n",
 			"<m-c-l>",
@@ -354,6 +354,19 @@ nvim_lsp.jsonls.setup {
 }
 
 --------------------------------------------------------------------------------
+--							  groovy-language-server						  --
+--------------------------------------------------------------------------------
+require("lspconfig").groovyls.setup {
+	-- Unix
+	cmd = {
+		"java",
+		"-jar",
+		"/usr/share/java/groovyls/groovy-language-server-all.jar",
+	},
+	...,
+}
+
+--------------------------------------------------------------------------------
 --                              null-ls.nvim								  --
 --------------------------------------------------------------------------------
 local null_ls = require "null-ls"
@@ -376,7 +389,7 @@ local sources = {
 require("null-ls").setup {
 	sources = sources,
 	on_attach = on_attach,
-	capabilities = capabilities
+	capabilities = capabilities,
 }
 -- require("lspconfig")["null-ls"].setup {
 -- 	on_attach = on_attach,

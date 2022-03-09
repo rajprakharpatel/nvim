@@ -727,6 +727,13 @@ return require("packer").startup {
 		}
 		use "folke/lua-dev.nvim"
 		use "rafcamlet/nvim-luapad"
+		use {
+			"camspiers/lens.vim",
+			requires = { "camspiers/animate.vim" },
+			config = function()
+				vim.cmd "let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'nvimtree']"
+			end,
+		}
 		if packer_bootstrap then
 			require("packer").sync()
 		end

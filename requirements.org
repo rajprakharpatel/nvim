@@ -33,3 +33,6 @@ sudo pacman -S cmake-language-server
 
 5. Java
 ~jdtls~ from aur
+
+6. Groovy
+~groovy-language-server~ from aur

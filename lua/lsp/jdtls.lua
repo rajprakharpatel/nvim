@@ -216,7 +216,7 @@ function M.setup()
 	}
 
 	local workspace_folder = home
-		.. "/.workspace"
+		.. "/.workspace/"
 		.. vim.fn.fnamemodify(root_dir, ":p:h:t")
 	local config = {
 		flags = {
@@ -273,7 +273,7 @@ function M.setup()
 			},
 		},
 	}
-	config.cmd = { "jdtls", workspace_folder }
+	config.cmd = { "jdtls", "-data", workspace_folder }
 	config.on_attach = on_attach
 	config.on_init = function(client, _)
 		client.notify(

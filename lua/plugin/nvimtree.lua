@@ -1,10 +1,3 @@
-vim.g.nvim_tree_ignore = {
-	".git",
-	".github",
-	".cache",
-	"log.json",
-	".root",
-}
 vim.g.nvim_tree_auto_ignore_ft = {
 	"dashboard",
 	"startify",
@@ -50,12 +43,19 @@ local nvim_tree_bindings = {
 	{ key = "]c", cb = tree_cb "next_git_item" },
 	{ key = { "<BS>", "-" }, cb = tree_cb "dir_up" },
 	{ key = "q", cb = tree_cb "close" },
-	{ key = "g?", cb = tree_cb "toggle_help" },
+	{ key = "?", cb = tree_cb "toggle_help" },
 }
 require("nvim-tree").setup {
 	auto_close = true,
 	hijack_cursor = true,
 	update_cwd = true,
+	update_focused_file = { enable = true, update_cwd = false },
+	system_open = { cmd = "xdg-open" },
+	actions = {
+		open_file = {
+			window_picker = { chars = { "j", "k", "l", "a", "s", "d" } },
+		},
+	},
 	diagnostics = {
 		enable = true,
 		icons = {
@@ -70,7 +70,17 @@ require("nvim-tree").setup {
 		custom_only = true,
 		list = nvim_tree_bindings,
 	},
+	filters = {
+		custom = {
+			".git",
+			".github",
+			".cache",
+			"log.json",
+			".root",
+		},
+	},
 	view = {
 		auto_resize = true,
+		mappings = { custom_only = true, list = nvim_tree_bindings },
 	},
 }
