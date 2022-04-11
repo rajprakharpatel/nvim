@@ -36,3 +36,16 @@ sudo pacman -S cmake-language-server
 
 6. Groovy
 ~groovy-language-server~ from aur
+
+7. javascript/typescript
+   ~typescript-language-server~ from aur
+
+8. emmet-ls
+   #+begin_src bash
+sudo npm i -g emmet-ls
+   #+end_src
+
+9. html
+   ~vscode-language-server~ from aur
+10. json
+    ~vscode-language-server~ from aur

@@ -734,6 +734,14 @@ return require("packer").startup {
 				vim.cmd "let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'nvimtree']"
 			end,
 		}
+		-- Lua
+		use {
+			"ahmedkhalf/jupyter-nvim",
+			run = ":UpdateRemotePlugins",
+			config = function()
+				require("jupyter-nvim").setup {}
+			end,
+		}
 		if packer_bootstrap then
 			require("packer").sync()
 		end

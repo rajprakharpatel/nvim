@@ -3,7 +3,7 @@ vim.g.nvim_tree_auto_ignore_ft = {
 	"startify",
 	"quickfix",
 }
-vim.g.nvim_tree_indent_markers = 1 -- "0 by default, this option shows indent markers when folders are open
+vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 local nvim_tree_bindings = {
 	{
@@ -46,7 +46,6 @@ local nvim_tree_bindings = {
 	{ key = "?", cb = tree_cb "toggle_help" },
 }
 require("nvim-tree").setup {
-	auto_close = true,
 	hijack_cursor = true,
 	update_cwd = true,
 	update_focused_file = { enable = true, update_cwd = false },
@@ -56,6 +55,7 @@ require("nvim-tree").setup {
 			window_picker = { chars = { "j", "k", "l", "a", "s", "d" } },
 		},
 	},
+	renderer = { indent_markers = { enable = true } },
 	diagnostics = {
 		enable = true,
 		icons = {

@@ -5,7 +5,7 @@ using namespace std;
 
 #define ll long long
 #define MEM(a, b) memset(a, (b), sizeof(a))
-#define fo(i, n) for (i = 0; i < n; i++)
+#define fo(i, n) for (int i = 0; i < n; i++)
 #define FOR(i, j, k, in) for (int i = j; i < k; i += in)
 #define RFOR(i, j, k, in) for (int i = j; i > k; i -= in)
 #define Fo(i, k, n) for (i = k; k < n ? i < n : i > n; k < n ? i += 1 : i -= 1)
@@ -55,7 +55,7 @@ void ipgraph(int n, int m);
 void dfs(int u, int par);
 
 const int N = 3e5;
-const int mod = 1'000'000'007;
+const int mod = 1000000007;
 vi g[N];
 
 void solve() { 
@@ -64,9 +64,9 @@ void solve() {
 
 int main() {
   ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-#ifdef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
+#ifndef ONLINE_JUDGE
+  freopen("inp", "r", stdin);
+  freopen("out", "w", stdout);
 #endif
   int test_case = 1;
   cin >> test_case;

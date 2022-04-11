@@ -100,57 +100,60 @@ vim.o.signcolumn = "yes"
 
 -- python path
 vim.g.python3_host_prog = "/usr/bin/python"
+
 --------------------------------------------------------------------------------
 --                                 autocmd!                                   --
 --------------------------------------------------------------------------------
 
 local plugins_lua = vim.fn.stdpath "config" .. "/lua/plugin/init.lua"
+local au = vim.api.nvim_create_autocmd
 
-define_augroups {
-	-- _colorizer = { { "FileType", "*", ":ColorizerAttachToBuffer" } },
-	_relNum = {
-		{ "InsertEnter", "*", "set norelativenumber" },
-		{ "InsertLeave", "*", "set relativenumber | set nu" },
-	},
-	_jdtls = {
-		{
-			"FileType",
-			"java",
-			[[lua require('lsp.jdtls').setup()]],
-		},
-		-- {'FileType', 'java', [[lua require('jdtls_config').on_attach()]]}
-	},
-	_lua = { { "FileType", "lua,java,python", "set ts=4 | set sw=4" } },
-	_gitFiles = {
-		{
-			"FileType",
-			"gitcommit,gitrebase,gitconfig",
-			"set bufhidden=delete",
-		},
-	},
-	_dashboard = {
-		-- seems to be nobuflisted that makes my stuff disapear will do more testing
-		{
-			"FileType",
-			"dashboard",
-			"setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= ",
-		},
-		{
-			"FileType",
-			"dashboard",
-			"set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2",
-		},
-	},
-	_packer_compile = {
-		{
-			"BufWritePost",
-			plugins_lua,
-			"source " .. plugins_lua .. " | PackerCompile",
-		},
-		{
-			"BufEnter",
-			plugins_lua,
-			"source " .. plugins_lua,
-		},
-	},
-}
+local _relNum = vim.api.nvim_create_augroup("_relNum", { clear = true })
+au("InsertEnter", { command = "set norelativenumber", group = _relNum })
+au("InsertLeave", { command = "set relativenumber", group = _relNum })
+
+local _jdtls = vim.api.nvim_create_augroup("_jdtls", { clear = true })
+au("FileType", {
+	pattern = "java",
+	command = "lua require('lsp.jdtls').setup()",
+	group = _jdtls,
+})
+
+local _gitFiles = vim.api.nvim_create_augroup("_gitFiles", { clear = true })
+au("FileType", {
+	pattern = { "gitcommit", "gitrebase", "gitconfig" },
+	command = "set bufhidden",
+	group = _gitFiles,
+})
+
+local _dashboard = vim.api.nvim_create_augroup("_dashboard", { clear = true })
+au("FileType", {
+	pattern = "dashboard",
+	command = "setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= showtabline=0",
+	group = _dashboard,
+})
+au(
+	"BufLeave",
+	{ buffer = 0, command = "set showtabline=2", group = _dashboard }
+)
+
+local _packer_compile = vim.api.nvim_create_augroup(
+	"_packer_compile",
+	{ clear = true }
+)
+au("BufWritePost", {
+	pattern = plugins_lua,
+	command = "source " .. plugins_lua .. " | PackerCompile",
+	group = _packer_compile,
+})
+au("BufEnter", {
+	pattern = plugins_lua,
+	command = "source" .. plugins_lua,
+	group = _packer_compile,
+})
+
+local _colorizer = vim.api.nvim_create_augroup("_colorizer", { clear = true })
+au("FileType", {
+	command = "ColorizerAttachToBuffer",
+	group = _colorizer,
+})
