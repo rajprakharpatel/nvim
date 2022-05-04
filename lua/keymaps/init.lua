@@ -144,7 +144,7 @@ map("n", "<leader>cf", "<cmd>ClearQuickfixList<CR>", { noremap = true })
 
 -- CommentToggle
 -- map('n', '<c-/>', '<cmd>Commentary<cr>', {noremap = true})
-map("n", "<c-_>", "<cmd>Commentary<cr>", { noremap = true })
+map("n", "<c-_>", "<cmd>Commentary<cr><ESC>j", { noremap = true })
 
 -- ctrl-s save
 map("n", "<c-s>", "<esc>:w!<cr>", { noremap = true })

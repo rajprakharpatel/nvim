@@ -3,6 +3,7 @@ vim.g.nvim_tree_auto_ignore_ft = {
 	"startify",
 	"quickfix",
 }
+vim.g.nvim_tree_group_empty = 1
 vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 local nvim_tree_bindings = {

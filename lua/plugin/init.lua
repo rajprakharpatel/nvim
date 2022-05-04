@@ -128,16 +128,15 @@ return require("packer").startup {
 				vim.g.everforest_background = "hard"
 			end,
 		}
+
+		-- visual sugar
 		use {
 			"folke/twilight.nvim",
 			disable = false,
-			cmd = "colo twilight",
 			config = function()
-				require("twilight").setup {}
+				require("twilight").setup {context=5}
 			end,
 		}
-
-		-- visual sugar
 		use {
 			"norcalli/nvim-colorizer.lua",
 			event = "BufWinEnter",
@@ -152,16 +151,10 @@ return require("packer").startup {
 		}
 		use {
 			"edluffy/specs.nvim",
-			disable = true,
+			disable = false,
 			config = function()
 				require "plugin.specs"
 			end,
-		}
-		use {
-			"wfxr/minimap.vim",
-			disable = true,
-			run = "cargo install --locked code-minimap",
-			cmd = "Minimap",
 		}
 		use {
 			"jbyuki/venn.nvim", -- Draw Ascii flow chart in vim
@@ -176,9 +169,16 @@ return require("packer").startup {
 			disable = true,
 			config = function()
 				require("notify").setup {
-					timeout = 3000,
-					background_colour = "#000000",
+				timeout = 3000,
+				background_colour = "#000000",
 				}
+			end,
+		}
+		use {
+			"SmiteshP/nvim-gps",
+			requires = "nvim-treesitter/nvim-treesitter",
+			config = function()
+				require("nvim-gps").setup{}
 			end,
 		}
 		-- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
@@ -214,6 +214,7 @@ return require("packer").startup {
 		}
 		use "tpope/vim-surround"
 		use "tpope/vim-repeat"
+		use "tpope/vim-sleuth"
 		use {
 			"airblade/vim-rooter",
 			config = function()
@@ -447,7 +448,13 @@ return require("packer").startup {
 		}
 
 		-- Lsp & autocompletion
-		use { "mfussenegger/nvim-jdtls", ft = "java" }
+		use {
+			"mfussenegger/nvim-jdtls",
+			ft = "java",
+			config = function()
+				require("lsp.jdtls").setup()
+			end,
+		}
 		use {
 			"hrsh7th/nvim-cmp",
 			disable = false,
@@ -465,12 +472,6 @@ return require("packer").startup {
 				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
 				{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
 				{ "hrsh7th/cmp-cmdline", event = "InsertEnter", disable = true },
-				{
-					"tzachar/cmp-tabnine",
-					event = "InsertEnter",
-					disable = true,
-					run = "./install.sh",
-				},
 				{ "quangnguyen30192/cmp-nvim-ultisnips", event = "InsertEnter" },
 				{
 					"kristijanhusak/vim-dadbod-completion",
@@ -486,6 +487,23 @@ return require("packer").startup {
 			config = function()
 				require "completion"
 			end,
+		}
+		use {
+			'tzachar/cmp-tabnine',
+			event = "InsertEnter",
+			run='./install.sh',
+			requires = 'hrsh7th/nvim-cmp'
+		}
+		use {
+			'David-Kunz/cmp-npm',
+			requires = {
+			'nvim-lua/plenary.nvim',
+			'hrsh7th/nvim-cmp'
+			}
+		}
+		use {
+			"lukas-reineke/cmp-rg",
+			requires = 'hrsh7th/nvim-cmp'
 		}
 		use "b0o/SchemaStore.nvim"
 		use {
@@ -603,7 +621,7 @@ return require("packer").startup {
 			requires = {
 				"akinsho/org-bullets.nvim",
 				config = function()
-					require("org-bullets").setup()
+					require("org-bullets").setup({})
 				end,
 			},
 			config = function()
@@ -705,7 +723,7 @@ return require("packer").startup {
 		use { "nikvdp/ejs-syntax" }
 		use { "tpope/vim-commentary", event = "BufWinEnter" }
 		use { "theprimeagen/harpoon" }
-		use { "stevearc/vim-arduino" }
+		-- use { "stevearc/vim-arduino" }
 		use { "ray-x/guihua.lua" }
 		-- relative line numbers on operator pending mode
 		-- use "vim-scripts/RelOps"

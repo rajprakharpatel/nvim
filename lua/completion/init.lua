@@ -11,19 +11,41 @@ local check_back_space = function()
 end
 
 local cmp = require "cmp"
+local compare = require('cmp.config.compare')
+vim.cmd([[packadd cmp-tabnine]])
+require('cmp-npm').setup({})
+
 cmp.setup {
 	snippet = {
 		expand = function(args)
 			vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
-	documentation = {
-		border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+	window = {
+		documentation = {
+			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+		},
 	},
+	sorting = {
+    priority_weight = 2,
+    comparators = {
+      require('cmp_tabnine.compare'),
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
 	formatting = {
 		format = function(entry, vim_item)
 			-- set a name for each source
 			local source_mapping = {
+				npm = "[npm]",
+				rg = "[ripgrep]",
 				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
 				vsnip = "[vsnip]",
@@ -51,7 +73,7 @@ cmp.setup {
 				then
 					menu = entry.completion_item.data.detail .. " " .. menu
 				end
-				vim_item.kind = "" .. " suggestion"
+				vim_item.kind = " " .. "suggestion"
 			end
 			if entry.source.name == "nuspell" then
 				if
@@ -81,7 +103,6 @@ cmp.setup {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		},
-
 		["<Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -106,8 +127,10 @@ cmp.setup {
 		end,
 	},
 	sources = {
+		{ name = "npm", keyword_length = 3},
 		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
+		{ name = "rg" },
 		{ name = "cmp_tabnine" },
 		{ name = "snippy" },
 		{ name = "buffer" },

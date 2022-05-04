@@ -38,6 +38,7 @@ vim.o.mouse = vim.o.mouse .. "a"
 vim.o.showtabline = 2
 vim.wo.colorcolumn = "80"
 vim.wo.cursorline = true
+vim.o.laststatus = 3
 
 vim.o.secure = true
 vim.o.title = true
@@ -152,8 +153,8 @@ au("BufEnter", {
 	group = _packer_compile,
 })
 
-local _colorizer = vim.api.nvim_create_augroup("_colorizer", { clear = true })
-au("FileType", {
-	command = "ColorizerAttachToBuffer",
-	group = _colorizer,
-})
+-- local _colorizer = vim.api.nvim_create_augroup("_colorizer", { clear = true })
+-- au("FileType", {
+-- 	command = "ColorizerAttachToBuffer",
+-- 	group = _colorizer,
+-- })

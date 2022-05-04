@@ -34,6 +34,7 @@ local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
+
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
@@ -163,7 +164,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[d", [[<cmd>:Lspsaga diagnostic_jump_prev<CR>]], opts)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.document_formatting then
 		vim.cmd [[
             augroup LspFormatting
                 autocmd! * <buffer>
@@ -176,7 +177,7 @@ local on_attach = function(client, bufnr)
 			"<cmd>lua vim.lsp.buf.formatting()<CR>",
 			opts
 		)
-	elseif client.resolved_capabilities.document_range_formatting then
+	elseif client.server_capabilities.document_range_formatting then
 		buf_set_keymap(
 			"v",
 			"<m-c-l>",
@@ -186,7 +187,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
       hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
@@ -279,7 +280,7 @@ nvim_lsp.bashls.setup {
 require("lspconfig").sqls.setup {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
-		client.resolved_capabilities.execute_command = true
+		client.server_capabilities.execute_command = true
 
 		local function buf_set_keymap(...)
 			vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -338,6 +339,10 @@ require("lspconfig").emmet_ls.setup {
 --                              jsonls      								  --
 --------------------------------------------------------------------------------
 nvim_lsp.jsonls.setup {
+	cmd = {
+		"vscode-json-languageserver",
+		"--stdio"
+	},
 	settings = {
 		json = {
 			schemas = require("schemastore").json.schemas(),
@@ -383,7 +388,7 @@ local sources = {
 	null_ls.builtins.diagnostics.write_good,
 	null_ls.builtins.code_actions.gitsigns,
 	null_ls.builtins.diagnostics.eslint,
-	null_ls.builtins.diagnostics.luacheck,
+	-- null_ls.builtins.diagnostics.luacheck,
 	null_ls.builtins.formatting.stylua,
 }
 require("null-ls").setup {

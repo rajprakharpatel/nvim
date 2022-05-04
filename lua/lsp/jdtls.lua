@@ -5,7 +5,7 @@ M.capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" },
 }
 function M.setup()
-	local on_attach = function(client, bufnr)
+	local on_attach = function(_, bufnr)
 		vim.fn.sign_define("LspDiagnosticsSignError", {
 			texthl = "LspDiagnosticsSignError",
 			text = "❌",
@@ -258,17 +258,21 @@ function M.setup()
 			configuration = {
 				runtimes = {
 					{
+						name = "JavaSE-8",
+						path = home .. "/.sdkman/candidates/java/8.0.302-open/",
+					},
+					{
 						name = "JavaSE-11",
-						path = home .. "/.sdkman/candidates/java/11.0.10-open/",
+						path = home .. "/.sdkman/candidates/java/11.0.12-open/",
 					},
-					{
-						name = "JavaSE-14",
-						path = home .. "/.sdkman/candidates/java/14.0.2-open/",
-					},
-					{
-						name = "JavaSE-15",
-						path = home .. "/.sdkman/candidates/java/15.0.1-open/",
-					},
+					-- {
+					-- 	name = "JavaSE-14",
+					-- 	path = home .. "/.sdkman/candidates/java/14.0.2-open/",
+					-- },
+					-- {
+					-- 	name = "JavaSE-15",
+					-- 	path = home .. "/.sdkman/candidates/java/15.0.1-open/",
+					-- },
 				},
 			},
 		},
