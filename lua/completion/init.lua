@@ -11,9 +11,9 @@ local check_back_space = function()
 end
 
 local cmp = require "cmp"
-local compare = require('cmp.config.compare')
-vim.cmd([[packadd cmp-tabnine]])
-require('cmp-npm').setup({})
+local compare = require "cmp.config.compare"
+vim.cmd [[packadd cmp-tabnine]]
+require("cmp-npm").setup {}
 
 cmp.setup {
 	snippet = {
@@ -27,19 +27,19 @@ cmp.setup {
 		},
 	},
 	sorting = {
-    priority_weight = 2,
-    comparators = {
-      require('cmp_tabnine.compare'),
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
-      compare.kind,
-      compare.sort_text,
-      compare.length,
-      compare.order,
-    },
-  },
+		priority_weight = 2,
+		comparators = {
+			require "cmp_tabnine.compare",
+			compare.offset,
+			compare.exact,
+			compare.score,
+			compare.recently_used,
+			compare.kind,
+			compare.sort_text,
+			compare.length,
+			compare.order,
+		},
+	},
 	formatting = {
 		format = function(entry, vim_item)
 			-- set a name for each source
@@ -127,10 +127,11 @@ cmp.setup {
 		end,
 	},
 	sources = {
-		{ name = "npm", keyword_length = 3},
+		{ name = "npm", keyword_length = 3 },
 		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
 		{ name = "rg" },
+		{ name = "cmp-git" },
 		{ name = "cmp_tabnine" },
 		{ name = "snippy" },
 		{ name = "buffer" },

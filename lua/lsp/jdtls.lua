@@ -259,7 +259,7 @@ function M.setup()
 				runtimes = {
 					{
 						name = "JavaSE-8",
-						path = home .. "/.sdkman/candidates/java/8.0.302-open/",
+						path = home .. "/.jdks/jdk1.8.0_321",
 					},
 					{
 						name = "JavaSE-11",
@@ -277,7 +277,13 @@ function M.setup()
 			},
 		},
 	}
-	config.cmd = { "jdtls", "-data", workspace_folder }
+	config.cmd = {
+		"jdtls",
+		"-data",
+		workspace_folder,
+		"--jvm-arg=-javaagent:/home/rajp/.m2/repository/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar",
+		"--jvm-arg=-Xbootclasspath/a:/home/rajp/.m2/repository/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar",
+	}
 	config.on_attach = on_attach
 	config.on_init = function(client, _)
 		client.notify(

@@ -164,27 +164,24 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[d", [[<cmd>:Lspsaga diagnostic_jump_prev<CR>]], opts)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
-	if client.server_capabilities.document_formatting then
-		vim.cmd [[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-            augroup END
-            ]]
-		buf_set_keymap(
-			"n",
-			"<m-c-l>",
-			"<cmd>lua vim.lsp.buf.formatting()<CR>",
-			opts
-		)
-	elseif client.server_capabilities.document_range_formatting then
-		buf_set_keymap(
-			"v",
-			"<m-c-l>",
-			"<cmd>lua vim.lsp.buf.range_formatting()<CR>",
-			opts
-		)
-	end
+	vim.cmd [[
+	augroup LspFormatting
+		autocmd! * <buffer>
+		autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async=false}
+	augroup END
+	]]
+	buf_set_keymap(
+		"n",
+		"<m-c-l>",
+		"<cmd>lua vim.lsp.buf.format{async=false}<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"v",
+		"<m-c-l>",
+		"<cmd>lua vim.lsp.buf.range_formatting()<CR>",
+		opts
+	)
 
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.document_highlight then
@@ -219,7 +216,7 @@ local servers = {
 	"pylsp",
 	"vimls",
 	"tsserver",
-	"html",
+	-- "html",
 	"cssls",
 }
 for _, lsp in ipairs(servers) do
@@ -235,11 +232,13 @@ local luadev = require("lua-dev").setup {
 	lspconfig = {
 		capabilities = capabilities,
 		on_attach = on_attach,
-		cmd = {
-			"/usr/bin/lua-language-server",
-			"-E",
-			"/usr/share/lua-language-server/main.lua",
-		},
+		init_options = { documentFormatting = true },
+		-- cmd = {
+		-- 	"/usr/bin/lua-language-server",
+		-- 	"-E",
+		-- 	"/usr/share/lua-language-server/main.lua",
+		-- },
+		runtime_path = true,
 		settings = {
 			Lua = {
 				runtime = {
@@ -336,12 +335,12 @@ require("lspconfig").emmet_ls.setup {
 }
 
 --------------------------------------------------------------------------------
---                              jsonls      								  --
+--                              jsonls      								                  --
 --------------------------------------------------------------------------------
 nvim_lsp.jsonls.setup {
 	cmd = {
 		"vscode-json-languageserver",
-		"--stdio"
+		"--stdio",
 	},
 	settings = {
 		json = {
@@ -359,7 +358,20 @@ nvim_lsp.jsonls.setup {
 }
 
 --------------------------------------------------------------------------------
---							  groovy-language-server						  --
+--                                  html                                      --
+--------------------------------------------------------------------------------
+nvim_lsp.html.setup {
+	cmd = {
+		"vscode-html-languageserver",
+		"--stdio",
+	},
+	init_options = { documentFormatting = true },
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+--------------------------------------------------------------------------------
+--										  groovy-language-server																--
 --------------------------------------------------------------------------------
 require("lspconfig").groovyls.setup {
 	-- Unix
@@ -372,7 +384,7 @@ require("lspconfig").groovyls.setup {
 }
 
 --------------------------------------------------------------------------------
---                              null-ls.nvim								  --
+--                              null-ls.nvim																  --
 --------------------------------------------------------------------------------
 local null_ls = require "null-ls"
 
@@ -388,7 +400,7 @@ local sources = {
 	null_ls.builtins.diagnostics.write_good,
 	null_ls.builtins.code_actions.gitsigns,
 	null_ls.builtins.diagnostics.eslint,
-	-- null_ls.builtins.diagnostics.luacheck,
+	null_ls.builtins.diagnostics.luacheck,
 	null_ls.builtins.formatting.stylua,
 }
 require("null-ls").setup {

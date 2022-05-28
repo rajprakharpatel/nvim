@@ -233,3 +233,4 @@ map("n", "<m-q>", "<cmd>quit<cr>", { noremap = true })
 -- miscellaneous
 map("i", "<C-u>", "<esc>mzgUiw`za", { noremap = true })
 map("v", "<M-k>", '<Cmd>lua require("dapui").eval()<CR>', { noremap = true })
+vim.cmd [[nnoremap <C-e> <Plug>RestNvim]]

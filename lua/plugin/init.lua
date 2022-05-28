@@ -67,7 +67,7 @@ return require("packer").startup {
 		-- preview lines by :<num>
 		use {
 			"nacro90/numb.nvim",
-			disable = true,
+			disable = false,
 			config = function()
 				require("numb").setup()
 			end,
@@ -134,7 +134,7 @@ return require("packer").startup {
 			"folke/twilight.nvim",
 			disable = false,
 			config = function()
-				require("twilight").setup {context=5}
+				require("twilight").setup { context = 5 }
 			end,
 		}
 		use {
@@ -169,8 +169,8 @@ return require("packer").startup {
 			disable = true,
 			config = function()
 				require("notify").setup {
-				timeout = 3000,
-				background_colour = "#000000",
+					timeout = 3000,
+					background_colour = "#000000",
 				}
 			end,
 		}
@@ -178,7 +178,7 @@ return require("packer").startup {
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",
 			config = function()
-				require("nvim-gps").setup{}
+				require("nvim-gps").setup {}
 			end,
 		}
 		-- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
@@ -218,7 +218,23 @@ return require("packer").startup {
 		use {
 			"airblade/vim-rooter",
 			config = function()
-				vim.cmd "let g:rooter_patterns = ['.git', 'CMakeLists.txt', 'Makefile', '*.sln', '.idea', '.root', '.vim', '.vscode']"
+				vim.g.rooter_patterns = {
+					".git",
+					"CMakeLists.txt",
+					"Makefile",
+					"*.sln",
+					".idea",
+					".root",
+					".vim",
+					".vscode",
+				}
+			end,
+		}
+		use {
+			"NTBBloodbath/rest.nvim",
+			requires = { "nvim-lua/plenary.nvim" },
+			config = function()
+				require("rest-nvim").setup {}
 			end,
 		}
 		use {
@@ -394,6 +410,19 @@ return require("packer").startup {
 				require "plugin.diffview"
 			end,
 		}
+		use {
+			"pwntester/octo.nvim",
+			disable = false,
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
+				"kyazdani42/nvim-web-devicons",
+			},
+			config = function()
+				require("octo").setup()
+			end,
+		}
+
 		use { "alec-gibson/nvim-tetris", disable = true, cmd = "Tetris" }
 		use {
 			"michaelb/sniprun",
@@ -489,21 +518,21 @@ return require("packer").startup {
 			end,
 		}
 		use {
-			'tzachar/cmp-tabnine',
+			"tzachar/cmp-tabnine",
 			event = "InsertEnter",
-			run='./install.sh',
-			requires = 'hrsh7th/nvim-cmp'
+			run = "./install.sh",
+			requires = "hrsh7th/nvim-cmp",
 		}
 		use {
-			'David-Kunz/cmp-npm',
+			"David-Kunz/cmp-npm",
 			requires = {
-			'nvim-lua/plenary.nvim',
-			'hrsh7th/nvim-cmp'
-			}
+				"nvim-lua/plenary.nvim",
+				"hrsh7th/nvim-cmp",
+			},
 		}
 		use {
 			"lukas-reineke/cmp-rg",
-			requires = 'hrsh7th/nvim-cmp'
+			requires = "hrsh7th/nvim-cmp",
 		}
 		use "b0o/SchemaStore.nvim"
 		use {
@@ -545,10 +574,10 @@ return require("packer").startup {
 
 		-- Status Line
 		use {
-			"glepnir/galaxyline.nvim",
+			"NTBBloodbath/galaxyline.nvim",
 			disable = false,
 			config = function()
-				require "plugin.galaxyline"
+				require "plugin/galaxyline-eviline"
 			end,
 		}
 		use {
@@ -621,7 +650,7 @@ return require("packer").startup {
 			requires = {
 				"akinsho/org-bullets.nvim",
 				config = function()
-					require("org-bullets").setup({})
+					require("org-bullets").setup {}
 				end,
 			},
 			config = function()

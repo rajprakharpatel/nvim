@@ -42,6 +42,12 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
+	"<leader>mo",
+	[[<Cmd>lua require('material.functions').change_style('deep ocean')<CR>]],
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
 	"<leader>md",
 	[[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
 	{ noremap = true, silent = true }
