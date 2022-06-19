@@ -3,8 +3,19 @@ vim.g.nvim_tree_auto_ignore_ft = {
 	"startify",
 	"quickfix",
 }
-vim.g.nvim_tree_group_empty = 1
-vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+-- To auto close nvimtree when it's last buffer
+-- vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+vim.api.nvim_create_autocmd("BufEnter", {
+	nested = true,
+	callback = function()
+		if
+			#vim.api.nvim_list_wins() == 1
+			and vim.api.nvim_buf_get_name(0):match "NvimTree_" ~= nil
+		then
+			vim.cmd "quit"
+		end
+	end,
+})
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 local nvim_tree_bindings = {
 	{
@@ -51,12 +62,12 @@ require("nvim-tree").setup {
 	update_cwd = true,
 	update_focused_file = { enable = true, update_cwd = false },
 	system_open = { cmd = "xdg-open" },
-	actions = {
-		open_file = {
-			window_picker = { chars = { "j", "k", "l", "a", "s", "d" } },
-		},
-	},
-	renderer = { indent_markers = { enable = true } },
+	-- actions = {
+	-- 	open_file = {
+	-- 		window_picker = "asdjkl",
+	-- 	},
+	-- },
+	renderer = { indent_markers = { enable = true }, group_empty = true },
 	diagnostics = {
 		enable = true,
 		icons = {
@@ -65,11 +76,6 @@ require("nvim-tree").setup {
 			warning = "",
 			error = "",
 		},
-	},
-	auto_resize = true,
-	mappings = {
-		custom_only = true,
-		list = nvim_tree_bindings,
 	},
 	filters = {
 		custom = {

@@ -29,7 +29,6 @@ cmp.setup {
 	sorting = {
 		priority_weight = 2,
 		comparators = {
-			require "cmp_tabnine.compare",
 			compare.offset,
 			compare.exact,
 			compare.score,
@@ -38,6 +37,7 @@ cmp.setup {
 			compare.sort_text,
 			compare.length,
 			compare.order,
+			require "cmp_tabnine.compare",
 		},
 	},
 	formatting = {

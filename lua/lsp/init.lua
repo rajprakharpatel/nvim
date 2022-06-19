@@ -28,7 +28,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local nvim_lsp = require "lspconfig"
-local on_attach = function(client, bufnr)
+local common_on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach()
 
 	local function buf_set_keymap(...)
@@ -164,12 +164,12 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[d", [[<cmd>:Lspsaga diagnostic_jump_prev<CR>]], opts)
 	buf_set_keymap("n", "]d", [[<cmd>Lspsaga diagnostic_jump_next<CR>]], opts)
 	-- Set some keybinds conditional on server capabilities
-	vim.cmd [[
+	--[[vim.cmd [[
 	augroup LspFormatting
 		autocmd! * <buffer>
 		autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async=false}
 	augroup END
-	]]
+	--]]
 	buf_set_keymap(
 		"n",
 		"<m-c-l>",
@@ -216,11 +216,16 @@ local servers = {
 	"pylsp",
 	"vimls",
 	"tsserver",
+	"rls",
+	"tailwindcss",
 	-- "html",
-	"cssls",
+	-- "cssls",
 }
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
+	nvim_lsp[lsp].setup {
+		on_attach = common_on_attach,
+		capabilities = capabilities,
+	}
 end
 
 --------------------------------------------------------------------------------
@@ -231,7 +236,7 @@ local luadev = require("lua-dev").setup {
 	library = { vimruntime = true, types = true, plugins = true },
 	lspconfig = {
 		capabilities = capabilities,
-		on_attach = on_attach,
+		on_attach = common_on_attach,
 		init_options = { documentFormatting = true },
 		-- cmd = {
 		-- 	"/usr/bin/lua-language-server",
@@ -270,7 +275,7 @@ nvim_lsp.sumneko_lua.setup(luadev)
 
 nvim_lsp.bashls.setup {
 	cmd = { "bash-language-server", "start" },
-	on_attach = on_attach,
+	on_attach = common_on_attach,
 }
 
 --------------------------------------------------------------------------------
@@ -278,7 +283,7 @@ nvim_lsp.bashls.setup {
 --------------------------------------------------------------------------------
 require("lspconfig").sqls.setup {
 	on_attach = function(client, bufnr)
-		on_attach(client, bufnr)
+		common_on_attach(client, bufnr)
 		client.server_capabilities.execute_command = true
 
 		local function buf_set_keymap(...)
@@ -366,7 +371,20 @@ nvim_lsp.html.setup {
 		"--stdio",
 	},
 	init_options = { documentFormatting = true },
-	on_attach = on_attach,
+	on_attach = common_on_attach,
+	capabilities = capabilities,
+}
+
+--------------------------------------------------------------------------------
+--                                  cssls                                     --
+--------------------------------------------------------------------------------
+nvim_lsp.cssls.setup {
+	cmd = {
+		"vscode-css-languageserver",
+		"--stdio",
+	},
+	init_options = { documentFormatting = true },
+	on_attach = common_on_attach,
 	capabilities = capabilities,
 }
 
@@ -405,7 +423,7 @@ local sources = {
 }
 require("null-ls").setup {
 	sources = sources,
-	on_attach = on_attach,
+	on_attach = common_on_attach,
 	capabilities = capabilities,
 }
 -- require("lspconfig")["null-ls"].setup {

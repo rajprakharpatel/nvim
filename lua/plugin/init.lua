@@ -92,7 +92,12 @@ return require("packer").startup {
 				vim.cmd "colo material"
 			end,
 		}
-		use { "projekt0n/github-nvim-theme", cmd = "colo github" }
+		use {
+			"projekt0n/github-nvim-theme",
+			config = function()
+				-- vim.cmd "colo github_light"
+			end,
+		}
 		use { "bluz71/vim-nightfly-guicolors", cmd = "colo nightfly" }
 		use {
 			"kristijanhusak/vim-hybrid-material",
@@ -312,7 +317,11 @@ return require("packer").startup {
 
 		-- Webdev
 		-- use 'gennaro-tedesco/nvim-jqx'
-		use { "turbio/bracey.vim", ft = { "html", "css", "javascript" } }
+		use {
+			"turbio/bracey.vim",
+			ft = { "html", "css", "javascript" },
+			run = "npm install --prefix server",
+		}
 		use {
 			"vuki656/package-info.nvim",
 			requires = "MunifTanjim/nui.nvim",
@@ -493,7 +502,7 @@ return require("packer").startup {
 				{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
 				{
 					"hrsh7th/cmp-nvim-lsp",
-					event = "InsertEnter",
+					-- event = "InsertEnter",
 					requires = "nvim-lspconfig",
 				},
 				{ "hrsh7th/cmp-path", event = "InsertEnter" },
@@ -730,7 +739,7 @@ return require("packer").startup {
 		use {
 			"gelguy/wilder.nvim",
 			disable = false,
-			event = "CmdlineEnter",
+			-- event = "CmdlineEnter",
 			run = ":UpdateRemotePlugins",
 			requires = {
 				"romgrk/fzy-lua-native",
@@ -748,12 +757,20 @@ return require("packer").startup {
 			end,
 		}
 		use { "jose-elias-alvarez/null-ls.nvim" }
-		use { "github/copilot.vim" }
+		use { "github/copilot.vim", disable = true }
 		use { "nikvdp/ejs-syntax" }
 		use { "tpope/vim-commentary", event = "BufWinEnter" }
 		use { "theprimeagen/harpoon" }
 		-- use { "stevearc/vim-arduino" }
 		use { "ray-x/guihua.lua" }
+		use {
+			"sudormrfbin/cheatsheet.nvim",
+			requires = {
+				{ "nvim-telescope/telescope.nvim" },
+				{ "nvim-lua/popup.nvim" },
+				{ "nvim-lua/plenary.nvim" },
+			},
+		}
 		-- relative line numbers on operator pending mode
 		-- use "vim-scripts/RelOps"
 		-- use({ "folke/trouble.nvim" })
