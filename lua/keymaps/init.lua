@@ -209,6 +209,8 @@ augroup code
   autocmd filetype java nmap <F18> :w <bar> FloatermNew! java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y %:r
   autocmd filetype python nmap <F6> :w <bar> Dispatch! python % < inp > out <CR>
   autocmd filetype python nmap <F18> :w <bar> Dispatch! alacritty --hold -e python % <CR>
+  autocmd filetype http nmap <F6> <Plug>RestNvim <CR>
+  autocmd filetype http nmap <F18> <Plug>RestNvim <CR>
 augroup END
 ]]
 

@@ -217,7 +217,7 @@ local servers = {
 	"vimls",
 	"tsserver",
 	"rls",
-	"tailwindcss",
+	-- "tailwindcss",
 	-- "html",
 	-- "cssls",
 }

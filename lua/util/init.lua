@@ -1,29 +1,9 @@
-function _G.define_augroups(definitions) -- {{{1
-	-- Create autocommand groups based on the passed definitions
-	--
-	-- The key will be the name of the group, and each definition
-	-- within the group should have:
-	--    1. Trigger
-	--    2. Pattern
-	--    3. Text
-	-- just like how they would normally be defined from Vim itself
-	for group_name, definition in pairs(definitions) do
-		vim.cmd("augroup " .. group_name)
-		vim.cmd "autocmd!"
-
-		for _, def in ipairs(definition) do
-			local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")
-			vim.cmd(command)
-		end
-		vim.cmd "augroup END"
-	end
-end
-
 function _G.loadrequire(module)
-	local function requiref(module)
-		require(module)
+	local function requiref(mod)
+		require(mod)
 		print "Module Loaded"
 	end
+
 	local res = pcall(requiref, module)
 	if not res then
 		print "Module not found"
@@ -42,10 +22,10 @@ function _G.put(...)
 end
 
 function _G.packer(...)
-	if packer_plugins[...] and packer_plugins[...].loaded then
-		print(... .. " is loaded")
+	if packer_plugins[...] then
+		_G.put(packer_plugins[...])
 	else
-		print(... .. " not loaded")
+		print(... .. " not installed")
 	end
 end
 

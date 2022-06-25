@@ -122,6 +122,7 @@ gls.left[8] = {
 		provider = function()
 			return package.get_status()
 		end,
+		highlight = { colors.red, colors.bg },
 	},
 }
 gls.left[9] = {

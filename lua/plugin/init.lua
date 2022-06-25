@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 local packer_bootstrap
@@ -24,12 +25,12 @@ return require("packer").startup {
 	function(use)
 		-- Packer can manage itself as an optional plugin
 		use "wbthomason/packer.nvim"
-		-- use {
-		-- 	"lewis6991/impatient.nvim",
-		-- 	config = function()
-		-- 		require("impatient").enable_profile()
-		-- 	end,
-		-- }
+		use {
+			"lewis6991/impatient.nvim",
+			-- config = function()
+			-- 	require("impatient").enable_profile()
+			-- end,
+		}
 		use "nathom/filetype.nvim"
 
 		-- Quality of life improvements
@@ -44,8 +45,7 @@ return require("packer").startup {
 		}
 		use "wsdjeg/vim-fetch"
 		use { "mhinz/vim-sayonara", cmd = "Sayonara" }
-		-- working with variants of word :- search, replace and changing cas
-		use {
+		use { -- working with variants of word :- search, replace and changing cas
 			"tpope/vim-abolish",
 			disable = false,
 			cmd = { "Abolish", "Subvert" },
@@ -64,8 +64,7 @@ return require("packer").startup {
 			},
 		}
 
-		-- preview lines by :<num>
-		use {
+		use { -- preview lines by :<num>
 			"nacro90/numb.nvim",
 			disable = false,
 			config = function()
@@ -73,8 +72,7 @@ return require("packer").startup {
 			end,
 		}
 
-		-- Automatically make dirs when opening new paths
-		use {
+		use { -- Automatically make dirs when opening new paths
 			"jghauser/mkdir.nvim",
 			disable = false,
 			config = function()
@@ -82,7 +80,10 @@ return require("packer").startup {
 			end,
 		}
 
-		-- colorschemes
+		--------------------
+		--  colorschemes  --
+		--------------------
+
 		use {
 			"marko-cerovac/material.nvim",
 			disable = false,
@@ -187,13 +188,11 @@ return require("packer").startup {
 			end,
 		}
 		-- use 'RRethy/vim-illuminate' --Highlight word under cursor without languageserver
-		-- use 'notomo/gesture.nvim'
-		-- use 'cossonleo/neo-smooth-scroll.nvim'
 
 		-- Helpful Generic Tools
 		use "kshenoy/vim-signature"
 		use "mg979/vim-visual-multi"
-		use {
+		use { -- This plugin defines three key mappings by default, g<, g>, gs.
 			"machakann/vim-swap",
 			config = function()
 				vim.cmd "omap i, <Plug>(swap-textobject-i)"
@@ -560,7 +559,6 @@ return require("packer").startup {
 			end,
 		}
 		use "ray-x/lsp_signature.nvim"
-		-- use {'tzachar/compe-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-compe'}
 		use {
 			"windwp/nvim-autopairs",
 			disable = false,
@@ -772,8 +770,7 @@ return require("packer").startup {
 			},
 		}
 		-- relative line numbers on operator pending mode
-		-- use "vim-scripts/RelOps"
-		-- use({ "folke/trouble.nvim" })
+		use { "folke/trouble.nvim" }
 
 		-- Plugin development
 		use {

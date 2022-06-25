@@ -158,6 +158,19 @@ wk.register({
 
 	},
 
+	-- Run
+	r = {
+		name = "Run stuff",
+		r = {
+			function ()
+
+				local current_filetype = vim.api.nvim_buf_get_option(0, 'filetype');
+				print(current_filetype)
+			end,
+			"Print filetype"
+		}
+	},
+
 	-- Toggle/Switch
 	s = {
 		name = "Switch/Toggle",
