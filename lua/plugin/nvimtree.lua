@@ -87,7 +87,11 @@ require("nvim-tree").setup {
 		},
 	},
 	view = {
-		auto_resize = true,
 		mappings = { custom_only = true, list = nvim_tree_bindings },
 	},
+	actions = {
+		open_file = {
+			resize_window = true
+		}
+	}
 }

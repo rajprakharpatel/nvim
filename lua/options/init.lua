@@ -92,7 +92,7 @@ set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 ]]
 -- UI OPTS
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
 vim.o.fillchars = "stlnc:»,vert:║,fold:·"
 vim.o.pumblend = 20
 vim.o.pumheight = 15

@@ -495,13 +495,13 @@ return require("packer").startup {
 		use {
 			"hrsh7th/nvim-cmp",
 			disable = false,
-			event = "VimEnter",
+			-- event = "VimEnter",
 			requires = {
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua" },
 				{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
 				{
 					"hrsh7th/cmp-nvim-lsp",
-					-- event = "InsertEnter",
+					-- event = "VimEnter",
 					requires = "nvim-lspconfig",
 				},
 				{ "hrsh7th/cmp-path", event = "InsertEnter" },
@@ -527,7 +527,8 @@ return require("packer").startup {
 		}
 		use {
 			"tzachar/cmp-tabnine",
-			event = "InsertEnter",
+			disable = true,
+			event = "VimEnter",
 			run = "./install.sh",
 			requires = "hrsh7th/nvim-cmp",
 		}
@@ -553,7 +554,7 @@ return require("packer").startup {
 		use {
 			"neovim/nvim-lspconfig",
 			after = { "cmp-nvim-lsp" },
-			event = "InsertEnter",
+			-- event = "VimEnter",
 			config = function()
 				require "lsp"
 			end,
@@ -567,7 +568,7 @@ return require("packer").startup {
 			end,
 			after = "nvim-cmp",
 		}
-		use { "onsails/lspkind-nvim", event = "InsertEnter" }
+		use { "onsails/lspkind-nvim", event = "VimEnter" }
 		-- TODO: change back to glepnir version when it's fixed
 		use {
 			"tami5/lspsaga.nvim",
@@ -582,9 +583,18 @@ return require("packer").startup {
 		-- Status Line
 		use {
 			"NTBBloodbath/galaxyline.nvim",
-			disable = false,
+			disable = true,
 			config = function()
 				require "plugin/galaxyline-eviline"
+			end,
+		}
+		use {
+			"rebelot/heirline.nvim",
+			disable = false,
+			after = "gitsigns.nvim",
+			requires = { "lewis6991/gitsigns.nvim" },
+			config = function()
+				require "plugin/heirline"
 			end,
 		}
 		use {
@@ -594,6 +604,7 @@ return require("packer").startup {
 				require "wlsample.evil_line"
 			end,
 		}
+
 		-- Bufferline
 		use {
 			"akinsho/nvim-bufferline.lua",
@@ -769,8 +780,15 @@ return require("packer").startup {
 				{ "nvim-lua/plenary.nvim" },
 			},
 		}
-		-- relative line numbers on operator pending mode
 		use { "folke/trouble.nvim" }
+		use {
+			"simrat39/rust-tools.nvim",
+			disable = false,
+			event = "VimEnter",
+			config = function()
+				require("rust-tools").setup {}
+			end,
+		}
 
 		-- Plugin development
 		use {
@@ -786,21 +804,42 @@ return require("packer").startup {
 				)
 			end,
 		}
-		use "folke/lua-dev.nvim"
+		use "folke/neodev.nvim"
 		use "rafcamlet/nvim-luapad"
 		use {
 			"camspiers/lens.vim",
 			requires = { "camspiers/animate.vim" },
 			config = function()
-				vim.cmd "let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'nvimtree']"
+				vim.cmd "let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'NvimTree']"
+				vim.cmd "let g:lens#disabled_buftypes = ['nofile']"
 			end,
 		}
-		-- Lua
+		use { "justinmk/vim-syntax-extra" }
+		use {
+			"ldelossa/litee.nvim",
+			config = function()
+				require("litee.lib").setup()
+			end,
+		}
+		use {
+			"ldelossa/gh.nvim",
+			requires = { "ldelossa/litee.nvim" },
+			config=function ()
+				require('litee.gh').setup()
+			end
+		}
 		use {
 			"ahmedkhalf/jupyter-nvim",
 			run = ":UpdateRemotePlugins",
 			config = function()
 				require("jupyter-nvim").setup {}
+			end,
+		}
+		use { "SmiteshP/nvim-navic" }
+		use {
+			"j-hui/fidget.nvim",
+			config = function()
+				require("fidget").setup {}
 			end,
 		}
 		if packer_bootstrap then

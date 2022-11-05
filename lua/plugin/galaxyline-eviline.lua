@@ -1,6 +1,5 @@
 local package = require "package-info"
 local gl = require "galaxyline"
-local gps = require "nvim-gps"
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
@@ -125,19 +124,19 @@ gls.left[8] = {
 		highlight = { colors.red, colors.bg },
 	},
 }
-gls.left[9] = {
-	nvimGPS = {
-		provider = function()
-			return gps.get_location()
-		end,
-		condition = function()
-			return gps.is_available()
-		end,
-		separator = " ",
-		separator_highlight = { "NONE", colors.bg },
-		highlight = { colors.purple , colors.bg },
-	},
-}
+-- gls.left[9] = {
+-- 	nvimGPS = {
+-- 		provider = function()
+-- 			return gps.get_location()
+-- 		end,
+-- 		condition = function()
+-- 			return gps.is_available()
+-- 		end,
+-- 		separator = " ",
+-- 		separator_highlight = { "NONE", colors.bg },
+-- 		highlight = { colors.purple , colors.bg },
+-- 	},
+-- }
 
 gls.right[1] = {
 	DiagnosticError = {

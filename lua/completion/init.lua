@@ -12,7 +12,7 @@ end
 
 local cmp = require "cmp"
 local compare = require "cmp.config.compare"
-vim.cmd [[packadd cmp-tabnine]]
+-- vim.cmd [[packadd cmp-tabnine]]
 require("cmp-npm").setup {}
 
 cmp.setup {
@@ -37,7 +37,6 @@ cmp.setup {
 			compare.sort_text,
 			compare.length,
 			compare.order,
-			require "cmp_tabnine.compare",
 		},
 	},
 	formatting = {

@@ -1,29 +1,30 @@
 vim.g.material_style = "deep ocean"
 require("material").setup {
 	contrast = {
+		terminal = true,
 		sidebars = false,
 		floating_windows = false,
-		line_numbers = false,
-		sign_column = false,
 		cursor_line = false,
 		non_current_windows = true,
 		popup_menu = false,
+		filetypes = {
+			"terminal",
+			"packer",
+			"qf",
+			"NvimTree",
+			"undotree",
+			"diff",
+		},
 	},
 	borders = true,
-	italics = {
-		comments = true,
-		strings = true,
-		Keywords = true,
-		functions = true,
-		variables = true,
-	},
-	contrast_filetypes = {
-		"terminal",
-		"packer",
-		"qf",
-		"NvimTree",
-		"undotree",
-		"diff",
+	styles = { -- Give comments style such as bold, italic, underline etc.
+		comments = { italic = true },
+		strings = { bold = true },
+		keywords = {},
+		functions = { bold = true },
+		variables = {},
+		operators = {},
+		types = {},
 	},
 	high_visibility = { lighter = false, darker = true },
 	disable = {
@@ -31,6 +32,25 @@ require("material").setup {
 		term_colors = false,
 		eob_lines = false,
 	},
+	plugins = { -- Uncomment the plugins that you use to highlight them
+		-- Available plugins:
+		"dap",
+		"dashboard",
+		"gitsigns",
+		"hop",
+		"indent-blankline",
+		"lspsaga",
+		"mini",
+		"neogit",
+		"nvim-cmp",
+		"nvim-navic",
+		"nvim-tree",
+		"sneak",
+		"telescope",
+		"trouble",
+		"which-key",
+	},
+	async_loading = true,
 }
 vim.g.material_variable_color = "#d17CB4"
 
