@@ -1,6 +1,7 @@
 #+Title:Programs Required for all functionalities
 #+Description:Programs name are based on package names in the arch and aur.
 
+* Pynvim for python support
 * Searching
 - fzf
 - silver-searcher(ag)
@@ -49,3 +50,5 @@ sudo npm i -g emmet-ls
    ~vscode-language-server~ from aur
 10. json
     ~vscode-language-server~ from aur
+11. lua
+    ~stylua~ and ~lua-language-server~ from aur or npm

@@ -4,14 +4,6 @@ require "keymaps.whichkey"
 -- no hl
 map("n", "<leader>h", ":nohl<cr>", { noremap = true, silent = true })
 
--- explorer
-vim.api.nvim_set_keymap(
-	"n",
-	"<space>e",
-	":NvimTreeToggle<CR>",
-	{ noremap = true, silent = true }
-)
-
 -- To use `ALT+{h,j,k,l}`  to navigate windowsfrom any mode:
 -- better window movement
 map("n", "<a-h>", "<C-w>h", { silent = true })
@@ -39,17 +31,17 @@ vim.cmd [[
 ]]
 
 -- better indenting
-vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
+map("v", "<", "<gv", { noremap = true, silent = true })
+map("v", ">", ">gv", { noremap = true, silent = true })
 
 -- Tab switch buffer
-vim.api.nvim_set_keymap(
+map(
 	"n",
 	"<TAB>",
 	":BufferLineCycleNext<CR>",
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap(
+map(
 	"n",
 	"<S-TAB>",
 	":BufferLineCyclePrev<CR>",

@@ -1,21 +1,27 @@
-_G.STime = vim.fn.localtime()
-------------------------------------------------------------------------
---                              modules                               --
-------------------------------------------------------------------------
+-- Bootstrap install of Lazy.nvim plugin manager
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system {
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	}
+end
+vim.opt.rtp:prepend(lazypath)
 
--- util
-require "util"
-
--- options
 require "options"
 
--- Keymaps
+require("lazy").setup("plugins", {
+	defaults = {
+		lazy = true,
+		-- version = "*",
+	},
+})
+
 require "keymaps"
-
--- plugins
-require "plugin.config"
-
--- Lsp
--- require "lsp"
-
-vim.cmd [[colo material]]
+vim.cmd "colorscheme sonokai"
+vim.notify = require "notify"
+require "utils"

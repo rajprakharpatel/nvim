@@ -21,7 +21,7 @@ let g:switch_custom_definitions =
     \ ]
 
 let g:switch_mapping = "-"
-nnoremap _ :SwitchReverse<cr>
+"nnoremap _ :call switch#Switch({'reverse': v:true})<cr>
 let g:switch_find_smallest_match = 1
 
 autocmd FileType vim let b:switch_custom_definitions = [
