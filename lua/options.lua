@@ -99,7 +99,7 @@ set ssop-=folds      " do not store folds
 ]]
 -- UI OPTS
 vim.o.termguicolors = true
-vim.o.fillchars = "stlnc:»,vert:║,fold:·"
+vim.o.fillchars = "stlnc:»,vert:║,fold:·,diff:/"
 vim.o.pumblend = 20
 vim.o.pumheight = 15
 vim.o.guicursor = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"

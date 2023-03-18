@@ -1,7 +1,42 @@
 return {
---------------------------------------------------------------------------------
---                                  gitsigns                                  --
---------------------------------------------------------------------------------
+	{
+		"TimUntersberger/neogit",
+		event = "BufRead",
+		cmd = { "Neogit" },
+		dependencies = { "plenary.nvim", "diffview.nvim" },
+		opts = {
+			sections = {
+				untracked = {
+					folded = true,
+				},
+				unstaged = {
+					folded = true,
+				},
+				staged = {
+					folded = true,
+				},
+				stashes = {
+					folded = true,
+				},
+				unpulled = {
+					folded = true,
+				},
+				unmerged = {
+					folded = true,
+				},
+				recent = {
+					folded = true,
+				},
+			},
+			integrations = {
+				diffview = true,
+			},
+		},
+	},
+	{
+		"sindrets/diffview.nvim",
+		dependencies = { "plenary.nvim", "diffview.nvim", "nvim-web-devicons" },
+	},
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
