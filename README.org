@@ -144,4 +144,5 @@
 - "wilder.nvim"
 - "windline.nvim"
 - "zen-mode.nvim"
+- "tabout.nvim"
 

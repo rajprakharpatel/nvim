@@ -165,4 +165,13 @@ return {
 	},
 	{ "mhinz/vim-sayonara",        cmd = "Sayonara" },
 	{ "justinmk/vim-syntax-extra", enabled = false, ft = { "flex", "bison" } },
+	{
+		"abecodes/tabout.nvim",
+		event = "InsertEnter",
+		dependencies = { "nvim-treesitter" },
+		opts = {
+			tabkey = "<C-o>",
+			backwards_tabkey = "<C-i>",
+		},
+	},
 }

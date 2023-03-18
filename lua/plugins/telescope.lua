@@ -167,7 +167,7 @@ return {
 			)
 		end,
 	},
-	{
+	{ -- dressing.nvim alternative
 		"nvim-telescope/telescope-ui-select.nvim",
 		event = "VeryLazy",
 		dependencies = { "telescope.nvim" },
