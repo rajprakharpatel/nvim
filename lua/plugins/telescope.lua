@@ -2,10 +2,9 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = { 
+		dependencies = {
 			"nvim-lua/popup.nvim",
 			"nvim-lua/plenary.nvim",
-			{"cljoly/telescope-repo.nvim"}
 		},
 		config = function()
 			local map = vim.api.nvim_set_keymap
@@ -80,7 +79,6 @@ return {
 					},
 				},
 			}
-			require("telescope").load_extension "repo"
 
 			-- Mappings
 			map(
@@ -167,59 +165,54 @@ return {
 				"<cmd>lua require'telescope'.extensions.ultisnips.ultisnips(require('telescope.themes').get_dropdown())<cr>",
 				{ noremap = true }
 			)
-			-- map("n", "<space>o", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { noremap = true })
 		end,
 	},
-
-	--[[
 	{
-		"dhruvmanila/telescope-bookmarks.nvim",
-		after = "telescope.nvim",
-		-- requires = {'nvim-telescope/telescope.nvim'},
+		"nvim-telescope/telescope-ui-select.nvim",
+		event = "VeryLazy",
+		dependencies = { "telescope.nvim" },
+		config = function()
+			require("telescope").load_extension "ui-select"
+		end,
+	},
+	{
+		"dhruvmanila/browser-bookmarks.nvim",
+		cmd = "BrowserBookmarks",
+		dependencies = { "telescope.nvim" },
 		config = function()
 			require("telescope").load_extension "bookmarks"
 		end,
 	},
 	{
-		"tom-anders/telescope-vim-bookmarks.nvim",
-		after = "telescope.nvim",
-		-- requires = {'nvim-telescope/telescope.nvim'},
-		config = function()
-			require("telescope").load_extension "vim_bookmarks"
-		end,
-	},
-	{
 		"cljoly/telescope-repo.nvim",
-		dependencies = "telescope.nvim",
+		dependencies = { "telescope.nvim" },
 		config = function()
 			require("telescope").load_extension "repo"
 		end,
 	},
 	{
 		"nvim-telescope/telescope-media-files.nvim",
-		after = "telescope.nvim",
-		-- requires = {'nvim-telescope/telescope.nvim'},
+		dependencies = { "telescope.nvim" },
 		config = function()
 			require("telescope").load_extension "media_files"
 		end,
 	},
 	{
 		"nvim-telescope/telescope-symbols.nvim",
-		after = "telescope.nvim",
+		dependencies = { "telescope.nvim" },
 	},
 	{
 		"fhill2/telescope-ultisnips.nvim",
-		after = "telescope.nvim",
+		dependencies = { "telescope.nvim" },
 		config = function()
 			require("telescope").load_extension "ultisnips"
 		end,
 	},
 	{
 		"gbrlsnchs/telescope-lsp-handlers.nvim",
-		after = "telescope.nvim",
+		dependencies = { "telescope.nvim" },
 		config = function()
 			require("telescope").load_extension "lsp_handlers"
 		end,
 	},
-	--]]
 }

@@ -174,8 +174,8 @@ map("n", "<F9>", ":SymbolsOutline<CR>", { noremap = true })
 map("n", "Y", "y$", { noremap = true })
 
 -- Keeping it centered
-map("n", "n", "nzzzv", { noremap = true })
-map("n", "N", "Nzzzv", { noremap = true })
+-- map("n", "n", "nzzzv", { noremap = true })
+-- map("n", "N", "Nzzzv", { noremap = true })
 map("n", "J", "mzJ`z", { noremap = true })
 
 -- Undo break points

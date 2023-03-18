@@ -81,4 +81,23 @@ return {
 			}
 		end,
 	},
+	{
+		"ldelossa/gh.nvim",
+		event = "BufEnter",
+		dependencies = {
+			{
+				"ldelossa/litee.nvim",
+				config = function()
+					require("litee.lib").setup {
+						panel = {
+							orientation = "right",
+						},
+					}
+				end,
+			},
+		},
+		config = function ()
+			require('litee.gh').setup({})
+		end
+	},
 }

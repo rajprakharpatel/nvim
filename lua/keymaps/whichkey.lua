@@ -112,7 +112,7 @@ wk.register({
 		["'"] = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
 	},
 
-	-- Orgmode
+	-- open
 	o = {
 		name = "Open",
 		n = { "<cmd>e ~/org/notes.org<cr>", "Notes" },
