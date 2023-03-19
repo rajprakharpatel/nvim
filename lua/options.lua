@@ -72,7 +72,7 @@ vim.o.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 vim.bo.undofile = true
 vim.o.undofile = true
 vim.o.undodir = vim.fn.stdpath "data" .. "/shada/undo-dir"
--- vim.o.foldopen = "search"
+vim.o.foldopen = "search"
 -- vim.o.fileformat = 'unix'
 vim.o.jumpoptions = "stack"
 vim.o.diffopt = "hiddenoff,iwhiteall,algorithm:patience"
@@ -90,6 +90,7 @@ vim.o.formatlistpat =
 	"^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
 -- vim.o.foldlevelstart = 0
 -- vim.wo.foldmethod = "indent"
+vim.o.foldenable = false
 vim.o.wildignore =
 	"*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot"
 vim.o.shortmess = vim.o.shortmess .. "s"
@@ -116,8 +117,6 @@ vim.g.python3_host_prog = "/usr/bin/python"
 --------------------------------------------------------------------------------
 --                                 autocmd!                                   --
 --------------------------------------------------------------------------------
-
-local plugins_lua = vim.fn.stdpath "config" .. "/lua/plugin/init.lua"
 local au = vim.api.nvim_create_autocmd
 
 local _relNum = vim.api.nvim_create_augroup("_relNum", { clear = true })
@@ -137,35 +136,3 @@ au("FileType", {
 	command = "set bufhidden",
 	group = _gitFiles,
 })
-
-local _dashboard = vim.api.nvim_create_augroup("_dashboard", { clear = true })
-au("FileType", {
-	pattern = "dashboard",
-	command = "setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= showtabline=0",
-	group = _dashboard,
-})
-au(
-	"BufLeave",
-	{ buffer = 0, command = "set showtabline=2", group = _dashboard }
-)
-
-local _packer_compile = vim.api.nvim_create_augroup(
-	"_packer_compile",
-	{ clear = true }
-)
-au("BufWritePost", {
-	pattern = plugins_lua,
-	command = "source " .. plugins_lua .. " | PackerCompile",
-	group = _packer_compile,
-})
-au("BufEnter", {
-	pattern = plugins_lua,
-	command = "source" .. plugins_lua,
-	group = _packer_compile,
-})
-
--- local _colorizer = vim.api.nvim_create_augroup("_colorizer", { clear = true })
--- au("FileType", {
--- 	command = "ColorizerAttachToBuffer",
--- 	group = _colorizer,
--- })
