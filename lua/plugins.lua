@@ -1,6 +1,6 @@
 return {
 	-- Faster filetype recognition
-	{ "nathom/filetype.nvim", lazy = false },
+	{ "nathom/filetype.nvim", enabled = false,                lazy = false,  priority = 1000 },
 
 	-- Quality of life improvements
 	{
@@ -38,7 +38,7 @@ return {
 	{
 		-- This plugin defines three key mappings by default, g<, g>, gs.
 		"machakann/vim-swap",
-		event = "BufEnter",
+		event = "VeryLazy",
 		--	config = function()
 		--		vim.cmd "omap i, <Plug>(swap-textobject-i)"
 		--		vim.cmd "omap i, <Plug>(swap-textobject-i)"

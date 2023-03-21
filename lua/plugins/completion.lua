@@ -12,9 +12,9 @@ return {
 			},
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-calc" },
-			{ "kdheepak/cmp-latex-symbols" },
-			{ "hrsh7th/cmp-emoji",                  },
-			{ "hrsh7th/cmp-cmdline", disable = true },
+			{ "kdheepak/cmp-latex-symbols",         ft = { "latex" } },
+			{ "hrsh7th/cmp-emoji" },
+			{ "hrsh7th/cmp-cmdline",                disable = true },
 			{ "quangnguyen30192/cmp-nvim-ultisnips" },
 			{ "lukas-reineke/cmp-rg" },
 			{
@@ -26,7 +26,7 @@ return {
 				enabled = false,
 				dependencies = "nvim-cmp",
 			}, -- Install nuspell c++ library(sudo pacman -S nuspell) and lua-nuspell rock
-			{ "onsails/lspkind-nvim"},
+			{ "onsails/lspkind-nvim" },
 		},
 		config = function()
 			local fk = function(str, ...)
@@ -93,14 +93,14 @@ return {
 						}
 						-- fancy icons and a name of kind
 						vim_item.kind = require("lspkind").presets.default[vim_item.kind]
-							.. " "
-							.. vim_item.kind
+								.. " "
+								.. vim_item.kind
 						-- vim_item.kind = require("lspkind").presets.default[vim_item.kind]
 						local menu = source_mapping[entry.source.name]
 						if entry.source.name == "cmp_tabnine" then
 							if
-								entry.completion_item.data ~= nil
-								and entry.completion_item.data.detail ~= nil
+									entry.completion_item.data ~= nil
+									and entry.completion_item.data.detail ~= nil
 							then
 								menu = entry.completion_item.data.detail .. " " .. menu
 							end
@@ -108,8 +108,8 @@ return {
 						end
 						if entry.source.name == "nuspell" then
 							if
-								entry.completion_item.data ~= nil
-								and entry.completion_item.data.detail ~= nil
+									entry.completion_item.data ~= nil
+									and entry.completion_item.data.detail ~= nil
 							then
 								menu = entry.completion_item.data.detail .. " " .. menu
 							end
@@ -158,7 +158,7 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "npm", keyword_length = 3 },
+					{ name = "npm",                  keyword_length = 3 },
 					{ name = "nvim_lua" },
 					{ name = "nvim_lsp" },
 					{ name = "rg" },
@@ -191,15 +191,15 @@ return {
 		},
 	},
 	{
-			"gelguy/wilder.nvim",
-			event = "CmdlineEnter",
-			run = ":UpdateRemotePlugins",
-			dependencies = {
-				"romgrk/fzy-lua-native",
-				{ "nixprime/cpsm", build = "./install.sh" },
-			},
-			config = function()
-				vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/wilder.vim")
-			end,
+		"gelguy/wilder.nvim",
+		event = "CmdlineEnter",
+		run = ":UpdateRemotePlugins",
+		dependencies = {
+			"romgrk/fzy-lua-native",
+			{ "nixprime/cpsm", build = "./install.sh" },
 		},
+		config = function()
+			vim.cmd("source " .. vim.fn.stdpath "config" .. "/viml/wilder.vim")
+		end,
+	},
 }

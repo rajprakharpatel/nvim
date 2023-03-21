@@ -5,15 +5,12 @@
 return {
 	{
 		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
 	},
 
 	{
 		"marko-cerovac/material.nvim",
-		-- cmd = 'colo material',
 		config = function()
-			vim.g.material_style = "deep ocean"
+			-- vim.g.material_style = ""
 			require("material").setup {
 				contrast = {
 					terminal = true,
@@ -32,7 +29,8 @@ return {
 					},
 				},
 				borders = true,
-				styles = { -- Give comments style such as bold, italic, underline etc.
+				styles = {
+					-- Give comments style such as bold, italic, underline etc.
 					comments = { italic = true },
 					strings = { bold = true },
 					keywords = {},
@@ -99,39 +97,36 @@ return {
 
 	{
 		"projekt0n/github-nvim-theme",
-			-- cmd = "colo github_light",
 	},
 
-	{ "bluz71/vim-nightfly-guicolors", 
-	-- cmd = "colo nightfly" 
+	{
+		"bluz71/vim-nightfly-guicolors",
 	},
 
 	{
 		"kristijanhusak/vim-hybrid-material",
-		-- cmd = { "colo hybrid_material", "colo hybrid_reverse" 
 	},
 
-	{ "savq/melange", 
-	-- cmd = "colo melange" 
+	{
+		"savq/melange",
 	},
 
-	{ "sainnhe/gruvbox-material", -- cmd = "colo gruvbox-material"
+	{
+		"sainnhe/gruvbox-material",
 	},
 
-	{ "sainnhe/sonokai", 
-	-- cmd = "colo sonokai" 
+	{
+		"sainnhe/sonokai",
 	},
 
 	{ "tanvirtin/monokai.nvim" },
 
 	{
 		"ChristianChiarulli/nvcode-color-schemes.vim",
-		-- cmd = { "colo gruvbox", "colo nvcode", "colo aurora" },
 	},
 
 	{
 		"tiagovla/tokyodark.nvim",
-		-- cmd = "colo tokyodark",
 	},
 
 	{
@@ -146,6 +141,5 @@ return {
 		config = function()
 			vim.g.everforest_background = "hard"
 		end,
-	}
+	},
 }
-

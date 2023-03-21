@@ -22,6 +22,5 @@ require("lazy").setup("plugins", {
 })
 
 require "keymaps"
-vim.cmd "colorscheme sonokai"
-vim.notify = require "notify"
+vim.cmd "colorscheme material"
 require "utils"

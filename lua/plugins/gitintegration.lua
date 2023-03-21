@@ -83,7 +83,7 @@ return {
 	},
 	{
 		"ldelossa/gh.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = {
 			{
 				"ldelossa/litee.nvim",

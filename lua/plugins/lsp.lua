@@ -212,9 +212,9 @@ return {
 				on_attach = common_on_attach,
 			})
 
-			--------------------------------------------------------------------------------
-			--                                 sqls.nvim                                  --
-			--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--                                 sqls.nvim                                  --
+--------------------------------------------------------------------------------
 			nvim_lsp.sqls.setup({
 				on_attach = function(client, bufnr)
 					common_on_attach(client, bufnr)
@@ -224,21 +224,16 @@ return {
 						vim.api.nvim_buf_set_keymap(bufnr, ...)
 					end
 
-					buf_set_keymap("n", "<m-l>", "<plug>(sqls-execute-query)jj", { silent = true })
-					buf_set_keymap("n", "<s-m-l>", "<cmd>SqlsExecuteQuery<CR>", { silent = true })
+					buf_set_keymap("n", "<m-l>", "<plug>(sqls-execute-query)", { silent = true })
+					buf_set_keymap("n", "<s-m-l>", "<plug>(sqls-execute-query-vertical)", { silent = true })
 					-- connections config in ~/.config/sqls/config.yml
-					require("sqls").setup({
-						picker = "telescope",
-						-- settings = {
-						-- sqls = {connections = {{driver = 'mysql', dataSourceName = 'world:rajp@tcp(127.0.0.1:3306)/world'}}}
-						-- }
-					})
+					require("sqls").on_attach(client, bufnr)
 				end,
 			})
 
-			--------------------------------------------------------------------------------
-			--                              emmet-ls																			--
-			--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--                              emmet-ls																			--
+--------------------------------------------------------------------------------
 			nvim_lsp.emmet_ls.setup({
 				filetypes = {
 					"html",

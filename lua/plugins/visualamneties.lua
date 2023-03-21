@@ -28,7 +28,7 @@ return {
 	},
 	{
 		"edluffy/specs.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("specs").setup {
 				show_jumps = true,
@@ -49,14 +49,17 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
+		lazy = false,
+		priority = 500,
 		config = function()
 			require("notify").setup {
-				timeout = 3000,
-				background_colour = "#000000",
+				timeout = 500,
+				-- background_colour = "#000000",
 			}
+			vim.notify = require "notify"
 		end,
 	},
-	{ "RRethy/vim-illuminate",  event = "BufEnter" },
+	{ "RRethy/vim-illuminate",  event = "VeryLazy" },
 	{ "mg979/vim-visual-multi", event = "InsertEnter" },
 	{
 		"j-hui/fidget.nvim",

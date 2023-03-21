@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 
 -- Do not source default filtype.(vim/lua)
-vim.g.did_load_filetypes = 1
+-- vim.g.did_load_filetypes = 1
 
 vim.cmd [[let $GIT_EDITOR = 'nvr -cc split --remote-wait']]
 vim.cmd [[set comments=sl:/*,mb:\ *,elx:\ */]]
