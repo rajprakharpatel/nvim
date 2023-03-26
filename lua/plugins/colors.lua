@@ -9,8 +9,10 @@ return {
 
 	{
 		"marko-cerovac/material.nvim",
+		init = function()
+			vim.g.material_style = "deep_ocean"
+		end,
 		config = function()
-			-- vim.g.material_style = ""
 			require("material").setup {
 				contrast = {
 					terminal = true,

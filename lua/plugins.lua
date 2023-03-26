@@ -1,6 +1,11 @@
 return {
 	-- Faster filetype recognition
-	{ "nathom/filetype.nvim", enabled = false,                lazy = false,  priority = 1000 },
+	{
+		"nathom/filetype.nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1000,
+	},
 
 	-- Quality of life improvements
 	{
@@ -14,10 +19,10 @@ return {
 			vim.o.undodir = vim.fn.stdpath "data" .. "/shada/undo-dir"
 		end,
 	},
-	{ "zhimsel/vim-stay",     lazy = false,                  priority = 100 },
-	{ "wsdjeg/vim-fetch",     lazy = false,                  priority = 500 },
+	{ "zhimsel/vim-stay",  lazy = false,                  priority = 100 },
+	{ "wsdjeg/vim-fetch",  lazy = false,                  priority = 500 },
 	-- working with variants of word :- search, replace and changing cas
-	{ "tpope/vim-abolish",    cmd = { "Abolish", "Subvert" } },
+	{ "tpope/vim-abolish", cmd = { "Abolish", "Subvert" } },
 	{
 		"tpope/vim-dispatch",
 		dependencies = "radenling/vim-dispatch-neovim",
@@ -157,47 +162,6 @@ return {
 		},
 	},
 	{ "folke/neoconf.nvim",        lazy = false },
-	{
-		"glepnir/dashboard-nvim",
-		event = "VimEnter",
-		opts = {
-			theme = "hyper",
-			config = {
-				week_header = {
-					enable = true,
-				},
-				shortcut = {
-					{
-						desc = " Update",
-						group = "@property",
-						action = "Lazy update",
-						key = "u",
-					},
-					{
-						icon = " ",
-						icon_hl = "@variable",
-						desc = "Files",
-						group = "Label",
-						action = "Telescope find_files",
-						key = "f",
-					},
-					{
-						desc = " Apps",
-						group = "DiagnosticHint",
-						action = "Telescope app",
-						key = "a",
-					},
-					{
-						desc = " dotfiles",
-						group = "Number",
-						action = "Telescope dotfiles",
-						key = "d",
-					},
-				},
-			},
-		},
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
-	},
 	{ "mhinz/vim-sayonara",        cmd = "Sayonara" },
 	{ "justinmk/vim-syntax-extra", enabled = false, ft = { "flex", "bison" } },
 	{
@@ -213,5 +177,60 @@ return {
 		"glepnir/dbsession.nvim",
 		cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
 		config = true,
+	},
+	{ "unblevable/quick-scope", event = "VeryLazy" },
+	{
+		"phaazon/hop.nvim",
+		event = "VeryLazy",
+		config = function()
+			local hop = require "hop"
+			hop.setup()
+		end,
+	},
+	{
+		"kevinhwang91/nvim-hlslens",
+		event = "VeryLazy",
+		config = function()
+			require("hlslens").setup {
+				calm_down = true,
+			}
+			local kopts = { noremap = true, silent = true }
+			vim.api.nvim_set_keymap(
+				"n",
+				"n",
+				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"N",
+				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"*",
+				[[*<Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"#",
+				[[#<Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"g*",
+				[[g*<Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"g#",
+				[[g#<Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+		end,
 	},
 }
