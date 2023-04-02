@@ -137,11 +137,44 @@ return {
 			require("transparent").setup { enable = false }
 		end,
 	},
-
 	{
 		"sainnhe/everforest",
 		config = function()
 			vim.g.everforest_background = "hard"
 		end,
+	},
+	{
+		"dharmx/nvim-colo",
+		-- event = "VeryLazy",
+		lazy = false,
+		opts = {
+			theme = "radium_dark",
+			extensions = {
+				bufferline = {
+					enable = true,
+				},
+				devicons = {
+					enable = true,
+				},
+				aggregates = {
+					enable = true,
+					items = {
+						bold = true,
+						undercurl = true,
+						underline = true,
+						italic = true,
+						transparent = true,
+					},
+				},
+			},
+			presets = {
+				enable = true,
+				items = {
+					italic_comments = true,
+					dotted_spell = true,
+					contrast = true,
+				},
+			},
+		},
 	},
 }

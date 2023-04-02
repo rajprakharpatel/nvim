@@ -22,5 +22,5 @@ require("lazy").setup("plugins", {
 })
 
 require "keymaps"
-vim.cmd "colorscheme material"
+-- vim.cmd "colorscheme material"
 require "utils"

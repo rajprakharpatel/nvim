@@ -14,7 +14,7 @@ return {
 			{ "hrsh7th/cmp-calc" },
 			{ "kdheepak/cmp-latex-symbols",         ft = { "latex" } },
 			{ "hrsh7th/cmp-emoji" },
-			{ "hrsh7th/cmp-cmdline",                disable = true },
+			{ "hrsh7th/cmp-cmdline",                enabled = false },
 			{ "quangnguyen30192/cmp-nvim-ultisnips" },
 			{ "lukas-reineke/cmp-rg" },
 			{
@@ -185,7 +185,7 @@ return {
 	},
 	{
 		"David-Kunz/cmp-npm",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
 		},
@@ -193,7 +193,7 @@ return {
 	{
 		"gelguy/wilder.nvim",
 		event = "CmdlineEnter",
-		run = ":UpdateRemotePlugins",
+		build = ":UpdateRemotePlugins",
 		dependencies = {
 			"romgrk/fzy-lua-native",
 			{ "nixprime/cpsm", build = "./install.sh" },
