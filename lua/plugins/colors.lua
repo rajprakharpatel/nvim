@@ -133,9 +133,8 @@ return {
 
 	{
 		"xiyaowong/nvim-transparent",
-		config = function()
-			require("transparent").setup { enable = false }
-		end,
+		cmd = { "TransparentEnable", "TransparentDisable", "TransparentToggle" },
+		config = true,
 	},
 	{
 		"sainnhe/everforest",

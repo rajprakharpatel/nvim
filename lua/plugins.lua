@@ -188,4 +188,14 @@ return {
 			hop.setup()
 		end,
 	},
+	{ "letieu/hacker.nvim",     cmd = { "Hack", "HackFollow" } },
+	{
+		"wintermute-cell/gitignore.nvim",
+		cmd = { "Gitignore" },
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+	},
+	{ "eandrju/cellular-automaton.nvim", cmd = { "CellularAutomaton" } },
+	{"seandewar/killersheep.nvim", cmd = "KillKillKill"}
 }

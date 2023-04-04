@@ -2,15 +2,17 @@
 "  Neovide  "
 """""""""""""
 
+set guifont=JetBrainsMono\ Nerd\ Font:h8
+set cmdheight=0
 let g:neovide_refresh_rate=120
 let g:neovide_transparency=0.8
-let g:neovide_cursor_animation_length=0.87
-let g:neovide_cursor_trail_length=0.8
 let g:neovide_cursor_antialiasing=v:true
+let g:neovide_hide_mouse_when_typing = v:true
+let g:neovide_profiler = v:false
 let g:neovide_cursor_vfx_mode = "railgun" "torpedo, pixiedust, wireframe, sonicboom, ripple
 let g:neovide_cursor_vfx_opacity=200.0
-let g:neovide_cursor_vfx_particle_lifetime=1.2
-let g:neovide_cursor_vfx_particle_density=7.0
+let g:neovide_cursor_vfx_particle_lifetime=0.5
+let g:neovide_cursor_vfx_particle_density=1.0
 let g:neovide_cursor_vfx_particle_speed=10.0
 let g:neovide_cursor_vfx_particle_phase=1.5
 let g:neovide_cursor_vfx_particle_curl=1.0
