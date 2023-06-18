@@ -298,32 +298,12 @@ return {
 			}
 
 			--------------------------------------------------------------------------------
-			--                                 sqls.nvim                                  --
+			--                                 sqlls.nvim                                  --
 			--------------------------------------------------------------------------------
-			nvim_lsp.sqls.setup {
-				on_attach = function(client, bufnr)
-					common_on_attach(client, bufnr)
-					client.server_capabilities.execute_command = true
-
-					local function buf_set_keymap(...)
-						vim.api.nvim_buf_set_keymap(bufnr, ...)
-					end
-
-					buf_set_keymap(
-						"n",
-						"<m-l>",
-						"<plug>(sqls-execute-query)",
-						{ silent = true }
-					)
-					buf_set_keymap(
-						"n",
-						"<s-m-l>",
-						"<plug>(sqls-execute-query-vertical)",
-						{ silent = true }
-					)
-					-- connections config in ~/.config/sqls/config.yml
-					require("sqls").on_attach(client, bufnr)
-				end,
+			nvim_lsp.sqlls.setup {
+				root_dir = function ()
+					return vim.fn.getcwd()
+				end
 			}
 
 			--------------------------------------------------------------------------------

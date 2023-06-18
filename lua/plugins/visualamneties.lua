@@ -63,6 +63,7 @@ return {
 	{ "mg979/vim-visual-multi", event = "InsertEnter" },
 	{
 		"j-hui/fidget.nvim",
+		tag = "legacy",
 		event = "VeryLazy",
 		config = true,
 	},

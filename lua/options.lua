@@ -105,7 +105,7 @@ vim.o.pumblend = 20
 vim.o.pumheight = 15
 vim.o.guicursor = "n:blinkwait60-blinkon175-blinkoff175,i-ci-ve:ver25"
 vim.o.signcolumn = "yes"
-vim.o.setmousemoveevent = 1
+vim.o.mousemoveevent = true
 -- vim.o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.o.splitkeep = "screen"

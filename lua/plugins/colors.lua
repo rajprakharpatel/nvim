@@ -144,13 +144,14 @@ return {
 	},
 	{
 		"dharmx/nvim-colo",
+		enabled = false,
 		-- event = "VeryLazy",
 		lazy = false,
 		opts = {
 			theme = "radium_dark",
 			extensions = {
 				bufferline = {
-					enable = true,
+					enable = false,
 				},
 				devicons = {
 					enable = true,
