@@ -1,6 +1,6 @@
 return {
 	{
-		"TimUntersberger/neogit",
+		"NeogitOrg/neogit",
 		event = "BufRead",
 		cmd = { "Neogit" },
 		dependencies = { "plenary.nvim", "diffview.nvim" },
@@ -68,11 +68,6 @@ return {
 				},
 				numhl = true,
 				linehl = false,
-				keymaps = {
-					-- Default keymap options
-					noremap = true,
-					buffer = true,
-				},
 				watch_gitdir = { interval = 50 },
 				current_line_blame = true,
 				sign_priority = 6,
