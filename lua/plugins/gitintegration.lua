@@ -18,11 +18,13 @@ return {
 				stashes = {
 					folded = true,
 				},
-				unpulled = {
+				unpulled_upstream = {
 					folded = true,
+					hidden = false
 				},
-				unmerged = {
+				unmerged_upstream = {
 					folded = true,
+					hidden = false
 				},
 				recent = {
 					folded = true,

@@ -112,7 +112,7 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- python path
-vim.g.python3_host_prog = "/usr/bin/python"
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 --------------------------------------------------------------------------------
 --                                 autocmd!                                   --
