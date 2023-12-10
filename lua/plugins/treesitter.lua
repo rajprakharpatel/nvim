@@ -21,6 +21,10 @@ return{
 					"yaml",
 					"vim",
 					"org",
+					"css",
+					"typescript",
+					"tsx",
+					"astro"
 				},
 				highlight = {
 					enable = true, -- false will disable the whole extension

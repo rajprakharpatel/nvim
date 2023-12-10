@@ -12,7 +12,7 @@ vim.cmd [[set guifont=SauceCodePro\ Nerd\ Font:h11]]
 vim.cmd "set iskeyword+=-"
 vim.cmd [[set nu]]
 vim.cmd [[set rnu]]
-vim.o.viewoptions="cursor,folds,slash,unix"
+vim.o.viewoptions = "cursor,folds,slash,unix"
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 9
 vim.wo.signcolumn = "yes"
@@ -53,7 +53,7 @@ vim.o.ttimeout = true
 vim.o.wildignorecase = true
 vim.o.shiftround = true
 vim.o.magic = true
-vim.o.expandtab = false
+vim.o.expandtab = true
 vim.o.tags = "" -- let gutentags handle this
 
 vim.o.ttimeoutlen = 20
@@ -87,12 +87,12 @@ vim.o.list = true
 -- vim.o.listchars = "tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿"
 vim.o.listchars = "tab:  ,trail:-,space:░,extends:»,precedes:«,nbsp:⣿"
 vim.o.formatlistpat =
-	"^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
+"^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
 -- vim.o.foldlevelstart = 0
 -- vim.wo.foldmethod = "indent"
 vim.o.foldenable = false
 vim.o.wildignore =
-	"*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot"
+"*/dist*/*,*/target/*,*/builds/*,*/node_modules/*,*/flow-typed/*,*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf,*.exe,*.o,*.obj,*.dll,*.DS_Store,*.ttf,*.otf,*.woff,*.woff2,*.eot"
 vim.o.shortmess = vim.o.shortmess .. "s"
 vim.cmd [[
 set ssop-=options    " do not store global and local values in a session
@@ -108,7 +108,7 @@ vim.o.signcolumn = "yes"
 vim.o.mousemoveevent = true
 -- vim.o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.o.splitkeep = "screen"
+	vim.o.splitkeep = "screen"
 end
 
 -- python path
@@ -136,3 +136,4 @@ au("FileType", {
 	command = "set bufhidden",
 	group = _gitFiles,
 })
+

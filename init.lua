@@ -22,5 +22,6 @@ require("lazy").setup("plugins", {
 })
 
 require "keymaps"
-vim.cmd "colorscheme material"
+vim.cmd "colorscheme material-darker"
+-- require('material.functions').change_style('deep ocean')
 require "utils"

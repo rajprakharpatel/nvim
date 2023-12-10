@@ -5,7 +5,7 @@ return {
 			"cmp-nvim-lsp",
 			{ "b0o/SchemaStore.nvim" },
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				"nvimtools/none-ls.nvim",
 				dependencies = {
 					"gitsigns.nvim",
 				},
@@ -277,9 +277,11 @@ return {
 				"pylsp",
 				"vimls",
 				"tsserver",
-				-- "tailwindcss",
-				-- "html",
-				-- "cssls",
+				"astro",
+				"tailwindcss",
+				"html",
+				"cssls",
+				"emmet_language_server",
 			}
 			for _, lsp in ipairs(servers) do
 				nvim_lsp[lsp].setup {
@@ -301,37 +303,9 @@ return {
 			--                                 sqlls.nvim                                  --
 			--------------------------------------------------------------------------------
 			nvim_lsp.sqlls.setup {
-				root_dir = function ()
+				root_dir = function()
 					return vim.fn.getcwd()
 				end
-			}
-
-			--------------------------------------------------------------------------------
-			--                              emmet-ls																			--
-			--------------------------------------------------------------------------------
-			nvim_lsp.emmet_ls.setup {
-				filetypes = {
-					"html",
-					"css",
-					"scss",
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-					"haml",
-					"xml",
-					"xsl",
-					"pug",
-					"slim",
-					"sass",
-					"stylus",
-					"less",
-					"sss",
-				},
-				root_dir = function()
-					return vim.loop.cwd()
-				end,
-				capabilities = capabilities,
 			}
 
 			--------------------------------------------------------------------------------
@@ -484,5 +458,11 @@ return {
 			--Please make sure you install markdown and markdown_inline parser
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
+	},
+	{
+		"olrtg/nvim-emmet",
+		config = function()
+			vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+		end,
 	},
 }

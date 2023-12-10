@@ -87,7 +87,6 @@ return {
 				[[<Cmd>lua require('material.functions').change_style('darker')<CR>]],
 				{ noremap = true, silent = true }
 			)
-
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>~",
