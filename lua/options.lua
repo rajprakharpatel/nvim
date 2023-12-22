@@ -84,8 +84,8 @@ vim.o.inccommand = "nosplit"
 vim.o.path = ".,,,**"
 vim.o.completeopt = "menuone,noselect"
 vim.o.list = true
--- vim.o.listchars = "tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿"
-vim.o.listchars = "tab:  ,trail:-,space:░,extends:»,precedes:«,nbsp:⣿"
+vim.o.listchars = "tab:░░,trail:-,space: ,extends:»,precedes:«,nbsp:⣿"
+-- vim.o.listchars = "tab:  ,trail:-,space:░,extends:»,precedes:«,nbsp:⣿"
 vim.o.formatlistpat =
 "^\\s*\\[({]\\?\\([0-9]\\+\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\|^\\s*[-–+o*•]\\s\\+"
 -- vim.o.foldlevelstart = 0
@@ -137,3 +137,8 @@ au("FileType", {
 	group = _gitFiles,
 })
 
+local _astro = vim.api.nvim_create_augroup("_astro", { clear = true })
+au({ "BufRead", "BufEnter" }, {
+	pattern = { "*.astro" },
+  command = "set ft=astro"
+})

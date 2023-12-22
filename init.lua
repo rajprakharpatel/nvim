@@ -1,4 +1,9 @@
 -- Bootstrap install of Lazy.nvim plugin manager
+
+-- Example for configuring Neovim to load user-installed installed Lua rocks:
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {
@@ -22,6 +27,6 @@ require("lazy").setup("plugins", {
 })
 
 require "keymaps"
-vim.cmd "colorscheme material-darker"
+vim.cmd "colorscheme modus"
 -- require('material.functions').change_style('deep ocean')
 require "utils"

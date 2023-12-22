@@ -6,7 +6,7 @@ return {
 	{
 		"folke/tokyonight.nvim",
 	},
-
+	{ "miikanissi/modus-themes.nvim", priority = 1000 },
 	{
 		"marko-cerovac/material.nvim",
 		init = function()
@@ -120,7 +120,7 @@ return {
 		"sainnhe/sonokai",
 	},
 
-	{ "tanvirtin/monokai.nvim" },
+	{ "loctvl842/monokai-pro.nvim" },
 
 	{
 		"ChristianChiarulli/nvcode-color-schemes.vim",
