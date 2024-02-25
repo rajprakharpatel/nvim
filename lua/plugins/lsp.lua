@@ -282,6 +282,7 @@ return {
 				"html",
 				"cssls",
 				"emmet_language_server",
+				"gopls",
 			}
 			for _, lsp in ipairs(servers) do
 				nvim_lsp[lsp].setup {
