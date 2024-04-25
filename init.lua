@@ -27,6 +27,7 @@ require("lazy").setup("plugins", {
 })
 
 require "keymaps"
-vim.cmd "colorscheme sonokai"
--- require('material.functions').change_style('deep ocean')
+vim.cmd "colorscheme material"
+require('material.functions').change_style('deep ocean')
+vim.cmd 'TransparentEnable'
 require "utils"

@@ -3,6 +3,8 @@ let g:switch_custom_definitions =
     \   ['1', '0'],
     \   ['false', 'true'],
     \   ['left', 'right'],
+    \   ['Left', 'Right'],
+    \   ['Top', 'Bottom'],
     \   ['next', 'prev'],
     \   {
     \       '\m(\(.*\))': '[\1]',
