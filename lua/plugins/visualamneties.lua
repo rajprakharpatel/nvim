@@ -63,18 +63,8 @@ return {
 	{ "mg979/vim-visual-multi", event = "InsertEnter" },
 	{
 		"j-hui/fidget.nvim",
-		tag = "legacy",
 		event = "VeryLazy",
 		config = true,
-	},
-	{
-		"camspiers/lens.vim",
-		event = "VeryLazy",
-		dependencies = { "camspiers/animate.vim" },
-		init = function()
-			vim.cmd "let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'NvimTree']"
-			vim.cmd "let g:lens#disabled_buftypes = ['nofile']"
-		end,
 	},
 	{
 		"lukas-reineke/headlines.nvim",
