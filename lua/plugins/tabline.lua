@@ -1,7 +1,8 @@
 return {
 	{
-		"akinsho/nvim-bufferline.lua",
-		version = "3.*",
+		"akinsho/bufferline.nvim",
+-- 		version = "*",
+        branch = "main",
 		event = "VeryLazy",
 		keys = {
 			{

@@ -197,5 +197,13 @@ return {
 		},
 	},
 	{ "eandrju/cellular-automaton.nvim", cmd = { "CellularAutomaton" } },
-	{"seandewar/killersheep.nvim", cmd = "KillKillKill"}
+	{"seandewar/killersheep.nvim", cmd = "KillKillKill"},
+	{
+  "vhyrro/luarocks.nvim",
+  priority = 1000,
+  config = true,
+  opts = {
+    rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+  }
+},
 }

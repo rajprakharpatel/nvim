@@ -24,7 +24,11 @@ return{
 					"css",
 					"typescript",
 					"tsx",
-					"astro"
+					"astro",
+					"lua",
+					"xml",
+					"http",
+					"graphql",
 				},
 				highlight = {
 					enable = true, -- false will disable the whole extension

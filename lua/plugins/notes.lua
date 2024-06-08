@@ -9,6 +9,23 @@ return {
 			"epwalsh/pomo.nvim",
 		},
 		opts = {
+			-- Either 'wiki' or 'markdown'.
+			preferred_link_style = "wiki",
+
+			-- Where to put new notes created from completion. Valid options are
+			--  * "current_dir" - put new notes in same directory as the current buffer.
+			--  * "notes_subdir" - put new notes in the default notes subdirectory.
+			new_notes_location = "current_dir",
+			-- Optional, customize how wiki links are formatted. You can set this to one of:
+			--  * "use_alias_only", e.g. '[[Foo Bar]]'
+			--  * "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
+			--  * "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
+			--  * "use_path_only", e.g. '[[foo-bar.md]]'
+			-- Or you can set it to a function that takes a table of options and returns a string, like this:
+			wiki_link_func = function(opts)
+				return require("obsidian.util").wiki_link_id_prefix(opts)
+			end,
+
 			workspaces = {
 				{
 					name = "work",
@@ -31,29 +48,6 @@ return {
 			completion = {
 				nvim_cmp = true,
 				min_chars = 2,
-
-				-- Where to put new notes created from completion. Valid options are
-				--  * "current_dir" - put new notes in same directory as the current buffer.
-				--  * "notes_subdir" - put new notes in the default notes subdirectory.
-				new_notes_location = "current_dir",
-
-				-- Either 'wiki' or 'markdown'.
-				preferred_link_style = "wiki",
-
-				-- Control how wiki links are completed with these (mutually exclusive) options:
-				--
-				-- 1. Whether to add the note ID during completion.
-				-- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
-				-- Mutually exclusive with 'prepend_note_path' and 'use_path_only'.
-				prepend_note_id = false,
-				-- 2. Whether to add the note path during completion.
-				-- E.g. "[[Foo" completes to "[[notes/foo|Foo]]" assuming "notes/foo.md" is the path of the note.
-				-- Mutually exclusive with 'prepend_note_id' and 'use_path_only'.
-				prepend_note_path = true,
-				-- 3. Whether to only use paths during completion.
-				-- E.g. "[[Foo" completes to "[[notes/foo]]" assuming "notes/foo.md" is the path of the note.
-				-- Mutually exclusive with 'prepend_note_id' and 'prepend_note_path'.
-				use_path_only = false,
 			},
 			ui = {
 				enable = true,
