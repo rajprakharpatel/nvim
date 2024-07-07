@@ -20,11 +20,11 @@ return {
 				},
 				unpulled_upstream = {
 					folded = true,
-					hidden = false
+					hidden = false,
 				},
 				unmerged_upstream = {
 					folded = true,
-					hidden = false
+					hidden = false,
 				},
 				recent = {
 					folded = true,
@@ -46,26 +46,20 @@ return {
 		config = function()
 			require("gitsigns").setup {
 				signs = {
-					add = { hl = "GitSignsAdd", text = "+", linehl = "GitSignsAddLn" },
+					add = {
+						text = "+",
+					},
 					change = {
-						hl = "GitSignsChange",
 						text = "~",
-						linehl = "GitSignsChangeLn",
 					},
 					delete = {
-						hl = "GitSignsDelete",
 						text = "-",
-						linehl = "GitSignsDeleteLn",
 					},
 					topdelete = {
-						hl = "GitSignsDelete",
 						text = "﫧",
-						linehl = "GitSignsDeleteLn",
 					},
 					changedelete = {
-						hl = "GitSignsChange",
 						text = "*",
-						linehl = "GitSignsChangeLn",
 					},
 				},
 				numhl = true,
@@ -93,8 +87,8 @@ return {
 				end,
 			},
 		},
-		config = function ()
-			require('litee.gh').setup({})
-		end
+		config = function()
+			require("litee.gh").setup {}
+		end,
 	},
 }
