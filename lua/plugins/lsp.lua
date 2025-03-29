@@ -276,7 +276,7 @@ return {
 				"cmake",
 				"pylsp",
 				"vimls",
-				"tsserver",
+				"ts_ls",
 				"astro",
 				"tailwindcss",
 				"html",

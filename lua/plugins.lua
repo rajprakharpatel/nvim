@@ -155,11 +155,6 @@ return {
 					suggestions = 20,
 				},
 			},
-			key_labels = {
-				["<space>"] = "SPC",
-				["<cr>"] = "RET",
-				["<tab>"] = "TAB",
-			},
 		},
 	},
 	{ "folke/neoconf.nvim",        lazy = false },
