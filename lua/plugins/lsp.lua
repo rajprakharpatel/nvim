@@ -63,7 +63,7 @@ return {
 					}
 				end
 
-				buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+				-- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 				-- Mappings.
 				local opts = { noremap = true, silent = true }
@@ -246,7 +246,7 @@ return {
 				-- Set autocommands conditional on server_capabilities
 				if client.server_capabilities.document_highlight then
 					print "LSP server has document_highlight"
-					vim.api.nvim_exec(
+					vim.api.nvim_exec2(
 						[[
 						hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
 						hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
@@ -281,6 +281,9 @@ return {
 				"tailwindcss",
 				"html",
 				"cssls",
+				"lua_ls",
+				"groovyls",
+				"gradle_ls",
 				-- "emmet_language_server",
 				"gopls",
 			}

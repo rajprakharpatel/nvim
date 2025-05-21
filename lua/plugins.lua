@@ -6,7 +6,6 @@ return {
 		lazy = false,
 		priority = 1000,
 	},
-
 	-- Quality of life improvements
 	{
 		"mbbill/undotree",
@@ -175,14 +174,6 @@ return {
 		config = true,
 	},
 	{ "unblevable/quick-scope", event = "VeryLazy" },
-	{
-		"phaazon/hop.nvim",
-		event = "VeryLazy",
-		config = function()
-			local hop = require "hop"
-			hop.setup()
-		end,
-	},
 	{ "letieu/hacker.nvim",     cmd = { "Hack", "HackFollow" } },
 	{
 		"wintermute-cell/gitignore.nvim",

@@ -29,7 +29,7 @@ return {
 			workspaces = {
 				{
 					name = "work",
-					path = "/Users/prakhar.patel/Documents/Obsidian Vault",
+					path = vim.fn.expand "$HOME" .. "/Documents/Obsidian Vault",
 					overrides = {
 						notes_subdir = "notes",
 					},

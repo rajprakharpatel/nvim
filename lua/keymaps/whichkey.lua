@@ -27,7 +27,7 @@ wk.add(
 		{ "<space>dm", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", desc = "Breakpoint Message" },
 		{ "<space>do", "<cmd>lua require'dap'.step_out()<CR>", desc = "Step Out" },
 		{ "<space>dr", "<cmd>lua require'dap'.repl.open()<CR>", desc = "Repl Open" },
-		{ "<space>ds", "<cmd>lua require('dapui').toggle()<CR>", desc = "Debugger Start/Stop" },
+		{ "<space>ds", "<cmd>lua require('dapui').toggle()<CR>", desc = "DapUI Start/Stop" },
 		{ "<space>dt", group = "Telescope" },
 		{ "<space>dtb", "<cmd>Telescope dap list_breakpoints<CR>", desc = "breakpoint" },
 		{ "<space>dtc", "<cmd>Telescope dap commands<CR>", desc = "commands" },

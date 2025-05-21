@@ -1,8 +1,8 @@
 return {
 	{
 		"akinsho/bufferline.nvim",
--- 		version = "*",
-        branch = "main",
+		-- 		version = "*",
+		branch = "main",
 		event = "VeryLazy",
 		keys = {
 			{
@@ -28,7 +28,7 @@ return {
 				end,
 				middle_mouse_command = "bdelete %d",
 				right_mouse_command = "vertical sbuffer %d",
-				buffer_close_icon = "",
+				buffer_close_icon = "",
 				modified_icon = "●",
 				close_icon = "",
 				left_trunc_marker = "",
@@ -39,10 +39,10 @@ return {
 				diagnostics = "nvim_lsp",
 				---@diagnostic disable-next-line: unused-local
 				diagnostics_indicator = function(
-					count,
-					level,
-					diagnostics_dict,
-					context
+				    count,
+				    level,
+				    diagnostics_dict,
+				    context
 				)
 					if context.buffer:current() then
 						return ""
@@ -50,7 +50,7 @@ return {
 					local s = " "
 					for e, n in pairs(diagnostics_dict) do
 						local sym = e == "error" and " "
-								or (e == "warning" and " " or "ℹ️")
+						    or (e == "warning" and " " or "ℹ️")
 						s = s .. n .. sym
 					end
 					return s

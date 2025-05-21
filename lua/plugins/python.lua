@@ -1,4 +1,5 @@
 return {
+  {
   "linux-cultist/venv-selector.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
@@ -13,4 +14,5 @@ return {
     keys = {
       { ",v", "<cmd>VenvSelect<cr>" },
     },
+  }
 }

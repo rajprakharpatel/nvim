@@ -11,7 +11,7 @@ return {
 	{
 		"folke/zen-mode.nvim",
 		dependencies = { "twilight.nvim" },
-		cmd = "ZenMonde",
+		cmd = "ZenMode",
 		config = true,
 	},
 	{
@@ -32,6 +32,7 @@ return {
 		priority = 500,
 		config = function()
 			require("notify").setup {
+				merge_duplicates = true,
 				timeout = 500,
 				background_colour = "#000000",
 			}

@@ -112,7 +112,7 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- python path
-vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
+vim.g.python3_host_prog = "/usr/bin/python3"
 
 --------------------------------------------------------------------------------
 --                                 autocmd!                                   --
@@ -122,13 +122,6 @@ local au = vim.api.nvim_create_autocmd
 local _relNum = vim.api.nvim_create_augroup("_relNum", { clear = true })
 au("InsertEnter", { command = "set norelativenumber", group = _relNum })
 au("InsertLeave", { command = "set relativenumber", group = _relNum })
-
-local _jdtls = vim.api.nvim_create_augroup("_jdtls", { clear = true })
-au("FileType", {
-	pattern = "java",
-	command = "lua require('lsp.jdtls').setup()",
-	group = _jdtls,
-})
 
 local _gitFiles = vim.api.nvim_create_augroup("_gitFiles", { clear = true })
 au("FileType", {
