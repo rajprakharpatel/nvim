@@ -1,4 +1,4 @@
-return{
+return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -20,7 +20,7 @@ return{
 					"json",
 					"yaml",
 					"vim",
-					"org",
+					-- "org",
 					"css",
 					"typescript",
 					"tsx",
@@ -35,7 +35,7 @@ return{
 					additional_vim_regex_highlighting = { "org" },
 				},
 				-- indent = {enable = true, disable = {"python", "html", "javascript"}},
-				-- indent = { enable = { "javascriptreact" } },
+				indent = { enable = { "javascriptreact" } },
 				playground = {
 					enable = true,
 					disable = {},
@@ -51,14 +51,14 @@ return{
 				},
 				refactor = { highlight_definitions = { enable = true } },
 			}
-			vim.cmd "set foldmethod=expr"
-			vim.cmd "set foldexpr=nvim_treesitter#foldexpr()"
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		end,
 	},
-	{"p00f/nvim-ts-rainbow"},
-	{"lukas-reineke/indent-blankline.nvim"},
+	{ "p00f/nvim-ts-rainbow" },
+	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "haringsrob/nvim_context_vt", dependencies = "nvim-treesitter" },
-	{"romgrk/nvim-treesitter-context"},
+	{ "romgrk/nvim-treesitter-context" },
 	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
@@ -72,5 +72,4 @@ return{
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{ "nvim-treesitter/playground", enabled = false },
 	{ "windwp/nvim-ts-autotag", enabled = false },
-
 }

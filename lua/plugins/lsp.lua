@@ -36,23 +36,23 @@ return {
 			})
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.offsetEncoding = { "utf-16" }
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities.textDocument.completion.completionItem.resolveSupport = {
 				properties = { "documentation", "detail", "additionalTextEdits" },
 			}
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			capabilities.offsetEncoding = { "utf-16" }
 
 			local nvim_lsp = require "lspconfig"
+
 			local common_on_attach = function(client, bufnr)
 				require("lsp_signature").on_attach()
 
+				-- Configure plugin better-diagnostic-virtual-text
+				require("better-diagnostic-virtual-text.api").setup_buf(bufnr, {})
+
 				local function buf_set_keymap(...)
 					vim.api.nvim_buf_set_keymap(bufnr, ...)
-				end
-
-				local function buf_set_option(...)
-					vim.api.nvim_buf_set_option(bufnr, ...)
 				end
 
 				local function options(desc)
@@ -257,7 +257,7 @@ return {
 							autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 						augroup END
 					]],
-						false
+						{ output = false }
 					)
 				end
 			end
@@ -309,7 +309,7 @@ return {
 			nvim_lsp.sqlls.setup {
 				root_dir = function()
 					return vim.fn.getcwd()
-				end
+				end,
 			}
 
 			--------------------------------------------------------------------------------
@@ -460,7 +460,11 @@ return {
 	{
 		"olrtg/nvim-emmet",
 		config = function()
-			vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+			vim.keymap.set(
+				{ "n", "v" },
+				"<leader>xe",
+				require("nvim-emmet").wrap_with_abbreviation
+			)
 		end,
 	},
 }

@@ -37,9 +37,16 @@ return {
 			end
 
 			local check_back_space = function()
+				-- if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then return false end
 				local col = vim.fn.col "." - 1
 				return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 			end
+
+			-- local has_words_before = function()
+			-- 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+			-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+			-- 	return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+			-- end
 
 			local cmp = require "cmp"
 			local compare = require "cmp.config.compare"
@@ -61,6 +68,7 @@ return {
 				sorting = {
 					priority_weight = 2,
 					comparators = {
+						require('copilot_cmp.comparators').prioritize,
 						compare.offset,
 						compare.exact,
 						compare.score,
@@ -89,13 +97,25 @@ return {
 							nuspell = "[nuspell]",
 							emoji = "[😀]",
 							cmp_tabnine = "[Tabnine]",
+							copilot = "[Copilot]",
 							["vim-dadbod-completion"] = "[DadBod]",
 						}
 						-- fancy icons and a name of kind
-						vim_item.kind = require("lspkind").presets.default[vim_item.kind]
-								.. " "
-								.. vim_item.kind
+						local lspkind = require("lspkind")
+						lspkind.init({
+							mode = "symbol_text",
+							preset = "codicons",
+							symbol_map = {
+								Copilot = "",
+							},
+						})
+						vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+						vim.notify_once(vim_item.kind)
+						-- vim_item.kind = lspkind.presets.codicons[vim_item.kind]
+						-- 		.. " "
+						-- 		.. vim_item.kind
 						-- vim_item.kind = require("lspkind").presets.default[vim_item.kind]
+						vim_item.kind = lspkind.presets.codicons[vim_item.kind]
 						local menu = source_mapping[entry.source.name]
 						if entry.source.name == "cmp_tabnine" then
 							if
@@ -134,7 +154,9 @@ return {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					},
-					["<Tab>"] = function(fallback)
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<Tab>"] = vim.schedule_wrap(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif check_back_space() then
@@ -144,8 +166,8 @@ return {
 						else
 							fallback()
 						end
-					end,
-					["<S-Tab>"] = function(fallback)
+					end),
+					["<S-Tab>"] = vim.schedule_wrap(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif check_back_space() then
@@ -155,9 +177,10 @@ return {
 						else
 							fallback()
 						end
-					end,
+					end),
 				},
 				sources = {
+					{ name = "copilot",              group_index = 2 },
 					{ name = "npm",                  keyword_length = 3 },
 					{ name = "nvim_lua" },
 					{ name = "nvim_lsp" },

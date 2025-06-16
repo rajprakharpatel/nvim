@@ -90,7 +90,7 @@ wk.add(
 		{ "<space>ns", "<cmd>lua require('package-info').show()<CR>", desc = "show" },
 		{ "<space>nu", "<cmd>lua require('package-info').update()<CR>", desc = "update" },
 		{ "<space>o", group = "Open" },
-		{ "<space>oa", "<cmd>lua require('orgmode').action('agenda.prompt')", desc = "Org agenda" },
+		{ "<space>oa", "<cmd>lua require('orgmode').action('agenda.prompt')<cr>", desc = "Org agenda" },
 		{ "<space>oc", "<cmd>Cheat<cr>", desc = "Cheatsheet" },
 		{ "<space>oe", "<cmd>NvimTreeToggle<cr>", desc = "File Browser" },
 		{ "<space>om", group = "terminal" },
