@@ -1,18 +1,16 @@
 return {
   {
-  "linux-cultist/venv-selector.nvim",
+    "linux-cultist/venv-selector.nvim",
+    branch = "main",
     dependencies = {
       "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+      { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
     },
-  lazy = false,
-  branch = "regexp", -- This is the regexp branch, use this for the new version
-  config = function()
-      require("venv-selector").setup()
-    end,
+    -- ft = "python", -- Load when opening Python files
+    lazy = false,
     keys = {
-      { ",v", "<cmd>VenvSelect<cr>" },
+      { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
     },
-  }
+    opts = {} -- this can be an empty lua table - just showing below for clarity.
+  },
 }

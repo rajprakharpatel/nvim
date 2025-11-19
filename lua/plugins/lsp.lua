@@ -43,8 +43,30 @@ return {
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 			capabilities.offsetEncoding = { "utf-16" }
 
-			local nvim_lsp = require "lspconfig"
-
+			-- 1. Create the Proxy Object and its Metatable
+			local nvim_lsp = {}
+			local metatable = {}
+			-- 2. Define the Handler for the 'setup' method
+			-- This is what is returned when the user accesses 'nvim_lsp_proxy.bashls'
+			local function create_lang_setup_proxy(lang_name)
+					return {
+							setup = function(config_table)
+									-- 3. INTERCEPT: Execute the new API call here
+									vim.lsp.config(lang_name, config_table)
+									vim.lsp.enable(lang_name)
+							end
+					}
+			end
+			-- 4. Define the __index Metamethod
+			-- This function runs whenever Lua tries to look up a key (like 'bashls') 
+			-- that is not directly defined on nvim_lsp_proxy.
+			function metatable.__index(self, lang_name)
+					-- 'lang_name' will be the string "bashls", "pylsp", etc.
+					return create_lang_setup_proxy(lang_name)
+			end
+			-- 5. Apply the Metatable
+			-- Now, nvim_lsp_proxy has the magic delegation behavior.
+			setmetatable(nvim_lsp, metatable)
 			local common_on_attach = function(client, bufnr)
 				require("lsp_signature").on_attach()
 
@@ -294,6 +316,7 @@ return {
 				}
 			end
 
+
 			--------------------------------------------------------------------------------
 			--                                   bashls                                   --
 			--------------------------------------------------------------------------------
@@ -340,7 +363,7 @@ return {
 			--------------------------------------------------------------------------------
 			nvim_lsp.html.setup {
 				cmd = {
-					"vscode-html-languageserver",
+					"vscode-html-language-server",
 					"--stdio",
 				},
 				init_options = { documentFormatting = true },
@@ -353,7 +376,7 @@ return {
 			--------------------------------------------------------------------------------
 			nvim_lsp.cssls.setup {
 				cmd = {
-					"vscode-css-languageserver",
+					"vscode-css-language-server",
 					"--stdio",
 				},
 				init_options = { documentFormatting = true },
